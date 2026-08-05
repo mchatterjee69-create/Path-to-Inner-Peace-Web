@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f8fafc;
+    color: #134e4a;
+  }
+
+  h1, h2, h3, h4, .font-poppins {
+    font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+  }
+}
+
+.font-poppins {
+  font-family: 'Poppins', 'Helvetica Neue', sans-serif;
+}
+
+.font-inter {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.font-serif-italic {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.emerald-gradient {
+  background: linear-gradient(135deg, #0b6b53 0%, #134e4a 100%);
+}
+
+.gold-text {
+  color: #d4af37;
+}
+
+.gold-border {
+  border-color: #d4af37;
+}
+
+.soft-shadow {
+  box-shadow: 0 10px 30px -10px rgba(11, 107, 83, 0.15);
+}
