@@ -1,29 +1,11 @@
 import React, { useState } from 'react';
 import { FOUNDER_INFO } from '../../data/mockData';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, Award, X, CheckCircle2, Upload, RotateCcw, Check, Camera } from 'lucide-react';
+import { ShieldCheck, Award, X, CheckCircle2, Camera } from 'lucide-react';
 
 export const FounderSection: React.FC = () => {
   const [showBioModal, setShowBioModal] = useState(false);
-  const [uploadToast, setUploadToast] = useState(false);
-  const { founderPhoto, updateFounderPhoto, resetFounderPhoto } = useApp();
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        updateFounderPhoto(result);
-        setUploadToast(true);
-        setTimeout(() => setUploadToast(false), 4000);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const [isLocked, setIsLocked] = useState(false);
-  const isCustomPhoto = founderPhoto !== FOUNDER_INFO.image;
+  const { founderPhoto } = useApp();
 
   return (
     <section className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 bg-[#FAF9F6] relative overflow-hidden">
@@ -37,84 +19,20 @@ export const FounderSection: React.FC = () => {
               MEET THE FOUNDER & MENTOR
             </h2>
           </div>
-          {uploadToast && (
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-100 border border-emerald-300 text-emerald-900 rounded-full text-xs font-bold animate-fadeIn shadow-sm">
-              <Check className="w-3.5 h-3.5 text-emerald-700" />
-              <span>Image Uploaded & Saved!</span>
-            </div>
-          )}
         </div>
 
         {/* Founder Card with Image & Details Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch bg-white p-6 sm:p-8 rounded-3xl border border-emerald-900/10 shadow-sm">
           
-          {/* Left Column: Interactive Founder Photo Upload */}
+          {/* Left Column: Founder Photo */}
           <div className="md:col-span-5 flex flex-col items-center w-full space-y-3">
-            <label className="relative group w-full h-80 sm:h-96 md:h-full min-h-[340px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-emerald-950 flex items-center justify-center cursor-pointer">
+            <div className="relative group w-full h-80 sm:h-96 md:h-full min-h-[340px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-emerald-950 flex items-center justify-center">
               <img 
                 src={founderPhoto} 
                 alt={FOUNDER_INFO.name} 
-                className="w-full h-full object-cover object-top sm:object-center group-hover:scale-105 transition-transform duration-500" 
+                className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500" 
               />
-              
-              {/* Overlay on Hover */}
-              <div className="absolute inset-0 bg-emerald-950/75 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-all duration-300 gap-2 p-4 text-center backdrop-blur-[2px]">
-                <Camera className="w-8 h-8 text-[#D4AF37]" />
-                <span className="font-bold text-sm text-white">Upload Local JPEG Image</span>
-                <span className="text-[11px] text-emerald-200">Click to select image file from device</span>
-              </div>
-
-              <input 
-                type="file" 
-                accept="image/jpeg,image/jpg,image/png,image/webp" 
-                onChange={handleFileUpload} 
-                className="hidden" 
-              />
-            </label>
-
-            {/* Upload & Reset Buttons Bar (Hidden when locked) */}
-            {!isLocked ? (
-              <div className="flex items-center justify-between w-full px-1 gap-2 flex-wrap sm:flex-nowrap">
-                <label className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-[#0B6B53] hover:bg-emerald-900 text-white rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-sm">
-                  <Upload className="w-3.5 h-3.5 text-[#D4AF37]" />
-                  <span>Upload Photo</span>
-                  <input 
-                    type="file" 
-                    accept="image/jpeg,image/jpg,image/png,image/webp" 
-                    onChange={handleFileUpload} 
-                    className="hidden" 
-                  />
-                </label>
-
-                {isCustomPhoto && (
-                  <button
-                    onClick={resetFounderPhoto}
-                    title="Reset to default photo"
-                    className="flex items-center gap-1 px-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors border border-slate-200"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Reset</span>
-                  </button>
-                )}
-
-                <button
-                  onClick={() => setIsLocked(true)}
-                  title="Hide upload controls for visitors"
-                  className="px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
-                >
-                  Hide Buttons
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center justify-end w-full px-1">
-                <button
-                  onClick={() => setIsLocked(false)}
-                  className="text-[11px] text-slate-400 hover:text-slate-600 transition-colors underline"
-                >
-                  Edit Founder Photo
-                </button>
-              </div>
-            )}
+            </div>
           </div>
 
           {/* Right Column: Name, Title & Credentials */}
@@ -191,7 +109,7 @@ export const FounderSection: React.FC = () => {
                 Mainak Chatterjee is an <strong>Author, Mind Mastery Coach & Founder</strong> of <strong>Path to Inner Peace</strong> and the <strong>MindForge 360°™</strong> ecosystem.
               </p>
               <p>
-                Having spent over a decade researching cognitive behavioral techniques, mindfulness protocols, eastern spiritual wisdom, and nervous system regulation, Mainak created the <strong>5-Day 30-Minute Mental Reset Challenge</strong> to make emotional healing accessible to busy individuals.
+                Having spent over a decade researching cognitive behavioral techniques, mindfulness protocols, eastern spiritual wisdom, and nervous system regulation, Mainak created the MindForge methodology to disarm anxiety and activate inner peace.
               </p>
               
               <h4 className="font-heading font-bold text-slate-900 text-base pt-2">Core Pillars of His Coaching:</h4>
@@ -225,4 +143,3 @@ export const FounderSection: React.FC = () => {
     </section>
   );
 };
-
