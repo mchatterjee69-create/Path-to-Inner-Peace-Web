@@ -110,11 +110,11 @@ export const MindForgeUpgrade: React.FC = () => {
                 </p>
 
                 {/* Price Display */}
-                <div className="mb-8">
+                <div className="mb-8 whitespace-nowrap flex items-baseline gap-1">
                   <span className={`font-heading font-extrabold text-4xl sm:text-5xl ${isElite ? 'text-white' : 'text-slate-900'}`}>
                     ₹{plan.priceINR}
                   </span>
-                  <span className={`text-xs ml-1 ${isElite ? 'text-emerald-200' : 'text-slate-500'}`}>
+                  <span className={`text-xs ${isElite ? 'text-emerald-200' : 'text-slate-500'}`}>
                     {plan.period.includes('Monthly') ? '/ month' : plan.period.includes('Annual') ? '/ year' : 'one-time'}
                   </span>
                 </div>

@@ -54,9 +54,9 @@ export const RazorpayModal: React.FC = () => {
             <span className="font-bold text-slate-900 block text-sm">{selectedPlan.name}</span>
             <span className="text-slate-500 text-[11px]">{selectedPlan.period}</span>
           </div>
-          <div className="text-right">
+          <div className="text-right whitespace-nowrap">
             <span className="font-heading font-extrabold text-2xl text-[#0F4C45]">₹{selectedPlan.priceINR}</span>
-            <span className="text-[10px] text-emerald-800 block font-bold">
+            <span className="text-xs text-emerald-800 font-bold ml-1">
               {selectedPlan.period.includes('Annual') ? '/ year' : '/ month'}
             </span>
           </div>

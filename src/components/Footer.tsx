@@ -8,8 +8,6 @@ import {
   Globe, 
   MessageCircle, 
   Heart, 
-  ShieldCheck, 
-  Award,
   Crown
 } from 'lucide-react';
 
@@ -37,19 +35,6 @@ export const Footer: React.FC = () => {
                 MindForge 360°™ Ecosystem
               </span>
             </div>
-          </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            Helping you transform from within through modern CBT psychology, breathwork, mindfulness, and psycho-spiritual coaching.
-          </p>
-          <div className="pt-2 flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 text-[11px] bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 px-2.5 py-1 rounded-full">
-              <ShieldCheck className="w-3 h-3 text-[#D4AF37]" />
-              Verified PWA App
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] bg-amber-950/80 text-amber-300 border border-amber-800/80 px-2.5 py-1 rounded-full">
-              <Award className="w-3 h-3 text-[#D4AF37]" />
-              Certificate Included
-            </span>
           </div>
         </div>
 

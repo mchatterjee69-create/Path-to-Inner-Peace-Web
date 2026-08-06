@@ -20,7 +20,7 @@ export const HeroSection: React.FC = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-7 space-y-6 text-left">
+        <div className="lg:col-span-7 space-y-6 text-center flex flex-col items-center">
           
           {/* 1. Welcome to & Path to Inner Peace (Centered) */}
           <div className="text-center py-2">
@@ -33,7 +33,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* 2. FREE 5-DAY MENTAL RESET CHALLENGE Tagline */}
-          <div className="flex justify-start pt-1">
+          <div className="flex justify-center pt-1">
             <div className="inline-flex items-center gap-3 bg-emerald-950/40 border border-[#D4AF37]/30 px-3.5 py-1.5 rounded-full">
               <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
               <span className="text-xs sm:text-sm font-bold uppercase tracking-widest gold-text">
@@ -43,21 +43,21 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* 3. Rewire Your Mind in Just 5 Days */}
-          <div className="pl-3 sm:pl-8 lg:pl-10">
-            <h1 className="font-poppins font-bold text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.15] text-left">
-              Rewire Your Mind in <br className="hidden sm:inline" />
+          <div className="text-center w-full">
+            <h1 className="font-poppins font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-tight leading-[1.15] text-center">
+              Rewire Your Mind in{' '}
               <span className="font-serif-italic text-[#D4AF37] font-normal italic">
                 Just 5 Days.
               </span>
             </h1>
           </div>
 
-          <p className="text-base sm:text-lg font-inter text-emerald-100/90 font-normal max-w-2xl leading-relaxed">
+          <p className="text-base sm:text-lg font-inter text-emerald-100/90 font-normal max-w-2xl leading-relaxed text-center mx-auto">
             Escape the noise. Join 1,000+ others in a science-backed, 30-minute daily journey with <strong className="font-bold text-white">Path to Inner Peace</strong> to reduce stress, calm anxiety, and reclaim your emotional strength.
           </p>
 
-          {/* Key 5 Benefits Checklist */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-2 max-w-xl text-left">
+          {/* Key 5 Benefits Checklist (Centered) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-2 max-w-xl mx-auto w-full">
             {[
               'Reduce Stress',
               'Calm Anxiety',
@@ -66,17 +66,17 @@ export const HeroSection: React.FC = () => {
               'Emotional Healing',
               'MindForge Certificate'
             ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-2 sm:gap-2.5 bg-white/10 backdrop-blur-md px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl border border-white/10 shadow-sm">
+              <div key={idx} className="flex items-center justify-center gap-2 sm:gap-2.5 bg-white/10 backdrop-blur-md px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-2xl border border-white/10 shadow-sm text-center">
                 <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-800 text-[10px] font-bold shrink-0">
                   ✓
                 </div>
-                <span className="text-xs font-medium text-white tracking-tight">{item}</span>
+                <span className="text-xs font-medium text-white tracking-tight text-center">{item}</span>
               </div>
             ))}
           </div>
 
           {/* Primary Action Buttons */}
-          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
             <button
               onClick={() => {
                 if (user.registered) {
@@ -108,16 +108,16 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Social Proof Line */}
-          <div className="pt-2 flex flex-wrap items-center justify-start gap-x-6 gap-y-2 text-xs text-emerald-200">
-            <span className="flex items-center gap-1.5 font-inter">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-emerald-200 text-center">
+            <span className="flex items-center justify-center gap-1.5 font-inter">
               <Users className="w-4 h-4 text-[#D4AF37]" />
               <strong>1,000+</strong> Lives Impacted
             </span>
-            <span className="flex items-center gap-1.5 font-inter">
+            <span className="flex items-center justify-center gap-1.5 font-inter">
               <Shield className="w-4 h-4 text-emerald-300" />
               100% Beginner Friendly
             </span>
-            <span className="flex items-center gap-1.5 font-inter">
+            <span className="flex items-center justify-center gap-1.5 font-inter">
               <Award className="w-4 h-4 text-[#D4AF37]" />
               Certificate Included
             </span>
