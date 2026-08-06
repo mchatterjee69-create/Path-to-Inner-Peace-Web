@@ -282,7 +282,7 @@ export const DashboardOverview: React.FC = () => {
                 <span className="text-[10px] font-bold uppercase bg-slate-200 text-slate-800 px-1.5 py-0.5 rounded">Member</span>
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-900 group-hover:text-slate-950">Profile & Stats</p>
+                <p className="text-xs font-bold text-slate-900 group-hover:text-slate-950">Member Access</p>
                 <p className="text-[10px] text-slate-500">Badges & certs</p>
               </div>
             </button>

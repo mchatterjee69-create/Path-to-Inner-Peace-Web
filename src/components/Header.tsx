@@ -97,7 +97,7 @@ export const Header: React.FC = () => {
             className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'profile' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
             <User className="w-4 h-4 text-[#0B6B53]" />
-            <span>{user.registered ? 'My Profile' : 'Member Access'}</span>
+            <span>Member Access</span>
           </button>
         </nav>
 
@@ -134,7 +134,7 @@ export const Header: React.FC = () => {
             <button
               onClick={() => setActiveView('profile')}
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-[#0B6B53] overflow-hidden hover:opacity-90 transition-opacity shrink-0"
-              title="Profile & Settings"
+              title="Member Access"
             >
               <img 
                 src={user.avatarUrl} 
@@ -191,7 +191,7 @@ export const Header: React.FC = () => {
             className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2"
           >
             <User className="w-4 h-4 text-[#0B6B53]" />
-            Profile & Settings
+            Member Access
           </button>
           <button
             onClick={() => { setActiveView('ai-coach'); setMobileMenuOpen(false); }}

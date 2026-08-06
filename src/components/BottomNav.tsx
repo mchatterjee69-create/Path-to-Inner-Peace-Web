@@ -17,7 +17,7 @@ export const BottomNav: React.FC = () => {
     { id: 'landing', label: 'Home', icon: Home },
     { id: 'inner-shift', label: 'Inner Shift', icon: Sparkles },
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'profile', label: 'Profile', icon: User },
+    { id: 'profile', label: 'Member Access', icon: User },
   ] as const;
 
   return (
