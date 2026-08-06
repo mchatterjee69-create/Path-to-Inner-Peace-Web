@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const { setActiveView, setIsRegistrationModalOpen } = useApp();
+  const { setActiveView, setIsRegistrationModalOpen, founderPhoto } = useApp();
 
   return (
     <footer className="bg-[#093d30] text-slate-200 border-t border-emerald-900 pt-16 pb-16 px-4 sm:px-6 lg:px-8">
@@ -132,9 +132,12 @@ export const Footer: React.FC = () => {
           <p className="text-xs text-slate-300 leading-relaxed italic border-l-2 border-[#D4AF37] pl-3 py-1 bg-emerald-950/40 rounded-r-lg">
             "{FOUNDER_INFO.quote}"
           </p>
-          <div className="mt-3 text-xs text-emerald-200">
-            <p className="font-semibold text-white">{FOUNDER_INFO.name}</p>
-            <p className="text-[11px] text-emerald-300">{FOUNDER_INFO.title}</p>
+          <div className="mt-3 text-xs text-emerald-200 flex items-center gap-2.5">
+            <img src={founderPhoto} alt={FOUNDER_INFO.name} className="w-9 h-9 rounded-full object-cover border border-[#D4AF37] shrink-0 shadow-sm" />
+            <div>
+              <p className="font-semibold text-white">{FOUNDER_INFO.name}</p>
+              <p className="text-[11px] text-emerald-300">{FOUNDER_INFO.title}</p>
+            </div>
           </div>
         </div>
 

@@ -8,7 +8,7 @@ import {
   PricingPlan,
   UserRegistration 
 } from '../types';
-import { ALL_BADGES, DAYS_DATA, PRICING_PLANS } from '../data/mockData';
+import { ALL_BADGES, DAYS_DATA, PRICING_PLANS, FOUNDER_INFO } from '../data/mockData';
 import confetti from 'canvas-confetti';
 
 interface AppContextType {
@@ -38,6 +38,9 @@ interface AppContextType {
   upgradeMembership: (planId: 'INNER_SHIFT' | 'MIND_MASTERY_PRO' | 'INNER_TRANSFORMATION_ELITE') => void;
   triggerConfetti: () => void;
   updateUserProfile: (fields: Partial<UserProfile>) => void;
+  founderPhoto: string;
+  updateFounderPhoto: (photo: string) => void;
+  resetFounderPhoto: () => void;
 }
 
 const DEFAULT_USER: UserProfile = {
@@ -120,6 +123,33 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(PRICING_PLANS[1]);
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
+
+  const [founderPhoto, setFounderPhoto] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem('pip_founder_photo');
+      return saved || FOUNDER_INFO.image;
+    } catch {
+      return FOUNDER_INFO.image;
+    }
+  });
+
+  const updateFounderPhoto = (photo: string) => {
+    setFounderPhoto(photo);
+    try {
+      localStorage.setItem('pip_founder_photo', photo);
+    } catch (e) {
+      console.error('Failed to save founder photo to localStorage', e);
+    }
+  };
+
+  const resetFounderPhoto = () => {
+    setFounderPhoto(FOUNDER_INFO.image);
+    try {
+      localStorage.removeItem('pip_founder_photo');
+    } catch (e) {
+      console.error('Failed to remove founder photo from localStorage', e);
+    }
+  };
 
   // Sync to localStorage
   useEffect(() => {
@@ -335,7 +365,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addMeditationMinutes,
         upgradeMembership,
         triggerConfetti,
-        updateUserProfile
+        updateUserProfile,
+        founderPhoto,
+        updateFounderPhoto,
+        resetFounderPhoto
       }}
     >
       {children}

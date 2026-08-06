@@ -1,89 +1,120 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FOUNDER_INFO } from '../../data/mockData';
-import { ShieldCheck, Award, X, CheckCircle2, Camera, User } from 'lucide-react';
+import { useApp } from '../../context/AppContext';
+import { ShieldCheck, Award, X, CheckCircle2, Upload, RotateCcw, Check, Camera } from 'lucide-react';
 
 export const FounderSection: React.FC = () => {
   const [showBioModal, setShowBioModal] = useState(false);
-  const [founderPhoto, setFounderPhoto] = useState<string>('');
+  const [uploadToast, setUploadToast] = useState(false);
+  const { founderPhoto, updateFounderPhoto, resetFounderPhoto } = useApp();
 
-  // Load saved founder photo from localStorage on mount
-  useEffect(() => {
-    const savedPhoto = localStorage.getItem('pip_founder_photo');
-    if (savedPhoto) {
-      setFounderPhoto(savedPhoto);
-    }
-  }, []);
-
-  // File upload handler for JPG/PNG images
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result as string;
-        setFounderPhoto(result);
-        try {
-          localStorage.setItem('pip_founder_photo', result);
-        } catch (err) {
-          console.error('Failed to save founder image to localStorage', err);
-        }
+        updateFounderPhoto(result);
+        setUploadToast(true);
+        setTimeout(() => setUploadToast(false), 4000);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleRemovePhoto = () => {
-    setFounderPhoto('');
-    localStorage.removeItem('pip_founder_photo');
-  };
+  const [isLocked, setIsLocked] = useState(false);
+  const isCustomPhoto = founderPhoto !== FOUNDER_INFO.image;
 
   return (
     <section className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 bg-[#FAF9F6] relative overflow-hidden">
       <div className="max-w-4xl mx-auto space-y-6">
         
         {/* Header Tag */}
-        <div className="flex items-center gap-3">
-          <span className="w-10 h-1 bg-[#D4AF37] rounded-full"></span>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-poppins font-bold uppercase tracking-wide text-[#0B6B53]">
-            MEET THE FOUNDER & MENTOR
-          </h2>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-3">
+            <span className="w-10 h-1 bg-[#D4AF37] rounded-full"></span>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-poppins font-bold uppercase tracking-wide text-[#0B6B53]">
+              MEET THE FOUNDER & MENTOR
+            </h2>
+          </div>
+          {uploadToast && (
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-100 border border-emerald-300 text-emerald-900 rounded-full text-xs font-bold animate-fadeIn shadow-sm">
+              <Check className="w-3.5 h-3.5 text-emerald-700" />
+              <span>Image Uploaded & Saved!</span>
+            </div>
+          )}
         </div>
 
         {/* Founder Card with Image & Details Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch bg-white p-6 sm:p-8 rounded-3xl border border-emerald-900/10 shadow-sm">
           
-          {/* Left Column: Founder Photo Display (Full Width & Enlarged) */}
-          <div className="md:col-span-5 flex flex-col items-center w-full">
-            <label className="relative group w-full h-72 sm:h-96 md:h-full min-h-[320px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-emerald-950 flex items-center justify-center cursor-pointer">
-              {founderPhoto ? (
-                <img 
-                  src={founderPhoto} 
-                  alt={FOUNDER_INFO.name} 
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" 
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center text-center p-6 text-emerald-100 space-y-3">
-                  <div className="w-20 h-20 rounded-full bg-emerald-900 flex items-center justify-center border border-[#D4AF37]/50 text-[#D4AF37]">
-                    <User className="w-10 h-10" />
-                  </div>
-                  <p className="text-sm font-bold text-[#D4AF37]">{FOUNDER_INFO.name}</p>
-                  <p className="text-xs text-emerald-300">Click to upload JPG photo</p>
-                </div>
-              )}
-
-              {/* Hover overlay for image upload */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity text-xs font-semibold gap-1.5 backdrop-blur-[2px]">
-                <Camera className="w-7 h-7 text-[#D4AF37]" />
-                <span>Upload JPG Photo</span>
+          {/* Left Column: Interactive Founder Photo Upload */}
+          <div className="md:col-span-5 flex flex-col items-center w-full space-y-3">
+            <label className="relative group w-full h-80 sm:h-96 md:h-full min-h-[340px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-emerald-950 flex items-center justify-center cursor-pointer">
+              <img 
+                src={founderPhoto} 
+                alt={FOUNDER_INFO.name} 
+                className="w-full h-full object-cover object-top sm:object-center group-hover:scale-105 transition-transform duration-500" 
+              />
+              
+              {/* Overlay on Hover */}
+              <div className="absolute inset-0 bg-emerald-950/75 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-all duration-300 gap-2 p-4 text-center backdrop-blur-[2px]">
+                <Camera className="w-8 h-8 text-[#D4AF37]" />
+                <span className="font-bold text-sm text-white">Upload Local JPEG Image</span>
+                <span className="text-[11px] text-emerald-200">Click to select image file from device</span>
               </div>
 
               <input 
                 type="file" 
                 accept="image/jpeg,image/jpg,image/png,image/webp" 
-                onChange={handleImageUpload} 
+                onChange={handleFileUpload} 
                 className="hidden" 
               />
             </label>
+
+            {/* Upload & Reset Buttons Bar (Hidden when locked) */}
+            {!isLocked ? (
+              <div className="flex items-center justify-between w-full px-1 gap-2 flex-wrap sm:flex-nowrap">
+                <label className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-[#0B6B53] hover:bg-emerald-900 text-white rounded-xl text-xs font-bold cursor-pointer transition-colors shadow-sm">
+                  <Upload className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <span>Upload Photo</span>
+                  <input 
+                    type="file" 
+                    accept="image/jpeg,image/jpg,image/png,image/webp" 
+                    onChange={handleFileUpload} 
+                    className="hidden" 
+                  />
+                </label>
+
+                {isCustomPhoto && (
+                  <button
+                    onClick={resetFounderPhoto}
+                    title="Reset to default photo"
+                    className="flex items-center gap-1 px-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors border border-slate-200"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Reset</span>
+                  </button>
+                )}
+
+                <button
+                  onClick={() => setIsLocked(true)}
+                  title="Hide upload controls for visitors"
+                  className="px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
+                >
+                  Hide Buttons
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-end w-full px-1">
+                <button
+                  onClick={() => setIsLocked(false)}
+                  className="text-[11px] text-slate-400 hover:text-slate-600 transition-colors underline"
+                >
+                  Edit Founder Photo
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Right Column: Name, Title & Credentials */}
@@ -148,13 +179,7 @@ export const FounderSection: React.FC = () => {
             </button>
 
             <div className="flex items-center gap-4 mb-6 pb-4 border-b border-slate-200">
-              {founderPhoto ? (
-                <img src={founderPhoto} alt={FOUNDER_INFO.name} className="w-16 h-16 rounded-full object-cover border-2 border-[#D4AF37]" />
-              ) : (
-                <div className="w-16 h-16 rounded-full bg-emerald-950 flex items-center justify-center text-[#D4AF37] font-bold text-xl border-2 border-[#D4AF37]">
-                  MC
-                </div>
-              )}
+              <img src={FOUNDER_INFO.image} alt={FOUNDER_INFO.name} className="w-16 h-16 rounded-full object-cover border-2 border-[#D4AF37] shrink-0" />
               <div>
                 <h3 className="font-heading font-bold text-2xl text-slate-900">{FOUNDER_INFO.name}</h3>
                 <p className="text-xs text-[#0B6B53] font-bold mt-0.5">{FOUNDER_INFO.title}</p>

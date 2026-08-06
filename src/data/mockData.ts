@@ -1,4 +1,5 @@
 import { DayLesson, FAQItem, Testimonial, Badge, PricingPlan } from '../types';
+import founderMainak from '../assets/images/mainak-chatterjee.jpg';
 import avatarAnanya from '../assets/images/indian_female_ananya_1785860347769.jpg';
 import avatarRajesh from '../assets/images/indian_male_rajesh_1785860363712.jpg';
 import avatarPriya from '../assets/images/indian_female_priya_1785860377497.jpg';
@@ -15,7 +16,7 @@ export const FOUNDER_INFO = {
   title: 'Author, Mind Mastery Coach & Founder',
   bio: 'Helping people overcome stress, anxiety, emotional pain, relationship struggles, and negative thinking through modern psychology, CBT techniques, mindfulness, meditation, and inner transformation practices.',
   quote: 'Transformation is not about becoming someone new; it is about stripping away the false layers to rediscover your innate inner peace.',
-  image: '',
+  image: founderMainak,
   website: 'www.pathtoinnerpeace.in',
   email: 'connect@pathtoinnerpeace.in',
   whatsapp: '+91 91636 70300'
