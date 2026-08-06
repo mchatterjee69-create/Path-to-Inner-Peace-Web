@@ -97,7 +97,7 @@ export const Header: React.FC = () => {
             className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'profile' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
             <User className="w-4 h-4 text-[#0B6B53]" />
-            <span>{user.registered ? 'My Profile' : 'Sign In / Sign Up'}</span>
+            <span>{user.registered ? 'My Profile' : 'Member Access'}</span>
           </button>
         </nav>
 

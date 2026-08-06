@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <button onClick={() => setActiveView('profile')} className="hover:text-white transition-colors text-amber-300 font-semibold">
-                Sign In / Sign Up
+                Member Access
               </button>
             </li>
             <li>
