@@ -7,7 +7,6 @@ import {
   Award, 
   Flame, 
   Compass, 
-  ShieldCheck,
   Menu,
   X,
   Radio
@@ -19,7 +18,6 @@ export const Header: React.FC = () => {
     activeView, 
     setActiveView, 
     setIsRegistrationModalOpen,
-    setIsAdminModalOpen,
     setIsCertificateModalOpen
   } = useApp();
 
@@ -93,6 +91,14 @@ export const Header: React.FC = () => {
             <Compass className="w-4 h-4 text-[#0B6B53]" />
             Inner Peace Guide
           </button>
+
+          <button
+            onClick={() => setActiveView('profile')}
+            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'profile' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+          >
+            <User className="w-4 h-4 text-[#0B6B53]" />
+            <span>{user.registered ? 'My Profile' : 'Sign In / Sign Up'}</span>
+          </button>
         </nav>
 
         {/* Right Action CTAs & Profile */}
@@ -138,14 +144,6 @@ export const Header: React.FC = () => {
               />
             </button>
           )}
-
-          <button
-            onClick={() => setIsAdminModalOpen(true)}
-            className="p-1.5 text-slate-400 hover:text-emerald-900 transition-colors rounded-full hover:bg-emerald-50 hidden lg:block"
-            title="Admin Portal"
-          >
-            <ShieldCheck className="w-5 h-5" />
-          </button>
 
           {/* Mobile Menu Button */}
           <button
@@ -201,13 +199,6 @@ export const Header: React.FC = () => {
           >
             <Compass className="w-4 h-4 text-[#0B6B53]" />
             Inner Peace Guide
-          </button>
-          <button
-            onClick={() => { setIsAdminModalOpen(true); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-500 text-xs flex items-center gap-1.5"
-          >
-            <ShieldCheck className="w-4 h-4" />
-            Admin Panel
           </button>
         </div>
       )}

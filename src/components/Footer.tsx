@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const { setActiveView, setIsRegistrationModalOpen, setIsAdminModalOpen } = useApp();
+  const { setActiveView, setIsRegistrationModalOpen } = useApp();
 
   return (
     <footer className="bg-[#093d30] text-slate-200 border-t border-emerald-900 pt-16 pb-16 px-4 sm:px-6 lg:px-8">
@@ -67,6 +67,11 @@ export const Footer: React.FC = () => {
             <li>
               <button onClick={() => setActiveView('ai-coach')} className="hover:text-white transition-colors flex items-center gap-1">
                 <span>Reflection Guide</span>
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setActiveView('profile')} className="hover:text-white transition-colors text-amber-300 font-semibold">
+                Sign In / Sign Up
               </button>
             </li>
             <li>
@@ -131,13 +136,6 @@ export const Footer: React.FC = () => {
             <p className="font-semibold text-white">{FOUNDER_INFO.name}</p>
             <p className="text-[11px] text-emerald-300">{FOUNDER_INFO.title}</p>
           </div>
-          
-          <button
-            onClick={() => setIsAdminModalOpen(true)}
-            className="mt-4 text-[10px] text-slate-400 hover:text-amber-300 underline block"
-          >
-            Admin Panel Access
-          </button>
         </div>
 
       </div>

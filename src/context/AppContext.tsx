@@ -26,8 +26,6 @@ interface AppContextType {
   setIsPaymentModalOpen: (open: boolean) => void;
   selectedPlan: PricingPlan | null;
   setSelectedPlan: (plan: PricingPlan | null) => void;
-  isAdminModalOpen: boolean;
-  setIsAdminModalOpen: (open: boolean) => void;
   isCertificateModalOpen: boolean;
   setIsCertificateModalOpen: (open: boolean) => void;
   registerUser: (details: UserRegistration) => void;
@@ -121,7 +119,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(PRICING_PLANS[1]);
-  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
 
   // Sync to localStorage
@@ -327,8 +324,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsPaymentModalOpen,
         selectedPlan,
         setSelectedPlan,
-        isAdminModalOpen,
-        setIsAdminModalOpen,
         isCertificateModalOpen,
         setIsCertificateModalOpen,
         registerUser,

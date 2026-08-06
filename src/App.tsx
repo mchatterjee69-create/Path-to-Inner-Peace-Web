@@ -28,7 +28,6 @@ import { RazorpayModal } from './components/Payment/RazorpayModal';
 import { SuccessView } from './components/Payment/SuccessView';
 import { AiReflectionAssistant } from './components/AiAssistant/AiReflectionAssistant';
 import { CertificateModal } from './components/Gamification/CertificateModal';
-import { AdminPanelModal } from './components/Admin/AdminPanelModal';
 import { ProfileView } from './components/Profile/ProfileView';
 
 const MainContent: React.FC = () => {
@@ -87,7 +86,6 @@ const MainContent: React.FC = () => {
       <RegistrationModal />
       <RazorpayModal />
       <CertificateModal />
-      <AdminPanelModal />
     </div>
   );
 };
