@@ -145,9 +145,6 @@ export const Footer: React.FC = () => {
 
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-emerald-900/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
         <p>© 2026 Path to Inner Peace by Mainak Chatterjee. All Rights Reserved.</p>
-        <p className="flex items-center gap-1 text-slate-400">
-          Crafted with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" /> for transformation.
-        </p>
       </div>
     </footer>
   );

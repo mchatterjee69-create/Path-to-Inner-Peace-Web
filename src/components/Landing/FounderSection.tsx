@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
 import { FOUNDER_INFO } from '../../data/mockData';
-import founderImage from '../../assets/images/founder_exact_attached_1786036620335.jpg';
-import { ShieldCheck, Award, X, CheckCircle2, Camera } from 'lucide-react';
+import { useApp } from '../../context/AppContext';
+import { ShieldCheck, Award, X, CheckCircle2 } from 'lucide-react';
 
 export const FounderSection: React.FC = () => {
   const [showBioModal, setShowBioModal] = useState(false);
+  const { founderPhoto } = useApp();
 
   return (
     <section className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 bg-[#FAF9F6] relative overflow-hidden">
       <div className="max-w-4xl mx-auto space-y-6">
         
         {/* Header Tag */}
-        <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-3">
-            <span className="w-10 h-1 bg-[#D4AF37] rounded-full"></span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-poppins font-bold uppercase tracking-wide text-[#0B6B53]">
-              MEET THE FOUNDER & MENTOR
-            </h2>
-          </div>
+        <div className="flex items-center gap-3">
+          <span className="w-10 h-1 bg-[#D4AF37] rounded-full"></span>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-poppins font-bold uppercase tracking-wide text-[#0B6B53]">
+            MEET THE FOUNDER & MENTOR
+          </h2>
         </div>
 
         {/* Founder Card with Image & Details Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch bg-white p-6 sm:p-8 rounded-3xl border border-emerald-900/10 shadow-sm">
           
-          {/* Left Column: Founder Photo */}
-          <div className="md:col-span-5 flex flex-col items-center w-full space-y-3">
-            <div className="relative group w-full h-80 sm:h-96 md:h-full min-h-[340px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-emerald-950 flex items-center justify-center">
+          {/* Left Column: Founder Photo Display */}
+          <div className="md:col-span-5 flex flex-col items-center w-full">
+            <div className="relative w-full h-80 sm:h-96 md:h-full min-h-[340px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-emerald-950 flex items-center justify-center">
               <img 
-                src={founderImage} 
-                alt="Mainak Chatterjee" 
-                className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500" 
+                src={founderPhoto || FOUNDER_INFO.image} 
+                alt={FOUNDER_INFO.name} 
+                className="w-full h-full object-cover object-top sm:object-center hover:scale-105 transition-transform duration-500" 
               />
             </div>
           </div>
@@ -96,7 +95,7 @@ export const FounderSection: React.FC = () => {
             </button>
 
             <div className="flex items-center gap-4 mb-6 pb-4 border-b border-slate-200">
-              <img src={founderImage} alt="Mainak Chatterjee" className="w-16 h-16 rounded-full object-cover border-2 border-[#D4AF37] shrink-0" />
+              <img src={FOUNDER_INFO.image} alt={FOUNDER_INFO.name} className="w-16 h-16 rounded-full object-cover border-2 border-[#D4AF37] shrink-0" />
               <div>
                 <h3 className="font-heading font-bold text-2xl text-slate-900">{FOUNDER_INFO.name}</h3>
                 <p className="text-xs text-[#0B6B53] font-bold mt-0.5">{FOUNDER_INFO.title}</p>
@@ -108,7 +107,7 @@ export const FounderSection: React.FC = () => {
                 Mainak Chatterjee is an <strong>Author, Mind Mastery Coach & Founder</strong> of <strong>Path to Inner Peace</strong> and the <strong>MindForge 360°™</strong> ecosystem.
               </p>
               <p>
-                Having spent over a decade researching cognitive behavioral techniques, mindfulness protocols, eastern spiritual wisdom, and nervous system regulation, Mainak created the MindForge methodology to disarm anxiety and activate inner peace.
+                Having spent over a decade researching cognitive behavioral techniques, mindfulness protocols, eastern spiritual wisdom, and nervous system regulation, Mainak created the <strong>5-Day 30-Minute Mental Reset Challenge</strong> to make emotional healing accessible to busy individuals.
               </p>
               
               <h4 className="font-heading font-bold text-slate-900 text-base pt-2">Core Pillars of His Coaching:</h4>
@@ -142,3 +141,4 @@ export const FounderSection: React.FC = () => {
     </section>
   );
 };
+
