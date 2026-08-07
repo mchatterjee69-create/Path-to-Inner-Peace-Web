@@ -204,7 +204,7 @@ export const DailyChallengeView: React.FC = () => {
             </p>
           </div>
 
-          {/* 30-Minute Timer Widget */}
+          {/* Session Timer Widget */}
           <div className="bg-[#064E3B] p-4 rounded-2xl border border-emerald-700/50 text-center shrink-0">
             <span className="text-[10px] uppercase font-bold text-emerald-300 block">
               Session Countdown
@@ -212,9 +212,30 @@ export const DailyChallengeView: React.FC = () => {
             <span className="font-mono font-extrabold text-2xl text-white block mt-0.5">
               {formatTime(timerSeconds)}
             </span>
+            <div className="flex items-center justify-center gap-1 my-2">
+              {[10, 15, 20, 30].map(mins => (
+                <button
+                  key={mins}
+                  onClick={() => {
+                    setTimerSeconds(mins * 60);
+                    setIsTimerRunning(false);
+                  }}
+                  className={`px-2 py-0.5 rounded text-[10px] font-bold border transition-colors ${
+                    timerSeconds === mins * 60
+                      ? 'bg-[#D4AF37] text-slate-950 border-[#D4AF37]'
+                      : 'bg-emerald-950/60 text-emerald-200 border-emerald-800/60 hover:bg-emerald-900'
+                  }`}
+                >
+                  {mins}m
+                </button>
+              ))}
+            </div>
             <button
-              onClick={() => setIsTimerRunning(!isTimerRunning)}
-              className="mt-2 text-[11px] font-bold text-[#D4AF37] hover:underline"
+              onClick={() => {
+                if (timerSeconds <= 0) setTimerSeconds(1800);
+                setIsTimerRunning(!isTimerRunning);
+              }}
+              className="text-[11px] font-bold text-[#D4AF37] hover:underline"
             >
               {isTimerRunning ? 'Pause Timer' : 'Start Timer'}
             </button>

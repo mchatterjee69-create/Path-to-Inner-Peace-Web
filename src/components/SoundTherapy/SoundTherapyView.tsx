@@ -14,7 +14,6 @@ import {
   RotateCcw,
   Waves,
   Disc,
-  Upload,
   Repeat,
   Volume1,
   Trash2,
@@ -48,7 +47,7 @@ const SOUND_TRACKS: SoundTrack[] = [
     category: 'binaural',
     categoryLabel: 'Binaural Beats',
     frequency: '6 Hz Theta Wave',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    audioUrl: 'https://www.image2url.com/r2/default/audio/1786110503048-d40f8f8b-287c-4eac-8750-8146fa2acca2.mp3',
     description: 'Stereophonic binaural pulse with a 6 Hz frequency differential between left and right ears. Naturally guides the brain into deep theta meditation, subconscious stress release, and restorative calm.',
     benefits: ['Calms mental chatter', 'Encourages theta brainwave entrainment', 'Enhances deep meditation state'],
     chakaColor: '#8B5CF6',
@@ -554,16 +553,24 @@ export const SoundTherapyView: React.FC = () => {
 
   // Handle Track Selection
   const handleSelectTrack = (track: SoundTrack) => {
+    if (selectedTrack.id === track.id) {
+      togglePlayPause();
+      return;
+    }
+
     setSelectedTrack(track);
+    if (selectedTimerMins > 0 && timeLeftSec <= 0) {
+      setTimeLeftSec(selectedTimerMins * 60);
+    }
     const targetUrl = getActiveAudioUrl(track);
 
     if (audioRef.current) {
       audioRef.current.src = targetUrl;
       audioRef.current.currentTime = 0;
       setCurrentTimeSec(0);
-      if (isPlaying) {
-        audioRef.current.play().catch(err => console.warn('Audio play failed:', err));
-      }
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(err => console.warn('Audio play failed:', err));
     }
   };
 
@@ -575,8 +582,12 @@ export const SoundTherapyView: React.FC = () => {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      if (!audioRef.current.src || audioRef.current.src !== getActiveAudioUrl(selectedTrack)) {
-        audioRef.current.src = getActiveAudioUrl(selectedTrack);
+      if (selectedTimerMins > 0 && timeLeftSec <= 0) {
+        setTimeLeftSec(selectedTimerMins * 60);
+      }
+      const targetUrl = getActiveAudioUrl(selectedTrack);
+      if (!audioRef.current.src || (!audioRef.current.src.endsWith(targetUrl) && audioRef.current.src !== targetUrl)) {
+        audioRef.current.src = targetUrl;
       }
       audioRef.current.play().then(() => {
         setIsPlaying(true);
@@ -589,7 +600,7 @@ export const SoundTherapyView: React.FC = () => {
   // Timer option changes
   const handleTimerChange = (mins: number) => {
     setSelectedTimerMins(mins);
-    setTimeLeftSec(mins * 60);
+    setTimeLeftSec(mins > 0 ? mins * 60 : 0);
   };
 
   // Upload Custom MP3
@@ -724,9 +735,7 @@ export const SoundTherapyView: React.FC = () => {
               </div>
 
               <p className="text-xs sm:text-sm text-[#C2D8D2] leading-relaxed max-w-xl">
-                {customAudioMap[selectedTrack.id] 
-                  ? `Playing custom uploaded audio file: ${customAudioMap[selectedTrack.id].fileName}` 
-                  : selectedTrack.description}
+                {selectedTrack.description}
               </p>
 
               {/* Key Benefits Pills */}
@@ -798,18 +807,18 @@ export const SoundTherapyView: React.FC = () => {
                   </span>
                 </div>
                 
-                <div className="grid grid-cols-4 gap-1.5 pt-1">
-                  {[10, 15, 20, 30].map(mins => (
+                <div className="grid grid-cols-5 gap-1.5 pt-1">
+                  {[10, 15, 20, 30, 0].map(mins => (
                     <button
                       key={mins}
                       onClick={() => handleTimerChange(mins)}
                       className={`py-1.5 rounded-xl text-xs font-semibold transition-all border ${
                         selectedTimerMins === mins
-                          ? 'bg-[#D4AF37] text-black border-[#D4AF37]'
-                          : 'bg-emerald-950/60 text-[#C2D8D2] border-emerald-800/50 hover:bg-emerald-900/60'
+                          ? 'bg-[#D4AF37] text-black border-[#D4AF37] font-bold shadow-md'
+                          : 'bg-emerald-950/60 text-[#C2D8D2] border-emerald-800/50 hover:bg-emerald-900/60 hover:text-white'
                       }`}
                     >
-                      {mins}m
+                      {mins === 0 ? 'Off' : `${mins}m`}
                     </button>
                   ))}
                 </div>
@@ -860,27 +869,6 @@ export const SoundTherapyView: React.FC = () => {
                 />
               </div>
 
-              {/* Custom MP3 Upload Button */}
-              <div className="w-full bg-emerald-950/60 p-3.5 rounded-2xl border border-emerald-800/40 space-y-2 text-center">
-                <p className="text-xs text-[#C2D8D2]">
-                  Play your own MP3 for <strong className="text-white">{selectedTrack.title}</strong>:
-                </p>
-                <label className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-emerald-900/70 hover:bg-emerald-800 text-[#D4AF37] border border-[#D4AF37]/40 text-xs font-semibold cursor-pointer transition-all w-full shadow-sm">
-                  <Upload className="w-4 h-4 text-[#D4AF37]" />
-                  <span>Upload Custom Natural Recording</span>
-                  <input
-                    type="file"
-                    accept="audio/*,.mp3"
-                    className="hidden"
-                    onChange={e => {
-                      if (e.target.files?.[0]) {
-                        handleFileUpload(selectedTrack.id, e.target.files[0]);
-                      }
-                    }}
-                  />
-                </label>
-              </div>
-
             </div>
 
           </div>
@@ -894,7 +882,7 @@ export const SoundTherapyView: React.FC = () => {
                 Authentic Acoustic Soundscapes
               </h3>
               <p className="text-xs sm:text-sm text-[#C2D8D2]">
-                Select any natural recording or upload your own MP3 files for custom sound therapy
+                Select any natural recording for authentic acoustic sound therapy
               </p>
             </div>
             <span className="text-xs font-semibold text-[#D4AF37] bg-emerald-950/90 px-3.5 py-1.5 rounded-full border border-[#D4AF37]/30">
@@ -905,7 +893,6 @@ export const SoundTherapyView: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTracks.map(track => {
               const isSelected = selectedTrack.id === track.id;
-              const hasCustomMp3 = Boolean(customAudioMap[track.id]);
 
               return (
                 <div
@@ -924,11 +911,6 @@ export const SoundTherapyView: React.FC = () => {
                           <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-950 border border-emerald-800 text-[#D4AF37]">
                             {track.categoryLabel}
                           </span>
-                          {hasCustomMp3 && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/50">
-                              Custom MP3
-                            </span>
-                          )}
                         </div>
                         <h4 className="text-lg font-serif font-bold text-white pt-1 group-hover:text-[#D4AF37] transition-colors">
                           {track.title}
@@ -960,7 +942,7 @@ export const SoundTherapyView: React.FC = () => {
                     </div>
 
                     <p className="text-xs text-[#C2D8D2] line-clamp-2 mb-4 leading-relaxed">
-                      {hasCustomMp3 ? `Custom MP3 File Loaded: ${customAudioMap[track.id].fileName}` : track.description}
+                      {track.description}
                     </p>
                   </div>
 
@@ -972,34 +954,6 @@ export const SoundTherapyView: React.FC = () => {
                       <span className="text-emerald-100/60">
                         {track.recommendedDuration}
                       </span>
-                    </div>
-
-                    {/* Upload MP3 Option per Card */}
-                    <div className="flex items-center justify-between gap-2 pt-1" onClick={e => e.stopPropagation()}>
-                      <label className="flex items-center gap-1.5 text-[11px] text-[#D4AF37] hover:text-white cursor-pointer transition-colors bg-emerald-900/40 px-3 py-1.5 rounded-xl border border-emerald-800/40">
-                        <Upload className="w-3.5 h-3.5" />
-                        <span>{hasCustomMp3 ? 'Replace MP3' : 'Upload MP3'}</span>
-                        <input
-                          type="file"
-                          accept="audio/*,.mp3"
-                          className="hidden"
-                          onChange={e => {
-                            if (e.target.files?.[0]) {
-                              handleFileUpload(track.id, e.target.files[0]);
-                            }
-                          }}
-                        />
-                      </label>
-
-                      {hasCustomMp3 && (
-                        <button
-                          onClick={e => removeCustomAudio(track.id, e)}
-                          className="text-[11px] text-rose-300 hover:text-rose-100 flex items-center gap-1"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                          <span>Reset</span>
-                        </button>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -1041,10 +995,10 @@ export const SoundTherapyView: React.FC = () => {
             <div className="space-y-2 bg-emerald-900/20 p-5 rounded-2xl border border-emerald-800/30">
               <h4 className="font-bold text-white flex items-center gap-2">
                 <Headphones className="w-4 h-4 text-[#D4AF37]" />
-                Personalized MP3 Immersion
+                Harmonic Immersion
               </h4>
               <p className="text-xs leading-relaxed">
-                You can upload your own professionally recorded MP3 audio tracks directly into any card or player slot to customize your acoustic sanctuary experience seamlessly.
+                Every audio track is meticulously synthesized and mastered at precise acoustic frequencies for maximum restorative impact and stress relief.
               </p>
             </div>
           </div>
