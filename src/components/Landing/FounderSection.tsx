@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { FOUNDER_INFO } from '../../data/mockData';
-import { useApp } from '../../context/AppContext';
+import founderImage from '../../assets/images/founder_exact_attached_1786036620335.jpg';
 import { ShieldCheck, Award, X, CheckCircle2, Camera } from 'lucide-react';
 
 export const FounderSection: React.FC = () => {
   const [showBioModal, setShowBioModal] = useState(false);
-  const { founderPhoto } = useApp();
 
   return (
     <section className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 bg-[#FAF9F6] relative overflow-hidden">
@@ -28,8 +27,8 @@ export const FounderSection: React.FC = () => {
           <div className="md:col-span-5 flex flex-col items-center w-full space-y-3">
             <div className="relative group w-full h-80 sm:h-96 md:h-full min-h-[340px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-lg bg-emerald-950 flex items-center justify-center">
               <img 
-                src={founderPhoto} 
-                alt={FOUNDER_INFO.name} 
+                src={founderImage} 
+                alt="Mainak Chatterjee" 
                 className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500" 
               />
             </div>
@@ -97,7 +96,7 @@ export const FounderSection: React.FC = () => {
             </button>
 
             <div className="flex items-center gap-4 mb-6 pb-4 border-b border-slate-200">
-              <img src={FOUNDER_INFO.image} alt={FOUNDER_INFO.name} className="w-16 h-16 rounded-full object-cover border-2 border-[#D4AF37] shrink-0" />
+              <img src={founderImage} alt="Mainak Chatterjee" className="w-16 h-16 rounded-full object-cover border-2 border-[#D4AF37] shrink-0" />
               <div>
                 <h3 className="font-heading font-bold text-2xl text-slate-900">{FOUNDER_INFO.name}</h3>
                 <p className="text-xs text-[#0B6B53] font-bold mt-0.5">{FOUNDER_INFO.title}</p>
