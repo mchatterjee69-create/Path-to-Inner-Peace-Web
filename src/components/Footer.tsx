@@ -133,7 +133,7 @@ export const Footer: React.FC = () => {
             "{FOUNDER_INFO.quote}"
           </p>
           <div className="mt-3 text-xs text-emerald-200 flex items-center gap-2.5">
-            <img src={founderPhoto} alt={FOUNDER_INFO.name} className="w-9 h-9 rounded-full object-cover border border-[#D4AF37] shrink-0 shadow-sm" />
+            <img src={founderPhoto} alt={FOUNDER_INFO.name} referrerPolicy="no-referrer" className="w-9 h-9 rounded-full object-cover border border-[#D4AF37] shrink-0 shadow-sm" />
             <div>
               <p className="font-semibold text-white">{FOUNDER_INFO.name}</p>
               <p className="text-[11px] text-emerald-300">{FOUNDER_INFO.title}</p>

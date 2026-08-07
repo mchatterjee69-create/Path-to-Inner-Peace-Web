@@ -1676,7 +1676,7 @@ export const ProfileView: React.FC = () => {
 
               <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <img src={founderPhoto} alt={FOUNDER_INFO.name} className="w-10 h-10 rounded-full object-cover border border-[#D4AF37] shrink-0" />
+                  <img src={founderPhoto} alt={FOUNDER_INFO.name} referrerPolicy="no-referrer" className="w-10 h-10 rounded-full object-cover border border-[#D4AF37] shrink-0" />
                   <div>
                     <h4 className="font-bold text-emerald-950 text-xs">Author: Mainak Chatterjee</h4>
                     <p className="text-[11px] text-emerald-800">Founder of Path to Inner Peace & MindForge 360°™</p>

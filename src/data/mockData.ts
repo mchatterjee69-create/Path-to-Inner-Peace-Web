@@ -16,7 +16,7 @@ export const FOUNDER_INFO = {
   title: 'Author, Mind Mastery Coach & Founder',
   bio: 'Helping people overcome stress, anxiety, emotional pain, relationship struggles, and negative thinking through modern psychology, CBT techniques, mindfulness, meditation, and inner transformation practices.',
   quote: 'Transformation is not about becoming someone new; it is about stripping away the false layers to rediscover your innate inner peace.',
-  image: founderMainak,
+  image: 'https://cdn.corenexis.com/f/H5nVGDp0Fk3.jpg',
   website: 'www.pathtoinnerpeace.in',
   email: 'connect@pathtoinnerpeace.in',
   whatsapp: '+91 91636 70300'

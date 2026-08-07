@@ -28,6 +28,7 @@ export const FounderSection: React.FC = () => {
               <img 
                 src={founderPhoto || FOUNDER_INFO.image} 
                 alt={FOUNDER_INFO.name} 
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-top sm:object-center hover:scale-105 transition-transform duration-500" 
               />
             </div>
