@@ -1,5 +1,5 @@
 import { DayLesson, FAQItem, Testimonial, Badge, PricingPlan } from '../types';
-import founderMainak from '../assets/images/mainak-chatterjee.jpg';
+import founderMainak from '../assets/images/founder_exact_attached_1786036620335.jpg';
 import avatarAnanya from '../assets/images/indian_female_ananya_1785860347769.jpg';
 import avatarRajesh from '../assets/images/indian_male_rajesh_1785860363712.jpg';
 import avatarPriya from '../assets/images/indian_female_priya_1785860377497.jpg';
@@ -50,7 +50,7 @@ export const DAYS_DATA: DayLesson[] = [
       audioDescription: 'Soft continuous rainfall overlayed with 6Hz Theta binaural beat frequency (216Hz/222Hz carrier waves) designed for deep cognitive clearance and subconscious mental detox.'
     },
     lessonContent: `Welcome to Day 1 of your 5-Day Mental Reset Challenge!
-Today we focus on Mental Detox. Most stress stems from unobserved automatic negative thoughts (ANTs). By bringing conscious awareness to these thought patterns without judgment, you loosen their grip on your nervous system.
+Today we focus on Mental Detox. Most stress stems from unobserved automatic negative thoughts (ANTs). By bringing conscious awareness to these thought patterns without judgment, you loosen their grip.
 
 Key Principle: You are not your thoughts; you are the observer of your thoughts.`,
     journalPrompts: [
@@ -80,9 +80,9 @@ Key Principle: You are not your thoughts; you are the observer of your thoughts.
       duration: '12:00',
       ambientSound: 'ocean',
       soundName: 'Ocean Waves & 528Hz Solfeggio Tone',
-      audioDescription: 'Dynamic ocean tidal swells with a 13-second rhythmic swell cycle, combined with 528Hz Solfeggio Miracle frequency and 136.1Hz Om resonance to lower cortisol and activate vagus nerve soothing.'
+      audioDescription: 'Dynamic ocean tidal swells with a 13-second rhythmic swell cycle, combined with 528Hz Solfeggio Miracle frequency and 136.1Hz Om resonance to lower cortisol and activate v[...]'
     },
-    lessonContent: `Day 2 is dedicated to Stress Reset. When stress builds up, your body remains stuck in "fight or flight" mode. Through rhythmic 4-4-4-4 breathing and somatic body scanning, we signal your vagus nerve that you are completely safe.
+    lessonContent: `Day 2 is dedicated to Stress Reset. When stress builds up, your body remains stuck in "fight or flight" mode. Through rhythmic 4-4-4-4 breathing and somatic body scanning, we s[...]
 
 Key Principle: Changing your breathing pattern instantly signals your brain to lower stress hormones.`,
     journalPrompts: [
@@ -114,7 +114,7 @@ Key Principle: Changing your breathing pattern instantly signals your brain to l
       soundName: 'Pine Forest & 639Hz Heart Solfeggio',
       audioDescription: 'Whispering pine wind with authentic 639Hz Heart Chakra Solfeggio harmonics and live meditative Pentatonic wood flute melodies to release emotional baggage.'
     },
-    lessonContent: `Day 3 brings Emotional Healing. Unprocessed resentment and guilt act like emotional anchors, holding you back from authentic peace. Forgiveness is not about excusing others—it is about freeing yourself from emotional baggage.
+    lessonContent: `Day 3 brings Emotional Healing. Unprocessed resentment and guilt act like emotional anchors, holding you back from authentic peace. Forgiveness is not about excusing others—[...]
 
 Key Principle: Self-compassion is the foundation of lasting emotional strength.`,
     journalPrompts: [
@@ -146,7 +146,7 @@ Key Principle: Self-compassion is the foundation of lasting emotional strength.`
       soundName: 'Morning Birdsong & 741Hz Alpha Awakening',
       audioDescription: 'Vibrant spring morning bird calls (Robin & Warbler) paired with 741Hz Intuition/Confidence Solfeggio tone and 10Hz Alpha wave pulses for dismantling self-doubt.'
     },
-    lessonContent: `Day 4 focuses on Confidence Reset. Confidence is not the absence of fear; it is the deep trust that you can handle whatever arises. By rewriting your core identity statements, you realign your actions with your highest potential.
+    lessonContent: `Day 4 focuses on Confidence Reset. Confidence is not the absence of fear; it is the deep trust that you can handle whatever arises. By rewriting your core identity statements,[...]
 
 Key Principle: Your self-worth is inherent and does not depend on external approval.`,
     journalPrompts: [
@@ -176,9 +176,9 @@ Key Principle: Your self-worth is inherent and does not depend on external appro
       duration: '15:00',
       ambientSound: 'birds',
       soundName: 'Sunrise Meadow & 852Hz Sacred Frequency',
-      audioDescription: 'Full dawn meadow soundscape with multi-species bird symphony (Robin, Warbler, Dove) coupled with 852Hz Spiritual Order Solfeggio frequency and A-Major 432Hz Sacred Triad to anchor lifelong peace.'
+      audioDescription: 'Full dawn meadow soundscape with multi-species bird symphony (Robin, Warbler, Dove) coupled with 852Hz Spiritual Order Solfeggio frequency and A-Major 432Hz Sacred Triad [...]'
     },
-    lessonContent: `Congratulations on reaching Day 5! Today is your Future Self & Integration Day. You have built momentum, quieted stress, and cultivated emotional space. Now we anchor these daily resets into a permanent lifestyle.
+    lessonContent: `Congratulations on reaching Day 5! Today is your Future Self & Integration Day. You have built momentum, quieted stress, and cultivated emotional space. Now we anchor these da[...]
 
 Key Principle: Consistency beats intensity. Small daily rituals create lifelong inner peace.`,
     journalPrompts: [
@@ -254,7 +254,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Bengaluru, India',
     avatar: avatarAnanya,
     rating: 5,
-    text: 'Mainak sir’s 5-Day Challenge changed my life. After struggling with acute work burnout and sleepless nights for 2 years, the Day 2 stress reset and box breathing gave me immediate relief!'
+    text: 'Mainak sir\'s 5-Day Challenge changed my life. After struggling with acute work burnout and sleepless nights for 2 years, the Day 2 stress reset and box breathing gave me immediate re[...]'
   },
   {
     id: '2',
@@ -281,7 +281,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'New Delhi, India',
     avatar: avatarSiddharth,
     rating: 5,
-    text: 'As a doctor, I recommend Mainak Chatterjee’s scientifically backed breathwork and vagus nerve regulation techniques to anyone suffering from chronic anxiety and workplace stress.'
+    text: 'As a doctor, I recommend Mainak Chatterjee\'s scientifically backed breathwork and vagus nerve regulation techniques to anyone suffering from chronic anxiety and workplace stress.'
   },
   {
     id: '5',
@@ -317,7 +317,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Ahmedabad, India',
     avatar: avatarArjun,
     rating: 5,
-    text: 'Mainak’s teaching style is clear, compassionate, and deeply practical. The daily streak gamification and sound therapy helped me stay consistent for 30 straight days.'
+    text: 'Mainak\'s teaching style is clear, compassionate, and deeply practical. The daily streak gamification and sound therapy helped me stay consistent for 30 straight days.'
   },
   {
     id: '9',
