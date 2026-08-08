@@ -22,11 +22,14 @@ import { MeditationPlayer } from './components/Meditation/MeditationPlayer';
 import { SoundTherapyView } from './components/SoundTherapy/SoundTherapyView';
 import { InnerShiftView } from './components/InnerShift/InnerShiftView';
 import { InnerRevolutionView } from './components/InnerShift/InnerRevolutionView';
+import { CareerAxisView } from './components/CareerAxis/CareerAxisView';
+import { CareerAxisBookingView } from './components/CareerAxis/CareerAxisBookingView';
 import { JournalView } from './components/Journal/JournalView';
 import { MindForgeUpgrade } from './components/Pricing/MindForgeUpgrade';
 import { RazorpayModal } from './components/Payment/RazorpayModal';
 import { SuccessView } from './components/Payment/SuccessView';
 import { AiReflectionAssistant } from './components/AiAssistant/AiReflectionAssistant';
+import { Cbt12TechniquesVideo } from './components/CbtVideo/Cbt12TechniquesVideo';
 import { CertificateModal } from './components/Gamification/CertificateModal';
 import { ProfileView } from './components/Profile/ProfileView';
 
@@ -69,6 +72,8 @@ const MainContent: React.FC = () => {
         {activeView === 'dashboard' && <DashboardOverview />}
         {activeView === 'inner-shift' && <InnerShiftView />}
         {activeView === 'inner-revolution' && <InnerRevolutionView />}
+        {activeView === 'career-axis' && <CareerAxisView />}
+        {activeView === 'career-axis-booking' && <CareerAxisBookingView />}
         {activeView === 'challenge' && <DailyChallengeView />}
         {activeView === 'breathing' && <BreathingExercise />}
         {activeView === 'meditation' && <MeditationPlayer />}
@@ -76,6 +81,7 @@ const MainContent: React.FC = () => {
         {activeView === 'journal' && <JournalView />}
         {activeView === 'upgrade' && <MindForgeUpgrade />}
         {activeView === 'ai-coach' && <AiReflectionAssistant />}
+        {activeView === 'cbt-video' && <Cbt12TechniquesVideo />}
         {activeView === 'profile' && <ProfileView />}
         {activeView === 'success' && <SuccessView />}
       </main>

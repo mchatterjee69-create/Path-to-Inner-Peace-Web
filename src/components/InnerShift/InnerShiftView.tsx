@@ -1,16 +1,15 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useApp } from '../../context/AppContext';
-import sleepArticleImage from '../../assets/images/article_sleep_vagus_1785772098679.jpg';
 import { 
   Wind, 
   Headphones, 
-  Moon, 
+  Volume2, 
   Users, 
   MessageCircle, 
   PhoneCall, 
   ArrowRight,
-  Sparkles
+  Sun
 } from 'lucide-react';
 
 export interface ServiceCardItem {
@@ -47,8 +46,8 @@ const SERVICE_SECTIONS: ServiceCardItem[] = [
     heading: 'Sound Therapy',
     description: 'Experience immersive soundscapes, binaural beats, sound bowls and therapeutic frequencies designed to promote deep relaxation, sleep quality and emotional calmness.',
     buttonText: 'Listen Now',
-    imageUrl: sleepArticleImage || 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80',
-    icon: Moon,
+    imageUrl: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=800&q=80',
+    icon: Volume2,
     actionType: 'sound'
   },
   {
@@ -101,7 +100,7 @@ export const InnerShiftView: React.FC = () => {
         window.open('https://wa.me/919163670300', '_blank');
         break;
       case 'call':
-        window.open('https://wa.me/919163670300', '_blank');
+        window.location.href = 'tel:+9191636703000';
         break;
       default:
         setActiveView('landing');
@@ -119,18 +118,12 @@ export const InnerShiftView: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="space-y-2 border-b border-slate-200 pb-4"
         >
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#C89620]" />
-            <span className="text-[#C89620] text-xs sm:text-sm font-bold tracking-wide uppercase">
-              WELCOME TO INNER SHIFT
-            </span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-[#1b4d2e] tracking-tight">
-            INNER SHIFT
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-[#1b4d2e] tracking-tight flex items-center gap-2.5">
+            <Sun className="w-7 h-7 sm:w-9 sm:h-9 text-[#C89620] shrink-0" />
+            <span>Welcome to Inner Shift</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl">
-            Inner Shift Program: Transform Your Mindset & Elevate Your Consciousness
+          <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mt-2">
+            Transform Your Mindset & Elevate Your Consciousness
           </p>
         </motion.div>
 

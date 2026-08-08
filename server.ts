@@ -16,6 +16,235 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", app: "Path to Inner Peace", timestamp: new Date().toISOString() });
 });
 
+// ==========================================
+// CAREER AXIS BOOKING & AVAILABILITY ENGINE
+// ==========================================
+interface CareerAxisBookingRecord {
+  id: string;
+  fullName: string;
+  email: string;
+  mobile: string;
+  age: number;
+  currentStatus: string;
+  careerField: string;
+  preferredDate: string; // YYYY-MM-DD
+  preferredTime: string; // e.g. "10:00 AM"
+  timezone: string;
+  helpDescription: string;
+  additionalInfo?: string;
+  createdAt: string;
+}
+
+const CAREER_AXIS_DEFAULT_SLOTS = [
+  '10:00 AM',
+  '11:30 AM',
+  '02:00 PM',
+  '03:30 PM',
+  '05:00 PM',
+  '06:30 PM',
+  '08:00 PM'
+];
+
+// Persistent in-memory bookings store
+const careerAxisBookingsStore: CareerAxisBookingRecord[] = [
+  {
+    id: "CA-2026-INIT1",
+    fullName: "Sample Client",
+    email: "client@example.com",
+    mobile: "+919876543210",
+    age: 22,
+    currentStatus: "Student",
+    careerField: "Computer Science & AI",
+    preferredDate: "2026-08-15",
+    preferredTime: "02:00 PM",
+    timezone: "Asia/Kolkata",
+    helpDescription: "Seeking guidance on engineering specializations.",
+    createdAt: new Date().toISOString()
+  }
+];
+
+// Get Available Slots for a given Date
+app.get("/api/career-axis/slots", (req, res) => {
+  try {
+    const { date } = req.query;
+    if (!date || typeof date !== "string") {
+      return res.status(400).json({ error: "Query parameter 'date' (YYYY-MM-DD) is required." });
+    }
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    const isPastDate = date < todayStr;
+
+    // Get already booked times for this date
+    const bookedTimes = new Set(
+      careerAxisBookingsStore
+        .filter(b => b.preferredDate === date)
+        .map(b => b.preferredTime)
+    );
+
+    const now = new Date();
+    
+    const slots = CAREER_AXIS_DEFAULT_SLOTS.map(timeStr => {
+      let isAvailable = !bookedTimes.has(timeStr) && !isPastDate;
+
+      // If selected date is today, check if slot time has already passed
+      if (date === todayStr && isAvailable) {
+        const [time, modifier] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':').map(Number);
+        if (modifier === 'PM' && hours < 12) hours += 12;
+        if (modifier === 'AM' && hours === 12) hours = 0;
+
+        const slotDateTime = new Date();
+        slotDateTime.setHours(hours, minutes, 0, 0);
+
+        if (slotDateTime <= now) {
+          isAvailable = false;
+        }
+      }
+
+      return {
+        time: timeStr,
+        available: isAvailable,
+        booked: bookedTimes.has(timeStr)
+      };
+    });
+
+    res.json({
+      date,
+      slots,
+      isPastDate
+    });
+  } catch (error: any) {
+    console.error("Error fetching Career Axis slots:", error);
+    res.status(500).json({ error: "Failed to fetch time slots" });
+  }
+});
+
+// Confirm a New Career Axis Booking
+app.post("/api/career-axis/bookings", (req, res) => {
+  try {
+    const {
+      fullName,
+      email,
+      mobile,
+      age,
+      currentStatus,
+      careerField,
+      preferredDate,
+      preferredTime,
+      timezone,
+      helpDescription,
+      additionalInfo
+    } = req.body;
+
+    // Server-side strict validations
+    if (!fullName || typeof fullName !== 'string' || fullName.trim().length < 2) {
+      return res.status(400).json({ success: false, error: "Please enter a valid full name (minimum 2 characters)." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email.trim())) {
+      return res.status(400).json({ success: false, error: "Please provide a valid email address." });
+    }
+
+    const cleanMobile = (mobile || '').replace(/\s+/g, '');
+    if (!cleanMobile || cleanMobile.length < 10) {
+      return res.status(400).json({ success: false, error: "Please enter a valid mobile number with at least 10 digits." });
+    }
+
+    const numAge = Number(age);
+    if (!age || isNaN(numAge) || numAge <= 0 || numAge > 120) {
+      return res.status(400).json({ success: false, error: "Please enter a valid age." });
+    }
+
+    if (!currentStatus) {
+      return res.status(400).json({ success: false, error: "Please select your current status." });
+    }
+
+    if (!careerField || typeof careerField !== 'string' || careerField.trim().length < 2) {
+      return res.status(400).json({ success: false, error: "Please enter your current career or education field." });
+    }
+
+    if (!preferredDate || typeof preferredDate !== 'string') {
+      return res.status(400).json({ success: false, error: "Please select a preferred session date." });
+    }
+
+    // Ensure preferredDate is not in the past
+    const todayStr = new Date().toISOString().split('T')[0];
+    if (preferredDate < todayStr) {
+      return res.status(400).json({ success: false, error: "You cannot book a session for a past date." });
+    }
+
+    if (!preferredTime || typeof preferredTime !== 'string' || !CAREER_AXIS_DEFAULT_SLOTS.includes(preferredTime)) {
+      return res.status(400).json({ success: false, error: "Please select a valid time slot." });
+    }
+
+    if (!helpDescription || typeof helpDescription !== 'string' || helpDescription.trim().length < 5) {
+      return res.status(400).json({ success: false, error: "Please briefly describe what you need help with." });
+    }
+
+    // DOUBLE BOOKING PREVENTION CHECK
+    const slotAlreadyTaken = careerAxisBookingsStore.some(
+      b => b.preferredDate === preferredDate && b.preferredTime === preferredTime
+    );
+
+    if (slotAlreadyTaken) {
+      return res.status(409).json({
+        success: false,
+        error: `The slot for ${preferredDate} at ${preferredTime} was just booked by another user. Please select a different time slot.`
+      });
+    }
+
+    // Generate Unique Reference ID (e.g. CA-2026-8A3F2)
+    const randomCode = Math.random().toString(36).substring(2, 7).toUpperCase();
+    const referenceId = `CA-2026-${randomCode}`;
+
+    const newBooking: CareerAxisBookingRecord = {
+      id: referenceId,
+      fullName: fullName.trim(),
+      email: email.trim(),
+      mobile: cleanMobile,
+      age: numAge,
+      currentStatus,
+      careerField: careerField.trim(),
+      preferredDate,
+      preferredTime,
+      timezone: timezone || "Local Timezone",
+      helpDescription: helpDescription.trim(),
+      additionalInfo: (additionalInfo || '').trim(),
+      createdAt: new Date().toISOString()
+    };
+
+    // Save into backend store
+    careerAxisBookingsStore.push(newBooking);
+
+    console.log(`[Career Axis Backend] Successfully saved booking ${referenceId} for ${fullName} on ${preferredDate} at ${preferredTime}`);
+
+    return res.json({
+      success: true,
+      booking: newBooking
+    });
+
+  } catch (error: any) {
+    console.error("Error creating Career Axis booking:", error);
+    res.status(500).json({ success: false, error: "Server error occurred while creating booking. Please try again." });
+  }
+});
+
+// Admin / List Bookings Endpoint
+app.get("/api/career-axis/bookings", (_req, res) => {
+  res.json({
+    total: careerAxisBookingsStore.length,
+    bookings: careerAxisBookingsStore.map(b => ({
+      id: b.id,
+      fullName: b.fullName,
+      preferredDate: b.preferredDate,
+      preferredTime: b.preferredTime,
+      currentStatus: b.currentStatus,
+      createdAt: b.createdAt
+    }))
+  });
+});
+
 // Razorpay Create Subscription endpoint
 app.post(["/create-subscription", "/api/create-subscription"], async (req, res) => {
   try {
@@ -67,77 +296,134 @@ app.post(["/create-subscription", "/api/create-subscription"], async (req, res) 
 
 // Helper for dynamic intelligent CBT response when Gemini API is unavailable or unconfigured
 function generateDynamicCbtResponse(prompt: string, currentDay: number = 1, mood: string = 'Calm') {
-  const p = prompt.toLowerCase();
+  const p = prompt.toLowerCase().trim();
   
-  if (p.includes('anxiety') || p.includes('anxious') || p.includes('fear') || p.includes('panic') || p.includes('worry')) {
+  if (p.includes('hi') || p.includes('hello') || p.includes('hey') || p.includes('namaste') || p.includes('greetings')) {
     return {
-      response: `Anxiety is simply your nervous system's misplaced attempt to protect you. When you feel anxiety rising, your body enters a sympathetic "fight or flight" surge.\n\nTo re-frame this immediately, try the **4-7-8 Vagus Reset**: Inhale through your nose for 4 seconds, hold gently for 7 seconds, and exhale completely with a soft sigh for 8 seconds. Remind yourself: *"This feeling is uncomfortable, but it is not dangerous."*\n\nAsk yourself: What is 1 thing in your immediate physical surroundings that you can see, touch, and hear right now? Grounding brings you back to the present moment.`,
-      suggestedAffirmation: "I release the need to control the future and trust in my present strength."
+      response: `Namaste! I am your 24/7 Mind Mastery & Stress Reset Coach on Day ${currentDay} of your inner peace journey.\n\nWhether you are dealing with a busy mind, seeking CBT reframing for stress, or wanting a quick breath regulation exercise, I am here to support you. What is currently present in your mind right now?`,
+      suggestedAffirmation: "I welcome peace and clarity into this present moment."
     };
   }
-  
-  if (p.includes('overthink') || p.includes('thought') || p.includes('loop') || p.includes('mind') || p.includes('head')) {
+
+  if (p.includes('anxiety') || p.includes('anxious') || p.includes('fear') || p.includes('panic') || p.includes('worry') || p.includes('nervous')) {
     return {
-      response: `Overthinking happens when we confuse *thinking* about a problem with *solving* a problem. In CBT psychology, we call this cognitive entanglement.\n\nInstead of trying to stop your thoughts, shift your role to the **Calm Observer**. Imagine standing by a quiet riverbank: your thoughts are leaves floating downstream. You don't need to jump into the water to grab every leaf—just observe them pass by.\n\nPractice saying to yourself: *"I am noticing the thought that..."* This simple linguistic shift creates immediate space between your awareness and the mental noise.`,
+      response: `Anxiety is your autonomic nervous system's misplaced attempt to protect you from uncertainty. When anxiety surges, your amygdala triggers a sympathetic fight-or-flight response.\n\nTo signal safety to your nervous system immediately, perform the **4-7-8 Vagus Nerve Reset**: Inhale through your nose for 4 seconds, gently hold for 7 seconds, and exhale slowly through un-pursed lips for 8 seconds. Repeat this 3 times.\n\nAsk yourself: *"Is this threat real right now in this exact room, or is my mind projecting into the future?"* Grounding yourself in physical facts brings immediate relief.`,
+      suggestedAffirmation: "I release the need to control the future and rest safely in the present moment."
+    };
+  }
+
+  if (p.includes('overthink') || p.includes('thought') || p.includes('loop') || p.includes('mind') || p.includes('head') || p.includes('ruminat')) {
+    return {
+      response: `Overthinking is cognitive entanglement—confusing the act of *thinking* with the act of *solving*.\n\nIn CBT psychology, we practice becoming the **Calm Observer**. Imagine sitting by a peaceful river. Each thought is simply a floating leaf drifting past. You do not need to jump into the water to grab every leaf—just observe them float away.\n\nTry labeling your thoughts silently: *"I am noticing the thought that..."* This simple linguistic shift instantly creates healthy space between your core self and the mental noise.`,
       suggestedAffirmation: "I am the peaceful observer of my thoughts, not the noise itself."
     };
   }
 
-  if (p.includes('stress') || p.includes('overwhelm') || p.includes('work') || p.includes('pressure') || p.includes('busy')) {
+  if (p.includes('stress') || p.includes('overwhelm') || p.includes('work') || p.includes('pressure') || p.includes('busy') || p.includes('exhaust')) {
     return {
-      response: `Overwhelm occurs when your mind tries to process ten tasks at once instead of honoring the single present step.\n\nTake a 60-second micro-reset right now. Drop your shoulders away from your ears, un-clench your jaw, and let your abdomen expand fully on your next breath. Ask yourself: *"What is the single most meaningful action I can take in the next 15 minutes?"*\n\nLet go of the non-essential for today. Excellence comes from focused calm, not hurried exhaustion.`,
+      response: `Overwhelm happens when your mind tries to hold ten future tasks at once instead of honoring the single task before you.\n\nTake a 60-second physical reset right now: drop your shoulders away from your ears, unclench your jaw, and let your belly soften completely on your next breath.\n\nAsk yourself: *"What is the single most meaningful action I can take in the next 15 minutes?"* Focus on that one step. Excellence comes from focused calm, not hurried exhaustion.`,
       suggestedAffirmation: "I prioritize my inner peace over external urgency."
     };
   }
 
-  if (p.includes('sleep') || p.includes('night') || p.includes('insomnia') || p.includes('bed') || p.includes('rest')) {
+  if (p.includes('sleep') || p.includes('night') || p.includes('insomnia') || p.includes('bed') || p.includes('rest') || p.includes('tired')) {
     return {
-      response: `Preparing your mind for rest requires systematically signaling safety to your physical body.\n\nAs you lie down, practice **Somatic Muscle Release**: tense your toes for 5 seconds, then let them fall completely limp. Move slowly up to your legs, hands, shoulders, and face. Pair this with our Day 1 or Day 2 soundscapes (Rain with Theta Binaural Tones) to naturally synchronize your brainwaves for deep sleep.`,
+      response: `Preparing your mind for restorative sleep requires signaling physiological safety to your body.\n\nAs you lie down, try **Somatic Progressive Muscle Release**: gently squeeze your toes for 5 seconds, then let them fall completely limp. Work your way up through your legs, stomach, shoulders, and face.\n\nCombine this with our Day 1 or Day 2 Binaural Theta Soundscapes in the app to synchronize your brainwaves into deep delta sleep.`,
       suggestedAffirmation: "I surrender today's efforts and rest in complete peace."
     };
   }
 
-  if (p.includes('confidence') || p.includes('worth') || p.includes('doubt') || p.includes('fail') || p.includes('imposter')) {
+  if (p.includes('anger') || p.includes('angry') || p.includes('frustrat') || p.includes('irritat') || p.includes('mad')) {
     return {
-      response: `Self-doubt is rarely based on facts; it is born from old emotional conditioning. You do not need to feel 100% confident before taking action; confidence is forged *through* taking aligned action.\n\nRecognize that your inner critic is just an outdated script. Reframe your inner dialogue: replace *"What if I mess up?"* with *"What if this leads to my greatest growth?"*\n\nYou have survived 100% of your hardest days so far. Trust your inner resilience.`,
-      suggestedAffirmation: "I am worthy, capable, and growing stronger every day."
+      response: `Anger is often a secondary emotion—a boundary alarm signaling that a core value, expectation, or boundary was crossed.\n\nBefore reacting, practice the **Somatic Pause**: place your hand over your solar plexus, breathe deeply into your belly, and allow the heat of the anger to soften. \n\nAsk yourself: *"What underlying need or hurt is my anger trying to protect?"* Responding from calm awareness gives you back your personal power.`,
+      suggestedAffirmation: "I honor my feelings without letting anger drive my actions."
     };
   }
 
+  if (p.includes('sad') || p.includes('grief') || p.includes('lonely') || p.includes('cry') || p.includes('depress') || p.includes('hurt')) {
+    return {
+      response: `Heavy emotions like sadness or grief are not signs of weakness—they are signs of your deep capacity to care and feel.\n\nInstead of pushing the feeling away or judging yourself, offer yourself radical self-compassion. Place both hands over your heart, feel the warmth of your skin, and tell yourself: *"It is okay to feel this way right now. I am here for myself."*\n\nGive yourself permission to go gently today. Healing is not linear, and every breath you take is progress.`,
+      suggestedAffirmation: "I meet myself with gentle kindness, love, and radical acceptance."
+    };
+  }
+
+  if (p.includes('focus') || p.includes('procrastinat') || p.includes('distract') || p.includes('motivation') || p.includes('lazy')) {
+    return {
+      response: `Procrastination is rarely a time-management issue; it is an emotional regulation response to perceived discomfort or fear of failure.\n\nTo break the resistance, apply the **5-Minute Micro-Step Rule**: promise yourself you will work on the task for just 5 minutes with zero expectation of perfection. Once you overcome the initial inertia, momentum naturally takes over.\n\nClean your physical space, take 3 deep breath cycles, and begin with just one small action.`,
+      suggestedAffirmation: "I move forward with ease, taking one small mindful step at a time."
+    };
+  }
+
+  if (p.includes('meditat') || p.includes('breath') || p.includes('challenge') || p.includes('day') || p.includes('mainak') || p.includes('certificate')) {
+    return {
+      response: `In the 5-Day Mental Reset Challenge by Coach Mainak Chatterjee, daily 30-minute practice is designed to rewire your neural pathways through sound therapy, box breathing, CBT journaling, and guided meditation.\n\nConsistency matters far more than perfection. Even 10-15 minutes of present awareness today strengthens your brain's prefrontal cortex and lowers cortisol levels.\n\nCheck your Dashboard for today's Day ${currentDay} guided lesson and soundscape!`,
+      suggestedAffirmation: "Every moment of present awareness rewires my mind for lasting peace."
+    };
+  }
+
+  // Extract key terms from user's custom prompt to make the response dynamically personalized
+  const userKeywords = prompt.trim().split(' ').filter(w => w.length > 3).slice(0, 3).join(', ');
+  const topicSummary = userKeywords ? `regarding "${userKeywords}"` : 'on your mind';
+
   return {
-    response: `Thank you for sharing your reflection. On Day ${currentDay} of your Mind Reset journey, bringing conscious awareness to your thoughts is the catalyst for genuine inner transformation.\n\nRemember the core CBT principle: Thoughts trigger emotions, but you possess the inherent power to choose your response to any thought. Pause, place a hand over your heart, and take three intentional, deep breaths.\n\nWhat is one small act of kindness or clarity you can offer yourself in this exact moment?`,
-    suggestedAffirmation: "I choose peace, clarity, and self-compassion today."
+    response: `Thank you for sharing your thoughts ${topicSummary}. On Day ${currentDay} of your Mind Reset journey, bringing conscious awareness to whatever you are experiencing is the first step toward freedom.\n\nIn CBT psychology, we recognize that our automatic interpretations create our emotional reality. When you examine your thoughts around this topic, ask yourself:\n1. *"Is this thought 100% true, or is it an assumption?"*\n2. *"How does holding this thought make me feel?"*\n3. *"What is a more compassionate, peaceful way to view this situation?"*\n\nPause, place a hand on your heart, and take three deep, slow belly breaths. You have the inner power to choose peace in every moment.`,
+    suggestedAffirmation: `I choose peace, clarity, and self-compassion when reflecting ${topicSummary}.`
   };
 }
 
-// AI Reflection Assistant endpoint using Gemini 2.5 Flash
+// AI Reflection Assistant endpoint using Gemini 3.6 Flash
 app.post("/api/ai-reflection", async (req, res) => {
   try {
-    const { prompt, journalContext, currentDay, mood } = req.body;
+    const { prompt, journalContext, currentDay, mood, history } = req.body;
     
     const apiKey = process.env.GEMINI_API_KEY;
 
-    const systemPrompt = `You are the "Mind Mastery & Stress Reset Coach", an empathetic psycho-spiritual guide trained in CBT psychology, breathwork, vagus nerve regulation, and mindfulness methods.
-Your goal is to promptly answer any question and help users quiet their minds, overcome overthinking, and find inner peace.
+    const systemPrompt = `You are the "Mind Mastery & Stress Reset Coach" for the "Path to Inner Peace" 5-Day Mental Reset Challenge by Coach Mainak Chatterjee.
+You are an empathetic psycho-spiritual guide trained in CBT psychology, breathwork, vagus nerve regulation, and mindfulness methods.
+Your goal is to answer ANY prompt or question from the user with direct, thoughtful, and specific guidance. Never give repetitive generic answers. Every response must address the user's exact words.
+
 User Context:
 - Current Challenge Day: ${currentDay || 1}
 - Recent Mood: ${mood || 'Calm'}
 ${journalContext ? `- Journal Entry: "${journalContext}"` : ''}
 
 Rules:
-1. Speak with warm compassion, clarity, practical CBT reframing, and grounded spiritual wisdom.
-2. Directly answer the user's question with 2-3 concise, actionable paragraphs.
-3. Always include 1 inspiring affirmation at the end formatted as "Affirmation: [Your text]".
-4. Never give medical diagnosis; focus on mental reset, breath awareness, emotional regulation, and inner clarity.`;
+1. Speak with warm compassion, clarity, practical CBT reframing, and grounded wisdom.
+2. Directly answer the user's specific question or statement with 2-3 tailored, highly relevant paragraphs.
+3. At the very end of your message, add an affirmation formatted strictly as: "Affirmation: [A short, custom, uplifting 1-sentence affirmation customized for this topic]".
+4. Do not give medical diagnosis; focus on mental reset, breath awareness, emotional regulation, and inner clarity.`;
 
-    if (apiKey) {
+    if (apiKey && apiKey !== "MY_GEMINI_API_KEY") {
       try {
-        const ai = new GoogleGenAI({ apiKey });
+        const ai = new GoogleGenAI({
+          apiKey,
+          httpOptions: {
+            headers: {
+              'User-Agent': 'aistudio-build'
+            }
+          }
+        });
+
+        // Build contents array including previous chat history if available
+        let contents: any[] = [];
+        if (Array.isArray(history) && history.length > 0) {
+          contents = history.map((h: any) => ({
+            role: h.sender === 'user' ? 'user' : 'model',
+            parts: [{ text: h.text }]
+          }));
+        }
+        contents.push({
+          role: 'user',
+          parts: [{ text: prompt }]
+        });
+
         const response = await ai.models.generateContent({
           model: 'gemini-3.6-flash',
-          contents: [
-            { role: 'user', parts: [{ text: `${systemPrompt}\n\nUser Question/Reflection: ${prompt}` }] }
-          ]
+          contents,
+          config: {
+            systemInstruction: systemPrompt,
+            temperature: 0.7
+          }
         });
 
         const replyText = response.text || "";

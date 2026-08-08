@@ -61,7 +61,7 @@ const SOUND_TRACKS: SoundTrack[] = [
     category: 'binaural',
     categoryLabel: 'Binaural Beats',
     frequency: '10 Hz Alpha Wave',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    audioUrl: 'https://www.image2url.com/r2/default/audio/1786122511436-6e307797-0f5f-4c82-a765-1339a54ce996.mp3',
     description: 'Smooth 10 Hz alpha binaural tone engineered for effortless focus, creative problem solving, and anxiety-free productivity.',
     benefits: ['Sharpens cognitive focus', 'Dissolves workplace stress', 'Fosters calm mental clarity'],
     chakaColor: '#3B82F6',

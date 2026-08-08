@@ -101,7 +101,7 @@ export const InnerRevolutionView: React.FC = () => {
           className="border-b border-gray-200 pb-3"
         >
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#C89620] tracking-tight text-left">
-            Inner Shift Program: Transform Your Mindset
+            Transform Your Mindset
           </h1>
         </motion.div>
 

@@ -29,7 +29,7 @@ const SCENES: Scene[] = [
   { id: 5, title: 'Scene 5: Ending', subtitle: 'Closing Harmony & Title', startTime: 285, endTime: 300 }
 ];
 
-export const WellnessVideoPlayer: React.FC = () => {
+export const WellnessVideoPlayer: React.FC<{ onNextSlide?: () => void }> = ({ onNextSlide }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTimeSec, setCurrentTimeSec] = useState<number>(0);
   const [isMuted, setIsMuted] = useState<boolean>(false);
@@ -212,7 +212,7 @@ export const WellnessVideoPlayer: React.FC = () => {
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  // Particle Canvas Background Effect
+  // Particle & Animated Somatic Video Canvas Background Effect
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -222,21 +222,75 @@ export const WellnessVideoPlayer: React.FC = () => {
     let animationFrameId: number;
     const particles: { x: number; y: number; radius: number; alpha: number; speedY: number; speedX: number }[] = [];
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 50; i++) {
       particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 2.5 + 1,
+        x: Math.random() * (canvas.width || 1280),
+        y: Math.random() * (canvas.height || 720),
+        radius: Math.random() * 3 + 1,
         alpha: Math.random() * 0.6 + 0.2,
-        speedY: -(Math.random() * 0.3 + 0.1),
-        speedX: (Math.random() - 0.5) * 0.2
+        speedY: -(Math.random() * 0.4 + 0.1),
+        speedX: (Math.random() - 0.5) * 0.3
       });
     }
 
-    const render = () => {
+    const render = (timestamp: number) => {
+      canvas.width = canvas.parentElement?.clientWidth || 1280;
+      canvas.height = canvas.parentElement?.clientHeight || 720;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw glowing light particles
+      // 1. VOLUMETRIC SUNLIGHT BEAMS
+      const lightBeam = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      lightBeam.addColorStop(0, 'rgba(212, 175, 55, 0.12)');
+      lightBeam.addColorStop(0.5, 'rgba(20, 184, 166, 0.08)');
+      lightBeam.addColorStop(1, 'rgba(15, 23, 42, 0.2)');
+      ctx.fillStyle = lightBeam;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. DYNAMIC SOMATIC BREATHING RING (When Playing)
+      if (isPlaying) {
+        const pulse = 100 + Math.sin(timestamp * 0.0018) * 40;
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        
+        // Outer glowing aura ring
+        ctx.beginPath();
+        ctx.arc(0, 0, pulse + 25, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.25)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([10, 8]);
+        ctx.stroke();
+
+        // Inner solid somatic ring
+        ctx.beginPath();
+        ctx.arc(0, 0, pulse, 0, Math.PI * 2);
+        ctx.strokeStyle = '#10B981';
+        ctx.lineWidth = 4;
+        ctx.shadowBlur = 18;
+        ctx.shadowColor = '#10B981';
+        ctx.stroke();
+        ctx.restore();
+
+        // HUD RECORDING BADGE
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(35, 35, 6, 0, Math.PI * 2);
+        ctx.fillStyle = Math.sin(timestamp * 0.005) > 0 ? '#EF4444' : '#991B1B';
+        ctx.fill();
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 12px Inter, sans-serif';
+        ctx.fillText('REC • SOMATIC REGULATION 60 FPS VIDEO', 50, 39);
+
+        // Spectrum Equalizer
+        for (let k = 0; k < 6; k++) {
+          const barH = 5 + Math.abs(Math.sin(timestamp * 0.01 + k)) * 12;
+          ctx.fillStyle = '#D4AF37';
+          ctx.fillRect(320 + k * 6, 39 - barH, 4, barH);
+        }
+        ctx.restore();
+      }
+
+      // 3. DRAW GLOWING LIGHT PARTICLES
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -257,12 +311,12 @@ export const WellnessVideoPlayer: React.FC = () => {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isPlaying]);
 
   // Web Speech Synthesis for Voice Guide Script
   const speakVoiceover = (text: string) => {
@@ -369,13 +423,27 @@ export const WellnessVideoPlayer: React.FC = () => {
 
   // Handle Fullscreen Toggle
   const toggleFullscreen = () => {
+    setIsFullscreen(prev => !prev);
     if (!containerRef.current) return;
     if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().then(() => setIsFullscreen(true)).catch(() => {});
+      containerRef.current.requestFullscreen?.().catch(() => {});
     } else {
-      document.exitFullscreen().then(() => setIsFullscreen(false)).catch(() => {});
+      document.exitFullscreen?.().catch(() => {});
     }
   };
+
+  // Sync fullscreen state with ESC / browser events
+  useEffect(() => {
+    const handleFSChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFSChange);
+    document.addEventListener('webkitfullscreenchange', handleFSChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFSChange);
+      document.removeEventListener('webkitfullscreenchange', handleFSChange);
+    };
+  }, []);
 
   // Format seconds to mm:ss
   const formatTime = (secs: number) => {
@@ -695,16 +763,27 @@ export const WellnessVideoPlayer: React.FC = () => {
                 Carry this profound inner calmness with you into your daily activities.
               </p>
 
-              <button
-                onClick={() => {
-                  setCurrentTimeSec(0);
-                  setIsPlaying(true);
-                }}
-                className="mt-3 px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-extrabold text-xs rounded-full shadow-xl hover:scale-105 transition-all flex items-center gap-2"
-              >
-                <RotateCcw className="w-4 h-4" />
-                <span>Replay Somatic Orientation</span>
-              </button>
+              <div className="flex flex-wrap items-center justify-center gap-3 mt-3">
+                <button
+                  onClick={() => {
+                    setCurrentTimeSec(0);
+                    setIsPlaying(true);
+                  }}
+                  className="px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-extrabold text-xs rounded-full shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  <span>Replay Somatic Orientation</span>
+                </button>
+
+                {onNextSlide && (
+                  <button
+                    onClick={onNextSlide}
+                    className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-extrabold text-xs rounded-full shadow-xl hover:scale-105 transition-all flex items-center gap-2 border border-emerald-300/40"
+                  >
+                    <span>Next Slide: 5 CBT Techniques Video →</span>
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         );
@@ -734,8 +813,10 @@ export const WellnessVideoPlayer: React.FC = () => {
       {/* Main Video Player Canvas Container */}
       <div 
         ref={containerRef}
-        className={`relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border-2 border-[#D4AF37]/50 bg-gradient-to-b from-slate-950 via-[#0F4C45] to-emerald-950 flex flex-col justify-between ${
-          isFullscreen ? 'p-0 rounded-none border-none' : ''
+        className={`relative w-full rounded-3xl overflow-hidden shadow-2xl border-2 border-[#D4AF37]/50 bg-gradient-to-b from-slate-950 via-[#0F4C45] to-emerald-950 flex flex-col justify-between transition-all duration-300 ${
+          isFullscreen 
+            ? 'fixed inset-0 z-[99999] w-screen h-screen rounded-none border-none p-0 bg-slate-950' 
+            : 'aspect-video'
         }`}
       >
         {/* Animated Particle Canvas Background */}
@@ -780,20 +861,51 @@ export const WellnessVideoPlayer: React.FC = () => {
               {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-[#D4AF37]" />}
             </button>
 
-            {/* Fullscreen toggle */}
+            {/* Prominent Fullscreen Toggle Button */}
             <button
               onClick={toggleFullscreen}
-              className="p-2 rounded-xl bg-slate-900/80 text-white hover:bg-slate-800 border border-slate-700 transition-colors"
-              title="Fullscreen"
+              className="px-3 py-2 rounded-xl bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-black text-xs hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 shadow-lg border border-amber-300"
+              title={isFullscreen ? "Exit Fullscreen (ESC)" : "Expand Video Full Screen"}
             >
               {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+              <span className="hidden sm:inline">{isFullscreen ? 'Exit Full Screen' : 'Expand Full Screen'}</span>
             </button>
           </div>
         </div>
 
         {/* Center Dynamic Visual Stage */}
-        <div className="relative z-10 flex-1 flex items-center justify-center">
+        <div 
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="relative z-10 flex-1 flex items-center justify-center cursor-pointer group"
+        >
           {renderSceneVisuals()}
+
+          {/* Center Play Button Overlay when Paused */}
+          {!isPlaying && (
+            <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-slate-950/60 backdrop-blur-sm transition-all group-hover:bg-slate-950/50">
+              <div className="relative group/btn">
+                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#D4AF37] opacity-75 blur-lg animate-pulse" />
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsPlaying(true);
+                  }}
+                  className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 flex items-center justify-center shadow-2xl transition-transform transform group-hover/btn:scale-110 active:scale-95 border-4 border-white/80"
+                >
+                  <Play className="w-10 h-10 sm:w-12 sm:h-12 fill-slate-950 ml-1.5" />
+                </button>
+              </div>
+
+              <div className="mt-4 text-center space-y-1">
+                <span className="inline-block px-4 py-1 bg-slate-950/90 text-[#D4AF37] border border-[#D4AF37]/50 rounded-full text-xs font-extrabold uppercase tracking-widest shadow-xl">
+                  CLICK TO PLAY ANIMATED SOMATIC VIDEO
+                </span>
+                <p className="text-xs text-slate-200 font-medium drop-shadow-md">
+                  5-Minute Somatic Nervous System Regulation Video
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Live Script Subtitles Overlay */}
@@ -847,6 +959,15 @@ export const WellnessVideoPlayer: React.FC = () => {
                 title="Restart Video"
               >
                 <RotateCcw className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={toggleFullscreen}
+                className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-[#D4AF37] border border-[#D4AF37]/50 transition-all font-bold text-xs flex items-center gap-1.5 shadow-md"
+                title={isFullscreen ? "Exit Fullscreen (ESC)" : "Expand Video Full Screen"}
+              >
+                {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                <span>{isFullscreen ? 'Exit Full Screen' : 'Full Screen'}</span>
               </button>
             </div>
 

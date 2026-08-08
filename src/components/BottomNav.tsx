@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { 
   Home, 
-  Sparkles,
+  Sun,
   LayoutDashboard, 
   Wind, 
   Radio, 
@@ -15,7 +15,7 @@ export const BottomNav: React.FC = () => {
 
   const navItems = [
     { id: 'landing', label: 'Home', icon: Home },
-    { id: 'inner-shift', label: 'Inner Shift', icon: Sparkles },
+    { id: 'inner-shift', label: 'Inner Shift', icon: Sun },
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'profile', label: 'Member Access', icon: User },
   ] as const;

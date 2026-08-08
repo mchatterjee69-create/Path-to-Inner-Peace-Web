@@ -16,9 +16,9 @@ import {
   Crown,
   Radio,
   Compass,
-  User,
-  Sparkles
+  User
 } from 'lucide-react';
+import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 
 export const DashboardOverview: React.FC = () => {
   const { user, setActiveView, setActiveDayNumber, setIsRegistrationModalOpen, setIsCertificateModalOpen } = useApp();
@@ -53,307 +53,341 @@ export const DashboardOverview: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8 animate-fadeIn">
+    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8 animate-fadeIn overflow-hidden">
       
       {/* Top Banner Greeting */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-[#0B6B53] via-[#134E4A] to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl">
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          
-          <div className="flex items-center gap-4">
-            <img 
-              src={user.avatarUrl} 
-              alt={user.name} 
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-[#D4AF37] shadow-lg"
-              referrerPolicy="no-referrer"
-            />
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider bg-[#D4AF37] text-slate-950 px-2.5 py-0.5 rounded-full">
-                  Level {user.level} Seeker
-                </span>
-                <span className="text-[11px] font-semibold text-emerald-200">
-                  {user.xpPoints} XP
-                </span>
+      <ScrollReveal variant="slide-down">
+        <div className="relative overflow-hidden bg-gradient-to-r from-[#0B6B53] via-[#134E4A] to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl">
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            
+            <div className="flex items-center gap-4">
+              <img 
+                src={user.avatarUrl} 
+                alt={user.name} 
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-[#D4AF37] shadow-lg"
+                referrerPolicy="no-referrer"
+              />
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider bg-[#D4AF37] text-slate-950 px-2.5 py-0.5 rounded-full">
+                    Level {user.level} Seeker
+                  </span>
+                  <span className="text-[11px] font-semibold text-emerald-200">
+                    {user.xpPoints} XP
+                  </span>
+                </div>
+                <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-white">
+                  Namaste, {user.name}! 🙏
+                </h1>
+                <p className="text-xs text-emerald-100 mt-1">
+                  Your inner peace journey continues today with Day {user.currentDay}: {currentDayData.title}
+                </p>
               </div>
-              <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-white">
-                Namaste, {user.name}! 🙏
-              </h1>
-              <p className="text-xs text-emerald-100 mt-1">
-                Your inner peace journey continues today with Day {user.currentDay}: {currentDayData.title}
-              </p>
             </div>
-          </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                setActiveDayNumber(user.currentDay);
-                setActiveView('challenge');
-              }}
-              className="px-6 py-3 bg bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg hover:brightness-110 transition-all flex items-center gap-2"
-            >
-              <span>Continue Day {user.currentDay}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => {
+                  setActiveDayNumber(user.currentDay);
+                  setActiveView('challenge');
+                }}
+                className="px-6 py-3 bg bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg hover:brightness-110 transition-all flex items-center gap-2"
+              >
+                <span>Continue Day {user.currentDay}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
 
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
 
       {/* Stats Cards Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4">
         
         {/* Streak */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-            <Flame className="w-6 h-6 fill-amber-500" />
-          </div>
-          <div>
-            <div className="font-heading font-extrabold text-2xl text-slate-900">
-              {user.streakDays} Days
+        <StaggerItem variant="scale">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 h-full">
+            <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+              <Flame className="w-6 h-6 fill-amber-500" />
             </div>
-            <div className="text-xs font-semibold text-slate-500">
-              Active Streak (Best: {user.longestStreak}d)
+            <div>
+              <div className="font-heading font-extrabold text-2xl text-slate-900">
+                {user.streakDays} Days
+              </div>
+              <div className="text-xs font-semibold text-slate-500">
+                Active Streak (Best: {user.longestStreak}d)
+              </div>
             </div>
           </div>
-        </div>
+        </StaggerItem>
 
         {/* Meditation Minutes */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-50 text-[#0B6B53] flex items-center justify-center shrink-0">
-            <Clock className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="font-heading font-extrabold text-2xl text-slate-900">
-              {user.meditationMinutes} Mins
+        <StaggerItem variant="scale">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 h-full">
+            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-[#0B6B53] flex items-center justify-center shrink-0">
+              <Clock className="w-6 h-6" />
             </div>
-            <div className="text-xs font-semibold text-slate-500">
-              Total Zen Time
+            <div>
+              <div className="font-heading font-extrabold text-2xl text-slate-900">
+                {user.meditationMinutes} Mins
+              </div>
+              <div className="text-xs font-semibold text-slate-500">
+                Total Zen Time
+              </div>
             </div>
           </div>
-        </div>
+        </StaggerItem>
 
         {/* Challenge Progress */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-50 text-[#0B6B53] flex items-center justify-center shrink-0">
-            <CheckCircle2 className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="font-heading font-extrabold text-2xl text-slate-900">
-              {user.completedDays.length} / 5 Days
+        <StaggerItem variant="scale">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 h-full">
+            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-[#0B6B53] flex items-center justify-center shrink-0">
+              <CheckCircle2 className="w-6 h-6" />
             </div>
-            <div className="text-xs font-semibold text-slate-500">
-              {progressPercent}% Reset Complete
+            <div>
+              <div className="font-heading font-extrabold text-2xl text-slate-900">
+                {user.completedDays.length} / 5 Days
+              </div>
+              <div className="text-xs font-semibold text-slate-500">
+                {progressPercent}% Reset Complete
+              </div>
             </div>
           </div>
-        </div>
+        </StaggerItem>
 
         {/* Badges Earned */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-[#D4AF37] flex items-center justify-center shrink-0">
-            <Award className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="font-heading font-extrabold text-2xl text-slate-900">
-              {user.badges.length} Badges
+        <StaggerItem variant="scale">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 h-full">
+            <div className="w-12 h-12 rounded-xl bg-amber-50 text-[#D4AF37] flex items-center justify-center shrink-0">
+              <Award className="w-6 h-6" />
             </div>
-            <div className="text-xs font-semibold text-slate-500">
-              Level {user.level} Unlocked
+            <div>
+              <div className="font-heading font-extrabold text-2xl text-slate-900">
+                {user.badges.length} Badges
+              </div>
+              <div className="text-xs font-semibold text-slate-500">
+                Level {user.level} Unlocked
+              </div>
             </div>
           </div>
-        </div>
+        </StaggerItem>
 
-      </div>
+      </StaggerContainer>
 
       {/* Daily Quote Card */}
-      <div className="bg-gradient-to-r from-amber-50 via-emerald-50 to-teal-50 p-6 rounded-2xl border border-amber-200/80 shadow-sm flex items-start gap-4">
-        <Quote className="w-6 h-6 text-[#D4AF37] shrink-0 mt-0.5" />
-        <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#0B6B53]">
-            DAILY WISDOM QUOTE
-          </span>
-          <p className="text-sm font-heading font-medium text-slate-800 italic mt-1">
-            "{todayQuote}"
-          </p>
+      <ScrollReveal variant="fade">
+        <div className="bg-gradient-to-r from-amber-50 via-emerald-50 to-teal-50 p-6 rounded-2xl border border-amber-200/80 shadow-sm flex items-start gap-4">
+          <Quote className="w-6 h-6 text-[#D4AF37] shrink-0 mt-0.5" />
+          <div>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#0B6B53]">
+              DAILY WISDOM QUOTE
+            </span>
+            <p className="text-sm font-heading font-medium text-slate-800 italic mt-1">
+              "{todayQuote}"
+            </p>
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
 
       {/* Main Task Card & Quick Action Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Today's Challenge Task */}
-        <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53]">
-                TODAY'S RESET FOCUS
-              </span>
-              <h2 className="font-heading font-extrabold text-2xl text-slate-900 mt-1">
-                Day {currentDayData.dayNumber}: {currentDayData.title}
-              </h2>
+        <div className="lg:col-span-8">
+          <ScrollReveal variant="slide-up">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53]">
+                    TODAY'S RESET FOCUS
+                  </span>
+                  <h2 className="font-heading font-extrabold text-2xl text-slate-900 mt-1">
+                    Day {currentDayData.dayNumber}: {currentDayData.title}
+                  </h2>
+                </div>
+
+                <span className="px-3 py-1 bg-emerald-100 text-[#0B6B53] font-bold text-xs rounded-full">
+                  30 Min Session
+                </span>
+              </div>
+
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {currentDayData.summary}
+              </p>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                <button 
+                  onClick={() => setActiveView('sound-therapy')}
+                  className="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 hover:bg-amber-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <Radio className="w-5 h-5 text-[#D4AF37]" />
+                    <span className="text-[10px] font-bold uppercase bg-amber-200/60 text-amber-950 px-1.5 py-0.5 rounded">Acoustic</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-amber-950 group-hover:text-amber-900">Sound Therapy</p>
+                    <p className="text-[10px] text-amber-800/90 truncate">Binaural & Bowls</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveView('breathing')}
+                  className="p-3.5 rounded-xl bg-emerald-50/90 border border-emerald-200 hover:bg-emerald-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <Wind className="w-5 h-5 text-[#0B6B53]" />
+                    <span className="text-[10px] font-bold uppercase bg-emerald-200/60 text-emerald-950 px-1.5 py-0.5 rounded">Somatic</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-900 group-hover:text-[#0B6B53]">Box Breathing</p>
+                    <p className="text-[10px] text-slate-500">Nervous system calm</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveView('meditation')}
+                  className="p-3.5 rounded-xl bg-indigo-50/90 border border-indigo-200 hover:bg-indigo-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <Headphones className="w-5 h-5 text-indigo-600" />
+                    <span className="text-[10px] font-bold uppercase bg-indigo-200/60 text-indigo-950 px-1.5 py-0.5 rounded">Mindful</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-900 group-hover:text-indigo-900">Guided Reset</p>
+                    <p className="text-[10px] text-slate-500 truncate">{currentDayData.meditationTrack.title}</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveView('journal')}
+                  className="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/80 hover:bg-amber-100/80 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <BookOpen className="w-5 h-5 text-amber-700" />
+                    <span className="text-[10px] font-bold uppercase bg-amber-200/60 text-amber-950 px-1.5 py-0.5 rounded">Reflect</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-900 group-hover:text-amber-900">Daily Journal</p>
+                    <p className="text-[10px] text-slate-500">CBT prompt</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveView('ai-coach')}
+                  className="p-3.5 rounded-xl bg-teal-50/90 border border-teal-200 hover:bg-teal-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <Compass className="w-5 h-5 text-[#0B6B53]" />
+                    <span className="text-[10px] font-bold uppercase bg-teal-200/60 text-teal-950 px-1.5 py-0.5 rounded">24/7 Guide</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-900 group-hover:text-[#0B6B53]">Inner Peace Guide</p>
+                    <p className="text-[10px] text-slate-500">Reflection guide</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveView('cbt-video')}
+                  className="p-3.5 rounded-xl bg-gradient-to-br from-amber-50 to-emerald-50 border border-amber-300 hover:border-amber-400 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow col-span-2 sm:col-span-1"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <span className="text-lg">🎬</span>
+                    <span className="text-[10px] font-extrabold uppercase bg-[#D4AF37] text-slate-950 px-1.5 py-0.5 rounded">10 Mins Video</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-extrabold text-slate-900 group-hover:text-[#0B6B53]">12 CBT Techniques</p>
+                    <p className="text-[10px] text-slate-600">Animated Masterclass</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveView('profile')}
+                  className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <User className="w-5 h-5 text-slate-700" />
+                    <span className="text-[10px] font-bold uppercase bg-slate-200 text-slate-800 px-1.5 py-0.5 rounded">Member</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-900 group-hover:text-slate-950">Member Access</p>
+                    <p className="text-[10px] text-slate-500">Badges & certs</p>
+                  </div>
+                </button>
+              </div>
+
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <button
+                  onClick={() => {
+                    setActiveDayNumber(user.currentDay);
+                    setActiveView('challenge');
+                  }}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-[#0B6B53] hover:bg-[#134E4A] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
+                >
+                  <span>Start Today's 30-Min Lesson</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                {user.completedDays.length >= 5 && (
+                  <button
+                    onClick={() => setIsCertificateModalOpen(true)}
+                    className="w-full sm:w-auto px-6 py-3.5 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 border border-amber-300"
+                  >
+                    <Award className="w-4 h-4 text-[#D4AF37]" />
+                    <span>View Certificate</span>
+                  </button>
+                )}
+              </div>
+
             </div>
-
-            <span className="px-3 py-1 bg-emerald-100 text-[#0B6B53] font-bold text-xs rounded-full">
-              30 Min Session
-            </span>
-          </div>
-
-          <p className="text-sm text-slate-600 leading-relaxed">
-            {currentDayData.summary}
-          </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            <button 
-              onClick={() => setActiveView('sound-therapy')}
-              className="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 hover:bg-amber-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
-            >
-              <div className="flex items-center justify-between w-full">
-                <Radio className="w-5 h-5 text-[#D4AF37]" />
-                <span className="text-[10px] font-bold uppercase bg-amber-200/60 text-amber-950 px-1.5 py-0.5 rounded">Acoustic</span>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-amber-950 group-hover:text-amber-900">Sound Therapy</p>
-                <p className="text-[10px] text-amber-800/90 truncate">Binaural & Bowls</p>
-              </div>
-            </button>
-
-            <button 
-              onClick={() => setActiveView('breathing')}
-              className="p-3.5 rounded-xl bg-emerald-50/90 border border-emerald-200 hover:bg-emerald-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
-            >
-              <div className="flex items-center justify-between w-full">
-                <Wind className="w-5 h-5 text-[#0B6B53]" />
-                <span className="text-[10px] font-bold uppercase bg-emerald-200/60 text-emerald-950 px-1.5 py-0.5 rounded">Somatic</span>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-900 group-hover:text-[#0B6B53]">Box Breathing</p>
-                <p className="text-[10px] text-slate-500">Nervous system calm</p>
-              </div>
-            </button>
-
-            <button 
-              onClick={() => setActiveView('meditation')}
-              className="p-3.5 rounded-xl bg-indigo-50/90 border border-indigo-200 hover:bg-indigo-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
-            >
-              <div className="flex items-center justify-between w-full">
-                <Headphones className="w-5 h-5 text-indigo-600" />
-                <span className="text-[10px] font-bold uppercase bg-indigo-200/60 text-indigo-950 px-1.5 py-0.5 rounded">Mindful</span>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-900 group-hover:text-indigo-900">Guided Reset</p>
-                <p className="text-[10px] text-slate-500 truncate">{currentDayData.meditationTrack.title}</p>
-              </div>
-            </button>
-
-            <button 
-              onClick={() => setActiveView('journal')}
-              className="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/80 hover:bg-amber-100/80 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
-            >
-              <div className="flex items-center justify-between w-full">
-                <BookOpen className="w-5 h-5 text-amber-700" />
-                <span className="text-[10px] font-bold uppercase bg-amber-200/60 text-amber-950 px-1.5 py-0.5 rounded">Reflect</span>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-900 group-hover:text-amber-900">Daily Journal</p>
-                <p className="text-[10px] text-slate-500">CBT prompt</p>
-              </div>
-            </button>
-
-            <button 
-              onClick={() => setActiveView('ai-coach')}
-              className="p-3.5 rounded-xl bg-teal-50/90 border border-teal-200 hover:bg-teal-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
-            >
-              <div className="flex items-center justify-between w-full">
-                <Compass className="w-5 h-5 text-[#0B6B53]" />
-                <span className="text-[10px] font-bold uppercase bg-teal-200/60 text-teal-950 px-1.5 py-0.5 rounded">AI 24/7</span>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-900 group-hover:text-[#0B6B53]">Inner Peace AI</p>
-                <p className="text-[10px] text-slate-500">Reflection guide</p>
-              </div>
-            </button>
-
-            <button 
-              onClick={() => setActiveView('profile')}
-              className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
-            >
-              <div className="flex items-center justify-between w-full">
-                <User className="w-5 h-5 text-slate-700" />
-                <span className="text-[10px] font-bold uppercase bg-slate-200 text-slate-800 px-1.5 py-0.5 rounded">Member</span>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-900 group-hover:text-slate-950">Member Access</p>
-                <p className="text-[10px] text-slate-500">Badges & certs</p>
-              </div>
-            </button>
-          </div>
-
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <button
-              onClick={() => {
-                setActiveDayNumber(user.currentDay);
-                setActiveView('challenge');
-              }}
-              className="w-full sm:w-auto px-8 py-3.5 bg-[#0B6B53] hover:bg-[#134E4A] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
-            >
-              <span>Start Today's 30-Min Lesson</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            {user.completedDays.length >= 5 && (
-              <button
-                onClick={() => setIsCertificateModalOpen(true)}
-                className="w-full sm:w-auto px-6 py-3.5 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 border border-amber-300"
-              >
-                <Award className="w-4 h-4 text-[#D4AF37]" />
-                <span>View Certificate</span>
-              </button>
-            )}
-          </div>
-
+          </ScrollReveal>
         </div>
 
         {/* Sidebar: Upcoming Reminder & Quick Tools */}
         <div className="lg:col-span-4 space-y-6">
           
           {/* Upcoming WhatsApp Reminder Alert */}
-          <div className="bg-[#064E3B] text-white p-6 rounded-3xl border border-emerald-800/80 shadow-md space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-500/20 text-[#D4AF37] rounded-xl">
-                <Bell className="w-5 h-5 animate-bounce" />
+          <ScrollReveal variant="slide-left" delay={0.1}>
+            <div className="bg-[#064E3B] text-white p-6 rounded-3xl border border-emerald-800/80 shadow-md space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-emerald-500/20 text-[#D4AF37] rounded-xl">
+                  <Bell className="w-5 h-5 animate-bounce" />
+                </div>
+                <div>
+                  <h4 className="font-heading font-bold text-sm text-white">
+                    WhatsApp Reminder Active
+                  </h4>
+                  <p className="text-xs text-emerald-200">
+                    Daily reminder sent to {user.whatsapp || 'Registered WhatsApp'}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-heading font-bold text-sm text-white">
-                  WhatsApp Reminder Active
-                </h4>
-                <p className="text-xs text-emerald-200">
-                  Daily reminder sent to {user.whatsapp || 'Registered WhatsApp'}
-                </p>
-              </div>
+              <p className="text-xs text-emerald-100 leading-relaxed bg-[#0B6B53]/50 p-3 rounded-xl border border-emerald-700/40">
+                💡 Tip: The best time to practice your 30-minute reset is early morning or right before bedtime for deep sleep recovery.
+              </p>
             </div>
-            <p className="text-xs text-emerald-100 leading-relaxed bg-[#0B6B53]/50 p-3 rounded-xl border border-emerald-700/40">
-              💡 Tip: The best time to practice your 30-minute reset is early morning or right before bedtime for deep sleep recovery.
-            </p>
-          </div>
+          </ScrollReveal>
 
           {/* Upgrade Teaser */}
-          <div className="bg-gradient-to-br from-[#134E4A] to-[#0B6B53] text-white p-6 rounded-3xl shadow-md space-y-3">
-            <div className="flex items-center gap-2">
-              <Crown className="w-5 h-5 text-[#D4AF37]" />
-              <span className="font-heading font-bold text-sm text-[#D4AF37]">
-                MindForge 360°™ Upgrade
-              </span>
+          <ScrollReveal variant="slide-left" delay={0.2}>
+            <div className="bg-gradient-to-br from-[#134E4A] to-[#0B6B53] text-white p-6 rounded-3xl shadow-md space-y-3">
+              <div className="flex items-center gap-2">
+                <Crown className="w-5 h-5 text-[#D4AF37]" />
+                <span className="font-heading font-bold text-sm text-[#D4AF37]">
+                  MindForge 360°™ Upgrade
+                </span>
+              </div>
+              <p className="text-xs text-emerald-100 leading-relaxed">
+                Unlock 50+ guided meditations, Personal Reflection Guide 24/7, and live monthly masterclasses with Mainak Chatterjee.
+              </p>
+              <button
+                onClick={() => setActiveView('upgrade')}
+                className="w-full py-2.5 bg-[#D4AF37] hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-sm"
+              >
+                View Membership Plans
+              </button>
             </div>
-            <p className="text-xs text-emerald-100 leading-relaxed">
-              Unlock 50+ guided meditations, Personal Reflection Guide 24/7, and live monthly masterclasses with Mainak Chatterjee.
-            </p>
-            <button
-              onClick={() => setActiveView('upgrade')}
-              className="w-full py-2.5 bg-[#D4AF37] hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-sm"
-            >
-              View Membership Plans
-            </button>
-          </div>
+          </ScrollReveal>
 
         </div>
 

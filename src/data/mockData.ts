@@ -14,6 +14,7 @@ import avatarRohan from '../assets/images/indian_male_rohan_1785860470161.jpg';
 export const FOUNDER_INFO = {
   name: 'Mainak Chatterjee',
   title: 'Author, Mind Mastery Coach & Founder',
+  achievement: 'Quantum Alchemist & Mindfulness Coach',
   bio: 'Helping people overcome stress, anxiety, emotional pain, relationship struggles, and negative thinking through modern psychology, CBT techniques, mindfulness, meditation, and inner transformation practices.',
   quote: 'Transformation is not about becoming someone new; it is about stripping away the false layers to rediscover your innate inner peace.',
   image: 'https://cdn.corenexis.com/f/H5nVGDp0Fk3.jpg',

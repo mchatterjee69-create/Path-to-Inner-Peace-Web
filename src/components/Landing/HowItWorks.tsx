@@ -8,6 +8,7 @@ import {
   Crown, 
   ArrowDown 
 } from 'lucide-react';
+import { ScrollReveal } from '../ScrollReveal';
 
 export const HowItWorks: React.FC = () => {
   const steps = [
@@ -56,20 +57,22 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#093d30] text-white relative">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#093d30] text-white relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-white/10 px-3 py-1 rounded-full border border-white/10">
-            SIMPLE 5-DAY ROADMAP
-          </span>
-          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-white mt-3 tracking-tight">
-            How The 5-Day Mental Reset Works
-          </h2>
-          <p className="text-slate-300 text-sm mt-2">
-            A frictionless, step-by-step transformation path designed for your busy routine.
-          </p>
-        </div>
+        <ScrollReveal variant="slide-up">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-white/10 px-3 py-1 rounded-full border border-white/10">
+              SIMPLE 5-DAY ROADMAP
+            </span>
+            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-white mt-3 tracking-tight">
+              How The 5-Day Mental Reset Works
+            </h2>
+            <p className="text-slate-300 text-sm mt-2">
+              A frictionless, step-by-step transformation path designed for your busy routine.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Timeline Grid / Stack */}
         <div className="relative max-w-4xl mx-auto space-y-6">
@@ -79,27 +82,29 @@ export const HowItWorks: React.FC = () => {
 
             return (
               <React.Fragment key={idx}>
-                <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-6 border border-slate-700/80 hover:border-[#D4AF37]/50 transition-all flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-lg group">
-                  
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border ${item.color} shadow-md group-hover:scale-105 transition-transform`}>
-                    <Icon className="w-7 h-7" />
-                  </div>
-
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
-                        {item.step}
-                      </span>
+                <ScrollReveal variant={idx % 2 === 0 ? 'slide-right' : 'slide-left'} delay={0.05}>
+                  <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-6 border border-slate-700/80 hover:border-[#D4AF37]/50 transition-all flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-lg group">
+                    
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border ${item.color} shadow-md group-hover:scale-105 transition-transform`}>
+                      <Icon className="w-7 h-7" />
                     </div>
-                    <h3 className="font-heading font-bold text-lg text-white">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
 
-                </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
+                          {item.step}
+                        </span>
+                      </div>
+                      <h3 className="font-heading font-bold text-lg text-white">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+
+                  </div>
+                </ScrollReveal>
 
                 {!isLast && (
                   <div className="flex justify-center py-1">

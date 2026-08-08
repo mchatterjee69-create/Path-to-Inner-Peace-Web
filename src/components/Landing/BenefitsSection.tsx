@@ -12,6 +12,7 @@ import {
   BookOpen, 
   Activity 
 } from 'lucide-react';
+import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 
 export const BenefitsSection: React.FC = () => {
   const benefits = [
@@ -84,42 +85,43 @@ export const BenefitsSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
-            HOLISTIC MENTAL TRANSFORMATION
-          </span>
-          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 mt-3 tracking-tight">
-            Comprehensive Benefits of Your 5-Day Reset
-          </h2>
-          <p className="text-slate-600 text-sm mt-3 leading-relaxed">
-            Every session combines modern psychology, CBT techniques, and psycho-spiritual wisdom to deliver profound, measurable shifts in your well-being.
-          </p>
-        </div>
+        <ScrollReveal variant="slide-up">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+              HOLISTIC MENTAL TRANSFORMATION
+            </span>
+            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 mt-3 tracking-tight">
+              Comprehensive Benefits of Your 5-Day Reset
+            </h2>
+            <p className="text-slate-600 text-sm mt-3 leading-relaxed">
+              Every session combines modern psychology, CBT techniques, and psycho-spiritual wisdom to deliver profound, measurable shifts in your well-being.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {benefits.map((b, idx) => {
             const Icon = b.icon;
             return (
-              <div 
-                key={idx}
-                className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#0B6B53]/30 hover:shadow-lg hover:-translate-y-1 transition-all group"
-              >
-                <div className={`w-12 h-12 rounded-xl ${b.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm`}>
-                  <Icon className="w-6 h-6" />
+              <StaggerItem key={idx} variant="scale">
+                <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#0B6B53]/30 hover:shadow-lg hover:-translate-y-1 transition-all group h-full">
+                  <div className={`w-12 h-12 rounded-xl ${b.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">
+                    {b.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {b.description}
+                  </p>
                 </div>
-                <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">
-                  {b.title}
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {b.description}
-                </p>
-              </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
 
       </div>
     </section>

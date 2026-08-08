@@ -2,6 +2,8 @@ export type ActiveView =
   | 'landing' 
   | 'inner-shift'
   | 'inner-revolution'
+  | 'career-axis'
+  | 'career-axis-booking'
   | 'dashboard' 
   | 'challenge' 
   | 'breathing' 
@@ -12,6 +14,7 @@ export type ActiveView =
   | 'upgrade' 
   | 'profile' 
   | 'ai-coach'
+  | 'cbt-video'
   | 'success';
 
 export interface BlogArticle {

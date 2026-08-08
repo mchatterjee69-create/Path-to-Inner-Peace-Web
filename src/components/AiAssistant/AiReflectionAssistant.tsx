@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Compass, Send, User, Lightbulb, HeartHandshake } from 'lucide-react';
+import { Compass, Send, User, Lightbulb, HeartHandshake, RotateCcw } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
@@ -35,6 +35,18 @@ export const AiReflectionAssistant: React.FC = () => {
     scrollToBottom();
   }, [messages, loading]);
 
+  const handleClearChat = () => {
+    setMessages([
+      {
+        id: Date.now().toString(),
+        sender: 'ai',
+        text: `Chat reset. Namaste ${user.name}! What question or reflection is on your mind right now?`,
+        affirmation: "Every moment is a fresh beginning.",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }
+    ]);
+  };
+
   const sendQuery = async (queryText: string) => {
     if (!queryText.trim() || loading) return;
 
@@ -45,9 +57,18 @@ export const AiReflectionAssistant: React.FC = () => {
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    setMessages(prev => [...prev, userMsg]);
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
     setInputPrompt('');
     setLoading(true);
+
+    const historyPayload = updatedMessages
+      .filter(m => m.id !== 'welcome_1')
+      .slice(-8)
+      .map(m => ({
+        sender: m.sender,
+        text: m.text
+      }));
 
     try {
       const res = await fetch('/api/ai-reflection', {
@@ -55,6 +76,7 @@ export const AiReflectionAssistant: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           prompt: queryText.trim(),
+          history: historyPayload,
           currentDay: user.currentDay,
           mood: 'Calm'
         })
@@ -72,7 +94,7 @@ export const AiReflectionAssistant: React.FC = () => {
 
       setMessages(prev => [...prev, aiMsg]);
     } catch (err) {
-      console.error(err);
+      console.error("AI Reflection chat error:", err);
       setMessages(prev => [
         ...prev,
         {
@@ -115,7 +137,7 @@ export const AiReflectionAssistant: React.FC = () => {
           Inner Peace Reflection Guide
         </h1>
         <p className="text-slate-600 text-sm">
-          Get real-time CBT re-framing, reflection guidance, and custom affirmations.
+          Get real-time CBT re-framing, reflection guidance, and custom affirmations for your mind.
         </p>
       </div>
 
@@ -129,15 +151,24 @@ export const AiReflectionAssistant: React.FC = () => {
               <HeartHandshake className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-heading font-bold text-sm text-white">
-                Mind Mastery & Stress Reset Coach
+              <h3 className="font-heading font-bold text-sm text-white flex items-center gap-2">
+                <span>Mind Mastery & Stress Reset Coach</span>
               </h3>
               <span className="text-[10px] text-emerald-200 flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Online & Ready to Guide
+                Reflection Guide Active & Ready
               </span>
             </div>
           </div>
+
+          <button
+            onClick={handleClearChat}
+            title="Reset Conversation"
+            className="p-2 text-emerald-200 hover:text-white hover:bg-white/10 rounded-xl transition-all flex items-center gap-1 text-xs"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span className="hidden sm:inline">Reset</span>
+          </button>
         </div>
 
         {/* Message Log */}
@@ -187,8 +218,9 @@ export const AiReflectionAssistant: React.FC = () => {
               <div className="w-8 h-8 rounded-full bg-[#0B6B53] text-[#D4AF37] flex items-center justify-center">
                 <Compass className="w-4 h-4 animate-spin" />
               </div>
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 text-xs text-slate-500 italic">
-                Reflecting on CBT wisdom...
+              <div className="bg-white p-4 rounded-2xl border border-slate-200 text-xs text-slate-500 italic flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                Reflection Guide is crafting your personalized CBT reflection...
               </div>
             </div>
           )}
