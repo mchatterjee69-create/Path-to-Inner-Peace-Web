@@ -1,7 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { DAYS_DATA } from '../../data/mockData';
-import { Lock, ArrowRight, Clock, Video } from 'lucide-react';
+import { Unlock, ArrowRight, Clock, Video } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 
 export const ChallengeOverview: React.FC = () => {
@@ -52,9 +52,9 @@ export const ChallengeOverview: React.FC = () => {
                       <span className="text-xs font-bold uppercase tracking-wider text-[#0B6B53]">
                         DAY {day.dayNumber}
                       </span>
-                      <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-full flex items-center gap-1">
-                        <Lock className="w-3 h-3 text-amber-600" />
-                        Locked
+                      <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Unlock className="w-3 h-3 text-[#0B6B53]" />
+                        Unlock Now
                       </span>
                     </div>
 

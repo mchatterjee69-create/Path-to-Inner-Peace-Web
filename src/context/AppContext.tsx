@@ -272,22 +272,58 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setIsRegistrationModalOpen(false);
     triggerConfetti();
     setActiveView('dashboard');
+
+    // Automatically push registration data to mchatterjee69@gmail.com
+    fetch('/api/notify-registration', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formType: '5-Day Mental Reset Challenge Registration',
+        fullName: details.fullName,
+        email: details.email || `${details.fullName.toLowerCase().replace(/\s+/g, '')}@example.com`,
+        whatsapp: details.whatsapp,
+        country: details.country,
+        details: {
+          agreedWhatsapp: details.agreedWhatsapp,
+          registeredAt: details.registeredAt || new Date().toISOString()
+        }
+      })
+    }).catch(err => console.error('Notify registration error:', err));
   };
 
   const loginUser = (emailOrPhone: string, fullName?: string) => {
     const isEmail = emailOrPhone.includes('@');
     const updatedName = fullName && fullName.trim() ? fullName.trim() : (user.name !== 'Seeker' ? user.name : 'Mainak Seeker');
+    const updatedEmail = isEmail ? emailOrPhone : (user.email || `${updatedName.toLowerCase().replace(/\s+/g, '')}@pathtoinnerpeace.in`);
+    const updatedWhatsapp = !isEmail ? emailOrPhone : (user.whatsapp || '+91 91636 70300');
+
     const updated: UserProfile = {
       ...user,
       name: updatedName,
-      email: isEmail ? emailOrPhone : (user.email || `${updatedName.toLowerCase().replace(/\s+/g, '')}@pathtoinnerpeace.in`),
-      whatsapp: !isEmail ? emailOrPhone : (user.whatsapp || '+91 91636 70300'),
+      email: updatedEmail,
+      whatsapp: updatedWhatsapp,
       registered: true,
       registeredAt: user.registeredAt || new Date().toISOString().split('T')[0],
       xpPoints: user.xpPoints + 50
     };
     setUser(updated);
     triggerConfetti();
+
+    // Notify email on account sign-in
+    fetch('/api/notify-registration', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formType: 'User Sign-In / Login',
+        fullName: updatedName,
+        email: updatedEmail,
+        whatsapp: updatedWhatsapp,
+        details: {
+          loginInput: emailOrPhone,
+          timestamp: new Date().toISOString()
+        }
+      })
+    }).catch(err => console.error('Notify login error:', err));
   };
 
   const logoutUser = () => {

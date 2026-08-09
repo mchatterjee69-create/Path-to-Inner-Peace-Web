@@ -64,7 +64,7 @@ export const RegistrationModal: React.FC = () => {
           </span>
 
           <h3 className="font-heading font-bold text-xl sm:text-2xl text-white tracking-tight">
-            Join the 5-Day Reset
+            Join 5-Day Mental Reset Challenge
           </h3>
           <p className="text-xs text-emerald-100 mt-0.5">
             Rewire your mind in 30 minutes a day with Mainak Chatterjee

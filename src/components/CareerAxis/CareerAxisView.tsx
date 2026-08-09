@@ -35,6 +35,21 @@ export const CareerAxisView: React.FC = () => {
   const handleSendInquiry = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inquiryMsg.trim()) return;
+
+    // Send email notification to mchatterjee69@gmail.com
+    fetch('/api/notify-registration', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formType: 'Career Axis Guidance Inquiry',
+        fullName: inquiryName || 'Career Axis Visitor',
+        details: {
+          inquiryMessage: inquiryMsg,
+          timestamp: new Date().toISOString()
+        }
+      })
+    }).catch(err => console.error('Career Axis inquiry notification error:', err));
+
     const encodedText = encodeURIComponent(`Hi Career Axis Team, my name is ${inquiryName || 'Student/Professional'}. Inquiry: ${inquiryMsg}`);
     window.open(`https://wa.me/919163670300?text=${encodedText}`, '_blank');
     setInquirySent(true);

@@ -453,6 +453,21 @@ export const ProfileView: React.FC = () => {
     });
     setSavedSuccess(true);
     setTimeout(() => setSavedSuccess(false), 2500);
+
+    // Notify email on profile updates
+    fetch('/api/notify-registration', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formType: 'User Profile Details Update',
+        fullName: editName,
+        email: editEmail,
+        whatsapp: editPhone,
+        details: {
+          updatedAt: new Date().toISOString()
+        }
+      })
+    }).catch(err => console.error('Notify profile update error:', err));
   };
 
   const toggleRsvp = (programId: string, programTitle: string) => {

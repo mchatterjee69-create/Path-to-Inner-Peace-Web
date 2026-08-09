@@ -3,6 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -11,10 +12,203 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// Target recipient email for all form registrations
+const ADMIN_NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "mchatterjee69@gmail.com";
+
+// Store for all registration form submissions
+interface StoredRegistrationRecord {
+  id: string;
+  formType: string;
+  fullName: string;
+  email: string;
+  mobile: string;
+  details: Record<string, any>;
+  receivedAt: string;
+}
+
+const userRegistrationsStore: StoredRegistrationRecord[] = [];
+
+// ==========================================
+// EMAIL NOTIFICATION DISPATCH ENGINE
+// ==========================================
+async function sendRegistrationEmailToAdmin(payload: {
+  formType: string;
+  fullName?: string;
+  email?: string;
+  mobile?: string;
+  details?: Record<string, any>;
+  receivedAt?: string;
+}) {
+  const timestamp = payload.receivedAt || new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+  const recipient = ADMIN_NOTIFICATION_EMAIL;
+
+  const detailsRows = Object.entries(payload.details || {})
+    .filter(([_, val]) => val !== undefined && val !== null && val !== '')
+    .map(([key, val]) => `
+      <tr>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #0B6B53; width: 35%; text-transform: capitalize;">${key.replace(/([A-Z])/g, ' $1')}:</td>
+        <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${typeof val === 'object' ? JSON.stringify(val) : String(val)}</td>
+      </tr>
+    `).join('');
+
+  const htmlBody = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #cbd5e1; border-radius: 16px; overflow: hidden; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+      <div style="background: linear-gradient(135deg, #0B6B53 0%, #134E4A 100%); padding: 24px; text-align: center; color: #ffffff;">
+        <div style="font-size: 28px; margin-bottom: 6px;">📋</div>
+        <h2 style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: #ffffff;">New User Registration Received</h2>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #a7f3d0; font-weight: 500;">Path to Inner Peace — ${payload.formType}</p>
+      </div>
+      <div style="padding: 28px 24px;">
+        <div style="background-color: #f0fdf4; border-left: 4px solid #0B6B53; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px;">
+          <p style="margin: 0; font-size: 14px; font-weight: 700; color: #065f46;">Notification for Mainak Chatterjee (${recipient})</p>
+          <p style="margin: 2px 0 0 0; font-size: 12px; color: #047857;">A new user submitted data on the <strong>Path to Inner Peace</strong> platform.</p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px;">
+          <tbody>
+            <tr>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #0B6B53; width: 35%;">Form Type:</td>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; color: #0f172a; font-weight: 700;">${payload.formType}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #0B6B53;">Full Name:</td>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; color: #0f172a; font-weight: 600;">${payload.fullName || 'N/A'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #0B6B53;">Email Address:</td>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; color: #0f172a;"><a href="mailto:${payload.email}" style="color: #0284c7; font-weight: 600; text-decoration: none;">${payload.email || 'N/A'}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #0B6B53;">Mobile / WhatsApp:</td>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; color: #0f172a; font-weight: 600;">${payload.mobile || 'N/A'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #0B6B53;">Submission Time:</td>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; color: #64748b;">${timestamp}</td>
+            </tr>
+            ${detailsRows}
+          </tbody>
+        </table>
+      </div>
+      <div style="background-color: #f8fafc; padding: 14px 24px; text-align: center; font-size: 11px; color: #64748b; border-top: 1px solid #e2e8f0;">
+        Path to Inner Peace Admin Lead System • Automated Dispatch to ${recipient}
+      </div>
+    </div>
+  `;
+
+  console.log(`\n==================================================`);
+  console.log(`📧 NEW FORM REGISTRATION PUSHED TO ${recipient}`);
+  console.log(`Form Type: ${payload.formType}`);
+  console.log(`Name: ${payload.fullName} | Email: ${payload.email} | Mobile: ${payload.mobile}`);
+  console.log(`Details:`, payload.details);
+  console.log(`==================================================\n`);
+
+  // Attempt Nodemailer if SMTP configured
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (host && user && pass) {
+    try {
+      const transporter = nodemailer.createTransport({
+        host,
+        port: Number(process.env.SMTP_PORT) || 587,
+        secure: Number(process.env.SMTP_PORT) === 465,
+        auth: { user, pass }
+      });
+
+      await transporter.sendMail({
+        from: `"Path to Inner Peace Leads" <${user}>`,
+        to: recipient,
+        subject: `[New Lead] ${payload.formType} - ${payload.fullName || payload.email || 'User'}`,
+        html: htmlBody
+      });
+      console.log(`✅ Registration email successfully sent via SMTP to ${recipient}`);
+    } catch (err: any) {
+      console.warn("SMTP email send warning:", err?.message || err);
+    }
+  }
+
+  // Fallback webhook trigger to ensure notification delivery to mchatterjee69@gmail.com
+  try {
+    fetch("https://submit-form.com/mchatterjee69@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        recipient,
+        formType: payload.formType,
+        fullName: payload.fullName,
+        email: payload.email,
+        mobile: payload.mobile,
+        timestamp,
+        ...payload.details
+      })
+    }).catch(() => {});
+  } catch (err) {
+    // Ignore fallback errors
+  }
+}
+
 // API Routes
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", app: "Path to Inner Peace", timestamp: new Date().toISOString() });
 });
+
+// ==========================================
+// REGISTRATION FORM NOTIFICATION ENDPOINT
+// ==========================================
+app.post("/api/notify-registration", async (req, res) => {
+  try {
+    const { formType, fullName, email, whatsapp, mobile, details, country } = req.body;
+
+    const cleanFullName = (fullName || (details && details.fullName) || "").trim();
+    const cleanEmail = (email || (details && details.email) || "").trim();
+    const cleanMobile = (whatsapp || mobile || (details && details.whatsapp) || (details && details.mobile) || "").trim();
+
+    const record: StoredRegistrationRecord = {
+      id: "REG-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase(),
+      formType: formType || "General Registration",
+      fullName: cleanFullName,
+      email: cleanEmail,
+      mobile: cleanMobile,
+      details: {
+        country: country || (details && details.country) || "India",
+        ...details
+      },
+      receivedAt: new Date().toISOString()
+    };
+
+    userRegistrationsStore.push(record);
+
+    // Push email notification to mchatterjee69@gmail.com
+    await sendRegistrationEmailToAdmin({
+      formType: record.formType,
+      fullName: record.fullName,
+      email: record.email,
+      mobile: record.mobile,
+      details: record.details,
+      receivedAt: record.receivedAt
+    });
+
+    res.json({
+      success: true,
+      message: `Registration data pushed successfully to ${ADMIN_NOTIFICATION_EMAIL}`,
+      recordId: record.id
+    });
+  } catch (error: any) {
+    console.error("Error processing registration notification:", error);
+    res.status(500).json({ success: false, error: "Server error occurred while notifying registration." });
+  }
+});
+
+// Endpoint to retrieve all registrations
+app.get("/api/admin/all-registrations", (_req, res) => {
+  res.json({
+    total: userRegistrationsStore.length,
+    targetEmail: ADMIN_NOTIFICATION_EMAIL,
+    registrations: userRegistrationsStore
+  });
+});
+
 
 // ==========================================
 // CAREER AXIS BOOKING & AVAILABILITY ENGINE
@@ -216,6 +410,46 @@ app.post("/api/career-axis/bookings", (req, res) => {
 
     // Save into backend store
     careerAxisBookingsStore.push(newBooking);
+
+    // Also push into global userRegistrationsStore
+    userRegistrationsStore.push({
+      id: newBooking.id,
+      formType: "Career Axis 1:1 Consulting Session Booking",
+      fullName: newBooking.fullName,
+      email: newBooking.email,
+      mobile: newBooking.mobile,
+      details: {
+        age: newBooking.age,
+        currentStatus: newBooking.currentStatus,
+        careerField: newBooking.careerField,
+        preferredDate: newBooking.preferredDate,
+        preferredTime: newBooking.preferredTime,
+        timezone: newBooking.timezone,
+        helpDescription: newBooking.helpDescription,
+        additionalInfo: newBooking.additionalInfo
+      },
+      receivedAt: newBooking.createdAt
+    });
+
+    // Push email notification to mchatterjee69@gmail.com
+    sendRegistrationEmailToAdmin({
+      formType: "Career Axis 1:1 Consulting Session Booking",
+      fullName: newBooking.fullName,
+      email: newBooking.email,
+      mobile: newBooking.mobile,
+      details: {
+        referenceId: newBooking.id,
+        age: newBooking.age,
+        currentStatus: newBooking.currentStatus,
+        careerField: newBooking.careerField,
+        preferredDate: newBooking.preferredDate,
+        preferredTime: newBooking.preferredTime,
+        timezone: newBooking.timezone,
+        helpDescription: newBooking.helpDescription,
+        additionalInfo: newBooking.additionalInfo
+      },
+      receivedAt: newBooking.createdAt
+    }).catch(err => console.error("Career Axis Email Notify Error:", err));
 
     console.log(`[Career Axis Backend] Successfully saved booking ${referenceId} for ${fullName} on ${preferredDate} at ${preferredTime}`);
 
