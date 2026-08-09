@@ -33,6 +33,12 @@ export const RegistrationModal: React.FC = () => {
       agreedWhatsapp,
       registeredAt: new Date().toISOString()
     });
+
+    const liveUrl = 'https://www.youtube.com/live/u42RK5eV_c8?si=wg7ziJNLQNRu7hID';
+    const newWin = window.open(liveUrl, '_blank');
+    if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+      window.location.href = liveUrl;
+    }
   };
 
   return (

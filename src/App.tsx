@@ -37,6 +37,11 @@ const MainContent: React.FC = () => {
   const { activeView, setActiveView, upgradeMembership, selectedPlan } = useApp();
 
   useEffect(() => {
+    // Scroll to top on view transition
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [activeView]);
+
+  useEffect(() => {
     // Detect if user landed on /success page
     if (window.location.pathname.startsWith('/success') || window.location.search.includes('status=success')) {
       upgradeMembership(selectedPlan?.id || 'MIND_MASTERY_PRO');
