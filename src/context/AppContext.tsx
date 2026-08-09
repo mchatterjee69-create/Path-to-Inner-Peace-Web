@@ -76,18 +76,85 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   });
 
-  const [activeView, setActiveViewRaw] = useState<ActiveView>('landing');
+  const VALID_VIEWS: ActiveView[] = [
+    'landing', 'inner-shift', 'inner-revolution', 'career-axis', 'career-axis-booking',
+    'dashboard', 'challenge', 'breathing', 'meditation', 'sound-therapy',
+    'journal', 'mood', 'upgrade', 'profile', 'ai-coach', 'cbt-video', 'success'
+  ];
+
+  const [activeView, setActiveViewRaw] = useState<ActiveView>(() => {
+    try {
+      const hash = window.location.hash.replace('#', '') as ActiveView;
+      if (hash && ['landing', 'inner-shift', 'inner-revolution', 'career-axis', 'career-axis-booking', 'dashboard', 'challenge', 'breathing', 'meditation', 'sound-therapy', 'journal', 'mood', 'upgrade', 'profile', 'ai-coach', 'cbt-video', 'success'].includes(hash)) {
+        return hash;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return 'landing';
+  });
   const [activeDayNumber, setActiveDayNumberRaw] = useState<number>(1);
 
-  const setActiveView = (view: ActiveView) => {
+  const setActiveView = (view: ActiveView, pushHistory = true) => {
     setActiveViewRaw(view);
     window.scrollTo({ top: 0, behavior: 'instant' });
+
+    if (pushHistory) {
+      try {
+        const currentHash = window.location.hash.replace('#', '');
+        if (currentHash !== view) {
+          const newHash = view === 'landing' ? '' : `#${view}`;
+          window.history.pushState({ view }, '', newHash || window.location.pathname + window.location.search);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
   };
 
   const setActiveDayNumber = (day: number) => {
     setActiveDayNumberRaw(day);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
+
+  useEffect(() => {
+    // Set initial history state if not already set
+    try {
+      if (!window.history.state || !window.history.state.view) {
+        window.history.replaceState({ view: activeView }, '', window.location.hash ? window.location.hash : window.location.pathname + window.location.search);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    const handlePopState = (event: PopStateEvent) => {
+      let targetView: ActiveView = 'landing';
+      if (event.state && event.state.view && VALID_VIEWS.includes(event.state.view)) {
+        targetView = event.state.view;
+      } else {
+        const hash = window.location.hash.replace('#', '') as ActiveView;
+        if (hash && VALID_VIEWS.includes(hash)) {
+          targetView = hash;
+        }
+      }
+      
+      // Close open modals on back/forward
+      setIsRegistrationModalOpen(false);
+      setIsPaymentModalOpen(false);
+      setIsCertificateModalOpen(false);
+
+      setActiveViewRaw(targetView);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
+    };
+  }, []);
   const [journalEntries, setJournalEntries] = useState<Record<number, JournalEntry>>(() => {
     try {
       const saved = localStorage.getItem('pip_journals');
