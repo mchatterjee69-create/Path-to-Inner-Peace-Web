@@ -11,7 +11,6 @@ import {
   Award, 
   Flame, 
   Compass,
-  Target,
   Menu,
   X
 } from 'lucide-react';
@@ -28,46 +27,38 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-900/10 transition-all w-full overflow-hidden">
-      <div className="max-w-[1536px] mx-auto px-2 sm:px-3 lg:px-4 h-16 sm:h-20 flex items-center justify-between gap-1 xl:gap-2">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-900/10 shadow-sm transition-all w-full">
+      <div className="max-w-[1600px] mx-auto px-2 sm:px-3 lg:px-4 h-16 sm:h-20 flex items-center justify-between gap-1 lg:gap-2">
         
         {/* Brand Logo & Name */}
         <div 
           onClick={() => setActiveView('landing')} 
-          className="flex items-center gap-1.5 cursor-pointer group shrink-0"
+          className="flex items-center gap-1.5 sm:gap-2 cursor-pointer group shrink-0"
         >
           <img 
             src={logoImg} 
             alt="Path to Inner Peace Logo" 
-            className="w-7 h-7 sm:w-8 sm:h-8 xl:w-9 xl:h-9 2xl:w-10 2xl:h-10 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform shrink-0 border border-emerald-800/10"
+            className="w-7 h-7 sm:w-8 sm:h-8 xl:w-9 xl:h-9 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform shrink-0 border border-emerald-800/10"
             referrerPolicy="no-referrer"
           />
           <div className="flex flex-col min-w-0">
-            <span className="font-poppins font-bold text-xs lg:text-xs xl:text-sm 2xl:text-base text-[#0B6B53] tracking-tight whitespace-nowrap leading-tight">
+            <span className="font-poppins font-bold text-xs xl:text-sm 2xl:text-base text-[#0B6B53] tracking-tight whitespace-nowrap leading-tight">
               Path to Inner Peace
             </span>
-            <span className="text-[8px] xl:text-[9px] 2xl:text-[10px] font-semibold gold-text tracking-normal whitespace-nowrap leading-none mt-0.5">
+            <span className="text-[8px] xl:text-[9px] font-semibold gold-text tracking-normal whitespace-nowrap leading-none mt-0.5">
               Transform Your Mind
             </span>
           </div>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 lg:gap-1.5 xl:gap-2.5 2xl:gap-3.5 font-inter text-[10px] lg:text-[11px] xl:text-xs 2xl:text-sm font-medium text-emerald-900/90 whitespace-nowrap shrink min-w-0">
+        {/* Desktop Navigation Links - Single Row */}
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2 2xl:gap-3 font-inter text-[10px] xl:text-[11px] 2xl:text-xs font-medium text-emerald-900/90 whitespace-nowrap shrink min-w-0">
           <button
             onClick={() => setActiveView('landing')}
             className={`transition-colors py-1 px-1 xl:px-1.5 flex items-center gap-0.5 xl:gap-1 whitespace-nowrap ${activeView === 'landing' ? 'text-emerald-950 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
             <Home className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Home</span>
-          </button>
-          
-          <button
-            onClick={() => setActiveView('challenge')}
-            className={`transition-colors py-1 px-1 xl:px-1.5 flex items-center gap-0.5 xl:gap-1 whitespace-nowrap ${activeView === 'challenge' ? 'text-emerald-950 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
-          >
-            <Target className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-[#0B6B53] shrink-0" />
-            <span className="whitespace-nowrap">Free Challenge</span>
           </button>
 
           <button
@@ -126,7 +117,7 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Right Action CTAs & Profile */}
-        <div className="flex items-center gap-1 lg:gap-1.5 xl:gap-2 shrink-0 ml-auto">
+        <div className="flex items-center gap-1 sm:gap-1.5 xl:gap-2 shrink-0">
           
           {user.completedDays.length >= 5 && (
             <button
@@ -140,7 +131,7 @@ export const Header: React.FC = () => {
 
           <button
             onClick={() => setActiveView('upgrade')}
-            className="flex items-center gap-1 px-2 xl:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold rounded-full text-[10px] xl:text-xs hover:brightness-105 transition-all shadow-md shadow-amber-500/20 shrink-0 whitespace-nowrap"
+            className="flex items-center gap-1 px-2 xl:px-2.5 py-1 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold rounded-full text-[10px] xl:text-[11px] hover:brightness-105 transition-all shadow-md shadow-amber-500/20 shrink-0 whitespace-nowrap"
           >
             <Crown className="w-3 h-3 fill-slate-950 shrink-0" />
             <span className="hidden sm:inline uppercase tracking-wider text-[10px] xl:text-[11px] whitespace-nowrap">MindForge 360°™</span>
@@ -150,14 +141,14 @@ export const Header: React.FC = () => {
           {!user.registered ? (
             <button
               onClick={() => setIsRegistrationModalOpen(true)}
-              className="px-2.5 lg:px-3 xl:px-3.5 py-1 sm:py-1.5 rounded-full border border-emerald-900 bg-emerald-900 text-white hover:bg-emerald-800 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors shadow-sm whitespace-nowrap shrink-0"
+              className="px-2.5 xl:px-3 py-1 rounded-full border border-emerald-900 bg-emerald-900 text-white hover:bg-emerald-800 text-[10px] xl:text-xs font-bold uppercase tracking-wider transition-colors shadow-sm whitespace-nowrap shrink-0"
             >
               Start Free
             </button>
           ) : (
             <button
               onClick={() => setActiveView('profile')}
-              className="w-7 h-7 sm:w-8 sm:h-8 xl:w-9 xl:h-9 rounded-full border-2 border-[#0B6B53] overflow-hidden hover:opacity-90 transition-opacity shrink-0"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#0B6B53] overflow-hidden hover:opacity-90 transition-opacity shrink-0"
               title="Member Access"
             >
               <img 
@@ -172,30 +163,23 @@ export const Header: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-1.5 sm:p-2 text-emerald-900 hover:bg-emerald-50 rounded-full shrink-0 flex items-center justify-center"
+            className="lg:hidden p-1.5 text-emerald-900 hover:bg-emerald-50 rounded-full shrink-0 flex items-center justify-center ml-0.5"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-1.5 text-sm">
+        <div className="md:hidden bg-white border-t border-slate-200 px-4 pt-2 pb-4 space-y-1.5 text-sm">
           <button
             onClick={() => { setActiveView('landing'); setMobileMenuOpen(false); }}
             className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2 whitespace-nowrap"
           >
             <Home className="w-4 h-4 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Home</span>
-          </button>
-          <button
-            onClick={() => { setActiveView('challenge'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2 whitespace-nowrap"
-          >
-            <Target className="w-4 h-4 text-[#0B6B53] shrink-0" />
-            <span className="whitespace-nowrap">Free Challenge</span>
           </button>
           <button
             onClick={() => { setActiveView('inner-shift'); setMobileMenuOpen(false); }}
