@@ -1001,7 +1001,10 @@ export const ProfileView: React.FC = () => {
           </span>
         </button>
 
-        <button
+        <a
+          href="https://welcomekit-pathtoinnerpeace.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => setActivePortalTab('downloads')}
           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
             activePortalTab === 'downloads'
@@ -1011,7 +1014,8 @@ export const ProfileView: React.FC = () => {
         >
           <Download className="w-4 h-4" />
           <span>Resource Vault</span>
-        </button>
+          <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+        </a>
 
       </div>
 
@@ -1576,13 +1580,24 @@ export const ProfileView: React.FC = () => {
       {activePortalTab === 'downloads' && (
         <div className="space-y-6 animate-fadeIn">
           
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-2">
-            <h2 className="font-heading font-extrabold text-2xl text-slate-900">
-              Pro Member Resource Vault
-            </h2>
-            <p className="text-xs text-slate-500">
-              Download official CBT workbooks, 528Hz audio soundscapes, and join our private MindForge 360°™ VIP community.
-            </p>
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 className="font-heading font-extrabold text-2xl text-slate-900">
+                Pro Member Resource Vault
+              </h2>
+              <p className="text-xs text-slate-500 mt-1">
+                Access official CBT workbooks, 528Hz audio soundscapes, and your welcome kit in our online Resource Vault.
+              </p>
+            </div>
+            <a
+              href="https://welcomekit-pathtoinnerpeace.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 bg-[#0B6B53] hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded-full shadow-md transition-all flex items-center gap-2 shrink-0 whitespace-nowrap"
+            >
+              <span>Launch Resource Vault</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
