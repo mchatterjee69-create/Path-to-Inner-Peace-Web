@@ -52,47 +52,47 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6 font-inter text-sm font-medium text-emerald-900/70">
+        <nav className="hidden xl:flex items-center gap-3.5 xl:gap-5 font-inter text-xs xl:text-sm font-medium text-emerald-900/70 whitespace-nowrap">
           <button
             onClick={() => setActiveView('landing')}
-            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'landing' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+            className={`transition-colors py-1 flex items-center gap-1.5 whitespace-nowrap ${activeView === 'landing' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
-            <Home className="w-4 h-4 text-[#0B6B53]" />
-            <span>Home</span>
+            <Home className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Home</span>
           </button>
           
           <button
             onClick={() => setActiveView('inner-shift')}
-            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'inner-shift' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+            className={`transition-colors py-1 flex items-center gap-1.5 whitespace-nowrap ${activeView === 'inner-shift' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
-            <Sun className="w-4 h-4 text-[#0B6B53]" />
-            <span>Inner Shift</span>
+            <Sun className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Inner Shift</span>
           </button>
 
           <button
             onClick={() => setActiveView('inner-revolution')}
-            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'inner-revolution' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+            className={`transition-colors py-1 flex items-center gap-1.5 whitespace-nowrap ${activeView === 'inner-revolution' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
-            <Zap className="w-4 h-4 text-[#0B6B53]" />
-            <span>Inner Revolution</span>
+            <Zap className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Inner Revolution</span>
           </button>
 
           <button
             onClick={() => setActiveView('career-axis')}
-            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'career-axis' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+            className={`transition-colors py-1 flex items-center gap-1.5 whitespace-nowrap ${activeView === 'career-axis' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
-            <Compass className="w-4 h-4 text-[#0B6B53]" />
-            <span>Career Axis</span>
+            <Compass className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Career Axis</span>
           </button>
 
           <button
             onClick={() => setActiveView('dashboard')}
-            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'dashboard' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+            className={`transition-colors py-1 flex items-center gap-1.5 whitespace-nowrap ${activeView === 'dashboard' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
-            <LayoutDashboard className="w-4 h-4 text-[#0B6B53]" />
-            <span>Dashboard</span>
+            <LayoutDashboard className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Dashboard</span>
             {user.streakDays > 0 && (
-              <span className="bg-amber-100 text-amber-900 text-xs px-2 py-0.5 rounded-full flex items-center gap-0.5 font-bold">
+              <span className="bg-amber-100 text-amber-900 text-xs px-2 py-0.5 rounded-full flex items-center gap-0.5 font-bold shrink-0">
                 <Flame className="w-3 h-3 text-amber-600 fill-amber-500" />
                 {user.streakDays}
               </span>
@@ -101,18 +101,18 @@ export const Header: React.FC = () => {
 
           <button
             onClick={() => setActiveView('ai-coach')}
-            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'ai-coach' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+            className={`transition-colors py-1 flex items-center gap-1.5 whitespace-nowrap ${activeView === 'ai-coach' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
-            <Compass className="w-4 h-4 text-[#0B6B53]" />
-            <span>Inner Peace Guide</span>
+            <Compass className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Inner Peace Guide</span>
           </button>
 
           <button
             onClick={() => setActiveView('profile')}
-            className={`transition-colors py-1 flex items-center gap-1.5 ${activeView === 'profile' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
+            className={`transition-colors py-1 flex items-center gap-1.5 whitespace-nowrap ${activeView === 'profile' ? 'text-emerald-900 font-bold border-b-2 border-[#0B6B53]' : 'hover:text-emerald-950'}`}
           >
-            <User className="w-4 h-4 text-[#0B6B53]" />
-            <span>Member Access</span>
+            <User className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Member Access</span>
           </button>
         </nav>
 
@@ -163,7 +163,7 @@ export const Header: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-1.5 sm:p-2 text-emerald-900 hover:bg-emerald-50 rounded-full shrink-0 flex items-center justify-center"
+            className="xl:hidden p-1.5 sm:p-2 text-emerald-900 hover:bg-emerald-50 rounded-full shrink-0 flex items-center justify-center"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
@@ -173,60 +173,60 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 text-sm">
+        <div className="xl:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 text-sm">
           <button
             onClick={() => { setActiveView('landing'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2"
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2 whitespace-nowrap"
           >
-            <Home className="w-4 h-4 text-[#0B6B53]" />
-            <span>Home</span>
+            <Home className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Home</span>
           </button>
           <button
             onClick={() => { setActiveView('inner-shift'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2"
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2 whitespace-nowrap"
           >
-            <Sun className="w-4 h-4 text-[#0B6B53]" />
-            <span>Inner Shift</span>
+            <Sun className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Inner Shift</span>
           </button>
           <button
             onClick={() => { setActiveView('inner-revolution'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2"
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2 whitespace-nowrap"
           >
-            <Zap className="w-4 h-4 text-[#0B6B53]" />
-            <span>Inner Revolution</span>
+            <Zap className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Inner Revolution</span>
           </button>
           <button
             onClick={() => { setActiveView('career-axis'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2"
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2 whitespace-nowrap"
           >
-            <Compass className="w-4 h-4 text-[#0B6B53]" />
-            <span>Career Axis</span>
+            <Compass className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Career Axis</span>
           </button>
           <button
             onClick={() => { setActiveView('dashboard'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center justify-between"
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center justify-between whitespace-nowrap"
           >
-            <div className="flex items-center gap-2">
-              <LayoutDashboard className="w-4 h-4 text-[#0B6B53]" />
-              <span>Dashboard</span>
+            <div className="flex items-center gap-2 whitespace-nowrap">
+              <LayoutDashboard className="w-4 h-4 text-[#0B6B53] shrink-0" />
+              <span className="whitespace-nowrap">Dashboard</span>
             </div>
-            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full font-bold">
+            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full font-bold whitespace-nowrap">
               Streak: {user.streakDays}d
             </span>
           </button>
           <button
             onClick={() => { setActiveView('ai-coach'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2"
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2 whitespace-nowrap"
           >
-            <Compass className="w-4 h-4 text-[#0B6B53]" />
-            <span>Inner Peace Guide</span>
+            <Compass className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Inner Peace Guide</span>
           </button>
           <button
             onClick={() => { setActiveView('profile'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2"
+            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2 whitespace-nowrap"
           >
-            <User className="w-4 h-4 text-[#0B6B53]" />
-            <span>Member Access</span>
+            <User className="w-4 h-4 text-[#0B6B53] shrink-0" />
+            <span className="whitespace-nowrap">Member Access</span>
           </button>
         </div>
       )}

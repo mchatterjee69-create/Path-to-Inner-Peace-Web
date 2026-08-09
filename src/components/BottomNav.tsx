@@ -37,7 +37,7 @@ export const BottomNav: React.FC = () => {
               }`}
             >
               <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5px]' : 'stroke-2'}`} />
-              <span className="text-[10px] mt-0.5 tracking-tight">{item.label}</span>
+              <span className="text-[10px] mt-0.5 tracking-tight whitespace-nowrap">{item.label}</span>
             </button>
           );
         })}
