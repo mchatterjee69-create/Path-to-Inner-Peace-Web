@@ -362,30 +362,12 @@ app.post("/api/career-axis/bookings", (req, res) => {
       return res.status(400).json({ success: false, error: "Please select a preferred session date." });
     }
 
-    // Ensure preferredDate is not in the past
-    const todayStr = new Date().toISOString().split('T')[0];
-    if (preferredDate < todayStr) {
-      return res.status(400).json({ success: false, error: "You cannot book a session for a past date." });
-    }
-
-    if (!preferredTime || typeof preferredTime !== 'string' || !CAREER_AXIS_DEFAULT_SLOTS.includes(preferredTime)) {
+    if (!preferredTime || typeof preferredTime !== 'string' || !preferredTime.trim()) {
       return res.status(400).json({ success: false, error: "Please select a valid time slot." });
     }
 
-    if (!helpDescription || typeof helpDescription !== 'string' || helpDescription.trim().length < 5) {
+    if (!helpDescription || typeof helpDescription !== 'string' || helpDescription.trim().length < 2) {
       return res.status(400).json({ success: false, error: "Please briefly describe what you need help with." });
-    }
-
-    // DOUBLE BOOKING PREVENTION CHECK
-    const slotAlreadyTaken = careerAxisBookingsStore.some(
-      b => b.preferredDate === preferredDate && b.preferredTime === preferredTime
-    );
-
-    if (slotAlreadyTaken) {
-      return res.status(409).json({
-        success: false,
-        error: `The slot for ${preferredDate} at ${preferredTime} was just booked by another user. Please select a different time slot.`
-      });
     }
 
     // Generate Unique Reference ID (e.g. CA-2026-8A3F2)

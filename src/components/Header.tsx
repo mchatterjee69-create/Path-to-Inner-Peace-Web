@@ -46,7 +46,7 @@ export const Header: React.FC = () => {
               Path to Inner Peace
             </span>
             <span className="text-[8px] xl:text-[9px] font-semibold gold-text tracking-normal whitespace-nowrap leading-none mt-0.5">
-              Transform Your Mind
+              Transform Your Mind, Elevate Your Life
             </span>
           </div>
         </div>
@@ -176,35 +176,45 @@ export const Header: React.FC = () => {
         <div className="lg:hidden bg-white border-t border-slate-200 px-4 pt-2 pb-4 space-y-1.5 text-sm">
           <button
             onClick={() => { setActiveView('landing'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2 whitespace-nowrap"
+            className={`w-full text-left px-3 py-2 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-colors ${
+              activeView === 'landing' ? 'bg-emerald-50 text-[#0B6B53] font-bold' : 'hover:bg-slate-50 text-slate-700'
+            }`}
           >
             <Home className="w-4 h-4 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Home</span>
           </button>
           <button
             onClick={() => { setActiveView('inner-shift'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2 whitespace-nowrap"
+            className={`w-full text-left px-3 py-2 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-colors ${
+              activeView === 'inner-shift' ? 'bg-emerald-50 text-[#0B6B53] font-bold' : 'hover:bg-slate-50 text-slate-700'
+            }`}
           >
             <Sun className="w-4 h-4 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Inner Shift</span>
           </button>
           <button
             onClick={() => { setActiveView('inner-revolution'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2 whitespace-nowrap"
+            className={`w-full text-left px-3 py-2 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-colors ${
+              activeView === 'inner-revolution' ? 'bg-emerald-50 text-[#0B6B53] font-bold' : 'hover:bg-slate-50 text-slate-700'
+            }`}
           >
             <Zap className="w-4 h-4 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Inner Revolution</span>
           </button>
           <button
             onClick={() => { setActiveView('career-axis'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-[#0B6B53] flex items-center gap-2 whitespace-nowrap"
+            className={`w-full text-left px-3 py-2 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-colors ${
+              activeView === 'career-axis' ? 'bg-emerald-50 text-[#0B6B53] font-bold' : 'hover:bg-slate-50 text-slate-700'
+            }`}
           >
             <Compass className="w-4 h-4 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Career Axis</span>
           </button>
           <button
             onClick={() => { setActiveView('dashboard'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center justify-between whitespace-nowrap"
+            className={`w-full text-left px-3 py-2 rounded-lg font-medium flex items-center justify-between whitespace-nowrap transition-colors ${
+              activeView === 'dashboard' ? 'bg-emerald-50 text-[#0B6B53] font-bold' : 'hover:bg-slate-50 text-slate-700'
+            }`}
           >
             <div className="flex items-center gap-2 whitespace-nowrap">
               <LayoutDashboard className="w-4 h-4 text-[#0B6B53] shrink-0" />
@@ -216,14 +226,18 @@ export const Header: React.FC = () => {
           </button>
           <button
             onClick={() => { setActiveView('ai-coach'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2 whitespace-nowrap"
+            className={`w-full text-left px-3 py-2 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-colors ${
+              activeView === 'ai-coach' ? 'bg-emerald-50 text-[#0B6B53] font-bold' : 'hover:bg-slate-50 text-slate-700'
+            }`}
           >
             <Compass className="w-4 h-4 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Inner Peace Guide</span>
           </button>
           <button
             onClick={() => { setActiveView('profile'); setMobileMenuOpen(false); }}
-            className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50 font-medium text-slate-700 flex items-center gap-2 whitespace-nowrap"
+            className={`w-full text-left px-3 py-2 rounded-lg font-medium flex items-center gap-2 whitespace-nowrap transition-colors ${
+              activeView === 'profile' ? 'bg-emerald-50 text-[#0B6B53] font-bold' : 'hover:bg-slate-50 text-slate-700'
+            }`}
           >
             <User className="w-4 h-4 text-[#0B6B53] shrink-0" />
             <span className="whitespace-nowrap">Member Access</span>
