@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { BottomNav } from './components/BottomNav';
 
 // Landing Page Sections
 import { HeroSection } from './components/Landing/HeroSection';
@@ -138,9 +137,6 @@ const MainContent: React.FC = () => {
       <RazorpayModal />
       <CertificateModal />
       <AdminLeadsModal isOpen={isAdminLeadsModalOpen} onClose={() => setIsAdminLeadsModalOpen(false)} />
-
-      {/* Mobile Bottom Navigation */}
-      <BottomNav />
     </div>
   );
 };
