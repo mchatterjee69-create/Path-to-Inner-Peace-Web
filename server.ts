@@ -128,23 +128,41 @@ async function sendRegistrationEmailToAdmin(payload: {
     }
   }
 
-  // Fallback webhook trigger to ensure notification delivery to mchatterjee69@gmail.com
+  // Direct FormSubmit service dispatch to ensure instant delivery to mchatterjee69@gmail.com
   try {
-    fetch("https://submit-form.com/mchatterjee69@gmail.com", {
+    const flattenedDetails: Record<string, string> = {};
+    if (payload.details && typeof payload.details === 'object') {
+      Object.entries(payload.details).forEach(([k, v]) => {
+        flattenedDetails[k] = typeof v === 'object' ? JSON.stringify(v) : String(v);
+      });
+    }
+
+    const appOrigin = "https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app";
+
+    await fetch(`https://formsubmit.co/ajax/${recipient}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Origin": appOrigin,
+        "Referer": `${appOrigin}/`
+      },
       body: JSON.stringify({
-        recipient,
-        formType: payload.formType,
-        fullName: payload.fullName,
-        email: payload.email,
-        mobile: payload.mobile,
-        timestamp,
-        ...payload.details
+        _subject: `[New Form Submission] ${payload.formType} - ${payload.fullName || payload.email || 'User'}`,
+        _captcha: "false",
+        _template: "table",
+        _replyto: payload.email || recipient,
+        "Form Type": payload.formType,
+        "Full Name": payload.fullName || "N/A",
+        "Email Address": payload.email || "N/A",
+        "Mobile / WhatsApp": payload.mobile || "N/A",
+        "Submission Time": timestamp,
+        ...flattenedDetails
       })
-    }).catch(() => {});
-  } catch (err) {
-    // Ignore fallback errors
+    });
+    console.log(`✅ FormSubmit payload pushed to ${recipient}`);
+  } catch (err: any) {
+    console.warn("FormSubmit dispatch warning:", err?.message || err);
   }
 }
 

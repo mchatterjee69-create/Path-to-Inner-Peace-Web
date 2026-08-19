@@ -10,6 +10,7 @@ import {
 } from '../types';
 import { ALL_BADGES, DAYS_DATA, PRICING_PLANS, FOUNDER_INFO } from '../data/mockData';
 import confetti from 'canvas-confetti';
+import { dispatchFormToAdmin } from '../utils/formSubmit';
 
 interface AppContextType {
   user: UserProfile;
@@ -22,12 +23,16 @@ interface AppContextType {
   badges: Badge[];
   isRegistrationModalOpen: boolean;
   setIsRegistrationModalOpen: (open: boolean) => void;
+  registrationTargetDay: number | null;
+  setRegistrationTargetDay: (day: number | null) => void;
   isPaymentModalOpen: boolean;
   setIsPaymentModalOpen: (open: boolean) => void;
   selectedPlan: PricingPlan | null;
   setSelectedPlan: (plan: PricingPlan | null) => void;
   isCertificateModalOpen: boolean;
   setIsCertificateModalOpen: (open: boolean) => void;
+  isAdminLeadsModalOpen: boolean;
+  setIsAdminLeadsModalOpen: (open: boolean) => void;
   registerUser: (details: UserRegistration) => void;
   loginUser: (emailOrPhone: string, fullName?: string) => void;
   logoutUser: () => void;
@@ -187,9 +192,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
+  const [registrationTargetDay, setRegistrationTargetDay] = useState<number | null>(null);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(PRICING_PLANS[1]);
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
+  const [isAdminLeadsModalOpen, setIsAdminLeadsModalOpen] = useState(false);
 
   const [founderPhoto, setFounderPhoto] = useState<string>(() => {
     try {
@@ -274,21 +281,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setActiveView('dashboard');
 
     // Automatically push registration data to mchatterjee69@gmail.com
-    fetch('/api/notify-registration', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        formType: '5-Day Mental Reset Challenge Registration',
-        fullName: details.fullName,
-        email: details.email || `${details.fullName.toLowerCase().replace(/\s+/g, '')}@example.com`,
-        whatsapp: details.whatsapp,
+    dispatchFormToAdmin({
+      formType: '5-Day Mental Reset Challenge Registration',
+      fullName: details.fullName,
+      email: details.email || `${details.fullName.toLowerCase().replace(/\s+/g, '')}@example.com`,
+      mobile: details.whatsapp,
+      details: {
         country: details.country,
-        details: {
-          agreedWhatsapp: details.agreedWhatsapp,
-          registeredAt: details.registeredAt || new Date().toISOString()
-        }
-      })
-    }).catch(err => console.error('Notify registration error:', err));
+        agreedWhatsapp: details.agreedWhatsapp,
+        registeredAt: details.registeredAt || new Date().toISOString()
+      }
+    });
   };
 
   const loginUser = (emailOrPhone: string, fullName?: string) => {
@@ -310,20 +313,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     triggerConfetti();
 
     // Notify email on account sign-in
-    fetch('/api/notify-registration', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        formType: 'User Sign-In / Login',
-        fullName: updatedName,
-        email: updatedEmail,
-        whatsapp: updatedWhatsapp,
-        details: {
-          loginInput: emailOrPhone,
-          timestamp: new Date().toISOString()
-        }
-      })
-    }).catch(err => console.error('Notify login error:', err));
+    dispatchFormToAdmin({
+      formType: 'User Sign-In / Login',
+      fullName: updatedName,
+      email: updatedEmail,
+      mobile: updatedWhatsapp,
+      details: {
+        loginInput: emailOrPhone,
+        timestamp: new Date().toISOString()
+      }
+    });
   };
 
   const logoutUser = () => {
@@ -453,12 +452,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         badges,
         isRegistrationModalOpen,
         setIsRegistrationModalOpen,
+        registrationTargetDay,
+        setRegistrationTargetDay,
         isPaymentModalOpen,
         setIsPaymentModalOpen,
         selectedPlan,
         setSelectedPlan,
         isCertificateModalOpen,
         setIsCertificateModalOpen,
+        isAdminLeadsModalOpen,
+        setIsAdminLeadsModalOpen,
         registerUser,
         loginUser,
         logoutUser,

@@ -33,9 +33,19 @@ import { AiReflectionAssistant } from './components/AiAssistant/AiReflectionAssi
 import { Cbt12TechniquesVideo } from './components/CbtVideo/Cbt12TechniquesVideo';
 import { CertificateModal } from './components/Gamification/CertificateModal';
 import { ProfileView } from './components/Profile/ProfileView';
+import { AdminLeadsModal } from './components/Admin/AdminLeadsModal';
 
 const MainContent: React.FC = () => {
-  const { activeView, setActiveView, upgradeMembership, selectedPlan } = useApp();
+  const { 
+    user,
+    activeView, 
+    setActiveView, 
+    upgradeMembership, 
+    selectedPlan, 
+    isAdminLeadsModalOpen, 
+    setIsAdminLeadsModalOpen,
+    setIsRegistrationModalOpen 
+  } = useApp();
 
   useEffect(() => {
     // Scroll to top on view transition
@@ -65,10 +75,39 @@ const MainContent: React.FC = () => {
             <FounderSection />
             <TestimonialsSection />
             <FaqSection />
-            <div className="bg-[#093d30] text-white py-12 px-4 text-center border-t border-emerald-800">
-              <h3 className="font-heading font-extrabold text-2xl mb-2">Ready to Rewire Your Mind in 5 Days?</h3>
-              <p className="text-xs text-emerald-100/90 max-w-md mx-auto">Join the FREE 30-Minute Mental Reset Challenge today!</p>
+            
+            {/* Elevated Bottom Call To Action Banner */}
+            <div className="relative overflow-hidden bg-gradient-to-r from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-emerald-800/40 text-center">
+              <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-300/30 via-transparent to-transparent blur-2xl" />
+              
+              <div className="relative max-w-3xl mx-auto space-y-4">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#D4AF37] text-[11px] font-bold uppercase tracking-widest">
+                  ★ Start Your Journey Today
+                </span>
+                <h3 className="font-heading font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
+                  Ready to Rewire Your Mind in 5 Days?
+                </h3>
+                <p className="text-xs sm:text-sm text-emerald-100/90 max-w-lg mx-auto font-inter leading-relaxed">
+                  Join 1,000+ seekers in the FREE 30-Minute Daily Mental Reset Challenge and experience true inner calm.
+                </p>
+                <div className="pt-3">
+                  <button
+                    onClick={() => {
+                      if (user?.registered) {
+                        setActiveView('dashboard');
+                      } else {
+                        setIsRegistrationModalOpen(true);
+                      }
+                    }}
+                    className="px-8 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-poppins font-bold text-sm rounded-2xl shadow-xl shadow-amber-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2"
+                  >
+                    <span>Join The Free Challenge</span>
+                    <span className="text-slate-950 font-bold">→</span>
+                  </button>
+                </div>
+              </div>
             </div>
+
             <div className="bg-white">
               <MindForgeUpgrade />
             </div>
@@ -98,6 +137,7 @@ const MainContent: React.FC = () => {
       <RegistrationModal />
       <RazorpayModal />
       <CertificateModal />
+      <AdminLeadsModal isOpen={isAdminLeadsModalOpen} onClose={() => setIsAdminLeadsModalOpen(false)} />
 
       {/* Mobile Bottom Navigation */}
       <BottomNav />

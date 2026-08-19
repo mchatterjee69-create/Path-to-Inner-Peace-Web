@@ -57,6 +57,7 @@ export const ProfileView: React.FC = () => {
     logoutUser, 
     updateUserProfile, 
     setIsCertificateModalOpen, 
+    setIsAdminLeadsModalOpen,
     setActiveView,
     founderPhoto
   } = useApp();
@@ -1175,6 +1176,27 @@ export const ProfileView: React.FC = () => {
                 </button>
               </div>
             </form>
+          </div>
+
+          {/* Admin Leads & User Form Data Portal */}
+          <div className="bg-gradient-to-r from-[#0B6B53] to-[#134E4A] p-6 rounded-3xl text-white shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-amber-300" />
+                <h3 className="font-heading font-bold text-base text-white">Admin Leads & Form Submissions Portal</h3>
+              </div>
+              <p className="text-xs text-emerald-100">
+                View, filter, and export all user registrations, Career Axis bookings, and inquiries routed to <span className="font-mono font-bold text-amber-300">mchatterjee69@gmail.com</span>.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsAdminLeadsModalOpen(true)}
+              className="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-md shrink-0 flex items-center gap-2"
+            >
+              <span>Open Leads Data Portal</span>
+            </button>
           </div>
 
           {/* Account Session Security & Logout Card */}

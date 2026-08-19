@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { dispatchFormToAdmin } from '../../utils/formSubmit';
 import { 
   Compass, 
   MessageCircle, 
@@ -37,18 +38,14 @@ export const CareerAxisView: React.FC = () => {
     if (!inquiryMsg.trim()) return;
 
     // Send email notification to mchatterjee69@gmail.com
-    fetch('/api/notify-registration', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        formType: 'Career Axis Guidance Inquiry',
-        fullName: inquiryName || 'Career Axis Visitor',
-        details: {
-          inquiryMessage: inquiryMsg,
-          timestamp: new Date().toISOString()
-        }
-      })
-    }).catch(err => console.error('Career Axis inquiry notification error:', err));
+    dispatchFormToAdmin({
+      formType: 'Career Axis Guidance Inquiry',
+      fullName: inquiryName || 'Career Axis Visitor',
+      details: {
+        inquiryMessage: inquiryMsg,
+        timestamp: new Date().toISOString()
+      }
+    });
 
     const encodedText = encodeURIComponent(`Hi Career Axis Team, my name is ${inquiryName || 'Student/Professional'}. Inquiry: ${inquiryMsg}`);
     window.open(`https://wa.me/919163670300?text=${encodedText}`, '_blank');

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { dispatchFormToAdmin } from '../../utils/formSubmit';
 import { 
   Compass, 
   Calendar, 
@@ -197,28 +198,24 @@ export const CareerAxisBookingView: React.FC = () => {
       additionalInfo: additionalInfo.trim()
     };
 
-    // Always push notification to mchatterjee69@gmail.com as a primary/backup push
-    fetch('/api/notify-registration', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        formType: 'Career Axis 1:1 Consulting Session Booking',
-        fullName: bookingPayload.fullName,
-        email: bookingPayload.email,
-        mobile: bookingPayload.mobile,
-        details: {
-          age: bookingPayload.age,
-          currentStatus: bookingPayload.currentStatus,
-          careerField: bookingPayload.careerField,
-          preferredDate: bookingPayload.preferredDate,
-          preferredTime: bookingPayload.preferredTime,
-          timezone: bookingPayload.timezone,
-          helpDescription: bookingPayload.helpDescription,
-          additionalInfo: bookingPayload.additionalInfo,
-          bookedAt: new Date().toISOString()
-        }
-      })
-    }).catch(err => console.error('Notify registration backup error:', err));
+    // Always push notification to mchatterjee69@gmail.com
+    dispatchFormToAdmin({
+      formType: 'Career Axis 1:1 Consulting Session Booking',
+      fullName: bookingPayload.fullName,
+      email: bookingPayload.email,
+      mobile: bookingPayload.mobile,
+      details: {
+        age: bookingPayload.age,
+        currentStatus: bookingPayload.currentStatus,
+        careerField: bookingPayload.careerField,
+        preferredDate: bookingPayload.preferredDate,
+        preferredTime: bookingPayload.preferredTime,
+        timezone: bookingPayload.timezone,
+        helpDescription: bookingPayload.helpDescription,
+        additionalInfo: bookingPayload.additionalInfo,
+        bookedAt: new Date().toISOString()
+      }
+    });
 
     try {
       const response = await fetch('/api/career-axis/bookings', {

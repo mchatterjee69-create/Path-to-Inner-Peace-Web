@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { X, Sun, CheckCircle2, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { DAYS_DATA } from '../../data/mockData';
+import { X, Sun, CheckCircle2, ShieldCheck, HeartHandshake, Lock, ArrowRight, AlertTriangle } from 'lucide-react';
 
 export const RegistrationModal: React.FC = () => {
-  const { isRegistrationModalOpen, setIsRegistrationModalOpen, registerUser } = useApp();
+  const { 
+    user,
+    isRegistrationModalOpen, 
+    setIsRegistrationModalOpen, 
+    registrationTargetDay,
+    setRegistrationTargetDay,
+    registerUser,
+    setActiveDayNumber,
+    setActiveView
+  } = useApp();
 
   const [fullName, setFullName] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -13,6 +23,15 @@ export const RegistrationModal: React.FC = () => {
   const [error, setError] = useState('');
 
   if (!isRegistrationModalOpen) return null;
+
+  const isSerialLocked = Boolean(registrationTargetDay && registrationTargetDay > 1);
+  const targetDayData = isSerialLocked ? DAYS_DATA.find(d => d.dayNumber === registrationTargetDay) : null;
+  const day1Data = DAYS_DATA[0];
+
+  const handleClose = () => {
+    setIsRegistrationModalOpen(false);
+    setRegistrationTargetDay(null);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +53,8 @@ export const RegistrationModal: React.FC = () => {
       registeredAt: new Date().toISOString()
     });
 
+    handleClose();
+
     const liveUrl = 'https://www.youtube.com/live/u42RK5eV_c8?si=wg7ziJNLQNRu7hID';
     const newWin = window.open(liveUrl, '_blank');
     if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
@@ -49,134 +70,192 @@ export const RegistrationModal: React.FC = () => {
         <div className="bg-gradient-to-r from-[#0B6B53] to-[#134E4A] p-4 sm:p-5 text-white text-center relative shrink-0">
           <button
             type="button"
-            onClick={() => setIsRegistrationModalOpen(false)}
+            onClick={handleClose}
             className="absolute top-3 right-3 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
           >
             <X className="w-5 h-5" />
           </button>
 
           <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] flex items-center justify-center text-[#D4AF37]">
-            <Sun className="w-5 h-5 animate-spin-slow text-[#D4AF37]" />
+            {isSerialLocked ? (
+              <Lock className="w-5 h-5 text-[#D4AF37]" />
+            ) : (
+              <Sun className="w-5 h-5 animate-spin-slow text-[#D4AF37]" />
+            )}
           </div>
 
           <span className="inline-block px-3 py-0.5 mb-1 bg-[#D4AF37] text-slate-950 font-bold text-[10px] uppercase tracking-widest rounded-full">
-            100% FREE REGISTRATION
+            {isSerialLocked ? `🔒 COMPLETE DAY 1 FIRST TO UNLOCK DAY ${registrationTargetDay}` : '100% FREE REGISTRATION'}
           </span>
 
           <h3 className="font-heading font-bold text-xl sm:text-2xl text-white tracking-tight">
-            Join 5-Day Mental Reset Challenge
+            {isSerialLocked 
+              ? `Complete Day 1 to Unlock Day ${registrationTargetDay}`
+              : 'Join 5-Day Mental Reset Challenge'}
           </h3>
           <p className="text-xs text-emerald-100 mt-0.5">
-            Rewire your mind in 30 minutes a day with Mainak Chatterjee
+            {isSerialLocked && targetDayData
+              ? `Day ${registrationTargetDay} (${targetDayData.title}) is serially locked. Start with Day 1 below.`
+              : 'Rewire your mind in 30 minutes a day with Mainak Chatterjee'}
           </p>
         </div>
 
-        {/* Registration Form */}
-        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-3.5 text-slate-800 overflow-y-auto flex-1">
-          
-          {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl">
-              {error}
+        {/* If user is ALREADY registered, show fast-track to Day 1 */}
+        {user.registered && isSerialLocked ? (
+          <div className="p-5 sm:p-6 space-y-4 text-slate-800 overflow-y-auto flex-1 text-center">
+            <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-xs text-amber-900 text-left">
+              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div>
+                <strong className="font-bold text-amber-950 block mb-0.5">
+                  Serial Step Progression Required
+                </strong>
+                Hello <span className="font-bold text-[#0B6B53]">{user.name}</span>! The challenge must be completed sequentially. Complete Day 1 to unlock Day {registrationTargetDay}.
+              </div>
             </div>
-          )}
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Full Name <span className="text-rose-500">*</span>
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="e.g. Ananya Sharma"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
-            />
+            <div className="bg-emerald-50/80 border border-emerald-200 p-4 rounded-xl text-left space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#0B6B53] bg-emerald-100 px-2 py-0.5 rounded">
+                Prerequisite Session
+              </span>
+              <h4 className="font-bold text-sm text-slate-900 mt-1">Day 1: {day1Data.title}</h4>
+              <p className="text-xs text-slate-600">{day1Data.subtitle} • 30 Mins Live</p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                handleClose();
+                setActiveDayNumber(1);
+                setActiveView('challenge');
+              }}
+              className="w-full py-3.5 px-6 bg-gradient-to-r from-[#0B6B53] to-[#134E4A] text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-900/20 hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+            >
+              <span>Start Day 1 Challenge Now</span>
+              <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+            </button>
           </div>
+        ) : (
+          /* Registration Form with Serial notice when Day 2-5 is clicked */
+          <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-3.5 text-slate-800 overflow-y-auto flex-1">
+            
+            {isSerialLocked && (
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5 text-xs text-amber-900">
+                <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <strong className="font-bold text-amber-950 block mb-0.5">
+                    Step-by-Step Serial Progression
+                  </strong>
+                  To unlock Day {registrationTargetDay} ({targetDayData?.title}), complete your free registration below to begin Day 1 ({day1Data.title}).
+                </div>
+              </div>
+            )}
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              WhatsApp Number <span className="text-rose-500">*</span>
-            </label>
-            <div className="relative">
+            {error && (
+              <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl">
+                {error}
+              </div>
+            )}
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                Full Name <span className="text-rose-500">*</span>
+              </label>
               <input
-                type="tel"
+                type="text"
                 required
-                placeholder="+91 91636 70300"
-                value={whatsapp}
-                onChange={(e) => setWhatsapp(e.target.value)}
+                placeholder="e.g. Ananya Sharma"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
                 className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
               />
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">Used exclusively to send daily exercise reminders & zoom session links.</p>
-          </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Email Address <span className="text-slate-400 font-normal">(Optional)</span>
-            </label>
-            <input
-              type="email"
-              placeholder="your.email@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
-            />
-          </div>
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                WhatsApp Number <span className="text-rose-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="tel"
+                  required
+                  placeholder="+91 91636 70300"
+                  value={whatsapp}
+                  onChange={(e) => setWhatsapp(e.target.value)}
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
+                />
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1">Used exclusively to send daily exercise reminders & zoom session links.</p>
+            </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Country
-            </label>
-            <select
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all cursor-pointer"
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                Email Address <span className="text-slate-400 font-normal">(Optional)</span>
+              </label>
+              <input
+                type="email"
+                placeholder="your.email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
+                Country
+              </label>
+              <select
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all cursor-pointer"
+              >
+                <option value="India">🇮🇳 India</option>
+                <option value="United States">🇺🇸 United States</option>
+                <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                <option value="United Arab Emirates">🇦🇪 United Arab Emirates</option>
+                <option value="Canada">🇨🇦 Canada</option>
+                <option value="Australia">🇦🇺 Australia</option>
+                <option value="Singapore">🇸🇬 Singapore</option>
+                <option value="Other">🌐 Other Country</option>
+              </select>
+            </div>
+
+            <div className="flex items-start gap-2.5 pt-1">
+              <input
+                type="checkbox"
+                id="whatsappCheck"
+                checked={agreedWhatsapp}
+                onChange={(e) => setAgreedWhatsapp(e.target.checked)}
+                className="mt-1 w-4 h-4 text-[#0B6B53] rounded border-slate-300 focus:ring-[#0B6B53]"
+              />
+              <label htmlFor="whatsappCheck" className="text-xs text-slate-600 leading-snug cursor-pointer">
+                I agree to receive daily WhatsApp notifications, lesson updates, and my certificate alert.
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3.5 px-6 bg-gradient-to-r from-[#0B6B53] to-[#134E4A] text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-900/20 hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2"
             >
-              <option value="India">🇮🇳 India</option>
-              <option value="United States">🇺🇸 United States</option>
-              <option value="United Kingdom">🇬🇧 United Kingdom</option>
-              <option value="United Arab Emirates">🇦🇪 United Arab Emirates</option>
-              <option value="Canada">🇨🇦 Canada</option>
-              <option value="Australia">🇦🇺 Australia</option>
-              <option value="Singapore">🇸🇬 Singapore</option>
-              <option value="Other">🌐 Other Country</option>
-            </select>
-          </div>
+              <CheckCircle2 className="w-5 h-5 text-[#D4AF37]" />
+              <span>
+                {isSerialLocked ? `Register & Start Day 1 Free` : 'Join Free Challenge Now'}
+              </span>
+            </button>
 
-          <div className="flex items-start gap-2.5 pt-1">
-            <input
-              type="checkbox"
-              id="whatsappCheck"
-              checked={agreedWhatsapp}
-              onChange={(e) => setAgreedWhatsapp(e.target.checked)}
-              className="mt-1 w-4 h-4 text-[#0B6B53] rounded border-slate-300 focus:ring-[#0B6B53]"
-            />
-            <label htmlFor="whatsappCheck" className="text-xs text-slate-600 leading-snug cursor-pointer">
-              I agree to receive daily WhatsApp notifications, lesson updates, and my certificate alert.
-            </label>
-          </div>
+            <div className="pt-2 flex items-center justify-center gap-4 text-[11px] text-slate-500">
+              <span className="flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                100% Privacy
+              </span>
+              <span className="flex items-center gap-1">
+                <HeartHandshake className="w-3.5 h-3.5 text-amber-600" />
+                No Credit Card
+              </span>
+            </div>
 
-          <button
-            type="submit"
-            className="w-full py-3.5 px-6 bg-gradient-to-r from-[#0B6B53] to-[#134E4A] text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-900/20 hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2"
-          >
-            <CheckCircle2 className="w-5 h-5 text-[#D4AF37]" />
-            <span>Join Free Challenge Now</span>
-          </button>
-
-          <div className="pt-2 flex items-center justify-center gap-4 text-[11px] text-slate-500">
-            <span className="flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              100% Privacy
-            </span>
-            <span className="flex items-center gap-1">
-              <HeartHandshake className="w-3.5 h-3.5 text-amber-600" />
-              No Credit Card
-            </span>
-          </div>
-
-        </form>
+          </form>
+        )}
       </div>
     </div>
   );

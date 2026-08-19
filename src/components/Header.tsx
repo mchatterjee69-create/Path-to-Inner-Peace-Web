@@ -12,7 +12,8 @@ import {
   Flame, 
   Compass,
   Menu,
-  X
+  X,
+  Database
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -21,7 +22,8 @@ export const Header: React.FC = () => {
     activeView, 
     setActiveView, 
     setIsRegistrationModalOpen,
-    setIsCertificateModalOpen
+    setIsCertificateModalOpen,
+    setIsAdminLeadsModalOpen
   } = useApp();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,12 +37,14 @@ export const Header: React.FC = () => {
           onClick={() => setActiveView('landing')} 
           className="flex items-center gap-1.5 sm:gap-2 cursor-pointer group shrink-0"
         >
-          <img 
-            src={logoImg} 
-            alt="Path to Inner Peace Logo" 
-            className="w-7 h-7 sm:w-8 sm:h-8 xl:w-9 xl:h-9 rounded-full object-cover shadow-sm group-hover:scale-105 transition-transform shrink-0 border border-emerald-800/10"
-            referrerPolicy="no-referrer"
-          />
+          <div className="w-8 h-8 sm:w-9 sm:h-9 xl:w-10 xl:h-10 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
+            <img 
+              src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
+              alt="Path to Inner Peace Logo" 
+              className="w-full h-full object-cover scale-[1.18] rounded-full group-hover:scale-125 transition-transform"
+              referrerPolicy="no-referrer"
+            />
+          </div>
           <div className="flex flex-col min-w-0">
             <span className="font-poppins font-bold text-xs xl:text-sm 2xl:text-base text-[#0B6B53] tracking-tight whitespace-nowrap leading-tight">
               Path to Inner Peace
@@ -128,6 +132,15 @@ export const Header: React.FC = () => {
               <span>Certificate</span>
             </button>
           )}
+
+          <button
+            onClick={() => setIsAdminLeadsModalOpen(true)}
+            className="flex items-center gap-1 px-2 py-1 bg-emerald-50 text-[#0B6B53] border border-emerald-300 rounded-full text-[10px] xl:text-[11px] font-bold hover:bg-emerald-100 transition-colors shadow-sm shrink-0 whitespace-nowrap"
+            title="Admin Leads Portal (mchatterjee69@gmail.com)"
+          >
+            <Database className="w-3.5 h-3.5 text-[#0B6B53]" />
+            <span className="hidden xl:inline">Admin Leads</span>
+          </button>
 
           <button
             onClick={() => setActiveView('upgrade')}
