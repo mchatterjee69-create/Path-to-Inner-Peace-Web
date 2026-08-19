@@ -12,8 +12,7 @@ import {
   Flame, 
   Compass,
   Menu,
-  X,
-  Database
+  X
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -22,8 +21,7 @@ export const Header: React.FC = () => {
     activeView, 
     setActiveView, 
     setIsRegistrationModalOpen,
-    setIsCertificateModalOpen,
-    setIsAdminLeadsModalOpen
+    setIsCertificateModalOpen
   } = useApp();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -132,15 +130,6 @@ export const Header: React.FC = () => {
               <span>Certificate</span>
             </button>
           )}
-
-          <button
-            onClick={() => setIsAdminLeadsModalOpen(true)}
-            className="flex items-center gap-1 px-2 py-1 bg-emerald-50 text-[#0B6B53] border border-emerald-300 rounded-full text-[10px] xl:text-[11px] font-bold hover:bg-emerald-100 transition-colors shadow-sm shrink-0 whitespace-nowrap"
-            title="Admin Leads Portal (mchatterjee69@gmail.com)"
-          >
-            <Database className="w-3.5 h-3.5 text-[#0B6B53]" />
-            <span className="hidden xl:inline">Admin Leads</span>
-          </button>
 
           <button
             onClick={() => setActiveView('upgrade')}
