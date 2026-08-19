@@ -114,21 +114,21 @@ export const BenefitsSection: React.FC = () => {
             const Icon = b.icon;
             return (
               <StaggerItem key={idx} variant="scale">
-                <div className="p-6 rounded-2xl bg-[#FAF9F6] border border-slate-200/90 hover:bg-white hover:border-[#0B6B53]/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group h-full flex flex-col justify-between">
-                  <div>
-                    <div className={`w-12 h-12 rounded-xl ${b.color} border flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xs`}>
-                      <Icon className="w-6 h-6" />
+                <div className="p-6 rounded-2xl bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] border border-emerald-800/60 hover:border-[#D4AF37]/60 hover:shadow-2xl hover:shadow-emerald-950/40 hover:-translate-y-1 transition-all duration-300 group h-full flex flex-col justify-between shadow-lg relative overflow-hidden">
+                  <div className="relative">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-950/80 text-[#D4AF37] border border-[#D4AF37]/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-xs">
+                      <Icon className="w-6 h-6 text-[#D4AF37]" />
                     </div>
-                    <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 mb-2 group-hover:text-[#0B6B53] transition-colors">
+                    <h3 className="font-heading font-bold text-base sm:text-lg text-[#D4AF37] mb-2 tracking-tight">
                       {b.title}
                     </h3>
-                    <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-inter">
+                    <p className="text-xs sm:text-[13px] text-white leading-relaxed font-inter font-normal">
                       {b.description}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-2 border-t border-slate-100/80 flex items-center gap-1 text-[11px] font-semibold text-[#0B6B53] opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>Evidence-Backed Protocol</span>
+                  <div className="pt-4 mt-3 border-t border-emerald-800/60 flex items-center gap-1 text-[11px] font-semibold text-amber-300/90">
+                    <span>★ Evidence-Backed Protocol</span>
                   </div>
                 </div>
               </StaggerItem>
