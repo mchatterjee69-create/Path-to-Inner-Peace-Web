@@ -30,35 +30,35 @@ const PROGRAM_ITEMS: InnerRevolutionProgramItem[] = [
   },
   {
     id: 'advanced-stress-management',
-    title: 'Advanced Stress Management Framework',
-    description: 'A CBT-based structured framework to reduce stress, build emotional resilience, and develop long-term mental well-being.',
+    title: 'Advanced Stress Reset Framework',
+    description: 'Calm your mind, reset your system, and build lasting emotional resilience in a CBT-based 2 weeks live structured program.',
     buttonText: 'Activate Stress Reset',
     bannerType: 'stress-reset',
-    bgImageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80'
+    bgImageUrl: 'https://media-cdn.cosmofeed.com/chat/WhatsApp-Image-2026-04-02-at-3-2026-02-04-10-25-23.jpeg'
   },
   {
     id: 'relationship-healing',
     title: 'Relationship Healing Therapy',
-    description: 'Heal emotional wounds, strengthen relationships, and create healthier connections using proven therapeutic principles.',
+    description: 'Heal deep emotional wounds, rebuild trust, and create meaningful connections using evidence-based principles inspired by John Gottman’s Sound Relationship House Theory.',
     buttonText: 'Initiate Your Therapy',
     bannerType: 'relationship',
-    bgImageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80'
+    bgImageUrl: 'https://media-cdn.cosmofeed.com/chat/1000155399-2026-02-04-01-58-50.png'
   },
   {
     id: 'mindfulness-meditation-journey',
-    title: 'Complete Mindfulness & Meditation Journey',
-    description: 'Develop awareness, mindfulness, and higher consciousness through guided meditation practices for greater inner clarity.',
+    title: 'COMPLETE MINDFULNESS & MEDITATION JOURNEY',
+    description: 'Cultivate awareness, deepen presence, and elevate consciousness. Integrating 8 globally recognized meditation approaches including Vipassana-based insight.',
     buttonText: 'Elevate Your Clarity',
     bannerType: 'meditation',
-    bgImageUrl: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1000&q=80'
+    bgImageUrl: 'https://media-cdn.cosmofeed.com/chat/1000155400-2026-09-04-03-16-59.png'
   },
   {
     id: 'deeper-awakening',
     title: 'Deeper Awakening Masterclass',
-    description: 'Experience deeper self-awareness, inner freedom, and expanded consciousness through advanced meditation and Heartfulness practices.',
+    description: 'Transcend conditioning, expand consciousness, and embody your highest self in an advanced 4 weeks live immersion with Heartfulness practices.',
     buttonText: 'Unlock Your True Potential',
     bannerType: 'awakening',
-    bgImageUrl: 'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?auto=format&fit=crop&w=1000&q=80'
+    bgImageUrl: 'https://media-cdn.cosmofeed.com/chat/1000155401-2026-08-04-11-27-2.png'
   }
 ];
 
@@ -68,7 +68,11 @@ export const InnerRevolutionView: React.FC = () => {
     setIsPaymentModalOpen, 
     setSelectedPlan,
     setIsInnerRevolutionModalOpen,
-    setIsInnerMasteryModalOpen 
+    setIsInnerMasteryModalOpen,
+    setIsStressResetModalOpen,
+    setIsRelationshipHealingModalOpen,
+    setIsMindfulnessJourneyModalOpen,
+    setIsDeeperAwakeningModalOpen 
   } = useApp();
 
   const handleProgramClick = (program: InnerRevolutionProgramItem) => {
@@ -82,27 +86,27 @@ export const InnerRevolutionView: React.FC = () => {
       return;
     }
 
-    if (program.id === 'deeper-awakening') {
-      setSelectedPlan({
-        id: 'INNER_TRANSFORMATION_ELITE',
-        name: 'Deeper Awakening Masterclass',
-        tagline: 'Deep Self-Awareness & Higher Consciousness Shift',
-        priceINR: 1999,
-        priceUSD: 29,
-        originalPriceINR: 9999,
-        popular: true,
-        features: [
-          'All 5-Day Challenges & Daily Audio Guides',
-          'Live Weekly Coaching & Q&A with Mainak',
-          'Full Mind Mastery Pro & Sound Therapy Vault',
-          '1-on-1 Guidance & Personalized Roadmap'
-        ],
-        badgeText: 'MOST COMPREHENSIVE'
-      });
-      setIsPaymentModalOpen(true);
-    } else {
-      setIsRegistrationModalOpen(true);
+    if (program.id === 'advanced-stress-management') {
+      setIsStressResetModalOpen(true);
+      return;
     }
+
+    if (program.id === 'relationship-healing') {
+      setIsRelationshipHealingModalOpen(true);
+      return;
+    }
+
+    if (program.id === 'mindfulness-meditation-journey') {
+      setIsMindfulnessJourneyModalOpen(true);
+      return;
+    }
+
+    if (program.id === 'deeper-awakening') {
+      setIsDeeperAwakeningModalOpen(true);
+      return;
+    }
+
+    setIsRegistrationModalOpen(true);
   };
 
   return (
@@ -139,138 +143,18 @@ export const InnerRevolutionView: React.FC = () => {
                     {program.title}
                   </h2>
 
-                  {/* 2. Large 16:9 banner image */}
+                  {/* 2. Large 16:9 banner image matching popup banner */}
                   <div 
-                    className="relative aspect-[16/9] rounded-lg overflow-hidden mb-4 border border-slate-200 shadow-sm bg-slate-900 group cursor-pointer"
+                    className="relative aspect-[16/9] rounded-xl overflow-hidden mb-4 border border-slate-200 shadow-sm bg-slate-900 group cursor-pointer"
                     onClick={() => handleProgramClick(program)}
                   >
                     <img 
                       src={program.bgImageUrl} 
                       alt={program.title} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                       referrerPolicy="no-referrer"
                     />
-
-                    {/* Styled Banner Graphic Overlays */}
-                    {program.bannerType === 'revolution' && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-emerald-950/85 to-indigo-950/80 p-4 sm:p-6 flex flex-col justify-between text-white">
-                        <div className="space-y-1">
-                          <h3 className="font-extrabold text-sm sm:text-base lg:text-lg tracking-wider text-white uppercase">
-                            COMPLETE INNER REVOLUTION <span className="text-[#D4AF37]">PROGRAM</span>
-                          </h3>
-                          <p className="text-[11px] sm:text-xs text-slate-200 font-medium max-w-sm leading-tight hidden sm:block">
-                            A complete system to transform your mindset, emotions, and consciousness for lasting inner peace and clarity.
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-between pt-2">
-                          <div className="text-[10px] text-emerald-300 uppercase tracking-widest font-semibold">
-                            COMPLETE PREMIUM & CORPORATE PROGRAM
-                          </div>
-                          <span className="px-3 py-1 bg-[#1E3A8A] hover:bg-blue-800 text-white text-[11px] font-bold rounded tracking-wider shadow">
-                            ENROLL NOW
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    {program.bannerType === 'mind-mastery' && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-sky-950/85 to-slate-900/90 p-4 sm:p-6 flex flex-col justify-between text-white">
-                        <div className="flex justify-between items-start">
-                          <div className="space-y-1 max-w-[65%]">
-                            <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-white uppercase tracking-wider">
-                              MIND MASTERY <span className="text-sky-400">PROGRAM</span>
-                            </h3>
-                            <p className="text-[11px] sm:text-xs text-slate-200 font-medium leading-tight hidden sm:block">
-                              Learn to control your thoughts and emotions, building unshakable mental strength and awareness.
-                            </p>
-                          </div>
-                          <div className="hidden sm:flex flex-col gap-1 text-[9px] text-slate-300 text-right">
-                            <span className="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700">Thought Control</span>
-                            <span className="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700">Emotional Regulation</span>
-                            <span className="bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700">Mental Fortitude</span>
-                          </div>
-                        </div>
-                        <div className="flex justify-end pt-2">
-                          <span className="px-3 py-1 bg-[#1E3A8A] hover:bg-blue-800 text-white text-[11px] font-bold rounded tracking-wider shadow">
-                            ENROLL NOW
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    {program.bannerType === 'stress-reset' && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/85 to-teal-950/80 p-4 sm:p-6 flex flex-col justify-between text-white">
-                        <div className="space-y-1 max-w-md">
-                          <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-white uppercase tracking-wider">
-                            ADVANCED STRESS RESET <span className="text-teal-400">FRAMEWORK</span>
-                          </h3>
-                          <p className="text-[10px] sm:text-xs text-slate-300 font-medium leading-tight hidden sm:block uppercase tracking-wide">
-                            A STRUCTURED, DEEP APPROACH TO ELIMINATE STRESS AND BUILD LONG-TERM EMOTIONAL RESILIENCE.
-                          </p>
-                        </div>
-                        <div className="flex justify-start pt-2">
-                          <span className="px-3 py-1 bg-[#0F766E] hover:bg-teal-700 text-white text-[11px] font-bold rounded tracking-wider shadow">
-                            ENROLL NOW
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    {program.bannerType === 'relationship' && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-sky-950/85 via-sky-900/75 to-emerald-950/80 p-4 sm:p-6 flex flex-col justify-between text-white">
-                        <div className="space-y-1 max-w-xs">
-                          <h3 className="font-bold text-sm sm:text-base lg:text-lg text-white">
-                            Relationship Healing Therapy
-                          </h3>
-                          <p className="text-[11px] sm:text-xs text-slate-100 font-normal leading-tight hidden sm:block">
-                            Heal emotional wounds and transform your relationships into deeper, healthier connections.
-                          </p>
-                        </div>
-                        <div className="flex justify-start pt-2">
-                          <span className="px-3 py-1 bg-[#D4AF37] text-slate-950 text-[11px] font-bold rounded-md tracking-wide shadow flex items-center gap-1">
-                            <span>Enroll Now</span>
-                            <span>&rsaquo;</span>
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    {program.bannerType === 'meditation' && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-stone-950/85 via-stone-900/70 to-stone-950/80 p-4 sm:p-6 flex flex-col justify-between text-white">
-                        <div className="space-y-1 max-w-xs">
-                          <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-white uppercase tracking-wider">
-                            MINDFULNESS & MEDITATION JOURNEY
-                          </h3>
-                          <p className="text-[11px] sm:text-xs text-slate-200 font-normal leading-tight hidden sm:block">
-                            A guided path to develop awareness, presence, and higher consciousness through meditation.
-                          </p>
-                        </div>
-                        <div className="flex justify-start pt-2">
-                          <span className="px-3 py-1 bg-[#1E3A8A] text-white text-[11px] font-bold rounded tracking-wider shadow">
-                            ENROLL NOW &rsaquo;
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    {program.bannerType === 'awakening' && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-amber-950/90 via-amber-900/80 to-yellow-950/85 p-4 sm:p-6 flex flex-col justify-between text-white">
-                        <div className="space-y-1 max-w-xs">
-                          <h3 className="font-extrabold text-sm sm:text-base lg:text-lg text-amber-200 uppercase tracking-widest">
-                            DEEPER AWAKENING
-                          </h3>
-                          <p className="text-[11px] sm:text-xs text-amber-100 font-normal leading-tight hidden sm:block">
-                            Go beyond the surface and experience a profound shift in consciousness.
-                          </p>
-                        </div>
-                        <div className="flex justify-start pt-2">
-                          <span className="px-3 py-1 bg-[#1E3A8A] text-white text-[11px] font-bold rounded tracking-wider shadow">
-                            Enroll Now
-                          </span>
-                        </div>
-                      </div>
-                    )}
                   </div>
 
                   {/* 3. Very short description (2–3 lines only) */}

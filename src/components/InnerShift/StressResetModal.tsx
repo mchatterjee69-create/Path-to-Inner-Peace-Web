@@ -15,9 +15,7 @@ import {
   ShieldCheck, 
   FolderOpen, 
   Brain, 
-  Zap, 
   Sparkles, 
-  Compass, 
   Headphones, 
   Lightbulb, 
   ShieldAlert, 
@@ -25,18 +23,17 @@ import {
   Rocket, 
   CheckCircle2, 
   Radio, 
-  Layers, 
-  Activity, 
   Cpu, 
+  RefreshCw,
   ArrowUp
 } from 'lucide-react';
 
-interface InnerMasteryModalProps {
+interface StressResetModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
+export const StressResetModal: React.FC<StressResetModalProps> = ({
   isOpen,
   onClose
 }) => {
@@ -71,15 +68,15 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
 
       try {
         await dispatchFormToAdmin({
-          formType: 'inner_mastery_module_enrollment',
+          formType: 'stress_reset_framework_enrollment',
           fullName: name.trim() || user.name || 'Anonymous Seeker',
           mobile: fullPhone || user.whatsapp || 'Not provided',
           email: user.email || 'seeker@innerpeace.com',
           details: {
-            program: 'Inner Mastery Module',
-            price: '₹1,199 (Original: ₹2,399)',
-            discount: '50% OFF',
-            status: 'Lead captured on Inner Mastery modal'
+            program: 'Advanced Stress Reset Framework',
+            price: '₹799 (Original: ₹999)',
+            discount: '20% OFF',
+            status: 'Lead captured on Stress Reset modal'
           }
         });
       } catch (err) {
@@ -88,25 +85,25 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
     }
 
     setSelectedPlan({
-      id: 'MIND_MASTERY_PRO',
-      name: 'Inner Mastery Module',
-      tagline: '2 Weeks Live Journey — Rewire Your Mind. Regulate Your Emotions. Reclaim Your Power.',
-      priceINR: 1199,
-      priceUSD: 19,
-      originalPriceINR: 2399,
+      id: 'INNER_SHIFT',
+      name: 'Advanced Stress Reset Framework',
+      tagline: '2 Weeks Live Structured Program — Calm Your Mind. Reset Your System. Build Lasting Emotional Resilience.',
+      priceINR: 799,
+      priceUSD: 12,
+      originalPriceINR: 999,
       popular: true,
-      badge: '50% OFF',
+      badge: '20% OFF',
       features: [
         'Guided Weekly Live Two Sessions & Workshops',
-        'Structured daily practices for mental clarity & focus',
-        'Proven systems for emotional self-regulation',
-        'Mindfulness tools based on attention training science',
-        'Techniques for balancing your nervous system response',
+        'Structured CBT-based exercises for stress reduction',
+        'Practical tools for emotional balance & control',
+        'Techniques to calm your mind & nervous system instantly',
+        'Daily practices to build long-term resilience',
+        'A step-by-step system for sustainable stress-free living',
         '1:1 Support / Healing Sessions (Optional)',
-        'Workbook, Audiobook & Study Materials after completion of each Session',
-        'A lifelong framework for sustained behavioral transformation'
+        'Workbook, Audiobook & Study Materials after completion of each Session'
       ],
-      badgeText: '50% OFF'
+      badgeText: '20% OFF'
     });
 
     setIsSubmitting(false);
@@ -147,19 +144,15 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
 
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer border border-emerald-700/50 hover:border-amber-400/50 hover:scale-105 active:scale-95"
+              className="p-1.5 sm:p-2 text-slate-300 hover:text-white rounded-full hover:bg-white/10 transition-colors cursor-pointer"
               title="Close modal"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Scrollable Main Container */}
-          <div 
-            ref={scrollRef}
-            onScroll={(e) => setShowScrollTop(e.currentTarget.scrollTop > 260)}
-            className="overflow-y-auto modal-scrollbar flex-1 p-4 sm:p-6 md:p-8 space-y-6 scroll-smooth"
-          >
+          <div className="overflow-y-auto flex-1 p-4 sm:p-6 md:p-8 space-y-6">
             
             {/* Top Course Card */}
             <div className="bg-[#0A261D] rounded-2xl border border-emerald-800/80 overflow-hidden shadow-xl">
@@ -167,8 +160,8 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
               {/* Product Cover Image */}
               <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
                 <img 
-                  src="https://media-cdn.cosmofeed.com/chat/WhatsApp-Image-2026-03-28-at-2-2026-02-04-09-18-6.jpeg" 
-                  alt="Inner Mastery Module" 
+                  src="https://media-cdn.cosmofeed.com/chat/WhatsApp-Image-2026-04-02-at-3-2026-02-04-10-25-23.jpeg" 
+                  alt="Advanced Stress Reset Framework" 
                   className="w-full h-full object-cover object-center"
                   referrerPolicy="no-referrer"
                 />
@@ -185,20 +178,20 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
 
                 {/* Course Title */}
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-snug">
-                  Inner Mastery Module
+                  Advanced Stress Reset Framework
                 </h1>
 
                 {/* Tagline */}
-                <p className="text-xs sm:text-sm font-semibold text-emerald-300 italic">
-                  Rewire Your Mind. Regulate Your Emotions. Reclaim Your Power.
+                <p className="text-xs sm:text-sm font-semibold text-amber-300 italic">
+                  Calm Your Mind. Reset Your System. Build Lasting Emotional Resilience.
                 </p>
 
                 {/* Pricing Block */}
                 <div className="flex items-baseline gap-3 pt-1">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white">₹1199</span>
-                  <span className="text-base sm:text-lg text-slate-400 line-through">₹2399</span>
-                  <span className="text-xs bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded">
-                    50% OFF
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white">₹799</span>
+                  <span className="text-base sm:text-lg text-slate-400 line-through">₹999</span>
+                  <span className="text-xs bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded">
+                    20% OFF
                   </span>
                   <span className="text-xs text-slate-400 ml-auto">Lifetime Access</span>
                 </div>
@@ -217,7 +210,7 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Enter your name"
-                      className="w-full bg-[#061A13] border border-emerald-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-emerald-100/40 focus:outline-hidden focus:border-[#D4AF37] transition-colors"
+                      className="w-full bg-[#061A13] border border-emerald-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-emerald-100/40 focus:outline-hidden focus:border-[#cdad44] transition-colors"
                     />
                   </div>
 
@@ -231,7 +224,7 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
                         aria-label="Country Code"
-                        className="bg-[#061A13] border border-emerald-700/60 rounded-xl px-3 py-3 text-xs text-slate-200 focus:outline-hidden focus:border-[#D4AF37]"
+                        className="bg-[#061A13] border border-emerald-700/60 rounded-xl px-3 py-3 text-xs text-slate-200 focus:outline-hidden focus:border-[#cdad44]"
                       >
                         <option value="+91">🇮🇳 +91</option>
                         <option value="+1">🇺🇸 +1</option>
@@ -246,25 +239,23 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Mobile / WhatsApp number"
-                        className="w-full bg-[#061A13] border border-emerald-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-emerald-100/40 focus:outline-hidden focus:border-[#D4AF37] transition-colors"
+                        className="w-full bg-[#061A13] border border-emerald-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-emerald-100/40 focus:outline-hidden focus:border-[#cdad44] transition-colors"
                       />
                     </div>
                   </div>
 
-                  {/* Enroll Button with Modernised Shimmer & Micro-interactions */}
+                  {/* Enroll Button with Exact Theme background #cdad44 */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="relative overflow-hidden group w-full py-3.5 rounded-xl font-bold text-sm sm:text-base text-white shadow-lg active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2 border border-emerald-400/30 hover:brightness-110"
-                    style={{ backgroundColor: '#307940' }}
+                    className="w-full py-3.5 rounded-xl font-bold text-sm sm:text-base text-[#fff9f9] shadow-lg active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2 hover:brightness-110"
+                    style={{ backgroundColor: '#cdad44' }}
                   >
-                    <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-12 -translate-x-full group-hover:animate-shimmer pointer-events-none" />
                     <span>{isSubmitting ? 'Processing...' : 'Enroll Now'}</span>
-                    <span className="transition-transform group-hover:translate-x-1 font-bold">&rsaquo;</span>
                   </button>
 
                   <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 pt-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
                     <span>Safe & secure encrypted checkout</span>
                   </div>
 
@@ -276,26 +267,26 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
             {/* Live Class & Curriculum Modules */}
             <div className="bg-[#0A261D] rounded-2xl border border-emerald-800/80 p-5 space-y-4">
               <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <Video className="w-5 h-5 text-emerald-400 stroke-[2.2]" />
+                <Video className="w-5 h-5 text-amber-400 stroke-[2.2]" />
                 <span>Live Sessions & Curriculum</span>
               </h3>
 
               {/* Live Session Item */}
               <div className="p-3.5 rounded-xl bg-[#061A13] border border-emerald-800/80 flex items-center justify-between gap-3 text-xs text-slate-200">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0 shadow-inner">
+                  <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 shadow-inner">
                     <Radio className="w-5 h-5 animate-pulse" />
                   </div>
                   <div>
-                    <div className="font-semibold text-white text-xs sm:text-sm">Live 2 Weeks Transformation Journey</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">Live 2 Weeks Stress Reset Program</div>
                     <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
                       <Clock className="w-3.5 h-3.5 text-slate-400" />
-                      <span>2 Live Weekly Coaching Sessions & Workshops</span>
+                      <span>2 Live Weekly CBT Coaching Sessions & Workshops</span>
                     </div>
                   </div>
                 </div>
-                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2.5 py-1 rounded-full border border-amber-500/30 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
                   Live Class
                 </span>
               </div>
@@ -317,7 +308,7 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                     <div className="px-4 pb-3 pt-1 text-xs text-slate-300 border-t border-emerald-900/80 space-y-1.5">
                       <div className="flex items-center gap-2.5 py-1 text-slate-300">
                         <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                        <span>Lesson 1: Introduction to Cognitive Awareness & Mind Reconditioning</span>
+                        <span>Lesson 1: Introduction to Stress Mechanism & CBT Reset Principles</span>
                       </div>
                     </div>
                   )}
@@ -329,71 +320,71 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
             <div className="bg-[#0A261D] rounded-2xl border border-emerald-800/80 p-5 sm:p-7 space-y-5 text-slate-200 text-sm leading-relaxed">
               
               {/* Top Subtitle */}
-              <p className="font-bold text-white text-base text-emerald-300">
-                Rewire Your Mind. Regulate Your Emotions. Reclaim Your Power.
+              <p className="font-bold text-white text-base text-amber-300">
+                Calm Your Mind. Reset Your System. Build Lasting Emotional Resilience.
               </p>
 
-              {/* Are You Stuck in This Mental Cycle? */}
+              {/* Are You Trapped in Constant Stress? */}
               <div className="space-y-2 pt-2 border-t border-emerald-800/70">
                 <h3 className="font-bold text-white text-base flex items-center gap-2">
-                  <span className="p-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+                  <span className="p-1 rounded-md bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
                     <ShieldAlert className="w-4 h-4 stroke-[2.2]" />
                   </span>
-                  <span>Are You Stuck in This Mental Cycle?</span>
+                  <span>Are You Trapped in Constant Stress?</span>
                 </h3>
                 <div className="space-y-1.5 text-xs sm:text-sm text-slate-300 pl-7">
-                  <p>• Constant overthinking and mental noise <em className="text-slate-400">(cognitive overload)</em></p>
-                  <p>• Emotional ups and downs you can’t control <em className="text-slate-400">(emotional dysregulation)</em></p>
-                  <p>• Persistent stress, anxiety, and inner restlessness <em className="text-slate-400">(chronic stress response)</em></p>
-                  <p>• Lack of clarity, focus, and direction <em className="text-slate-400">(decision fatigue)</em></p>
+                  <p>• Feeling mentally exhausted and overwhelmed <em className="text-slate-400">(chronic stress load)</em></p>
+                  <p>• Struggling with anxiety, pressure, or burnout <em className="text-slate-400">(stress dysregulation)</em></p>
+                  <p>• Overreacting or feeling emotionally drained <em className="text-slate-400">(emotional fatigue)</em></p>
+                  <p>• Unable to relax, switch off, or feel at peace <em className="text-slate-400">(nervous system imbalance)</em></p>
                 </div>
                 <p className="text-xs sm:text-sm text-amber-300 font-medium pt-1.5 pl-7">
-                  👉 If this feels familiar, your mind is operating on <strong className="text-white">unconscious patterns</strong>—and it’s time to take back control.
+                  👉 If this feels like your daily reality, your system is stuck in a <strong className="text-white">stress-response loop</strong>—and it’s time to reset it.
                 </p>
               </div>
 
-              {/* What This Module Does For You */}
+              {/* ✦ What This Program Does For You */}
               <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <h3 className="font-bold text-white text-base flex items-center gap-2">
-                  <span className="p-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                  <span className="p-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
                     <Sparkles className="w-4 h-4 stroke-[2.2]" />
                   </span>
-                  <span>What This Module Does For You</span>
+                  <span>✦ What This Program Does For You</span>
                 </h3>
                 <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
-                  The <strong className="text-white">Inner Mastery Module</strong> 2 weeks Live Journey is a structured, science-backed transformation experience built on <strong className="text-white">cognitive awareness, emotional regulation, and mind reconditioning principles</strong>.
+                  This <strong className="text-white">Advanced Stress Reset Framework</strong> is a powerful, CBT-based (Cognitive Behavioral Therapy) 2 weeks Live structured program designed to help you eliminate stress at its root—not just manage it temporarily.
                 </p>
                 <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
-                  It empowers you to consciously redesign how you think, feel, and respond to life.
+                  Built on principles of <strong className="text-white">cognitive restructuring, behavioral correction, and nervous system regulation</strong>, this program helps you regain control over how your mind and body respond to stress.
                 </p>
                 <p className="text-slate-200 text-xs sm:text-sm font-semibold pl-7 pt-1">
                   You will learn to:
                 </p>
                 <div className="space-y-1.5 text-xs sm:text-sm text-slate-300 pl-7">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Break negative thinking loops using <strong className="text-white">cognitive restructuring</strong></span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Identify and break stress-inducing thought patterns <em className="text-slate-400">(cognitive restructuring)</em></span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Shift from reaction to response through <strong className="text-white">stimulus-response awareness</strong></span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Replace unhealthy reactions with constructive behaviors <em className="text-slate-400">(behavioral activation)</em></span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Regulate emotions with precision using <strong className="text-white">emotional intelligence frameworks</strong></span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Calm your mind and body using <strong className="text-white">nervous system regulation techniques</strong></span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Build unshakable resilience through <strong className="text-white">psychological hardiness</strong></span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Build long-term resilience to pressure and uncertainty <em className="text-slate-400">(stress adaptation)</em></span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Move from autopilot living to <strong className="text-white">high-level meta-awareness</strong></span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Shift from survival mode to <strong className="text-white">calm, controlled functioning</strong></span>
                   </div>
                 </div>
                 <div className="pl-7 pt-1.5 text-xs sm:text-sm text-slate-200">
-                  <p>This is not information.</p>
-                  <p className="font-bold text-emerald-300">This is inner reprogramming at a core level.</p>
+                  <p>This is not temporary relief.</p>
+                  <p className="font-bold text-amber-300">This is deep stress elimination and system reset.</p>
                 </div>
               </div>
 
@@ -406,58 +397,58 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                   <span>Core Learning Experience</span>
                 </h3>
 
-                {/* Thought Mastery */}
+                {/* Understanding Stress Mechanism */}
                 <div className="space-y-1 pl-1">
                   <p className="font-bold text-white text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
-                    <span>Thought Mastery</span>
+                    <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shrink-0" />
+                    <span>Understanding Stress Mechanism</span>
                   </p>
                   <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
-                    Decode and rewire limiting beliefs through <strong className="text-white">advanced cognitive reframing</strong>
+                    Decode how stress is created and sustained through <strong className="text-white">thought-behavior cycles</strong>
                   </p>
                 </div>
 
-                {/* Emotional Regulation System */}
+                {/* Cognitive Stress Reset */}
                 <div className="space-y-1 pl-1">
                   <p className="font-bold text-white text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
-                    <span>Emotional Regulation System</span>
+                    <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shrink-0" />
+                    <span>Cognitive Stress Reset</span>
                   </p>
                   <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
-                    Identify triggers and apply <strong className="text-white">response modulation techniques</strong> for stability
+                    Eliminate negative thinking loops using <strong className="text-white">CBT-based reframing techniques</strong>
                   </p>
                 </div>
 
-                {/* Mindfulness & Presence */}
+                {/* Emotional Stabilization */}
                 <div className="space-y-1 pl-1">
                   <p className="font-bold text-white text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
-                    <span>Mindfulness & Presence</span>
+                    <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shrink-0" />
+                    <span>Emotional Stabilization</span>
                   </p>
                   <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
-                    Train your attention to eliminate anxiety using <strong className="text-white">grounding & awareness practices</strong>
+                    Regulate emotional responses through <strong className="text-white">trigger awareness & response control</strong>
                   </p>
                 </div>
 
-                {/* Inner Strength Conditioning */}
+                {/* Nervous System Regulation */}
                 <div className="space-y-1 pl-1">
                   <p className="font-bold text-white text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
-                    <span>Inner Strength Conditioning</span>
+                    <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shrink-0" />
+                    <span>Nervous System Regulation</span>
                   </p>
                   <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
-                    Build resilience with <strong className="text-white">stress adaptation and mental conditioning models</strong>
+                    Learn practical methods to shift from <strong className="text-white">fight-or-flight to calm state</strong>
                   </p>
                 </div>
 
-                {/* Conscious Decision Intelligence */}
+                {/* Resilience Building System */}
                 <div className="space-y-1 pl-1">
                   <p className="font-bold text-white text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
-                    <span>Conscious Decision Intelligence</span>
+                    <span className="w-2 h-2 rounded-full bg-amber-400 inline-block shrink-0" />
+                    <span>Resilience Building System</span>
                   </p>
                   <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
-                    Enhance clarity and control using <strong className="text-white">executive function activation</strong>
+                    Develop long-term strength using <strong className="text-white">stress conditioning & adaptation models</strong>
                   </p>
                 </div>
               </div>
@@ -472,36 +463,36 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                 </h3>
                 <div className="space-y-2 text-xs sm:text-sm text-slate-300">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <span>Guided Weekly Live Two Sessions & Workshops</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Structured daily practices for mental clarity & focus</span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Structured CBT-based exercises for stress reduction</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Proven systems for emotional self-regulation</span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Practical tools for emotional balance & control</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Mindfulness tools based on attention training science</span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Techniques to calm your mind & nervous system instantly</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>Techniques for balancing your nervous system response</span>
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>Daily practices to build long-term resilience</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <span>A step-by-step system for sustainable stress-free living</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <span>1:1 Support / Healing Sessions (Optional)</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <span>Workbook, Audiobook & Study Materials after completion of each Session</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>A lifelong framework for sustained behavioral transformation</span>
                   </div>
                 </div>
               </div>
@@ -515,11 +506,11 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                   <span>Who This Is For:</span>
                 </h3>
                 <div className="space-y-1.5 text-xs sm:text-sm text-slate-300 pl-7">
-                  <p>• Individuals experiencing <strong className="text-white">anxiety, mental fatigue, or emotional instability</strong></p>
-                  <p>• Professionals navigating <strong className="text-white">high stress, burnout, and pressure</strong></p>
-                  <p>• Students struggling with <strong className="text-white">focus, clarity, and cognitive distraction</strong></p>
-                  <p>• Anyone caught in <strong className="text-white">negative thought loops or reactive behavior patterns</strong></p>
-                  <p>• Growth-driven individuals committed to <strong className="text-white">self-mastery and inner evolution</strong></p>
+                  <p>• Individuals experiencing <strong className="text-white">chronic stress, anxiety, or burnout</strong></p>
+                  <p>• Working professionals under <strong className="text-white">high pressure & deadlines</strong></p>
+                  <p>• Students facing <strong className="text-white">academic stress & performance anxiety</strong></p>
+                  <p>• Anyone feeling <strong className="text-white">mentally exhausted or emotionally drained</strong></p>
+                  <p>• Anyone seeking <strong className="text-white">long-term calm, balance, and resilience</strong></p>
                 </div>
               </div>
 
@@ -532,70 +523,70 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
                   <span>Your Transformation:</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 pl-7">
-                  Imagine operating from a place where your mind no longer controls you…
+                  Imagine a life where stress no longer controls you…
                 </p>
                 <div className="space-y-1 text-xs sm:text-sm text-slate-200 pl-7">
                   <p className="flex items-center gap-2">
-                    <span className="text-[#FFCA3A]">✦</span>
-                    <span>You respond with clarity instead of reacting impulsively</span>
+                    <span className="text-[#FFCA3A]">⬢</span>
+                    <span>You stay calm even in high-pressure situations</span>
                   </p>
                   <p className="flex items-center gap-2">
-                    <span className="text-[#FFCA3A]">✦</span>
-                    <span>You maintain emotional balance under pressure</span>
+                    <span className="text-[#FFCA3A]">⬢</span>
+                    <span>You respond with clarity instead of reacting emotionally</span>
                   </p>
                   <p className="flex items-center gap-2">
-                    <span className="text-[#FFCA3A]">✦</span>
-                    <span>You act with awareness, not unconscious conditioning</span>
+                    <span className="text-[#FFCA3A]">⬢</span>
+                    <span>You feel mentally light, stable, and in control</span>
                   </p>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-300 pl-7 pt-1 font-semibold">
-                  After completing this module, you will experience:
+                  After completing this program, you will experience:
                 </p>
                 <div className="space-y-1.5 text-xs sm:text-sm text-slate-300 pl-9">
                   <p className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Reduced anxiety through <strong className="text-white">emotional regulation mastery</strong></span>
+                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>Significant reduction in stress and anxiety</span>
                   </p>
                   <p className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Enhanced clarity via <strong className="text-white">cognitive control systems</strong></span>
+                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>Emotional balance through <strong className="text-white">CBT-based regulation</strong></span>
                   </p>
                   <p className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Stronger decision-making with <strong className="text-white">executive function alignment</strong></span>
+                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>Clear thinking and improved focus</span>
                   </p>
                   <p className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Deep inner stability through <strong className="text-white">heightened self-awareness</strong></span>
+                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>Strong resilience against future stress triggers</span>
                   </p>
                 </div>
               </div>
 
-              {/* A True Psychological Shift */}
+              {/* A Complete System Reset */}
               <div className="space-y-2 pt-3 border-t border-emerald-800/70">
                 <h3 className="font-bold text-white text-base flex items-center gap-2">
-                  <span className="p-1 rounded-md bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0">
-                    <Cpu className="w-4 h-4 stroke-[2.2]" />
+                  <span className="p-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+                    <RefreshCw className="w-4 h-4 stroke-[2.2]" />
                   </span>
-                  <span>A True Psychological Shift</span>
+                  <span>A Complete System Reset</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 pl-7">
-                  Right now, most of your life is governed by <strong className="text-white">conditioned responses and subconscious programming</strong>.
+                  Right now, your mind and body may be conditioned to stay in <strong className="text-white">constant stress mode</strong>.
                 </p>
-                <div className="p-3 rounded-xl bg-[#061A13] border border-emerald-800/80 text-xs sm:text-sm text-emerald-300 font-semibold text-center my-2">
-                  Interrupt those patterns → Rewire your responses → Consciously design your inner state
+                <div className="p-3 rounded-xl bg-[#061A13] border border-emerald-800/80 text-xs sm:text-sm text-amber-300 font-semibold text-center my-2">
+                  Break the stress cycle → Reset your internal system → Build lasting resilience
                 </div>
               </div>
 
-              {/* 👉 Take Control of Your Inner System */}
+              {/* 👉 Take Back Control of Your Mind & Emotions */}
               <div className="pt-4 border-t border-emerald-800/70 text-center flex flex-col items-center justify-center gap-2">
-                <span className="p-1.5 rounded-lg bg-[#307940]/20 text-emerald-400 border border-[#307940]/40 flex items-center justify-center">
+                <span className="p-1.5 rounded-lg bg-[#cdad44]/20 text-amber-400 border border-[#cdad44]/40 flex items-center justify-center">
                   <Rocket className="w-5 h-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold text-slate-300 uppercase tracking-wider">👉 Take Control of Your Inner System</p>
-                  <p className="font-extrabold text-white text-lg sm:text-xl text-emerald-400">
-                    Join the Inner Mastery Module Today
+                  <p className="text-xs font-semibold text-slate-300 uppercase tracking-wider">👉 Take Back Control of Your Mind & Emotions</p>
+                  <p className="font-extrabold text-white text-lg sm:text-xl text-amber-400">
+                    Join the Stress Management System Today
                   </p>
                 </div>
               </div>
@@ -605,53 +596,29 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
             {/* Creator / Support Contact Info */}
             <div className="p-4 rounded-xl bg-[#0A261D] border border-emerald-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-emerald-400" />
+                <Phone className="w-4 h-4 text-amber-400" />
                 <span>Support Contact: +91 9163670300</span>
               </div>
               <a
                 href="https://wa.me/919163670300"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold"
+                className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-semibold"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>
               </a>
             </div>
 
-            {/* Spacing for sticky bottom bar */}
-            <div className="h-12" />
-
           </div>
 
-          {/* Floating Modernized Scroll-to-Top Button */}
-          <AnimatePresence>
-            {showScrollTop && (
-              <motion.button
-                initial={{ opacity: 0, y: 15, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 15, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="absolute bottom-20 right-4 sm:right-6 z-40 px-3.5 py-2 rounded-full bg-[#061A13]/90 hover:bg-[#0c3125] text-amber-300 hover:text-white border border-[#D4AF37]/60 shadow-2xl shadow-black/60 backdrop-blur-md flex items-center gap-2 text-xs font-bold transition-all hover:scale-105 active:scale-95 group cursor-pointer"
-                title="Scroll to top"
-                aria-label="Scroll to top"
-              >
-                <div className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">
-                  <ArrowUp className="w-3.5 h-3.5 stroke-[2.5]" />
-                </div>
-                <span className="text-[11px] tracking-wide">Top</span>
-              </motion.button>
-            )}
-          </AnimatePresence>
-
           {/* Sticky Bottom Bar */}
-          <div className="sticky bottom-0 z-40 bg-[#071E17]/95 backdrop-blur-md px-4 sm:px-6 py-3.5 border-t border-emerald-800/80 flex items-center justify-between gap-4 shadow-2xl">
+          <div className="sticky bottom-0 z-40 bg-[#071E17] px-4 sm:px-6 py-3.5 border-t border-emerald-800/80 flex items-center justify-between gap-4 shadow-2xl">
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-xl sm:text-2xl font-black text-white">₹1199</span>
-                <span className="text-xs text-slate-400 line-through">₹2399</span>
-                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">50% OFF</span>
+                <span className="text-xl sm:text-2xl font-black text-white">₹799</span>
+                <span className="text-xs text-slate-400 line-through">₹999</span>
+                <span className="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">20% OFF</span>
               </div>
               <div className="text-[10px] text-slate-400">One-Time / Lifetime Access</div>
             </div>
@@ -659,12 +626,10 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
             <button
               onClick={handleEnrollNow}
               disabled={isSubmitting}
-              className="relative overflow-hidden group py-2.5 sm:py-3 px-6 sm:px-8 font-bold text-xs sm:text-sm text-white rounded-xl shadow-lg active:scale-[0.98] transition-all cursor-pointer flex items-center gap-2 shrink-0 border border-emerald-400/30 hover:brightness-110"
-              style={{ backgroundColor: '#307940' }}
+              className="px-6 sm:px-8 py-2.5 sm:py-3 font-bold text-xs sm:text-sm text-[#fff9f9] rounded-xl shadow-lg active:scale-[0.98] transition-all cursor-pointer hover:brightness-110"
+              style={{ backgroundColor: '#cdad44' }}
             >
-              <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-12 -translate-x-full group-hover:animate-shimmer pointer-events-none" />
-              <span>{isSubmitting ? 'Processing...' : 'Enroll Now'}</span>
-              <span className="transition-transform group-hover:translate-x-1 font-bold">&rsaquo;</span>
+              <span>Enroll Now</span>
             </button>
           </div>
 

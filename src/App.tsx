@@ -35,6 +35,10 @@ import { ProfileView } from './components/Profile/ProfileView';
 import { AdminLeadsModal } from './components/Admin/AdminLeadsModal';
 import { CompleteInnerRevolutionModal } from './components/InnerShift/CompleteInnerRevolutionModal';
 import { InnerMasteryModal } from './components/InnerShift/InnerMasteryModal';
+import { StressResetModal } from './components/InnerShift/StressResetModal';
+import { RelationshipHealingModal } from './components/InnerShift/RelationshipHealingModal';
+import { MindfulnessJourneyModal } from './components/InnerShift/MindfulnessJourneyModal';
+import { DeeperAwakeningModal } from './components/InnerShift/DeeperAwakeningModal';
 
 const MainContent: React.FC = () => {
   const { 
@@ -49,7 +53,15 @@ const MainContent: React.FC = () => {
     isInnerRevolutionModalOpen,
     setIsInnerRevolutionModalOpen,
     isInnerMasteryModalOpen,
-    setIsInnerMasteryModalOpen 
+    setIsInnerMasteryModalOpen,
+    isStressResetModalOpen,
+    setIsStressResetModalOpen,
+    isRelationshipHealingModalOpen,
+    setIsRelationshipHealingModalOpen,
+    isMindfulnessJourneyModalOpen,
+    setIsMindfulnessJourneyModalOpen,
+    isDeeperAwakeningModalOpen,
+    setIsDeeperAwakeningModalOpen 
   } = useApp();
 
   useEffect(() => {
@@ -150,6 +162,22 @@ const MainContent: React.FC = () => {
       <InnerMasteryModal
         isOpen={isInnerMasteryModalOpen}
         onClose={() => setIsInnerMasteryModalOpen(false)}
+      />
+      <StressResetModal
+        isOpen={isStressResetModalOpen}
+        onClose={() => setIsStressResetModalOpen(false)}
+      />
+      <RelationshipHealingModal
+        isOpen={isRelationshipHealingModalOpen}
+        onClose={() => setIsRelationshipHealingModalOpen(false)}
+      />
+      <MindfulnessJourneyModal
+        isOpen={isMindfulnessJourneyModalOpen}
+        onClose={() => setIsMindfulnessJourneyModalOpen(false)}
+      />
+      <DeeperAwakeningModal
+        isOpen={isDeeperAwakeningModalOpen}
+        onClose={() => setIsDeeperAwakeningModalOpen(false)}
       />
     </div>
   );

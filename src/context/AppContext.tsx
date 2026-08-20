@@ -37,6 +37,14 @@ interface AppContextType {
   setIsInnerRevolutionModalOpen: (open: boolean) => void;
   isInnerMasteryModalOpen: boolean;
   setIsInnerMasteryModalOpen: (open: boolean) => void;
+  isStressResetModalOpen: boolean;
+  setIsStressResetModalOpen: (open: boolean) => void;
+  isRelationshipHealingModalOpen: boolean;
+  setIsRelationshipHealingModalOpen: (open: boolean) => void;
+  isMindfulnessJourneyModalOpen: boolean;
+  setIsMindfulnessJourneyModalOpen: (open: boolean) => void;
+  isDeeperAwakeningModalOpen: boolean;
+  setIsDeeperAwakeningModalOpen: (open: boolean) => void;
   registerUser: (details: UserRegistration) => void;
   loginUser: (emailOrPhone: string, fullName?: string) => void;
   logoutUser: () => void;
@@ -203,6 +211,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isAdminLeadsModalOpen, setIsAdminLeadsModalOpen] = useState(false);
   const [isInnerRevolutionModalOpen, setIsInnerRevolutionModalOpen] = useState(false);
   const [isInnerMasteryModalOpen, setIsInnerMasteryModalOpen] = useState(false);
+  const [isStressResetModalOpen, setIsStressResetModalOpen] = useState(false);
+  const [isRelationshipHealingModalOpen, setIsRelationshipHealingModalOpen] = useState(false);
+  const [isMindfulnessJourneyModalOpen, setIsMindfulnessJourneyModalOpen] = useState(false);
+  const [isDeeperAwakeningModalOpen, setIsDeeperAwakeningModalOpen] = useState(false);
 
   const [founderPhoto, setFounderPhoto] = useState<string>(() => {
     try {
@@ -472,6 +484,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsInnerRevolutionModalOpen,
         isInnerMasteryModalOpen,
         setIsInnerMasteryModalOpen,
+        isStressResetModalOpen,
+        setIsStressResetModalOpen,
+        isRelationshipHealingModalOpen,
+        setIsRelationshipHealingModalOpen,
+        isMindfulnessJourneyModalOpen,
+        setIsMindfulnessJourneyModalOpen,
+        isDeeperAwakeningModalOpen,
+        setIsDeeperAwakeningModalOpen,
         registerUser,
         loginUser,
         logoutUser,

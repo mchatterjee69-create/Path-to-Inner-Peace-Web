@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useApp } from '../../context/AppContext';
 import { dispatchFormToAdmin } from '../../utils/formSubmit';
@@ -32,7 +32,8 @@ import {
   Radio,
   FileText,
   HelpCircle,
-  Award
+  Award,
+  ArrowUp
 } from 'lucide-react';
 
 interface CompleteInnerRevolutionModalProps {
@@ -56,6 +57,8 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
   const [countryCode, setCountryCode] = useState('+91');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expandedModule, setExpandedModule] = useState<number | null>(1);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   if (!isOpen) return null;
 
@@ -117,7 +120,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn font-poppins">
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-[#04140E]/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn font-poppins">
         
         {/* Main SuperProfile / Cosmofeed Styled Page Modal */}
         <motion.div 
@@ -125,13 +128,13 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.97, y: 15 }}
           transition={{ duration: 0.25 }}
-          className="relative w-full max-w-3xl bg-[#3D444B] text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-600/60 overflow-hidden flex flex-col max-h-[94vh]"
+          className="relative w-full max-w-3xl bg-[#0c3125] text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-emerald-700/50 overflow-hidden flex flex-col max-h-[94vh]"
           style={{
-            backgroundImage: 'radial-gradient(circle at 50% 0%, #4D565F 0%, #2A3036 100%)'
+            backgroundImage: 'radial-gradient(circle at 50% 0%, #154D3D 0%, #09261C 100%)'
           }}
         >
           {/* Top Navbar Header */}
-          <div className="sticky top-0 z-40 bg-[#2C3238]/95 backdrop-blur-md px-4 sm:px-6 py-3 border-b border-slate-700/80 flex items-center justify-between">
+          <div className="sticky top-0 z-40 bg-[#0A291E]/95 backdrop-blur-md px-4 sm:px-6 py-3 border-b border-emerald-800/80 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
                 <img 
@@ -148,18 +151,22 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
 
             <button
               onClick={onClose}
-              className="p-1.5 sm:p-2 text-slate-300 hover:text-white rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer border border-emerald-700/50 hover:border-amber-400/50 hover:scale-105 active:scale-95"
               title="Close modal"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 
           {/* Scrollable Main Container */}
-          <div className="overflow-y-auto flex-1 p-4 sm:p-6 md:p-8 space-y-6">
+          <div 
+            ref={scrollRef}
+            onScroll={(e) => setShowScrollTop(e.currentTarget.scrollTop > 260)}
+            className="overflow-y-auto modal-scrollbar flex-1 p-4 sm:p-6 md:p-8 space-y-6 scroll-smooth"
+          >
             
             {/* Top Course Card */}
-            <div className="bg-[#242A30] rounded-2xl border border-slate-700/80 overflow-hidden shadow-xl">
+            <div className="bg-[#0A261D] rounded-2xl border border-emerald-800/80 overflow-hidden shadow-xl">
               
               {/* Product Cover Image */}
               <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
@@ -196,7 +203,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                 </div>
 
                 {/* Lead Form Inputs (Exact SuperProfile Style) */}
-                <form onSubmit={handleEnrollNow} className="pt-3 space-y-4 border-t border-slate-700/80">
+                <form onSubmit={handleEnrollNow} className="pt-3 space-y-4 border-t border-emerald-800/80">
                   
                   {/* Name field */}
                   <div>
@@ -209,7 +216,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Enter your name"
-                      className="w-full bg-[#1C2127] border border-slate-600 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-[#B5363E] transition-colors"
+                      className="w-full bg-[#061A13] border border-emerald-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-emerald-100/40 focus:outline-hidden focus:border-[#D4AF37] transition-colors"
                     />
                   </div>
 
@@ -223,7 +230,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
                         aria-label="Country Code"
-                        className="bg-[#1C2127] border border-slate-600 rounded-xl px-3 py-3 text-xs text-slate-300 focus:outline-hidden focus:border-[#B5363E]"
+                        className="bg-[#061A13] border border-emerald-700/60 rounded-xl px-3 py-3 text-xs text-slate-200 focus:outline-hidden focus:border-[#D4AF37]"
                       >
                         <option value="+91">🇮🇳 +91</option>
                         <option value="+1">🇺🇸 +1</option>
@@ -238,19 +245,21 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Mobile / WhatsApp number"
-                        className="w-full bg-[#1C2127] border border-slate-600 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-[#B5363E] transition-colors"
+                        className="w-full bg-[#061A13] border border-emerald-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-emerald-100/40 focus:outline-hidden focus:border-[#D4AF37] transition-colors"
                       />
                     </div>
                   </div>
 
-                  {/* Enroll Button with Exact #B5363E background */}
+                  {/* Enroll Button with Modernised Shimmer & Micro-interactions */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl font-bold text-sm sm:text-base text-white shadow-lg active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="relative overflow-hidden group w-full py-3.5 rounded-xl font-bold text-sm sm:text-base text-white shadow-lg active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2 border border-rose-400/30"
                     style={{ backgroundColor: '#B5363E' }}
                   >
+                    <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-12 -translate-x-full group-hover:animate-shimmer pointer-events-none" />
                     <span>{isSubmitting ? 'Processing...' : 'Enroll Now'}</span>
+                    <span className="transition-transform group-hover:translate-x-1 font-bold">&rsaquo;</span>
                   </button>
 
                   <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 pt-1">
@@ -264,14 +273,14 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
             </div>
 
             {/* Live Class & Curriculum Modules (From Cosmofeed Collection) */}
-            <div className="bg-[#242A30] rounded-2xl border border-slate-700/80 p-5 space-y-4">
+            <div className="bg-[#0A261D] rounded-2xl border border-emerald-800/80 p-5 space-y-4">
               <h3 className="text-base font-bold text-white flex items-center gap-2">
                 <Video className="w-5 h-5 text-rose-400 stroke-[2.2]" />
                 <span>Live Sessions & Curriculum</span>
               </h3>
 
               {/* Live Session Item */}
-              <div className="p-3.5 rounded-xl bg-[#1C2127] border border-slate-700 flex items-center justify-between gap-3 text-xs text-slate-200">
+              <div className="p-3.5 rounded-xl bg-[#061A13] border border-emerald-800/80 flex items-center justify-between gap-3 text-xs text-slate-200">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0 shadow-inner">
                     <Radio className="w-5 h-5 animate-pulse" />
@@ -292,7 +301,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
 
               {/* Modules Accordion */}
               <div className="space-y-2 pt-1">
-                <div className="border border-slate-700 rounded-xl bg-[#1C2127] overflow-hidden">
+                <div className="border border-emerald-800/70 rounded-xl bg-[#061A13] overflow-hidden">
                   <button 
                     onClick={() => setExpandedModule(expandedModule === 1 ? null : 1)}
                     className="w-full p-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:bg-white/5 transition-colors cursor-pointer"
@@ -304,7 +313,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                     {expandedModule === 1 ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
                   </button>
                   {expandedModule === 1 && (
-                    <div className="px-4 pb-3 pt-1 text-xs text-slate-300 border-t border-slate-800 space-y-1.5">
+                    <div className="px-4 pb-3 pt-1 text-xs text-slate-300 border-t border-emerald-900/80 space-y-1.5">
                       <div className="flex items-center gap-2.5 py-1 text-slate-300">
                         <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                         <span>Lesson 1: Introduction to Root-Level Mind Detox</span>
@@ -313,7 +322,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                   )}
                 </div>
 
-                <div className="border border-slate-700 rounded-xl bg-[#1C2127] overflow-hidden">
+                <div className="border border-emerald-800/70 rounded-xl bg-[#061A13] overflow-hidden">
                   <button 
                     onClick={() => setExpandedModule(expandedModule === 2 ? null : 2)}
                     className="w-full p-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:bg-white/5 transition-colors cursor-pointer"
@@ -325,7 +334,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                     {expandedModule === 2 ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
                   </button>
                   {expandedModule === 2 && (
-                    <div className="px-4 pb-3 pt-1 text-xs text-slate-300 border-t border-slate-800 space-y-1.5">
+                    <div className="px-4 pb-3 pt-1 text-xs text-slate-300 border-t border-emerald-900/80 space-y-1.5">
                       <div className="flex items-center gap-2.5 py-1 text-slate-300">
                         <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                         <span>Lesson 1: Emotional Release & Conscious Living Protocols</span>
@@ -337,7 +346,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
             </div>
 
             {/* EXACT VERBATIM COURSE DESCRIPTION FROM COSMOFEED / SUPERPROFILE */}
-            <div className="bg-[#242A30] rounded-2xl border border-slate-700/80 p-5 sm:p-7 space-y-5 text-slate-200 text-sm leading-relaxed">
+            <div className="bg-[#0A261D] rounded-2xl border border-emerald-800/80 p-5 sm:p-7 space-y-5 text-slate-200 text-sm leading-relaxed">
               
               <p className="font-semibold text-white text-base">
                 This 4 weeks Live Journey is designed to create deep, lasting change at the root level:
@@ -422,7 +431,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               </div>
 
               {/* 🧭 Program Structure (Transformation Phases): */}
-              <div className="space-y-3 pt-3 border-t border-slate-700">
+              <div className="space-y-3 pt-3 border-t border-emerald-800/70">
                 <p className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
                     <Compass className="w-4 h-4 stroke-[2.2]" />
@@ -487,7 +496,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               </div>
 
               {/* 🎧 What You’ll Get: */}
-              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+              <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <p className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
                     <Headphones className="w-4 h-4 stroke-[2.2]" />
@@ -527,7 +536,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               </div>
 
               {/* 💡 Who This Program Is For: */}
-              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+              <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <p className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-yellow-500/15 border border-yellow-500/30 text-yellow-400 flex items-center justify-center shrink-0">
                     <Lightbulb className="w-4 h-4 stroke-[2.2]" />
@@ -543,7 +552,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               </div>
 
               {/* 🚫 What Makes This Different: */}
-              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+              <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <p className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
                     <ShieldAlert className="w-4 h-4 stroke-[2.2]" />
@@ -561,7 +570,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               </div>
 
               {/* 🎯 The Result: */}
-              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+              <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <p className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center shrink-0">
                     <Target className="w-4 h-4 stroke-[2.2]" />
@@ -594,7 +603,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               </div>
 
               {/* 🚀 Your Inner Revolution Starts Now */}
-              <div className="pt-4 border-t border-slate-700 text-center flex items-center justify-center gap-2">
+              <div className="pt-4 border-t border-emerald-800/70 text-center flex items-center justify-center gap-2">
                 <span className="p-1.5 rounded-lg bg-[#B5363E]/20 text-rose-400 border border-[#B5363E]/40 flex items-center justify-center">
                   <Rocket className="w-5 h-5" />
                 </span>
@@ -606,7 +615,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
             </div>
 
             {/* Creator / Support Contact Info */}
-            <div className="p-4 rounded-xl bg-[#242A30] border border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
+            <div className="p-4 rounded-xl bg-[#0A261D] border border-emerald-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400" />
                 <span>Support Contact: +91 9163670300</span>
@@ -622,10 +631,34 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               </a>
             </div>
 
+            {/* Spacing for sticky bottom bar */}
+            <div className="h-12" />
+
           </div>
 
+          {/* Floating Modernized Scroll-to-Top Button */}
+          <AnimatePresence>
+            {showScrollTop && (
+              <motion.button
+                initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 15, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="absolute bottom-20 right-4 sm:right-6 z-40 px-3.5 py-2 rounded-full bg-[#061A13]/90 hover:bg-[#0c3125] text-amber-300 hover:text-white border border-[#D4AF37]/60 shadow-2xl shadow-black/60 backdrop-blur-md flex items-center gap-2 text-xs font-bold transition-all hover:scale-105 active:scale-95 group cursor-pointer"
+                title="Scroll to top"
+                aria-label="Scroll to top"
+              >
+                <div className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">
+                  <ArrowUp className="w-3.5 h-3.5 stroke-[2.5]" />
+                </div>
+                <span className="text-[11px] tracking-wide">Top</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
           {/* Sticky Bottom Bar */}
-          <div className="sticky bottom-0 z-40 bg-[#1F2429] px-4 sm:px-6 py-3.5 border-t border-slate-700/80 flex items-center justify-between gap-4 shadow-2xl">
+          <div className="sticky bottom-0 z-40 bg-[#071E17]/95 backdrop-blur-md px-4 sm:px-6 py-3.5 border-t border-emerald-800/80 flex items-center justify-between gap-4 shadow-2xl">
             <div>
               <div className="flex items-baseline gap-2">
                 <span className="text-xl sm:text-2xl font-black text-white">₹2999</span>
@@ -638,10 +671,12 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
             <button
               onClick={handleEnrollNow}
               disabled={isSubmitting}
-              className="px-6 sm:px-8 py-2.5 sm:py-3 font-bold text-xs sm:text-sm text-white rounded-xl shadow-lg active:scale-[0.98] transition-all cursor-pointer"
+              className="relative overflow-hidden group py-2.5 sm:py-3 px-6 sm:px-8 font-bold text-xs sm:text-sm text-white rounded-xl shadow-lg active:scale-[0.98] transition-all cursor-pointer flex items-center gap-2 shrink-0 border border-rose-400/30"
               style={{ backgroundColor: '#B5363E' }}
             >
-              <span>Enroll Now</span>
+              <div className="absolute inset-0 w-1/2 h-full bg-white/20 skew-x-12 -translate-x-full group-hover:animate-shimmer pointer-events-none" />
+              <span>{isSubmitting ? 'Processing...' : 'Enroll Now'}</span>
+              <span className="transition-transform group-hover:translate-x-1 font-bold">&rsaquo;</span>
             </button>
           </div>
 
