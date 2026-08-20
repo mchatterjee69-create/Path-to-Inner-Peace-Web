@@ -4,28 +4,35 @@ import { useApp } from '../../context/AppContext';
 import { dispatchFormToAdmin } from '../../utils/formSubmit';
 import { 
   X, 
-  Check, 
-  Calendar, 
-  Clock, 
   Video, 
-  ShieldCheck, 
+  Lock, 
+  ChevronDown, 
+  ChevronUp, 
+  Clock, 
   Phone, 
   MessageCircle, 
-  Sparkles, 
-  ArrowRight,
-  BookOpen,
-  Award,
-  Heart,
+  Check, 
+  ShieldCheck,
+  FolderOpen,
   Brain,
+  HeartCrack,
   Zap,
+  Sparkles,
+  Heart,
   Compass,
   Headphones,
-  Users,
+  Lightbulb,
+  ShieldAlert,
+  Target,
+  Rocket,
   CheckCircle2,
-  Lock,
-  Layers,
+  CalendarCheck2,
+  BookCheck,
+  Infinity as InfinityIcon,
+  Radio,
+  FileText,
   HelpCircle,
-  Flame
+  Award
 } from 'lucide-react';
 
 interface CompleteInnerRevolutionModalProps {
@@ -41,7 +48,6 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
     user, 
     setIsPaymentModalOpen, 
     setSelectedPlan, 
-    triggerConfetti, 
     updateUserProfile 
   } = useApp();
 
@@ -49,7 +55,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
   const [phone, setPhone] = useState(user?.whatsapp || '');
   const [countryCode, setCountryCode] = useState('+91');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'phases' | 'curriculum' | 'creator'>('overview');
+  const [expandedModule, setExpandedModule] = useState<number | null>(1);
 
   if (!isOpen) return null;
 
@@ -65,7 +71,6 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
         whatsapp: fullPhone || user.whatsapp
       });
 
-      // Dispatch lead to admin sheet / notification
       try {
         await dispatchFormToAdmin({
           formType: 'inner_revolution_program_enrollment',
@@ -74,32 +79,33 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
           email: user.email || 'seeker@innerpeace.com',
           details: {
             program: 'Complete Inner Revolution Program',
-            price: '₹2,999 (50% OFF)',
-            notes: 'User clicked Enroll Now on Complete Inner Revolution Program'
+            price: '₹2,999 (Original: ₹5,999)',
+            discount: '50% OFF',
+            status: 'Lead captured on Cosmofeed modal'
           }
         });
       } catch (err) {
-        console.error('Failed to log enrollment lead', err);
+        console.error('Lead dispatch error', err);
       }
     }
 
-    // Set the plan for Razorpay modal
     setSelectedPlan({
       id: 'INNER_TRANSFORMATION_ELITE',
       name: 'Complete Inner Revolution Program',
-      tagline: '4-Week Live Deep Mental Reset & Consciousness Awakening Journey',
+      tagline: '4 Weeks Live Journey to create deep, lasting change at the root level',
       priceINR: 2999,
       priceUSD: 39,
       originalPriceINR: 5999,
       popular: true,
-      badge: '50% DISCOUNTED',
+      badge: '50% OFF',
       features: [
-        '4 Weekly Live Interactive Workshops with Mainak',
+        'Guided Weekly Live Four Sessions & Workshops',
         'Deep Meditation & Mind Reprogramming Audios',
-        'Practical CBT & Somatic Tools for Stress Control',
-        '1:1 Optional Healing Guidance & Q&A',
-        'Complete Workbooks, Audiobooks & Study Materials',
-        'Lifetime Learnings for Inner Stability & Peace'
+        'Practical Tools for Stress & Emotional Control',
+        '1:1 Support / Healing Sessions (Optional)',
+        'Daily Practices & Habit System',
+        'Workbook, Audiobook & Study Materials after completion of each Session',
+        'Lifetime Learnings for Inner Stability'
       ],
       badgeText: '50% OFF'
     });
@@ -111,117 +117,90 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn">
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fadeIn font-poppins">
         
-        {/* Main Modal Card */}
+        {/* Main SuperProfile / Cosmofeed Styled Page Modal */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          initial={{ opacity: 0, scale: 0.97, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 20 }}
-          transition={{ duration: 0.3 }}
-          className="relative w-full max-w-4xl bg-[#1C2127] text-slate-100 rounded-3xl shadow-2xl border border-slate-700/80 overflow-hidden flex flex-col max-h-[92vh]"
+          exit={{ opacity: 0, scale: 0.97, y: 15 }}
+          transition={{ duration: 0.25 }}
+          className="relative w-full max-w-3xl bg-[#3D444B] text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-600/60 overflow-hidden flex flex-col max-h-[94vh]"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 50% 0%, #4D565F 0%, #2A3036 100%)'
+          }}
         >
-          {/* Top Bar / Navigation */}
-          <div className="sticky top-0 z-30 bg-[#1C2127]/95 backdrop-blur-md px-5 py-3.5 border-b border-slate-800 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img 
-                src="https://media-cdn.cosmofeed.com/profile/my_image1779941323-2026-28-05-04-08-44.png" 
-                alt="Mainak Chatterjee" 
-                className="w-8 h-8 rounded-full border border-[#FFCA3A] object-cover"
-                referrerPolicy="no-referrer"
-              />
-              <div>
-                <div className="text-xs font-bold text-white flex items-center gap-1.5">
-                  <span>Mainak Chatterjee</span>
-                  <span className="text-[10px] bg-amber-500/20 text-[#FFCA3A] px-1.5 py-0.5 rounded font-mono font-medium">@pathtoinnerpeace</span>
-                </div>
-                <div className="text-[10px] text-slate-400">Complete Inner Revolution Program</div>
+          {/* Top Navbar Header */}
+          <div className="sticky top-0 z-40 bg-[#2C3238]/95 backdrop-blur-md px-4 sm:px-6 py-3 border-b border-slate-700/80 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
+                <img 
+                  src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
+                  alt="Path to Inner Peace Logo" 
+                  className="w-full h-full object-cover scale-[1.15] rounded-full"
+                  referrerPolicy="no-referrer"
+                />
               </div>
+              <span className="text-xs sm:text-sm font-semibold text-slate-100 tracking-tight">
+                Path to Inner Peace
+              </span>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2.5 py-1 rounded-full">
-                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                Live 4-Week Journey
-              </span>
-              <button
-                onClick={onClose}
-                className="p-2 text-slate-400 hover:text-white rounded-full hover:bg-slate-800 transition-colors cursor-pointer"
-                title="Close"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+            <button
+              onClick={onClose}
+              className="p-1.5 sm:p-2 text-slate-300 hover:text-white rounded-full hover:bg-white/10 transition-colors cursor-pointer"
+              title="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
 
-          {/* Modal Scrollable Body */}
-          <div className="overflow-y-auto flex-1 p-4 sm:p-6 md:p-8 space-y-8 font-sans">
+          {/* Scrollable Main Container */}
+          <div className="overflow-y-auto flex-1 p-4 sm:p-6 md:p-8 space-y-6">
             
-            {/* Hero Banner with Visual Design Style */}
-            <div className="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-900 group">
-              <div className="relative aspect-[16/8] sm:aspect-[21/9] w-full overflow-hidden bg-slate-950">
+            {/* Top Course Card */}
+            <div className="bg-[#242A30] rounded-2xl border border-slate-700/80 overflow-hidden shadow-xl">
+              
+              {/* Product Cover Image */}
+              <div className="relative aspect-[16/9] w-full bg-slate-900 overflow-hidden">
                 <img 
                   src="https://media-cdn.cosmofeed.com/chat/1000155931-2026-30-03-09-07-18.png" 
-                  alt="Complete Inner Revolution Program Banner" 
-                  className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                  alt="Complete Inner Revolution Program" 
+                  className="w-full h-full object-cover object-center"
                   referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80';
-                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C2127] via-[#1C2127]/40 to-transparent" />
               </div>
 
-              {/* Title & Price Header Overlay */}
-              <div className="p-4 sm:p-6 -mt-12 sm:-mt-16 relative z-10 space-y-3">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-red-600 to-rose-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-lg">
-                  <Flame className="w-3.5 h-3.5 text-amber-300" />
-                  <span>50% Special Limited Discount</span>
+              {/* Creator & Course Title Section */}
+              <div className="p-5 sm:p-6 space-y-4">
+                
+                {/* Creator Profile Chip */}
+                <div>
+                  <div className="text-sm font-bold text-white leading-tight">Mainak Chatterjee</div>
+                  <div className="text-xs text-[#FFCA3A] font-medium">@pathtoinnerpeace</div>
                 </div>
 
-                <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                {/* Course Title */}
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-snug">
                   Complete Inner Revolution Program
                 </h1>
 
-                {/* Price & Duration Badge Card */}
-                <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/90 border border-slate-700/80">
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono">₹2,999</span>
-                    <span className="text-sm sm:text-base text-slate-400 line-through font-mono">₹5,999</span>
-                    <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-bold">
-                      SAVE ₹3,000
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-xs text-slate-300">
-                    <span className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-md border border-slate-700">
-                      <Clock className="w-3.5 h-3.5 text-[#FFCA3A]" />
-                      4 Weeks Live
-                    </span>
-                    <span className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-md border border-slate-700">
-                      <Video className="w-3.5 h-3.5 text-sky-400" />
-                      Google Meet
-                    </span>
-                  </div>
+                {/* Pricing Block */}
+                <div className="flex items-baseline gap-3 pt-1">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white">₹2999</span>
+                  <span className="text-base sm:text-lg text-slate-400 line-through">₹5999</span>
+                  <span className="text-xs bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded">
+                    50% OFF
+                  </span>
+                  <span className="text-xs text-slate-400 ml-auto">Lifetime Access</span>
                 </div>
-              </div>
-            </div>
 
-            {/* Quick Registration & Checkout Box */}
-            <div className="bg-gradient-to-br from-slate-900 via-[#1e252e] to-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-700/80 space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#FFCA3A]" />
-                  <h3 className="text-base font-bold text-white">Instant Enrollment</h3>
-                </div>
-                <span className="text-xs text-[#FFCA3A] font-semibold">One-Time / Lifetime Access</span>
-              </div>
-
-              <form onSubmit={handleEnrollNow} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Name Input */}
+                {/* Lead Form Inputs (Exact SuperProfile Style) */}
+                <form onSubmit={handleEnrollNow} className="pt-3 space-y-4 border-t border-slate-700/80">
+                  
+                  {/* Name field */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                       What's your name? <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -229,22 +208,22 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Enter your full name"
-                      className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-[#FFCA3A] transition-colors"
+                      placeholder="Enter your name"
+                      className="w-full bg-[#1C2127] border border-slate-600 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-[#B5363E] transition-colors"
                     />
                   </div>
 
-                  {/* Phone Input */}
+                  {/* Phone number field */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                       Add your phone number <span className="text-red-400">*</span>
                     </label>
                     <div className="flex gap-2">
                       <select 
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
-                        aria-label="Select country code"
-                        className="bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-2.5 text-xs text-slate-300 focus:outline-hidden focus:border-[#FFCA3A]"
+                        aria-label="Country Code"
+                        className="bg-[#1C2127] border border-slate-600 rounded-xl px-3 py-3 text-xs text-slate-300 focus:outline-hidden focus:border-[#B5363E]"
                       >
                         <option value="+91">🇮🇳 +91</option>
                         <option value="+1">🇺🇸 +1</option>
@@ -258,393 +237,412 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="WhatsApp / Mobile number"
-                        className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-[#FFCA3A] transition-colors"
+                        placeholder="Mobile / WhatsApp number"
+                        className="w-full bg-[#1C2127] border border-slate-600 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-[#B5363E] transition-colors"
                       />
                     </div>
                   </div>
-                </div>
 
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <div className="text-xs text-slate-400 flex items-center gap-1.5">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Safe & encrypted 256-bit payment via Razorpay / Cards / UPI</span>
-                  </div>
-
+                  {/* Enroll Button with Exact #B5363E background */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-[#B5363E] via-red-600 to-[#B5363E] hover:brightness-110 active:scale-[0.98] text-white font-bold text-sm rounded-xl shadow-lg shadow-red-950/50 flex items-center justify-center gap-2 cursor-pointer transition-all"
+                    className="w-full py-3.5 rounded-xl font-bold text-sm sm:text-base text-white shadow-lg active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2"
+                    style={{ backgroundColor: '#B5363E' }}
                   >
-                    <span>{isSubmitting ? 'Processing...' : 'Enroll Now (₹2,999)'}</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>{isSubmitting ? 'Processing...' : 'Enroll Now'}</span>
                   </button>
-                </div>
-              </form>
+
+                  <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 pt-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Safe & secure encrypted checkout</span>
+                  </div>
+
+                </form>
+
+              </div>
             </div>
 
-            {/* Intro Lead Description */}
-            <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 text-slate-200 text-sm sm:text-base leading-relaxed">
-              <p className="font-semibold text-white mb-2">
+            {/* Live Class & Curriculum Modules (From Cosmofeed Collection) */}
+            <div className="bg-[#242A30] rounded-2xl border border-slate-700/80 p-5 space-y-4">
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <Video className="w-5 h-5 text-rose-400 stroke-[2.2]" />
+                <span>Live Sessions & Curriculum</span>
+              </h3>
+
+              {/* Live Session Item */}
+              <div className="p-3.5 rounded-xl bg-[#1C2127] border border-slate-700 flex items-center justify-between gap-3 text-xs text-slate-200">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0 shadow-inner">
+                    <Radio className="w-5 h-5 animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">Live Online Interactive Workshop</div>
+                    <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
+                      <Clock className="w-3.5 h-3.5 text-slate-400" />
+                      <span>Google Meet • 01:31 PM – 02:30 PM (IST)</span>
+                    </div>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                  Live Class
+                </span>
+              </div>
+
+              {/* Modules Accordion */}
+              <div className="space-y-2 pt-1">
+                <div className="border border-slate-700 rounded-xl bg-[#1C2127] overflow-hidden">
+                  <button 
+                    onClick={() => setExpandedModule(expandedModule === 1 ? null : 1)}
+                    className="w-full p-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:bg-white/5 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <FolderOpen className="w-4 h-4 text-[#FFCA3A] stroke-[2.2]" />
+                      <span>Module 1: Introduction</span>
+                    </div>
+                    {expandedModule === 1 ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                  </button>
+                  {expandedModule === 1 && (
+                    <div className="px-4 pb-3 pt-1 text-xs text-slate-300 border-t border-slate-800 space-y-1.5">
+                      <div className="flex items-center gap-2.5 py-1 text-slate-300">
+                        <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        <span>Lesson 1: Introduction to Root-Level Mind Detox</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="border border-slate-700 rounded-xl bg-[#1C2127] overflow-hidden">
+                  <button 
+                    onClick={() => setExpandedModule(expandedModule === 2 ? null : 2)}
+                    className="w-full p-3.5 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:bg-white/5 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <FolderOpen className="w-4 h-4 text-[#FFCA3A] stroke-[2.2]" />
+                      <span>Module 2: Deep Transformation System</span>
+                    </div>
+                    {expandedModule === 2 ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                  </button>
+                  {expandedModule === 2 && (
+                    <div className="px-4 pb-3 pt-1 text-xs text-slate-300 border-t border-slate-800 space-y-1.5">
+                      <div className="flex items-center gap-2.5 py-1 text-slate-300">
+                        <Lock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        <span>Lesson 1: Emotional Release & Conscious Living Protocols</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* EXACT VERBATIM COURSE DESCRIPTION FROM COSMOFEED / SUPERPROFILE */}
+            <div className="bg-[#242A30] rounded-2xl border border-slate-700/80 p-5 sm:p-7 space-y-5 text-slate-200 text-sm leading-relaxed">
+              
+              <p className="font-semibold text-white text-base">
                 This 4 weeks Live Journey is designed to create deep, lasting change at the root level:
               </p>
-              <p className="text-slate-400 text-xs sm:text-sm">
-                A structured, evidence-backed transformation system integrating neuroscience, cognitive restructuring, mindfulness, and inner consciousness awakening.
-              </p>
-            </div>
 
-            {/* 6 Core Transformation Root Pillars */}
-            <div className="space-y-4">
-              <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                <Brain className="w-5 h-5 text-[#FFCA3A]" />
-                <span>Core Transformation Pillars</span>
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700 transition-colors">
-                  <div className="flex items-center gap-2 text-sm font-bold text-emerald-400 mb-1.5">
-                    <span className="text-base">🧠</span>
-                    <span>Rewire Your Mind</span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                    Identify and transform negative thought patterns using proven psychological techniques like cognitive restructuring and awareness training.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700 transition-colors">
-                  <div className="flex items-center gap-2 text-sm font-bold text-rose-400 mb-1.5">
-                    <span className="text-base">💔</span>
-                    <span>Heal Emotional Wounds</span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                    Release past pain, trauma, and suppressed emotions through guided healing processes and deep inner release.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700 transition-colors">
-                  <div className="flex items-center gap-2 text-sm font-bold text-amber-400 mb-1.5">
-                    <span className="text-base">⚡</span>
-                    <span>Eliminate Stress & Anxiety</span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                    Learn powerful stress management tools to regain calmness, clarity, and emotional stability in everyday situations.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700 transition-colors">
-                  <div className="flex items-center gap-2 text-sm font-bold text-sky-400 mb-1.5">
-                    <span className="text-base">🧘</span>
-                    <span>Master Mindfulness & Meditation</span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                    Build a daily practice that strengthens focus, awareness, and inner peace for lasting mental balance.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700 transition-colors">
-                  <div className="flex items-center gap-2 text-sm font-bold text-red-400 mb-1.5">
-                    <span className="text-base">❤️</span>
-                    <span>Improve Relationships</span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                    Understand emotional triggers, communication patterns, and create healthier, more fulfilling connections.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700 transition-colors">
-                  <div className="flex items-center gap-2 text-sm font-bold text-purple-400 mb-1.5">
-                    <span className="text-base">🌌</span>
-                    <span>Awaken Your Higher Self</span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                    Go beyond the surface mind and experience deeper awareness, life purpose, and true inner freedom.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* 🧭 Program Structure (Transformation Phases) */}
-            <div className="space-y-4 pt-2">
-              <div className="flex items-center gap-2">
-                <Compass className="w-5 h-5 text-[#FFCA3A]" />
-                <h2 className="text-lg sm:text-xl font-bold text-white">
-                  Program Structure (Transformation Phases)
-                </h2>
-              </div>
-
-              <div className="space-y-3">
-                <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 relative overflow-hidden flex gap-3.5 items-start">
-                  <div className="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                    1
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white">
-                      🔹 Phase 1: Awareness & Mind Detox
-                    </h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      Understand how your mind works. Identify toxic patterns, overthinking loops, and unconscious behaviors that are holding you back.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 relative overflow-hidden flex gap-3.5 items-start">
-                  <div className="w-7 h-7 rounded-lg bg-rose-500/10 text-rose-400 border border-rose-500/30 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                    2
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white">
-                      🔹 Phase 2: Emotional Healing & Release
-                    </h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      Work through inner blocks, past experiences, and emotional baggage using guided processes and deep reflection.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 relative overflow-hidden flex gap-3.5 items-start">
-                  <div className="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                    3
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white">
-                      🔹 Phase 3: Mind Reprogramming & Inner Strength
-                    </h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      Replace limiting beliefs with empowering ones. Build confidence, clarity, and mental resilience.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 relative overflow-hidden flex gap-3.5 items-start">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                    4
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white">
-                      🔹 Phase 4: Mindfulness & Daily Practices
-                    </h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      Create powerful daily rituals including meditation, breathwork, and awareness exercises for long-term stability.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 relative overflow-hidden flex gap-3.5 items-start">
-                  <div className="w-7 h-7 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/30 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                    5
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white">
-                      🔹 Phase 5: Deep Awakening & Conscious Living
-                    </h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">
-                      Step into a higher level of awareness where you respond to life consciously rather than reacting unconsciously.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 🎧 What You’ll Get */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-emerald-950/30 border border-emerald-800/60 space-y-4">
-              <h3 className="text-lg font-bold text-emerald-300 flex items-center gap-2">
-                <Headphones className="w-5 h-5 text-emerald-400" />
-                <span>🎧 What You’ll Get</span>
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-200">
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Guided Weekly Live Four Sessions & Workshops</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Deep Meditation & Mind Reprogramming Audios</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Practical Tools for Stress & Emotional Control</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>1:1 Support / Healing Sessions (Optional)</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Daily Practices & Habit System</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Workbook, Audiobook & Study Materials after completion of each Session</span>
-                </div>
-                <div className="flex items-start gap-2.5 sm:col-span-2">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span className="font-bold text-amber-300">Lifetime Learnings for Inner Stability</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 💡 Who This Program Is For & 🚫 What Makes This Different */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-                <h3 className="text-sm sm:text-base font-bold text-[#FFCA3A] flex items-center gap-2">
-                  <span>💡</span>
-                  <span>Who This Program Is For</span>
-                </h3>
-                <ul className="space-y-2 text-xs text-slate-300">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#FFCA3A]">•</span>
-                    <span>Anyone struggling with stress, anxiety, or overthinking</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#FFCA3A]">•</span>
-                    <span>People feeling emotionally stuck or lost in life</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#FFCA3A]">•</span>
-                    <span>Those seeking clarity, purpose, and inner peace</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#FFCA3A]">•</span>
-                    <span>Individuals who want real transformation — not temporary motivation</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-                <h3 className="text-sm sm:text-base font-bold text-rose-400 flex items-center gap-2">
-                  <span>🚫</span>
-                  <span>What Makes This Different</span>
-                </h3>
-                <p className="text-xs text-slate-300 leading-relaxed font-semibold">
-                  This is not just theory or motivation. This is a step-by-step transformation system combining:
-                </p>
-                <ul className="space-y-1.5 text-xs text-slate-300 pl-1">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                    <span>Psychology-based techniques</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                    <span>Mindfulness & meditation practices</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                    <span>Real-life application tools</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                    <span>Deep inner awareness work</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* 🎯 The Result */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-emerald-950/40 to-slate-900 border border-emerald-800/50 space-y-3">
-              <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                <span>🎯</span>
-                <span>The Result: By the end of this journey, you will experience:</span>
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-slate-200">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>A calmer, clearer, and more focused mind</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Emotional balance and inner stability</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Freedom from overthinking and stress patterns</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Stronger relationships and self-awareness</span>
-                </div>
-                <div className="flex items-center gap-2 sm:col-span-2 text-amber-300 font-semibold">
-                  <CheckCircle2 className="w-4 h-4 text-amber-300 shrink-0" />
-                  <span>A deep sense of inner peace and control</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Creator Profile / Mentor Section */}
-            <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row items-center sm:items-start gap-4">
-              <img 
-                src="https://media-cdn.cosmofeed.com/profile/my_image1779941323-2026-28-05-04-08-44.png" 
-                alt="Mainak Chatterjee" 
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl border-2 border-[#FFCA3A] object-cover shadow-md shrink-0"
-                referrerPolicy="no-referrer"
-              />
-              <div className="space-y-1.5 text-center sm:text-left flex-1">
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  <h4 className="text-base font-bold text-white">Mainak Chatterjee</h4>
-                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
-                    Author & Mind Mastery Mentor
+              {/* 🧠 Rewire Your Mind */}
+              <div className="space-y-1">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0">
+                    <Brain className="w-4 h-4 stroke-[2.2]" />
                   </span>
-                </div>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  Founder of Path to Inner Peace and MindForge 360°™. Dedicated to helping individuals eliminate stress, master emotional regulation, and achieve effortless clarity.
+                  <span>Rewire Your Mind</span>
                 </p>
-                <div className="pt-1 flex flex-wrap items-center justify-center sm:justify-start gap-3 text-xs text-slate-300">
-                  <a 
-                    href="https://wa.me/919163670300" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[#25D366] hover:underline"
-                  >
-                    <MessageCircle className="w-3.5 h-3.5" />
-                    <span>Support: +91 9163670300</span>
-                  </a>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
+                  Identify and transform negative thought patterns using proven psychological techniques like cognitive restructuring and awareness training.
+                </p>
+              </div>
+
+              {/* 💔 Heal Emotional Wounds */}
+              <div className="space-y-1">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
+                    <HeartCrack className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>Heal Emotional Wounds</span>
+                </p>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
+                  Release past pain, trauma, and suppressed emotions through guided healing processes.
+                </p>
+              </div>
+
+              {/* ⚡ Eliminate Stress & Anxiety */}
+              <div className="space-y-1">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+                    <Zap className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>Eliminate Stress & Anxiety</span>
+                </p>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
+                  Learn powerful stress management tools to regain calmness, clarity, and emotional stability.
+                </p>
+              </div>
+
+              {/* 🧘 Master Mindfulness & Meditation */}
+              <div className="space-y-1">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-teal-500/15 border border-teal-500/30 text-teal-400 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>Master Mindfulness & Meditation</span>
+                </p>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
+                  Build a daily practice that strengthens focus, awareness, and inner peace.
+                </p>
+              </div>
+
+              {/* ❤️ Improve Relationships */}
+              <div className="space-y-1">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-pink-500/15 border border-pink-500/30 text-pink-400 flex items-center justify-center shrink-0">
+                    <Heart className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>Improve Relationships</span>
+                </p>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
+                  Understand emotional triggers, communication patterns, and create healthier, more fulfilling connections.
+                </p>
+              </div>
+
+              {/* 🌌 Awaken Your Higher Self */}
+              <div className="space-y-1">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center shrink-0">
+                    <Compass className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>Awaken Your Higher Self</span>
+                </p>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-7">
+                  Go beyond the surface mind and experience deeper awareness, purpose, and inner freedom.
+                </p>
+              </div>
+
+              {/* 🧭 Program Structure (Transformation Phases): */}
+              <div className="space-y-3 pt-3 border-t border-slate-700">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+                    <Compass className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>Program Structure (Transformation Phases):</span>
+                </p>
+
+                {/* Phase 1 */}
+                <div className="space-y-1 pl-1">
+                  <p className="font-bold text-white text-sm flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
+                    <span>Phase 1: Awareness & Mind Detox</span>
+                  </p>
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
+                    Understand how your mind works. Identify toxic patterns, overthinking loops, and unconscious behaviors that are holding you back.
+                  </p>
+                </div>
+
+                {/* Phase 2 */}
+                <div className="space-y-1 pl-1">
+                  <p className="font-bold text-white text-sm flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
+                    <span>Phase 2: Emotional Healing & Release</span>
+                  </p>
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
+                    Work through inner blocks, past experiences, and emotional baggage using guided processes and deep reflection.
+                  </p>
+                </div>
+
+                {/* Phase 3 */}
+                <div className="space-y-1 pl-1">
+                  <p className="font-bold text-white text-sm flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
+                    <span>Phase 3: Mind Reprogramming & Inner Strength</span>
+                  </p>
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
+                    Replace limiting beliefs with empowering ones. Build confidence, clarity, and mental resilience.
+                  </p>
+                </div>
+
+                {/* Phase 4 */}
+                <div className="space-y-1 pl-1">
+                  <p className="font-bold text-white text-sm flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
+                    <span>Phase 4: Mindfulness & Daily Practices</span>
+                  </p>
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
+                    Create powerful daily rituals including meditation, breathwork, and awareness exercises for long-term stability.
+                  </p>
+                </div>
+
+                {/* Phase 5 */}
+                <div className="space-y-1 pl-1">
+                  <p className="font-bold text-white text-sm flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block shrink-0" />
+                    <span>Phase 5: Deep Awakening & Conscious Living</span>
+                  </p>
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed pl-4">
+                    Step into a higher level of awareness where you respond to life consciously rather than reacting unconsciously.
+                  </p>
                 </div>
               </div>
+
+              {/* 🎧 What You’ll Get: */}
+              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                    <Headphones className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>What You’ll Get:</span>
+                </p>
+                <div className="space-y-2 text-xs sm:text-sm text-slate-300">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Guided Weekly Live Four Sessions & Workshops</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Deep Meditation & Mind Reprogramming Audios</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Practical Tools for Stress & Emotional Control</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>1:1 Support / Healing Sessions (Optional)</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Daily Practices & Habit System</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Workbook, Audiobook & Study Materials after completion of each Session</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Lifetime Learnings for Inner Stability</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 💡 Who This Program Is For: */}
+              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-yellow-500/15 border border-yellow-500/30 text-yellow-400 flex items-center justify-center shrink-0">
+                    <Lightbulb className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>Who This Program Is For:</span>
+                </p>
+                <div className="space-y-1.5 text-xs sm:text-sm text-slate-300 pl-7">
+                  <p>• Anyone struggling with stress, anxiety, or overthinking</p>
+                  <p>• People feeling emotionally stuck or lost in life</p>
+                  <p>• Those seeking clarity, purpose, and inner peace</p>
+                  <p>• Individuals who want real transformation — not temporary motivation</p>
+                </div>
+              </div>
+
+              {/* 🚫 What Makes This Different: */}
+              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
+                    <ShieldAlert className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>What Makes This Different:</span>
+                </p>
+                <p className="text-xs sm:text-sm text-slate-300 pl-7">This is not just theory or motivation.</p>
+                <p className="text-xs sm:text-sm text-slate-300 pl-7 font-medium">This is a step-by-step transformation system combining:</p>
+                <div className="space-y-1 text-xs sm:text-sm text-slate-300 pl-9">
+                  <p>• Psychology-based techniques</p>
+                  <p>• Mindfulness & meditation practices</p>
+                  <p>• Real-life application tools</p>
+                  <p>• Deep inner awareness work</p>
+                </div>
+              </div>
+
+              {/* 🎯 The Result: */}
+              <div className="space-y-2.5 pt-3 border-t border-slate-700">
+                <p className="font-bold text-white text-base flex items-center gap-2">
+                  <span className="p-1 rounded-md bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center shrink-0">
+                    <Target className="w-4 h-4 stroke-[2.2]" />
+                  </span>
+                  <span>The Result:</span>
+                </p>
+                <p className="text-xs sm:text-sm text-slate-300 pl-7">By the end of this journey, you will experience:</p>
+                <div className="space-y-1.5 text-xs sm:text-sm text-slate-300 pl-9">
+                  <p className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>A calmer, clearer, and more focused mind</span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Emotional balance and inner stability</span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Freedom from overthinking and stress patterns</span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Stronger relationships and self-awareness</span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>A deep sense of inner peace and control</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* 🚀 Your Inner Revolution Starts Now */}
+              <div className="pt-4 border-t border-slate-700 text-center flex items-center justify-center gap-2">
+                <span className="p-1.5 rounded-lg bg-[#B5363E]/20 text-rose-400 border border-[#B5363E]/40 flex items-center justify-center">
+                  <Rocket className="w-5 h-5" />
+                </span>
+                <p className="font-extrabold text-white text-lg">
+                  Your Inner Revolution Starts Now
+                </p>
+              </div>
+
             </div>
 
-            {/* Bottom Call To Action Banner */}
-            <div className="text-center p-6 rounded-2xl bg-gradient-to-r from-red-950/60 via-slate-900 to-red-950/60 border border-red-900/50 space-y-3">
-              <h3 className="text-lg sm:text-xl font-bold text-white">
-                🚀 Your Inner Revolution Starts Now
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
-                Step into a calmer, more conscious life with step-by-step guidance, weekly live workshops, and lifetime inner stability.
-              </p>
-              <div className="pt-2">
-                <button
-                  onClick={handleEnrollNow}
-                  className="px-8 py-3.5 bg-gradient-to-r from-[#B5363E] via-red-600 to-[#B5363E] hover:brightness-110 active:scale-[0.98] text-white font-bold text-sm sm:text-base rounded-2xl shadow-xl shadow-red-950/60 cursor-pointer inline-flex items-center gap-2"
-                >
-                  <span>Enroll In Inner Revolution (₹2,999)</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+            {/* Creator / Support Contact Info */}
+            <div className="p-4 rounded-xl bg-[#242A30] border border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-emerald-400" />
+                <span>Support Contact: +91 9163670300</span>
               </div>
+              <a
+                href="https://wa.me/919163670300"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Chat on WhatsApp</span>
+              </a>
             </div>
 
           </div>
 
-          {/* Sticky Bottom Checkout Footer */}
-          <div className="sticky bottom-0 z-30 bg-[#14181D] px-4 sm:px-6 py-3.5 border-t border-slate-800 flex items-center justify-between gap-4 shadow-2xl">
+          {/* Sticky Bottom Bar */}
+          <div className="sticky bottom-0 z-40 bg-[#1F2429] px-4 sm:px-6 py-3.5 border-t border-slate-700/80 flex items-center justify-between gap-4 shadow-2xl">
             <div>
-              <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Total Investment</div>
               <div className="flex items-baseline gap-2">
-                <span className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">₹2,999</span>
-                <span className="text-xs text-slate-400 line-through font-mono">₹5,999</span>
+                <span className="text-xl sm:text-2xl font-black text-white">₹2999</span>
+                <span className="text-xs text-slate-400 line-through">₹5999</span>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">50% OFF</span>
               </div>
+              <div className="text-[10px] text-slate-400">One-Time / Lifetime</div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleEnrollNow}
-                disabled={isSubmitting}
-                className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-[#B5363E] via-red-600 to-[#B5363E] hover:brightness-110 active:scale-[0.98] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-red-950/50 flex items-center gap-2 cursor-pointer transition-all"
-              >
-                <span>Enroll Now</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <button
+              onClick={handleEnrollNow}
+              disabled={isSubmitting}
+              className="px-6 sm:px-8 py-2.5 sm:py-3 font-bold text-xs sm:text-sm text-white rounded-xl shadow-lg active:scale-[0.98] transition-all cursor-pointer"
+              style={{ backgroundColor: '#B5363E' }}
+            >
+              <span>Enroll Now</span>
+            </button>
           </div>
 
         </motion.div>
