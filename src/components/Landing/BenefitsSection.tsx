@@ -10,8 +10,7 @@ import {
   Wind, 
   Headphones, 
   BookOpen, 
-  Activity,
-  Sparkles
+  Activity
 } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 
@@ -97,7 +96,7 @@ export const BenefitsSection: React.FC = () => {
         <ScrollReveal variant="slide-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53] bg-emerald-50 px-4 py-1.5 rounded-full border border-emerald-200/70 inline-flex items-center gap-1.5 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#0B6B53]" />
+              <HeartPulse className="w-3.5 h-3.5 text-[#0B6B53]" />
               HOLISTIC MENTAL TRANSFORMATION
             </span>
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight">

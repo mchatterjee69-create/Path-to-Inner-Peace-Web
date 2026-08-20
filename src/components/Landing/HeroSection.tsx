@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Play, Shield, Users, Award, ArrowRight, Sparkles, Check, Clock, UserCheck, Gift } from 'lucide-react';
+import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 
 export const HeroSection: React.FC = () => {
@@ -171,7 +171,7 @@ export const HeroSection: React.FC = () => {
               
               {/* Top Accent Ribbon */}
               <div className="absolute -top-3.5 -right-3 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-poppins font-extrabold text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md border border-amber-200/40 flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-slate-950" />
+                <Clock className="w-3 h-3 text-slate-950" />
                 <span>Limited Free Seats</span>
               </div>
 

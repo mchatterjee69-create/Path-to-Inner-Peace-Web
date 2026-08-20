@@ -33,6 +33,7 @@ import { Cbt12TechniquesVideo } from './components/CbtVideo/Cbt12TechniquesVideo
 import { CertificateModal } from './components/Gamification/CertificateModal';
 import { ProfileView } from './components/Profile/ProfileView';
 import { AdminLeadsModal } from './components/Admin/AdminLeadsModal';
+import { CompleteInnerRevolutionModal } from './components/InnerShift/CompleteInnerRevolutionModal';
 
 const MainContent: React.FC = () => {
   const { 
@@ -43,7 +44,9 @@ const MainContent: React.FC = () => {
     selectedPlan, 
     isAdminLeadsModalOpen, 
     setIsAdminLeadsModalOpen,
-    setIsRegistrationModalOpen 
+    setIsRegistrationModalOpen,
+    isInnerRevolutionModalOpen,
+    setIsInnerRevolutionModalOpen 
   } = useApp();
 
   useEffect(() => {
@@ -137,6 +140,10 @@ const MainContent: React.FC = () => {
       <RazorpayModal />
       <CertificateModal />
       <AdminLeadsModal isOpen={isAdminLeadsModalOpen} onClose={() => setIsAdminLeadsModalOpen(false)} />
+      <CompleteInnerRevolutionModal 
+        isOpen={isInnerRevolutionModalOpen} 
+        onClose={() => setIsInnerRevolutionModalOpen(false)} 
+      />
     </div>
   );
 };

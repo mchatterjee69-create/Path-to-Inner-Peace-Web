@@ -33,6 +33,8 @@ interface AppContextType {
   setIsCertificateModalOpen: (open: boolean) => void;
   isAdminLeadsModalOpen: boolean;
   setIsAdminLeadsModalOpen: (open: boolean) => void;
+  isInnerRevolutionModalOpen: boolean;
+  setIsInnerRevolutionModalOpen: (open: boolean) => void;
   registerUser: (details: UserRegistration) => void;
   loginUser: (emailOrPhone: string, fullName?: string) => void;
   logoutUser: () => void;
@@ -197,6 +199,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(PRICING_PLANS[1]);
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
   const [isAdminLeadsModalOpen, setIsAdminLeadsModalOpen] = useState(false);
+  const [isInnerRevolutionModalOpen, setIsInnerRevolutionModalOpen] = useState(false);
 
   const [founderPhoto, setFounderPhoto] = useState<string>(() => {
     try {
@@ -462,6 +465,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsCertificateModalOpen,
         isAdminLeadsModalOpen,
         setIsAdminLeadsModalOpen,
+        isInnerRevolutionModalOpen,
+        setIsInnerRevolutionModalOpen,
         registerUser,
         loginUser,
         logoutUser,

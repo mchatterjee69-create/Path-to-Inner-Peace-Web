@@ -7,7 +7,7 @@ import {
   Award, 
   Crown, 
   ArrowDown,
-  Sparkles
+  Milestone
 } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 
@@ -75,7 +75,7 @@ export const HowItWorks: React.FC = () => {
         <ScrollReveal variant="slide-up">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-white/10 px-4 py-1.5 rounded-full border border-white/15 inline-flex items-center gap-1.5 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <Milestone className="w-3.5 h-3.5 text-[#D4AF37]" />
               SIMPLE 5-DAY ROADMAP
             </span>
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-white mt-4 tracking-tight">

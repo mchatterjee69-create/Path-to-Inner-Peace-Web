@@ -63,14 +63,24 @@ const PROGRAM_ITEMS: InnerRevolutionProgramItem[] = [
 ];
 
 export const InnerRevolutionView: React.FC = () => {
-  const { setIsRegistrationModalOpen, setIsPaymentModalOpen, setSelectedPlan } = useApp();
+  const { 
+    setIsRegistrationModalOpen, 
+    setIsPaymentModalOpen, 
+    setSelectedPlan,
+    setIsInnerRevolutionModalOpen 
+  } = useApp();
 
   const handleProgramClick = (program: InnerRevolutionProgramItem) => {
-    if (program.id === 'complete-inner-revolution' || program.id === 'deeper-awakening') {
+    if (program.id === 'complete-inner-revolution') {
+      setIsInnerRevolutionModalOpen(true);
+      return;
+    }
+
+    if (program.id === 'deeper-awakening') {
       setSelectedPlan({
         id: 'INNER_TRANSFORMATION_ELITE',
-        name: 'Inner Transformation Elite',
-        tagline: 'Complete Mind Mastery & Consciousness Evolution',
+        name: 'Deeper Awakening Masterclass',
+        tagline: 'Deep Self-Awareness & Higher Consciousness Shift',
         priceINR: 1999,
         priceUSD: 29,
         originalPriceINR: 9999,

@@ -21,7 +21,6 @@ import {
   Volume2,
   VolumeX,
   RotateCcw,
-  Sparkles,
   Video
 } from 'lucide-react';
 

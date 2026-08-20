@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FAQ_ITEMS } from '../../data/mockData';
-import { ChevronDown, HelpCircle, Sparkles } from 'lucide-react';
+import { ChevronDown, HelpCircle, MessageCircleQuestion } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 
 export const FaqSection: React.FC = () => {
@@ -17,7 +17,7 @@ export const FaqSection: React.FC = () => {
         <ScrollReveal variant="slide-up">
           <div className="text-center mb-14">
             <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53] bg-emerald-50 px-4 py-1.5 rounded-full border border-emerald-200/70 inline-flex items-center gap-1.5 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#0B6B53]" />
+              <MessageCircleQuestion className="w-3.5 h-3.5 text-[#0B6B53]" />
               GOT QUESTIONS?
             </span>
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight">
