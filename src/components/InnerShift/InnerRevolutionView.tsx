@@ -18,15 +18,15 @@ const PROGRAM_ITEMS: InnerRevolutionProgramItem[] = [
     description: 'Embark on a complete journey to transform your mindset, manage stress effectively, and elevate your emotions and consciousness for lasting inner peace and clarity.',
     buttonText: 'Begin Your Transformation',
     bannerType: 'revolution',
-    bgImageUrl: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1000&q=80'
+    bgImageUrl: 'https://media-cdn.cosmofeed.com/chat/1000155931-2026-30-03-09-07-18.png'
   },
   {
     id: 'mind-mastery',
-    title: 'Mind Mastery Program',
-    description: 'Learn to control your thoughts and emotions while building mental strength, awareness, and resilience to transform your mindset.',
+    title: 'Inner Mastery Module',
+    description: 'Rewire your mind, regulate your emotions, and reclaim your power in a structured 2 weeks live journey of cognitive awareness and inner reprogramming.',
     buttonText: 'Start Mastering Your Mind',
     bannerType: 'mind-mastery',
-    bgImageUrl: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1000&q=80'
+    bgImageUrl: 'https://media-cdn.cosmofeed.com/chat/WhatsApp-Image-2026-03-28-at-2-2026-02-04-09-18-6.jpeg'
   },
   {
     id: 'advanced-stress-management',
@@ -67,12 +67,18 @@ export const InnerRevolutionView: React.FC = () => {
     setIsRegistrationModalOpen, 
     setIsPaymentModalOpen, 
     setSelectedPlan,
-    setIsInnerRevolutionModalOpen 
+    setIsInnerRevolutionModalOpen,
+    setIsInnerMasteryModalOpen 
   } = useApp();
 
   const handleProgramClick = (program: InnerRevolutionProgramItem) => {
     if (program.id === 'complete-inner-revolution') {
       setIsInnerRevolutionModalOpen(true);
+      return;
+    }
+
+    if (program.id === 'mind-mastery') {
+      setIsInnerMasteryModalOpen(true);
       return;
     }
 

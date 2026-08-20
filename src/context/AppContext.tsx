@@ -35,6 +35,8 @@ interface AppContextType {
   setIsAdminLeadsModalOpen: (open: boolean) => void;
   isInnerRevolutionModalOpen: boolean;
   setIsInnerRevolutionModalOpen: (open: boolean) => void;
+  isInnerMasteryModalOpen: boolean;
+  setIsInnerMasteryModalOpen: (open: boolean) => void;
   registerUser: (details: UserRegistration) => void;
   loginUser: (emailOrPhone: string, fullName?: string) => void;
   logoutUser: () => void;
@@ -200,6 +202,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isCertificateModalOpen, setIsCertificateModalOpen] = useState(false);
   const [isAdminLeadsModalOpen, setIsAdminLeadsModalOpen] = useState(false);
   const [isInnerRevolutionModalOpen, setIsInnerRevolutionModalOpen] = useState(false);
+  const [isInnerMasteryModalOpen, setIsInnerMasteryModalOpen] = useState(false);
 
   const [founderPhoto, setFounderPhoto] = useState<string>(() => {
     try {
@@ -467,6 +470,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsAdminLeadsModalOpen,
         isInnerRevolutionModalOpen,
         setIsInnerRevolutionModalOpen,
+        isInnerMasteryModalOpen,
+        setIsInnerMasteryModalOpen,
         registerUser,
         loginUser,
         logoutUser,

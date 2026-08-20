@@ -34,6 +34,7 @@ import { CertificateModal } from './components/Gamification/CertificateModal';
 import { ProfileView } from './components/Profile/ProfileView';
 import { AdminLeadsModal } from './components/Admin/AdminLeadsModal';
 import { CompleteInnerRevolutionModal } from './components/InnerShift/CompleteInnerRevolutionModal';
+import { InnerMasteryModal } from './components/InnerShift/InnerMasteryModal';
 
 const MainContent: React.FC = () => {
   const { 
@@ -46,7 +47,9 @@ const MainContent: React.FC = () => {
     setIsAdminLeadsModalOpen,
     setIsRegistrationModalOpen,
     isInnerRevolutionModalOpen,
-    setIsInnerRevolutionModalOpen 
+    setIsInnerRevolutionModalOpen,
+    isInnerMasteryModalOpen,
+    setIsInnerMasteryModalOpen 
   } = useApp();
 
   useEffect(() => {
@@ -143,6 +146,10 @@ const MainContent: React.FC = () => {
       <CompleteInnerRevolutionModal 
         isOpen={isInnerRevolutionModalOpen} 
         onClose={() => setIsInnerRevolutionModalOpen(false)} 
+      />
+      <InnerMasteryModal
+        isOpen={isInnerMasteryModalOpen}
+        onClose={() => setIsInnerMasteryModalOpen(false)}
       />
     </div>
   );
