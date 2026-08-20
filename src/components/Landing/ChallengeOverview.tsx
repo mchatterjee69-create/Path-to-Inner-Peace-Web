@@ -41,7 +41,7 @@ export const ChallengeOverview: React.FC = () => {
   };
 
   return (
-    <section id="curriculum-section" className="pt-20 sm:pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FAF9F6] via-white to-[#FAF9F6] border-t border-slate-200/80 overflow-hidden">
+    <section id="curriculum-section" className="pt-20 sm:pt-24 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FAF9F6] via-white to-[#FAF9F6] border-t border-slate-200/80 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         <ScrollReveal variant="slide-up">

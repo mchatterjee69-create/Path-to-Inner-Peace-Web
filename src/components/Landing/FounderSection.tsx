@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FOUNDER_INFO } from '../../data/mockData';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, Award, X, CheckCircle2, Sparkles, ArrowRight, Quote } from 'lucide-react';
+import { ShieldCheck, Award, X, CheckCircle2, UserCheck, Sparkles, ArrowRight, Quote } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 
 export const FounderSection: React.FC = () => {
@@ -9,19 +9,19 @@ export const FounderSection: React.FC = () => {
   const { founderPhoto } = useApp();
 
   return (
-    <section className="pt-12 sm:pt-16 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FAF9F6] via-white to-[#FAF9F6] relative overflow-hidden">
+    <section className="pt-2 sm:pt-4 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FAF9F6] via-white to-[#FAF9F6] relative overflow-hidden">
       
       {/* Background Soft Glow */}
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto space-y-8">
+      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-7">
         
         {/* Header Tag */}
         <ScrollReveal variant="slide-right">
           <div className="flex items-center gap-3">
-            <span className="w-10 h-1 bg-[#D4AF37] rounded-full"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53] bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200/70 inline-flex items-center gap-1.5 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#0B6B53]" />
+            <span className="w-10 sm:w-12 h-1.5 bg-[#D4AF37] rounded-full"></span>
+            <span className="text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider text-[#0B6B53] bg-emerald-50 px-4 py-1.5 sm:py-2 rounded-full border border-emerald-200/80 inline-flex items-center gap-2 shadow-xs">
+              <UserCheck className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#0B6B53]" />
               MEET THE FOUNDER & MENTOR
             </span>
           </div>
