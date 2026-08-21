@@ -148,7 +148,7 @@ export const Header: React.FC = () => {
                 onClick={() => setIsRegistrationModalOpen(true)}
                 className="px-3 sm:px-3.5 py-1.5 rounded-full border border-emerald-900 bg-emerald-900 text-white hover:bg-emerald-800 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all shadow-xs whitespace-nowrap shrink-0 active:scale-95 cursor-pointer"
               >
-                Start Free
+                Join Free...
               </button>
             ) : (
               <button

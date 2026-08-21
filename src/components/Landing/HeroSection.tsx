@@ -121,10 +121,10 @@ export const HeroSection: React.FC = () => {
                     setIsRegistrationModalOpen(true);
                   }
                 }}
-                className="w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-xl shadow-amber-500/25 hover:brightness-110 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-300/40 cursor-pointer"
+                className="btn-glowing-gold w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer group"
               >
-                <span>{user.registered ? 'Go to My Dashboard' : 'Start Free Challenge'}</span>
-                <ArrowRight className="w-5 h-5 text-slate-950" />
+                <span>{user.registered ? 'Go to My Dashboard' : 'Join 5-Day Mental Reset Free'}</span>
+                <ArrowRight className="w-5 h-5 text-slate-950 group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
@@ -227,10 +227,10 @@ export const HeroSection: React.FC = () => {
 
                 <button
                   onClick={() => setIsRegistrationModalOpen(true)}
-                  className="w-full py-4 bg-gradient-to-r from-[#0B6B53] to-[#134E4A] hover:from-[#0D7D61] hover:to-[#175C57] text-white font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-xl shadow-emerald-950/40 hover:shadow-emerald-900/60 hover:brightness-110 active:scale-[0.98] transition-all text-center border border-emerald-400/30 flex items-center justify-center gap-2 cursor-pointer"
+                  className="btn-glowing-gold w-full py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-extrabold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all text-center border border-amber-200/60 flex items-center justify-center gap-2 cursor-pointer group"
                 >
-                  <span>Start Free Challenge</span>
-                  <ArrowRight className="w-4.5 h-4.5 text-[#D4AF37]" />
+                  <span>Join 5-Day Mental Reset Free</span>
+                  <ArrowRight className="w-5 h-5 text-slate-950 group-hover:translate-x-1 transition-transform" />
                 </button>
 
                 <p className="text-[10.5px] text-center text-emerald-200/70 font-inter italic">

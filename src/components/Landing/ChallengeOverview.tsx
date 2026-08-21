@@ -135,16 +135,16 @@ export const ChallengeOverview: React.FC = () => {
                         e.stopPropagation();
                         handleDayAction(day.dayNumber);
                       }}
-                      className={`font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm transition-all text-xs cursor-pointer ${
+                      className={`font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all text-xs cursor-pointer ${
                         isCompleted
-                          ? 'bg-emerald-700 hover:bg-emerald-800 text-white'
+                          ? 'bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm'
                           : isDay1 || isUnlocked
-                          ? 'bg-[#0B6B53] hover:bg-[#08523F] text-white shadow-emerald-900/20'
+                          ? 'btn-glowing-emerald bg-gradient-to-r from-[#0B6B53] to-[#134E4A] hover:brightness-110 text-white border border-emerald-400/40'
                           : 'bg-amber-600 hover:bg-amber-700 text-white shadow-amber-900/20'
                       }`}
                     >
                       {!isUnlocked && !isDay1 && <Lock className="w-3 h-3 text-amber-200" />}
-                      <span>{isCompleted ? 'Review' : 'Start'}</span>
+                      <span>{isCompleted ? 'Review' : isDay1 && !user.registered ? 'Join Free' : 'Start'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>

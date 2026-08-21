@@ -117,10 +117,10 @@ const MainContent: React.FC = () => {
                         setIsRegistrationModalOpen(true);
                       }
                     }}
-                    className="px-8 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-poppins font-bold text-sm rounded-2xl shadow-xl shadow-amber-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2"
+                    className="btn-glowing-gold px-8 py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-poppins font-extrabold text-sm sm:text-base rounded-2xl shadow-2xl active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2 border border-amber-200/60 group"
                   >
-                    <span>Join The Free Challenge</span>
-                    <span className="text-slate-950 font-bold">→</span>
+                    <span>Join 5-Day Mental Reset Free</span>
+                    <span className="text-slate-950 font-bold group-hover:translate-x-1 transition-transform">→</span>
                   </button>
                 </div>
               </div>

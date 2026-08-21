@@ -117,9 +117,9 @@ export const Footer: React.FC = () => {
           <div className="mt-6">
             <button
               onClick={() => setIsRegistrationModalOpen(true)}
-              className="w-full py-2 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold text-xs rounded-lg hover:brightness-110 transition-all shadow-md"
+              className="btn-glowing-gold w-full py-2.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold text-xs rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-lg border border-amber-200/50 cursor-pointer"
             >
-              Join 5-Day Reset Free
+              Join 5-Day Mental Reset Free
             </button>
           </div>
         </div>

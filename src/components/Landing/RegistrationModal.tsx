@@ -235,11 +235,11 @@ export const RegistrationModal: React.FC = () => {
 
             <button
               type="submit"
-              className="w-full py-3.5 px-6 bg-gradient-to-r from-[#0B6B53] to-[#134E4A] text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-900/20 hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+              className="btn-glowing-gold w-full py-3.5 px-6 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-extrabold text-sm rounded-xl shadow-xl hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 border border-amber-200/60 cursor-pointer"
             >
-              <CheckCircle2 className="w-5 h-5 text-[#D4AF37]" />
+              <CheckCircle2 className="w-5 h-5 text-slate-950" />
               <span>
-                {isSerialLocked ? `Register & Start Day 1 Free` : 'Join Free Challenge Now'}
+                {isSerialLocked ? `Register & Join 5-Day Mental Reset` : 'Join 5-Day Mental Reset Challenge Now'}
               </span>
             </button>
 

@@ -44,9 +44,10 @@ export const DashboardOverview: React.FC = () => {
         </p>
         <button
           onClick={() => setIsRegistrationModalOpen(true)}
-          className="px-8 py-3.5 bg-[#0B6B53] text-white font-bold text-sm rounded-xl hover:bg-[#134E4A] transition-all shadow-md"
+          className="btn-glowing-gold px-8 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold text-sm rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-xl border border-amber-200/50 cursor-pointer inline-flex items-center gap-2"
         >
-          Join Free Challenge Now
+          <span>Join 5-Day Mental Reset Free</span>
+          <ArrowRight className="w-4 h-4 text-slate-950" />
         </button>
       </div>
     );

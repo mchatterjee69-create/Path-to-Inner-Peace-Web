@@ -118,11 +118,11 @@ export const InnerShiftView: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="space-y-2 border-b border-slate-200 pb-4"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-[#1b4d2e] tracking-tight flex items-center gap-2.5">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-[#C89620] tracking-tight flex items-center gap-2.5">
             <Sun className="w-7 h-7 sm:w-9 sm:h-9 text-[#C89620] shrink-0" />
             <span>Welcome to Inner Shift</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mt-2">
+          <p className="text-sm sm:text-base text-[#C89620] font-semibold max-w-2xl mt-2">
             Transform Your Mindset & Elevate Your Consciousness
           </p>
         </motion.div>
