@@ -39,6 +39,8 @@ import { StressResetModal } from './components/InnerShift/StressResetModal';
 import { RelationshipHealingModal } from './components/InnerShift/RelationshipHealingModal';
 import { MindfulnessJourneyModal } from './components/InnerShift/MindfulnessJourneyModal';
 import { DeeperAwakeningModal } from './components/InnerShift/DeeperAwakeningModal';
+import { MobileBottomNav } from './components/Navigation/MobileBottomNav';
+import { ScrollToTop } from './components/Navigation/ScrollToTop';
 
 const MainContent: React.FC = () => {
   const { 
@@ -78,10 +80,10 @@ const MainContent: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-slate-900 font-sans flex flex-col selection:bg-[#0B6B53] selection:text-white overflow-x-hidden w-full max-w-full">
+    <div className="min-h-screen bg-[#FAF9F6] text-slate-900 font-sans flex flex-col selection:bg-[#0B6B53] selection:text-white overflow-x-hidden w-full max-w-full pb-14 lg:pb-0">
       <Header />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full">
         {activeView === 'landing' && (
           <div className="space-y-0">
             <HeroSection />
@@ -179,6 +181,12 @@ const MainContent: React.FC = () => {
         isOpen={isDeeperAwakeningModalOpen}
         onClose={() => setIsDeeperAwakeningModalOpen(false)}
       />
+
+      {/* Floating Scroll to Top Button */}
+      <ScrollToTop />
+
+      {/* Bottom Navigation for Mobile & Small Tablets */}
+      <MobileBottomNav />
     </div>
   );
 };
