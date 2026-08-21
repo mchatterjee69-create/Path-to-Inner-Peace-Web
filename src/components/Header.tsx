@@ -11,6 +11,7 @@ import {
   Flame, 
   Compass,
   Menu,
+  MoreVertical,
   X,
   Sparkles,
   PhoneCall,
@@ -146,9 +147,10 @@ export const Header: React.FC = () => {
             {!user.registered ? (
               <button
                 onClick={() => setIsRegistrationModalOpen(true)}
-                className="px-3 sm:px-3.5 py-1.5 rounded-full border border-emerald-900 bg-emerald-900 text-white hover:bg-emerald-800 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all shadow-xs whitespace-nowrap shrink-0 active:scale-95 cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#0B6B53] hover:bg-[#095743] text-white font-bold rounded-full text-[10px] sm:text-xs active:scale-95 transition-all shadow-md shadow-emerald-900/20 border border-emerald-500/30 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider"
               >
-                Join Free...
+                <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+                <span>Join Free</span>
               </button>
             ) : (
               <button
@@ -166,14 +168,14 @@ export const Header: React.FC = () => {
               </button>
             )}
 
-            {/* Mobile / Tablet Menu Button */}
+            {/* Mobile & Tablet 3-Dots Menu Button (Hidden on Desktop & Laptop) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 text-emerald-950 hover:bg-emerald-50 rounded-xl shrink-0 flex items-center justify-center transition-colors cursor-pointer"
+              className="xl:hidden p-1.5 sm:p-2 text-slate-700 hover:text-emerald-950 hover:bg-emerald-50 rounded-xl shrink-0 flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-[#0B6B53]" /> : <Menu className="w-6 h-6 text-slate-800" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-[#0B6B53]" /> : <MoreVertical className="w-6 h-6 text-slate-800" />}
             </button>
           </div>
         </div>
