@@ -65,17 +65,17 @@ export const Header: React.FC = () => {
   return (
     <>
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-900/10 shadow-xs transition-all w-full">
-        <div className="max-w-[1600px] mx-auto px-3 sm:px-4 lg:px-6 h-16 sm:h-20 flex items-center justify-between gap-2 lg:gap-4">
+        <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-2 lg:gap-4 overflow-hidden">
           
           {/* Brand Logo & Name */}
           <div 
             onClick={() => { setActiveView('landing'); setMobileMenuOpen(false); }} 
-            className="flex items-center gap-2 sm:gap-2.5 cursor-pointer group shrink-0"
+            className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer group min-w-0 shrink"
             role="button"
             tabIndex={0}
             aria-label="Path to Inner Peace Home"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
               <img 
                 src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
                 alt="Path to Inner Peace Logo" 
@@ -83,11 +83,11 @@ export const Header: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="flex flex-col min-w-0">
-              <span className="font-poppins font-bold text-xs sm:text-sm lg:text-base text-[#0B6B53] tracking-tight whitespace-nowrap leading-tight">
+            <div className="flex flex-col min-w-0 overflow-hidden">
+              <span className="font-poppins font-bold text-[11px] sm:text-sm lg:text-base text-[#0B6B53] tracking-tight whitespace-nowrap leading-tight truncate">
                 Path to Inner Peace
               </span>
-              <span className="text-[8px] sm:text-[9px] font-semibold gold-text tracking-normal whitespace-nowrap leading-none mt-0.5">
+              <span className="text-[7px] sm:text-[9.5px] font-semibold gold-text tracking-normal whitespace-nowrap leading-none mt-0.5 truncate">
                 Transform Your Mind, Elevate Your Life
               </span>
             </div>
@@ -123,7 +123,7 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Right Action CTAs & Profile */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="flex items-center gap-1 xs:gap-1.5 sm:gap-2 shrink-0">
             
             {user.completedDays.length >= 5 && (
               <button
@@ -137,9 +137,9 @@ export const Header: React.FC = () => {
 
             <button
               onClick={() => setActiveView('upgrade')}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold rounded-full text-[10px] sm:text-xs hover:brightness-105 active:scale-95 transition-all shadow-md shadow-amber-500/20 shrink-0 whitespace-nowrap cursor-pointer"
+              className="flex items-center gap-1 xs:gap-1.5 px-2 xs:px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold rounded-full text-[10px] sm:text-xs hover:brightness-105 active:scale-95 transition-all shadow-xs shadow-amber-500/20 shrink-0 whitespace-nowrap cursor-pointer"
             >
-              <Crown className="w-3.5 h-3.5 fill-slate-950 shrink-0" />
+              <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-slate-950 shrink-0" />
               <span className="hidden sm:inline uppercase tracking-wider text-[11px] whitespace-nowrap">MindForge 360°™</span>
               <span className="sm:hidden text-[10px]">Upgrade</span>
             </button>
@@ -147,15 +147,15 @@ export const Header: React.FC = () => {
             {!user.registered ? (
               <button
                 onClick={() => setIsRegistrationModalOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#0B6B53] hover:bg-[#095743] text-white font-bold rounded-full text-[10px] sm:text-xs active:scale-95 transition-all shadow-md shadow-emerald-900/20 border border-emerald-500/30 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider"
+                className="flex items-center gap-1 xs:gap-1.5 px-2 xs:px-2.5 sm:px-3 py-1.5 bg-[#0B6B53] hover:bg-[#095743] text-white font-bold rounded-full text-[10px] sm:text-xs active:scale-95 transition-all shadow-xs shadow-emerald-900/20 border border-emerald-500/30 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider"
               >
-                <Sun className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+                <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
                 <span>Join Free</span>
               </button>
             ) : (
               <button
                 onClick={() => setActiveView('profile')}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-[#0B6B53] overflow-hidden hover:opacity-90 transition-opacity shrink-0 cursor-pointer"
+                className="w-7 h-7 sm:w-9 sm:h-9 rounded-full border-2 border-[#0B6B53] overflow-hidden hover:opacity-90 transition-opacity shrink-0 cursor-pointer"
                 title="Member Access"
                 aria-label="View member profile"
               >
@@ -171,11 +171,12 @@ export const Header: React.FC = () => {
             {/* Mobile & Tablet 3-Dots Menu Button (Hidden on Desktop & Laptop) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-1.5 sm:p-2 text-slate-700 hover:text-emerald-950 hover:bg-emerald-50 rounded-xl shrink-0 flex items-center justify-center transition-colors cursor-pointer"
+              className="xl:hidden w-7 h-7 sm:w-8 sm:h-8 text-slate-800 hover:text-emerald-950 bg-slate-100 hover:bg-emerald-50 border border-slate-300 rounded-full shrink-0 flex items-center justify-center transition-all cursor-pointer shadow-2xs active:scale-95 z-10"
               aria-label="Toggle navigation menu"
+              title="Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-[#0B6B53]" /> : <MoreVertical className="w-6 h-6 text-slate-800" />}
+              {mobileMenuOpen ? <X className="w-4 h-4 text-[#0B6B53]" /> : <MoreVertical className="w-4 h-4 text-slate-800" />}
             </button>
           </div>
         </div>
@@ -204,9 +205,11 @@ export const Header: React.FC = () => {
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-poppins font-bold text-xs text-[#0B6B53]">Path to Inner Peace</span>
-                  <span className="text-[9px] text-amber-700 font-semibold">Transform Your Mind</span>
+                <div className="flex flex-col min-w-0">
+                  <span className="font-poppins font-bold text-sm text-[#0B6B53] leading-tight">Path to Inner Peace</span>
+                  <span className="text-[10px] sm:text-[11px] font-semibold gold-text tracking-normal leading-tight mt-0.5 whitespace-normal">
+                    Transform Your Mind, Elevate Your Life
+                  </span>
                 </div>
               </div>
               <button
