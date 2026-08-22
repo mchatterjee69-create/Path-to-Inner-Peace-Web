@@ -225,13 +225,15 @@ export const HeroSection: React.FC = () => {
 
                 </div>
 
-                <button
-                  onClick={() => setIsRegistrationModalOpen(true)}
-                  className="btn-glowing-gold w-full py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-extrabold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all text-center border border-amber-200/60 flex items-center justify-center gap-2 cursor-pointer group"
-                >
-                  <span>Join 5-Day Mental Reset Free</span>
-                  <ArrowRight className="w-5 h-5 text-slate-950 group-hover:translate-x-1 transition-transform" />
-                </button>
+                <div className="flex justify-center pt-1">
+                  <button
+                    onClick={() => setIsRegistrationModalOpen(true)}
+                    className="btn-glowing-gold px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm rounded-xl shadow-lg hover:brightness-110 active:scale-[0.98] transition-all text-center border border-amber-200/60 flex items-center justify-center gap-1.5 cursor-pointer group"
+                  >
+                    <span>Join now.</span>
+                    <ArrowRight className="w-4 h-4 text-slate-950 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                </div>
 
                 <p className="text-[10.5px] text-center text-emerald-200/70 font-inter italic">
                   MindForge 360°™ Certification included upon completion.
