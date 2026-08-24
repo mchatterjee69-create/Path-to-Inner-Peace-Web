@@ -1042,21 +1042,21 @@ export const ProfileView: React.FC = () => {
         <div className="space-y-8 animate-fadeIn">
           
           {/* Featured Monthly Magazine Launch Access Banner */}
-          <div className="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 p-6 sm:p-8 rounded-3xl border border-emerald-800/50 shadow-xl text-white flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="bg-gradient-to-r from-slate-950 via-emerald-950 to-slate-900 p-6 sm:p-8 rounded-3xl border border-emerald-800/60 shadow-2xl text-white flex flex-col lg:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mt-10 -mr-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
             
             <div className="flex flex-col sm:flex-row items-center md:items-start gap-5 z-10 text-center sm:text-left">
-              <div className="w-20 h-28 shrink-0 rounded-xl overflow-hidden shadow-2xl border border-amber-400/40 relative">
+              <div className="w-24 sm:w-28 h-36 sm:h-40 shrink-0 rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/50 relative bg-slate-900 group">
                 <img 
                   src={MAGAZINE_ISSUES[0]?.coverImageUrl} 
                   alt="INNER HORIZON Issue 01" 
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="space-y-2 max-w-xl">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  <span className="text-[10px] font-extrabold uppercase bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-extrabold uppercase bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full shadow-sm">
                     Exclusive Member Access
                   </span>
                   <span className="text-[10px] font-bold text-emerald-300">
@@ -1072,14 +1072,14 @@ export const ProfileView: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 z-10 w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row lg:flex-col items-center gap-3 shrink-0 z-10 w-full lg:w-auto">
               <button
                 type="button"
                 onClick={() => {
                   setSelectedMagazine(MAGAZINE_ISSUES[0]);
                   setMagTab('overview');
                 }}
-                className="w-full sm:w-auto px-5 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs rounded-2xl transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full sm:w-auto lg:w-full px-5 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 whitespace-nowrap"
               >
                 <Book className="w-4 h-4" />
                 <span>Read Issue 01 Now</span>
@@ -1087,7 +1087,7 @@ export const ProfileView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleDownloadMagazineFile(MAGAZINE_ISSUES[0])}
-                className="w-full sm:w-auto px-4 py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-2xl border border-emerald-500/80 transition-all flex items-center justify-center gap-2 shadow-md"
+                className="w-full sm:w-auto lg:w-full px-4 py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-2xl border border-emerald-500/80 transition-all flex items-center justify-center gap-2 shadow-md whitespace-nowrap"
               >
                 <Download className="w-4 h-4 text-amber-300" />
                 <span>Download Issue PDF</span>
@@ -1095,7 +1095,7 @@ export const ProfileView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setActivePortalTab('magazine')}
-                className="w-full sm:w-auto px-4 py-3 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-2xl border border-white/20 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto lg:w-full px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-2xl border border-white/20 transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               >
                 <span>All Issues</span>
                 <ChevronRight className="w-4 h-4" />
@@ -1372,24 +1372,54 @@ export const ProfileView: React.FC = () => {
       {activePortalTab === 'magazine' && (
         <div className="space-y-8 animate-fadeIn">
           
-          <div className="bg-gradient-to-r from-amber-900 via-amber-800 to-amber-950 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400/20 text-[#D4AF37] border border-amber-400/30 rounded-full text-xs font-bold">
-                <Crown className="w-4 h-4" />
-                <span>INNER TRANSFORMATION DIGITAL MAGAZINE</span>
+          <div className="bg-gradient-to-r from-amber-950 via-slate-900 to-emerald-950 text-white p-6 sm:p-8 rounded-3xl border border-amber-500/30 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mt-10 -mr-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="flex flex-col sm:flex-row items-center gap-6 z-10 text-center sm:text-left">
+              <div className="w-28 h-40 shrink-0 rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/40 relative bg-slate-950 group">
+                <img
+                  src={MAGAZINE_ISSUES[0]?.coverImageUrl}
+                  alt="INNER HORIZON Launch Issue Cover"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
-              <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-white">
-                Monthly Pro Member Magazine Editions
-              </h2>
-              <p className="text-xs text-amber-100/90 leading-relaxed">
-                As a Pro Member of Path to Inner Peace, you receive full digital access to our monthly transformation magazine, including audio supplement tracks and printable CBT workbooks.
-              </p>
+
+              <div className="space-y-2.5 max-w-xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400/20 text-[#D4AF37] border border-amber-400/30 rounded-full text-xs font-bold">
+                  <Crown className="w-4 h-4 text-amber-400" />
+                  <span>INNER TRANSFORMATION DIGITAL MAGAZINE</span>
+                </div>
+                <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-white">
+                  Monthly Pro Member Magazine Editions
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Featured Issue: <strong className="text-amber-300">INNER HORIZON (Issue 01 • 31 Pages)</strong>. Complete with neuroscience frameworks, CBT journals, and expert wisdom columns.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white/10 p-4 rounded-2xl border border-white/15 text-center shrink-0">
-              <span className="text-[10px] uppercase font-bold text-amber-300 block">Current Issue</span>
-              <span className="font-heading font-extrabold text-xl text-white">August 2026</span>
-              <span className="text-[11px] text-emerald-200 block mt-1 font-semibold">✓ Access Unlocked</span>
+            <div className="flex flex-col sm:flex-row lg:flex-col items-center gap-3 shrink-0 z-10 w-full sm:w-auto">
+              <button
+                onClick={() => {
+                  setSelectedMagazine(MAGAZINE_ISSUES[0]);
+                  setMagTab('overview');
+                }}
+                className="w-full sm:w-auto px-6 py-3 bg-[#0B6B53] hover:bg-emerald-700 text-white font-extrabold text-xs rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 whitespace-nowrap"
+              >
+                <Book className="w-4 h-4 text-amber-300" />
+                <span>Read Issue 01 Online</span>
+              </button>
+              
+              <a
+                href={MAGAZINE_ISSUES[0]?.pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-6 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 whitespace-nowrap"
+              >
+                <ExternalLink className="w-4 h-4" />
+                <span>Open Digital Issue (PDF)</span>
+              </a>
             </div>
           </div>
 
