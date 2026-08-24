@@ -47,7 +47,13 @@ import {
   ChevronRight,
   Quote,
   Zap,
-  Gift
+  Gift,
+  Brain,
+  BarChart3,
+  Headphones,
+  Moon,
+  Compass,
+  Sparkles
 } from 'lucide-react';
 
 export const ProfileView: React.FC = () => {
@@ -1604,68 +1610,119 @@ export const ProfileView: React.FC = () => {
       {activePortalTab === 'downloads' && (
         <div className="space-y-6 animate-fadeIn">
           
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold mb-2">
-                <Gift className="w-3.5 h-3.5 text-amber-700" />
-                <span>Instant Access Included</span>
-              </div>
-              <h2 className="font-heading font-extrabold text-2xl text-slate-900">
-                Free Welcome Kit
-              </h2>
-              <p className="text-xs text-slate-500 mt-1 max-w-xl">
-                Mental Fitness Assessment, Personalised Mind Report, 5 Minute Stress Reset Audio, Better Sleep Blueprint, and Mental Reset Starter Guide.
-              </p>
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">
+              <Gift className="w-3.5 h-3.5 text-amber-700" />
+              <span>Included in Your Free Welcome Kit</span>
             </div>
-            <a
-              href="https://welcomekit-pathtoinnerpeace.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 bg-[#0B6B53] hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded-full shadow-md transition-all flex items-center gap-2 shrink-0 whitespace-nowrap"
-            >
-              <span>Launch Free Welcome Kit</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">
+              Free Welcome Kit
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
+              Explore your 5 comprehensive transformation assets designed to kickstart your journey toward lasting inner peace, reduced stress, and restorative sleep.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {MEMBER_RESOURCES.map((res) => (
-              <div
-                key={res.id}
-                className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex items-start gap-4 hover:shadow-md transition-all"
-              >
-                <div className="p-3 bg-emerald-50 text-[#0B6B53] rounded-2xl shrink-0">
-                  {res.type === 'pdf' && <FileText className="w-6 h-6" />}
-                  {res.type === 'audio' && <BookOpen className="w-6 h-6" />}
-                  {res.type === 'wallpaper' && <Star className="w-6 h-6" />}
-                  {res.type === 'community' && <MessageCircle className="w-6 h-6" />}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* 1. Mental Fitness Assessment */}
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-emerald-300 transition-all space-y-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[#0B6B53] shrink-0 shadow-xs">
+                  <Brain className="w-6 h-6" />
                 </div>
-
-                <div className="space-y-2 flex-1">
-                  <div>
-                    <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase">
-                      <span>{res.type}</span>
-                      <span>{res.size}</span>
-                    </div>
-                    <h3 className="font-heading font-bold text-base text-slate-900">
-                      {res.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {res.description}
-                  </p>
-
-                  <button
-                    onClick={() => handleDownloadResourceFile(res)}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0B6B53] hover:underline pt-1 text-left"
-                  >
-                    <span>{res.type === 'community' ? 'Join Community Now' : 'Download File'}</span>
-                    <Download className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+                <span className="w-8 h-8 rounded-full bg-emerald-100/80 text-[#0B6B53] font-mono font-extrabold text-xs flex items-center justify-center">
+                  01
+                </span>
               </div>
-            ))}
+              <div className="space-y-1.5">
+                <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                  1. Mental Fitness Assessment
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  understand where your mind fitness stand
+                </p>
+              </div>
+            </div>
+
+            {/* 2. Personalised Mind Report */}
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-amber-300 transition-all space-y-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 shrink-0 shadow-xs">
+                  <BarChart3 className="w-6 h-6" />
+                </div>
+                <span className="w-8 h-8 rounded-full bg-amber-100/80 text-amber-900 font-mono font-extrabold text-xs flex items-center justify-center">
+                  02
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                  2. Personalised Mind Report
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Get your Custom Mind Insights & Mental Fitness Score
+                </p>
+              </div>
+            </div>
+
+            {/* 3. 5 Minute Stress Reset Audio */}
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-indigo-300 transition-all space-y-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-700 shrink-0 shadow-xs">
+                  <Headphones className="w-6 h-6" />
+                </div>
+                <span className="w-8 h-8 rounded-full bg-indigo-100/80 text-indigo-900 font-mono font-extrabold text-xs flex items-center justify-center">
+                  03
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                  3. 5 Minute Stress Reset Audio
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Calm your mind, anytime, anywhere
+                </p>
+              </div>
+            </div>
+
+            {/* 4. Better Sleep Blueprint */}
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-purple-300 transition-all space-y-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700 shrink-0 shadow-xs">
+                  <Moon className="w-6 h-6" />
+                </div>
+                <span className="w-8 h-8 rounded-full bg-purple-100/80 text-purple-900 font-mono font-extrabold text-xs flex items-center justify-center">
+                  04
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                  4. Better Sleep Blueprint
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Sleep deeper. Wake up refreshed
+                </p>
+              </div>
+            </div>
+
+            {/* 5. Mental Reset Starter Guide */}
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col justify-between hover:border-teal-300 transition-all space-y-4 md:col-span-2 lg:col-span-1">
+              <div className="flex items-start justify-between gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-[#0B6B53] shrink-0 shadow-xs">
+                  <Compass className="w-6 h-6" />
+                </div>
+                <span className="w-8 h-8 rounded-full bg-teal-100/80 text-[#0B6B53] font-mono font-extrabold text-xs flex items-center justify-center">
+                  05
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                  5. Mental Reset Starter Guide
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Simple steps to reset your mind daily
+                </p>
+              </div>
+            </div>
           </div>
 
         </div>

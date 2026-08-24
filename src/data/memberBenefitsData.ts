@@ -284,37 +284,97 @@ export const FUTURE_PROGRAMS: FutureProgram[] = [
   }
 ];
 
+export interface WelcomeKitItem {
+  id: string;
+  number: number;
+  title: string;
+  description: string;
+  category: string;
+  tag: string;
+}
+
+export const WELCOME_KIT_ITEMS: WelcomeKitItem[] = [
+  {
+    id: 'wk-1',
+    number: 1,
+    title: 'Mental Fitness Assessment',
+    description: 'understand where your mind fitness stand',
+    category: 'Assessment',
+    tag: 'Core Diagnostic'
+  },
+  {
+    id: 'wk-2',
+    number: 2,
+    title: 'Personalised Mind Report',
+    description: 'Get your Custom Mind Insights & Mental Fitness Score',
+    category: 'Report',
+    tag: 'Personalized Insights'
+  },
+  {
+    id: 'wk-3',
+    number: 3,
+    title: '5 Minute Stress Reset Audio',
+    description: 'Calm your mind, anytime, anywhere',
+    category: 'Audio Therapy',
+    tag: 'Fast Relief'
+  },
+  {
+    id: 'wk-4',
+    number: 4,
+    title: 'Better Sleep Blueprint',
+    description: 'Sleep deeper. Wake up refreshed',
+    category: 'Sleep Science',
+    tag: 'Restorative Protocol'
+  },
+  {
+    id: 'wk-5',
+    number: 5,
+    title: 'Mental Reset Starter Guide',
+    description: 'Simple steps to reset your mind daily',
+    category: 'Daily Guide',
+    tag: 'Starter Playbook'
+  }
+];
+
 export const MEMBER_RESOURCES: MemberResource[] = [
   {
     id: 'res-1',
-    title: 'Official CBT Thought Journal Workbook (PDF)',
+    title: 'Mental Fitness Assessment',
     type: 'pdf',
-    size: '4.2 MB',
-    description: 'Printable 30-day cognitive restructuring diary with guided daily prompts and mood mapping templates.',
+    size: 'Included',
+    description: 'understand where your mind fitness stand',
     downloadUrl: '#'
   },
   {
     id: 'res-2',
-    title: '528Hz DNA Repair & Deep Tranquility Audio (MP3)',
-    type: 'audio',
-    size: '18.5 MB',
-    description: 'High-definition 45-minute ambient soundscape engineered for deep meditation, anxiety relief, and sleep.',
+    title: 'Personalised Mind Report',
+    type: 'pdf',
+    size: 'Included',
+    description: 'Get your Custom Mind Insights & Mental Fitness Score',
     downloadUrl: '#'
   },
   {
     id: 'res-3',
-    title: 'Path to Inner Peace Mindful HD Wallpapers Set',
-    type: 'wallpaper',
-    size: '12.0 MB',
-    description: 'Beautiful 4K serenity wallpapers with daily quotes for desktop and mobile lockscreens.',
+    title: '5 Minute Stress Reset Audio',
+    type: 'audio',
+    size: 'Included',
+    description: 'Calm your mind, anytime, anywhere',
     downloadUrl: '#'
   },
   {
     id: 'res-4',
-    title: 'MindForge 360°™ WhatsApp & Telegram VIP Community',
-    type: 'community',
-    size: 'Instant Access',
-    description: 'Connect with hundreds of like-minded seekers, share daily breakthroughs, and receive live coach updates.',
-    downloadUrl: 'https://chat.whatsapp.com/demo-path-to-inner-peace'
+    title: 'Better Sleep Blueprint',
+    type: 'pdf',
+    size: 'Included',
+    description: 'Sleep deeper. Wake up refreshed',
+    downloadUrl: '#'
+  },
+  {
+    id: 'res-5',
+    title: 'Mental Reset Starter Guide',
+    type: 'pdf',
+    size: 'Included',
+    description: 'Simple steps to reset your mind daily',
+    downloadUrl: '#'
   }
 ];
