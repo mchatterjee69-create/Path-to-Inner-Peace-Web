@@ -7,7 +7,6 @@ import { Footer } from './components/Footer';
 import { HeroSection } from './components/Landing/HeroSection';
 import { TrustSection } from './components/Landing/TrustSection';
 import { BenefitsSection } from './components/Landing/BenefitsSection';
-import { MagazineBannerSection } from './components/Landing/MagazineBannerSection';
 import { HowItWorks } from './components/Landing/HowItWorks';
 import { ChallengeOverview } from './components/Landing/ChallengeOverview';
 import { FounderSection } from './components/Landing/FounderSection';
@@ -89,7 +88,6 @@ const MainContent: React.FC = () => {
             <HeroSection />
             <TrustSection />
             <BenefitsSection />
-            <MagazineBannerSection />
             <HowItWorks />
             <ChallengeOverview />
             <FounderSection />

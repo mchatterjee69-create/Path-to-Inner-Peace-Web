@@ -112,9 +112,13 @@ export const ProfileView: React.FC = () => {
   const [actionToast, setActionToast] = useState<string | null>(null);
 
   const handleDownloadMagazineFile = (mag: MagazineIssue) => {
-    if (mag.pdfUrl && mag.pdfUrl.startsWith('http')) {
-      window.open(mag.pdfUrl, '_blank');
-      setActionToast(`✓ Opening "${mag.title}" (Original Digital PDF) in a new tab!`);
+    const targetPdfUrl = mag.pdfUrl?.startsWith('http') 
+      ? mag.pdfUrl 
+      : (mag.pdfUrl?.includes('edgeone.dev') ? `https://${mag.pdfUrl}` : 'https://conscious-gold-2gld9uka.edgeone.dev');
+
+    if (targetPdfUrl && (targetPdfUrl.startsWith('http') || targetPdfUrl.includes('edgeone.dev'))) {
+      window.open(targetPdfUrl, '_blank');
+      setActionToast(`✓ Opening and downloading "${mag.title}" (Digital Issue PDF)...`);
       setTimeout(() => setActionToast(null), 4000);
       return;
     }
@@ -2149,13 +2153,17 @@ export const ProfileView: React.FC = () => {
                 ✓ Full 31-Page Edition Included for Pro Members
               </span>
 
-              <button
-                onClick={() => handleDownloadMagazineFile(selectedMagazine)}
-                className="w-full sm:w-auto px-6 py-3 bg-[#0B6B53] text-white font-bold text-xs rounded-xl hover:bg-[#134E4A] transition-all flex items-center justify-center gap-2 shadow-md"
-              >
-                <Download className="w-4 h-4 text-amber-300" />
-                <span>Download Printable Issue PDF (31 Pages)</span>
-              </button>
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <a
+                  href={selectedMagazine?.pdfUrl?.startsWith('http') ? selectedMagazine.pdfUrl : `https://${selectedMagazine?.pdfUrl || 'conscious-gold-2gld9uka.edgeone.dev'}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-6 py-3 bg-[#0B6B53] text-white font-bold text-xs rounded-xl hover:bg-[#134E4A] transition-all flex items-center justify-center gap-2 shadow-md"
+                >
+                  <Download className="w-4 h-4 text-amber-300" />
+                  <span>Open & Download Issue PDF (31 Pages)</span>
+                </a>
+              </div>
             </div>
 
           </div>
