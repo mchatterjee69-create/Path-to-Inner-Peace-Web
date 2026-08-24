@@ -29,7 +29,7 @@ export const MagazineBannerSection: React.FC = () => {
                   
                   <div className="relative rounded-2xl overflow-hidden border-2 border-amber-300/80 shadow-2xl bg-slate-950 aspect-[1/1.45] w-full">
                     <img 
-                      src={innerHorizonCover || '/inner_horizon_cover.jpg'} 
+                      src="https://plain-apac-prod-public.komododecks.com/202608/24/7FUZEA9VKa2YWPBYl9zz/image.jpg" 
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = '/inner_horizon_cover.jpg';
                       }}

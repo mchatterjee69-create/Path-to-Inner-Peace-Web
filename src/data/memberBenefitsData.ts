@@ -125,10 +125,10 @@ At *Path to Inner Peace*, we fuse these spiritual traditions with practical cogn
 export const MAGAZINE_ISSUES: MagazineIssue[] = [
   {
     id: 'mag-inner-horizon-01',
-    issueNumber: 'Launch Issue • Vol. 01 (July 20, 2026)',
+    issueNumber: 'Issue 01 • August 2026',
     title: 'INNER HORIZON: The Science of Inner Peace',
-    monthYear: 'July 2026 Launch Edition',
-    coverImageUrl: innerHorizonCover,
+    monthYear: 'August 2026 Launch Edition',
+    coverImageUrl: 'https://plain-apac-prod-public.komododecks.com/202608/24/7FUZEA9VKa2YWPBYl9zz/image.jpg',
     description: 'The official launch issue of Path to Inner Peace magazine. 31 pages of evidence-based neuroscience, CBT frameworks, expert columns, and daily reflection toolkits.',
     topics: [
       'The Science of Inner Peace',

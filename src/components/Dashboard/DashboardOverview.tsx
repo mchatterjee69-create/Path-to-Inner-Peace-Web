@@ -202,8 +202,11 @@ export const DashboardOverview: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center gap-5 z-10 text-center sm:text-left">
             <div className="w-24 h-36 shrink-0 rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-300/60 relative bg-slate-950 group">
               <img 
-                src="/inner_horizon_cover.jpg" 
-                alt="INNER HORIZON Launch Issue 01" 
+                src="https://plain-apac-prod-public.komododecks.com/202608/24/7FUZEA9VKa2YWPBYl9zz/image.jpg" 
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/inner_horizon_cover.jpg';
+                }}
+                alt="INNER HORIZON Issue 01" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 referrerPolicy="no-referrer"
               />
