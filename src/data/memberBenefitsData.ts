@@ -176,7 +176,7 @@ Editor & Founder, Path to Inner Peace`
       'Guided Audio Supplement: 432Hz Miracle Frequency Soundscape',
       'Exclusive Q&A with Founder Mainak Chatterjee'
     ],
-    pdfUrl: '#download-august-magazine',
+    pdfUrl: 'https://conscious-gold-2gld9uka.edgeone.dev',
     editorsNote: `Welcome to the August 2026 issue of the Inner Transformation Digital Magazine!
     
 In this edition, we unpack the exact steps to conquer subconscious anxiety loops. Mental peace is not a gift bestowed upon a lucky few—it is a trainable psychological skill. Explore our guided CBT worksheets, sound therapy breakdowns, and daily reflection blueprints.`
