@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Users, Headphones, Sun, Award, CheckCircle } from 'lucide-react';
+import { Star, Users, Headphones, Sun, Sparkles, CheckCircle, Crown } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 
 export const TrustSection: React.FC = () => {
@@ -33,11 +33,11 @@ export const TrustSection: React.FC = () => {
       accent: 'text-[#D4AF37] bg-yellow-50 border-yellow-200'
     },
     {
-      icon: Award,
-      value: 'Certificate',
-      label: 'Included Free',
-      detail: 'Verifiable MindForge badge',
-      accent: 'text-emerald-800 bg-emerald-100/70 border-emerald-300'
+      icon: Crown,
+      value: 'Deep Dive',
+      label: 'Transformation',
+      detail: 'Inside MindForge 360°™',
+      accent: 'text-[#997B1E] bg-amber-50/90 border-amber-300'
     }
   ];
 
