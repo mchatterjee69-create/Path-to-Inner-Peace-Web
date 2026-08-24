@@ -17,7 +17,8 @@ import {
   PhoneCall,
   MessageCircle,
   Video,
-  ChevronRight
+  ChevronRight,
+  BookOpen
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -58,8 +59,8 @@ export const Header: React.FC = () => {
     { id: 'inner-revolution', label: 'Inner Revolution', icon: Zap },
     { id: 'career-axis', label: 'Career Axis', icon: Compass },
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, streak: user.streakDays },
+    { id: 'profile', label: 'Magazine & Portal', icon: BookOpen },
     { id: 'ai-coach', label: 'Inner Peace Guide', icon: Sparkles },
-    { id: 'profile', label: 'Member Access', icon: User },
   ] as const;
 
   return (

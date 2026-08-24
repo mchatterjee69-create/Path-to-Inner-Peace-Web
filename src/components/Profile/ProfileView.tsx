@@ -88,7 +88,7 @@ export const ProfileView: React.FC = () => {
   const [signupError, setSignupError] = useState('');
 
   // Logged-in Portal Tab & Search States
-  const [activePortalTab, setActivePortalTab] = useState<'profile' | 'articles' | 'magazine' | 'programs' | 'downloads'>('downloads');
+  const [activePortalTab, setActivePortalTab] = useState<'profile' | 'articles' | 'magazine' | 'programs' | 'downloads'>('magazine');
   
   // Profile Form Edit States
   const [editName, setEditName] = useState(user.name);
@@ -1433,11 +1433,11 @@ export const ProfileView: React.FC = () => {
                 <div className="space-y-4">
                   <div className="relative h-56 overflow-hidden bg-gradient-to-br from-amber-950 to-slate-900">
                     <img
-                      src={mag.coverImageUrl}
+                      src={mag.coverImageUrl || '/inner_horizon_cover.jpg'}
                       alt={mag.title}
                       referrerPolicy="no-referrer"
                       onError={(e) => {
-                        e.currentTarget.style.display = 'none';
+                        (e.target as HTMLImageElement).src = '/inner_horizon_cover.jpg';
                       }}
                       className="w-full h-full object-cover"
                     />
@@ -1932,9 +1932,12 @@ export const ProfileView: React.FC = () => {
                   {/* Cover & Hero Banner */}
                   <div className="flex flex-col md:flex-row items-center gap-6 bg-gradient-to-br from-emerald-900 via-slate-900 to-emerald-950 p-6 rounded-3xl text-white border border-emerald-800/40">
                     <img 
-                      src={selectedMagazine.coverImageUrl} 
+                      src={selectedMagazine.coverImageUrl || '/inner_horizon_cover.jpg'} 
                       alt={selectedMagazine.title} 
                       referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/inner_horizon_cover.jpg';
+                      }}
                       className="w-36 h-48 object-cover rounded-2xl shadow-2xl border border-amber-400/30 shrink-0"
                     />
                     <div className="space-y-3">
