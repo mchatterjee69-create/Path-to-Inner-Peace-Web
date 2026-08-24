@@ -114,9 +114,9 @@ export const ProfileView: React.FC = () => {
   const handleDownloadMagazineFile = (mag: MagazineIssue) => {
     const targetPdfUrl = mag.pdfUrl?.startsWith('http') 
       ? mag.pdfUrl 
-      : (mag.pdfUrl?.includes('edgeone.dev') ? `https://${mag.pdfUrl}` : 'https://conscious-gold-2gld9uka.edgeone.dev');
+      : (mag.pdfUrl?.includes('pdftourl.net') || mag.pdfUrl?.includes('edgeone.dev') ? `https://${mag.pdfUrl}` : 'https://pdftourl.net/files/1787569013151-d9247f94-efc8-4315-8014-b0dae41f9088.pdf');
 
-    if (targetPdfUrl && (targetPdfUrl.startsWith('http') || targetPdfUrl.includes('edgeone.dev'))) {
+    if (targetPdfUrl && (targetPdfUrl.startsWith('http') || targetPdfUrl.includes('pdftourl.net') || targetPdfUrl.includes('edgeone.dev'))) {
       window.open(targetPdfUrl, '_blank');
       setActionToast(`✓ Opening and downloading "${mag.title}" (Digital Issue PDF)...`);
       setTimeout(() => setActionToast(null), 4000);
@@ -2155,7 +2155,7 @@ export const ProfileView: React.FC = () => {
 
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <a
-                  href={selectedMagazine?.pdfUrl?.startsWith('http') ? selectedMagazine.pdfUrl : `https://${selectedMagazine?.pdfUrl || 'conscious-gold-2gld9uka.edgeone.dev'}`}
+                  href={selectedMagazine?.pdfUrl?.startsWith('http') ? selectedMagazine.pdfUrl : `https://${selectedMagazine?.pdfUrl || 'pdftourl.net/files/1787569013151-d9247f94-efc8-4315-8014-b0dae41f9088.pdf'}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-6 py-3 bg-[#0B6B53] text-white font-bold text-xs rounded-xl hover:bg-[#134E4A] transition-all flex items-center justify-center gap-2 shadow-md"

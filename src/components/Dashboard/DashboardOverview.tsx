@@ -236,7 +236,7 @@ export const DashboardOverview: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row md:flex-col items-center gap-3 shrink-0 z-10 w-full md:w-auto">
             <a
-              href="https://conscious-gold-2gld9uka.edgeone.dev"
+              href="https://pdftourl.net/files/1787569013151-d9247f94-efc8-4315-8014-b0dae41f9088.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto md:w-full px-5 py-3 bg-gradient-to-r from-[#D4AF37] to-amber-400 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg hover:brightness-110 transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"

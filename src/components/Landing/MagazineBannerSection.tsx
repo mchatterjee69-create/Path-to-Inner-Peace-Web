@@ -87,7 +87,7 @@ export const MagazineBannerSection: React.FC = () => {
                 {/* Action Buttons */}
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
                   <a
-                    href="https://conscious-gold-2gld9uka.edgeone.dev"
+                    href="https://pdftourl.net/files/1787569013151-d9247f94-efc8-4315-8014-b0dae41f9088.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-extrabold text-sm rounded-xl shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer"

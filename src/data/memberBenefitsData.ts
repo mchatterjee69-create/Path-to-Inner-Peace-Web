@@ -147,7 +147,7 @@ export const MAGAZINE_ISSUES: MagazineIssue[] = [
       'Ask The Experts: Wellness & Spiritual Q&A with Juneli Das & Tarun Goswami',
       '7-Day Inner Peace Challenge & Printable Reflection Journal'
     ],
-    pdfUrl: 'https://conscious-gold-2gld9uka.edgeone.dev',
+    pdfUrl: 'https://pdftourl.net/files/1787569013151-d9247f94-efc8-4315-8014-b0dae41f9088.pdf',
     editorsNote: `Dear Readers,
 
 It gives me immense joy and gratitude to welcome you to the very first issue of Inner Horizon.
@@ -176,7 +176,7 @@ Editor & Founder, Path to Inner Peace`
       'Guided Audio Supplement: 432Hz Miracle Frequency Soundscape',
       'Exclusive Q&A with Founder Mainak Chatterjee'
     ],
-    pdfUrl: 'https://conscious-gold-2gld9uka.edgeone.dev',
+    pdfUrl: 'https://pdftourl.net/files/1787569013151-d9247f94-efc8-4315-8014-b0dae41f9088.pdf',
     editorsNote: `Welcome to the August 2026 issue of the Inner Transformation Digital Magazine!
     
 In this edition, we unpack the exact steps to conquer subconscious anxiety loops. Mental peace is not a gift bestowed upon a lucky few—it is a trainable psychological skill. Explore our guided CBT worksheets, sound therapy breakdowns, and daily reflection blueprints.`
