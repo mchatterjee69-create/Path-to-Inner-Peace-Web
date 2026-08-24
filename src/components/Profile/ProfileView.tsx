@@ -112,6 +112,13 @@ export const ProfileView: React.FC = () => {
   const [actionToast, setActionToast] = useState<string | null>(null);
 
   const handleDownloadMagazineFile = (mag: MagazineIssue) => {
+    if (mag.pdfUrl && mag.pdfUrl.startsWith('http')) {
+      window.open(mag.pdfUrl, '_blank');
+      setActionToast(`✓ Opening "${mag.title}" (Original Digital PDF) in a new tab!`);
+      setTimeout(() => setActionToast(null), 4000);
+      return;
+    }
+
     const filename = `${mag.title.replace(/[^a-zA-Z0-9]/g, '_')}_31_Pages_Edition.html`;
 
     const htmlDoc = `<!DOCTYPE html>
@@ -1917,6 +1924,20 @@ export const ProfileView: React.FC = () => {
                           </span>
                         ))}
                       </div>
+
+                      {selectedMagazine.pdfUrl && selectedMagazine.pdfUrl.startsWith('http') && (
+                        <div className="pt-2">
+                          <a
+                            href={selectedMagazine.pdfUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs rounded-xl shadow-md transition-all"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            <span>Open Digital Issue (PDF)</span>
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
 

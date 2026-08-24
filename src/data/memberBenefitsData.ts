@@ -147,7 +147,7 @@ export const MAGAZINE_ISSUES: MagazineIssue[] = [
       'Ask The Experts: Wellness & Spiritual Q&A with Juneli Das & Tarun Goswami',
       '7-Day Inner Peace Challenge & Printable Reflection Journal'
     ],
-    pdfUrl: '#download-inner-horizon-issue-01',
+    pdfUrl: 'https://conscious-gold-2gld9uka.edgeone.dev',
     editorsNote: `Dear Readers,
 
 It gives me immense joy and gratitude to welcome you to the very first issue of Inner Horizon.
