@@ -46,7 +46,8 @@ import {
   Key,
   ChevronRight,
   Quote,
-  Zap
+  Zap,
+  Gift
 } from 'lucide-react';
 
 export const ProfileView: React.FC = () => {
@@ -81,7 +82,7 @@ export const ProfileView: React.FC = () => {
   const [signupError, setSignupError] = useState('');
 
   // Logged-in Portal Tab & Search States
-  const [activePortalTab, setActivePortalTab] = useState<'profile' | 'articles' | 'magazine' | 'programs' | 'downloads'>('profile');
+  const [activePortalTab, setActivePortalTab] = useState<'profile' | 'articles' | 'magazine' | 'programs' | 'downloads'>('downloads');
   
   // Profile Form Edit States
   const [editName, setEditName] = useState(user.name);
@@ -503,27 +504,27 @@ export const ProfileView: React.FC = () => {
      ======================================================================== */
   if (!user.registered) {
     return (
-      <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-10 animate-fadeIn pb-24">
+      <div className="max-w-7xl mx-auto py-6 sm:py-8 px-4 sm:px-6 lg:px-8 space-y-8 animate-fadeIn pb-20">
         
         {/* Top Branding Hero */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="text-center space-y-2.5 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-[#0B6B53] font-bold text-xs uppercase tracking-wider">
             <Sun className="w-4 h-4 text-[#0B6B53]" />
             <span>MEMBER PORTAL ACCESS</span>
           </div>
-          <h1 className="font-heading font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight leading-tight">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-tight">
             Welcome to Path to Inner Peace
           </h1>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed max-w-2xl mx-auto">
             Sign in or create your account to access your personal transformation dashboard, monthly digital magazines, expert CBT articles, and live program invitations.
           </p>
         </div>
 
         {/* Auth Box & Benefits Preview Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
-          {/* Main Auth Form Box (7 cols) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+          {/* Main Auth Form Box (7 cols on lg, 6 cols on xl) */}
+          <div className="lg:col-span-7 xl:col-span-6 bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
             
             {/* Auth Toggle Tabs */}
             <div className="grid grid-cols-2 bg-slate-100/80 p-1.5 border-b border-slate-200">
@@ -781,62 +782,73 @@ export const ProfileView: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Benefits Column (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Right Benefits Column (5 cols on lg, 6 cols on xl with sticky positioning) */}
+          <div className="lg:col-span-5 xl:col-span-6 lg:sticky lg:top-24 space-y-4">
             
-            <div className="bg-gradient-to-br from-[#0B6B53] to-[#134E4A] p-6 sm:p-8 rounded-3xl text-white space-y-6 shadow-xl relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#0B6B53] via-[#0D5C48] to-[#134E4A] p-5 sm:p-7 rounded-3xl text-white space-y-5 shadow-xl relative overflow-hidden border border-emerald-600/30">
               <div className="absolute top-0 right-0 transform translate-x-6 -translate-y-6 w-32 h-32 bg-white/5 rounded-full blur-xl pointer-events-none" />
 
-              <div className="space-y-2">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#D4AF37]">
+              <div className="space-y-1.5 border-b border-emerald-700/50 pb-4">
+                <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#D4AF37] block">
                   PRO MEMBER ADVANTAGE
                 </span>
-                <h3 className="font-heading font-extrabold text-2xl text-white">
+                <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-white tracking-tight">
                   Why Create an Account?
                 </h3>
-                <p className="text-xs text-emerald-100 leading-relaxed">
+                <p className="text-xs text-emerald-100/90 leading-relaxed">
                   Join Mainak Chatterjee’s inner circle and gain instant access to exclusive mental transformation tools.
                 </p>
               </div>
 
-              <div className="space-y-4 text-xs">
+              <div className="space-y-3 text-xs">
                 
-                <div className="flex items-start gap-3 bg-white/10 p-3.5 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <BookOpen className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 bg-amber-400/15 p-3 rounded-2xl backdrop-blur-sm border border-amber-300/50 shadow-xs">
+                  <div className="w-8 h-8 rounded-xl bg-amber-400/20 border border-amber-300/40 flex items-center justify-center shrink-0 mt-0.5">
+                    <Gift className="w-4 h-4 text-amber-300" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[#D4AF37] text-sm flex items-center gap-1.5">
+                      <span>Free Welcome Kit</span>
+                      <span className="text-[10px] bg-[#D4AF37] text-slate-950 px-1.5 py-0.2 rounded-full font-extrabold">Instant</span>
+                    </h4>
+                    <p className="text-emerald-100/90 text-xs mt-0.5 leading-snug">
+                      Mental Fitness Assessment, Personalised Mind Report, 5 Minute Stress Reset Audio, Better Sleep Blueprint, Mental Reset Starter Guide.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
+                  <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <BookOpen className="w-4 h-4 text-[#D4AF37]" />
+                  </div>
                   <div>
                     <h4 className="font-bold text-white text-sm">Inner Peace Blog & Articles</h4>
-                    <p className="text-emerald-100/80 mt-0.5">
+                    <p className="text-emerald-100/80 text-xs mt-0.5 leading-snug">
                       Read expert articles on CBT techniques, vagus nerve stimulation, and stress management.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 bg-white/10 p-3.5 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <Book className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
+                  <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Book className="w-4 h-4 text-[#D4AF37]" />
+                  </div>
                   <div>
                     <h4 className="font-bold text-white text-sm">Monthly Digital Magazine Access</h4>
-                    <p className="text-emerald-100/80 mt-0.5">
+                    <p className="text-emerald-100/80 text-xs mt-0.5 leading-snug">
                       Receive monthly digital editions packed with workbooks, audio supplements, & wisdom.
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 bg-white/10 p-3.5 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <Calendar className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
+                  <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Calendar className="w-4 h-4 text-[#D4AF37]" />
+                  </div>
                   <div>
                     <h4 className="font-bold text-white text-sm">Future Program Invitations</h4>
-                    <p className="text-emerald-100/80 mt-0.5">
+                    <p className="text-emerald-100/80 text-xs mt-0.5 leading-snug">
                       Get VIP invitations to live Zoom masterclasses, retreats, and group coaching sessions.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 bg-white/10 p-3.5 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <Award className="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-white text-sm">MindForge 360°™ Certificate & Badges</h4>
-                    <p className="text-emerald-100/80 mt-0.5">
-                      Track your daily streak, unlock level badges, and claim your official completion certificate.
                     </p>
                   </div>
                 </div>
@@ -844,7 +856,7 @@ export const ProfileView: React.FC = () => {
               </div>
 
               <div className="pt-2 text-center border-t border-emerald-800/60">
-                <p className="text-[11px] text-emerald-200/80 italic">
+                <p className="text-[11px] text-emerald-200/90 italic">
                   "Your mental peace is your greatest superpower." – Mainak Chatterjee
                 </p>
               </div>
@@ -943,6 +955,21 @@ export const ProfileView: React.FC = () => {
       <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200">
         
         <button
+          onClick={() => setActivePortalTab('downloads')}
+          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
+            activePortalTab === 'downloads'
+              ? 'bg-[#0B6B53] text-white shadow-md'
+              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+          }`}
+        >
+          <Gift className="w-4 h-4 text-amber-300" />
+          <span>Free Welcome Kit</span>
+          <span className="bg-amber-400 text-slate-950 text-[10px] px-1.5 py-0.5 rounded-full font-extrabold">
+            Free
+          </span>
+        </button>
+
+        <button
           onClick={() => setActivePortalTab('profile')}
           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
             activePortalTab === 'profile'
@@ -992,22 +1019,6 @@ export const ProfileView: React.FC = () => {
             VIP
           </span>
         </button>
-
-        <a
-          href="https://welcomekit-pathtoinnerpeace.vercel.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => setActivePortalTab('downloads')}
-          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
-            activePortalTab === 'downloads'
-              ? 'bg-[#0B6B53] text-white shadow-md'
-              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-          }`}
-        >
-          <Download className="w-4 h-4" />
-          <span>Resource Vault</span>
-          <ExternalLink className="w-3.5 h-3.5 opacity-70" />
-        </a>
 
       </div>
 
@@ -1588,18 +1599,22 @@ export const ProfileView: React.FC = () => {
       )}
 
       {/* ====================================================================
-         TAB 5: RESOURCE VAULT & DOWNLOADS
+         TAB 5: FREE WELCOME KIT & DOWNLOADS
          ==================================================================== */}
       {activePortalTab === 'downloads' && (
         <div className="space-y-6 animate-fadeIn">
           
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold mb-2">
+                <Gift className="w-3.5 h-3.5 text-amber-700" />
+                <span>Instant Access Included</span>
+              </div>
               <h2 className="font-heading font-extrabold text-2xl text-slate-900">
-                Pro Member Resource Vault
+                Free Welcome Kit
               </h2>
-              <p className="text-xs text-slate-500 mt-1">
-                Access official CBT workbooks, 528Hz audio soundscapes, and your welcome kit in our online Resource Vault.
+              <p className="text-xs text-slate-500 mt-1 max-w-xl">
+                Mental Fitness Assessment, Personalised Mind Report, 5 Minute Stress Reset Audio, Better Sleep Blueprint, and Mental Reset Starter Guide.
               </p>
             </div>
             <a
@@ -1608,7 +1623,7 @@ export const ProfileView: React.FC = () => {
               rel="noopener noreferrer"
               className="px-5 py-2.5 bg-[#0B6B53] hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm rounded-full shadow-md transition-all flex items-center gap-2 shrink-0 whitespace-nowrap"
             >
-              <span>Launch Resource Vault</span>
+              <span>Launch Free Welcome Kit</span>
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>
