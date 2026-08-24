@@ -88,7 +88,7 @@ export const ProfileView: React.FC = () => {
   const [signupError, setSignupError] = useState('');
 
   // Logged-in Portal Tab & Search States
-  const [activePortalTab, setActivePortalTab] = useState<'profile' | 'articles' | 'magazine' | 'programs' | 'downloads'>('magazine');
+  const [activePortalTab, setActivePortalTab] = useState<'profile' | 'articles' | 'magazine' | 'programs' | 'downloads'>('downloads');
   
   // Profile Form Edit States
   const [editName, setEditName] = useState(user.name);
