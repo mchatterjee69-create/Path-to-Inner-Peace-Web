@@ -1610,17 +1610,29 @@ export const ProfileView: React.FC = () => {
       {activePortalTab === 'downloads' && (
         <div className="space-y-6 animate-fadeIn">
           
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">
-              <Gift className="w-3.5 h-3.5 text-amber-700" />
-              <span>Included in Your Free Welcome Kit</span>
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold mb-2">
+                <Gift className="w-3.5 h-3.5 text-amber-700" />
+                <span>Included in Your Free Welcome Kit</span>
+              </div>
+              <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">
+                Free Welcome Kit
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-xl leading-relaxed mt-1">
+                Explore your 5 comprehensive transformation assets designed to kickstart your journey toward lasting inner peace, reduced stress, and restorative sleep.
+              </p>
             </div>
-            <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">
-              Free Welcome Kit
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
-              Explore your 5 comprehensive transformation assets designed to kickstart your journey toward lasting inner peace, reduced stress, and restorative sleep.
-            </p>
+            <a
+              href="https://welcomekit-pathtoinnerpeace.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3.5 bg-[#0B6B53] hover:bg-emerald-800 text-white font-bold text-sm rounded-2xl shadow-md hover:shadow-lg transition-all flex items-center gap-2.5 shrink-0 whitespace-nowrap"
+            >
+              <Gift className="w-4 h-4 text-amber-300" />
+              <span>Launch Free Welcome Kit</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
