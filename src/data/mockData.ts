@@ -427,6 +427,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     priceINR: 1499,
     period: 'Monthly Access',
     badge: 'LUXURY ELITE MEMBERSHIP',
+    paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
     features: [
       'Everything in Pro, PLUS:',
       'Personalized Meditation Program',

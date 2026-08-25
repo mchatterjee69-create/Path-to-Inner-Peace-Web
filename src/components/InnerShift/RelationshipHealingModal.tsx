@@ -91,6 +91,10 @@ export const RelationshipHealingModal: React.FC<RelationshipHealingModalProps> =
       originalPriceINR: 2999,
       popular: true,
       badge: '33% OFF',
+      paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
+      period: '2 Weeks Live Program',
+      buttonText: 'Enroll Now (₹1,999)',
+      colorScheme: 'darkEmerald',
       features: [
         'Understand and heal emotional triggers (attachment awareness)',
         'Communicate effectively without conflict escalation',

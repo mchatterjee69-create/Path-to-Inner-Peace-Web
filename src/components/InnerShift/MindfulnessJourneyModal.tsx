@@ -89,6 +89,10 @@ export const MindfulnessJourneyModal: React.FC<MindfulnessJourneyModalProps> = (
       originalPriceINR: 3999,
       popular: true,
       badge: '50% OFF',
+      paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
+      period: '2 Weeks Live Immersion',
+      buttonText: 'Enroll Now (₹1,999)',
+      colorScheme: 'darkEmerald',
       features: [
         'Guided meditation practices across 8 powerful techniques',
         'Vipassana-Based Insight & Non-Reactive Observation',

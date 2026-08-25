@@ -101,6 +101,10 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
       originalPriceINR: 5999,
       popular: true,
       badge: '50% OFF',
+      paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
+      period: '4 Weeks Live Program',
+      buttonText: 'Enroll Now (₹2,999)',
+      colorScheme: 'darkEmerald',
       features: [
         'Guided Weekly Live Four Sessions & Workshops',
         'Deep Meditation & Mind Reprogramming Audios',

@@ -91,6 +91,10 @@ export const DeeperAwakeningModal: React.FC<DeeperAwakeningModalProps> = ({
       originalPriceINR: 5999,
       popular: true,
       badge: '33% OFF',
+      paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
+      period: '4 Weeks Live Masterclass',
+      buttonText: 'Enroll Now (₹3,999)',
+      colorScheme: 'darkEmerald',
       features: [
         'Live 4 Weeks Advanced Protocols for Meta-Awareness Expansion',
         'Guided Heartfulness Meditation & Inner Balance Practices',
