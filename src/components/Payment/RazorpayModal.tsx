@@ -17,7 +17,12 @@ export const RazorpayModal: React.FC = () => {
   if (!isPaymentModalOpen || !selectedPlan) return null;
 
   const handleJoinInnerShift = () => {
-    const paymentLink = selectedPlan?.paymentUrl || (selectedPlan?.id === 'INNER_TRANSFORMATION_ELITE' ? 'https://rzp.io/rzp/x8BS9RM' : 'https://rzp.io/rzp/Xv7Q6XB');
+    const paymentLink = 
+      selectedPlan?.paymentUrl || 
+      (selectedPlan?.name?.toLowerCase().includes('revolution') ? 'https://rzp.io/rzp/pJfkvaT' : 
+      (selectedPlan?.id === 'INNER_SHIFT' || selectedPlan?.name?.toLowerCase().includes('basic')) ? 'https://rzp.io/rzp/O6VyUfSW' :
+      selectedPlan?.id === 'INNER_TRANSFORMATION_ELITE' ? 'https://rzp.io/rzp/x8BS9RM' : 
+      'https://rzp.io/rzp/Xv7Q6XB');
     window.location.href = paymentLink;
   };
 

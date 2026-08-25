@@ -374,6 +374,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     tagline: 'Build Your Mental Fitness Foundation',
     priceINR: 199,
     period: 'Monthly Access',
+    paymentUrl: 'https://rzp.io/rzp/O6VyUfSW',
     razorpayPlanId: 'plan_TKyyIg8RAcWLUv',
     badge: 'BEGINNER FRIENDLY',
     features: [
