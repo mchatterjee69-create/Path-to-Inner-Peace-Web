@@ -401,6 +401,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     period: 'Monthly Access',
     popular: true,
     badge: 'MOST POPULAR CHOICE',
+    paymentUrl: 'https://rzp.io/rzp/Xv7Q6XB',
     features: [
       'Everything in Basic, PLUS:',
       'Advanced Meditation Training',

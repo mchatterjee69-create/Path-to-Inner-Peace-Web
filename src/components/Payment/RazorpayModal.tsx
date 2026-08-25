@@ -17,7 +17,8 @@ export const RazorpayModal: React.FC = () => {
   if (!isPaymentModalOpen || !selectedPlan) return null;
 
   const handleJoinInnerShift = () => {
-    window.location.href = 'https://rzp.io/rzp/O6VyUfSW';
+    const paymentLink = selectedPlan?.paymentUrl || 'https://rzp.io/rzp/Xv7Q6XB';
+    window.location.href = paymentLink;
   };
 
   return (

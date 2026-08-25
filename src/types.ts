@@ -176,6 +176,7 @@ export interface PricingPlan {
   priceINR: number;
   period: string;
   razorpayPlanId?: string;
+  paymentUrl?: string;
   popular?: boolean;
   badge?: string;
   features: string[];
