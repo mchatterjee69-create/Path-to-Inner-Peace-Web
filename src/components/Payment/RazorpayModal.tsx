@@ -71,7 +71,7 @@ export const RazorpayModal: React.FC = () => {
             onClick={handleJoinInnerShift}
             className="w-full py-4 bg-[#0F4C45] hover:bg-[#0B3B36] active:scale-[0.99] text-white font-extrabold text-base sm:text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2 group cursor-pointer border border-[#D4AF37]/30"
           >
-            <span>🚀 Join {selectedPlan.name} – ₹{selectedPlan.priceINR}</span>
+            <span>Join {selectedPlan.name} – ₹{selectedPlan.priceINR}</span>
           </button>
 
           {/* Secure Payment Note */}

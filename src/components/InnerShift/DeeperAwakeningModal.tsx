@@ -18,7 +18,6 @@ import {
   Lightbulb,
   ShieldAlert,
   Target,
-  Rocket,
   CheckCircle2,
   Radio,
   RefreshCw,
@@ -581,9 +580,6 @@ export const DeeperAwakeningModal: React.FC<DeeperAwakeningModalProps> = ({
 
               {/* 👉 Step Into the Next Level of Consciousness */}
               <div className="pt-4 border-t border-emerald-800/70 text-center flex flex-col items-center justify-center gap-2">
-                <span className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center">
-                  <Rocket className="w-5 h-5" />
-                </span>
                 <p className="font-bold text-white text-sm sm:text-base">
                   👉 Step Into the Next Level of Consciousness
                 </p>

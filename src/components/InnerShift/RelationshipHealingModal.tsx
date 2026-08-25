@@ -20,7 +20,6 @@ import {
   Lightbulb,
   ShieldAlert,
   Target,
-  Rocket,
   CheckCircle2,
   Radio,
   RefreshCw,
@@ -552,9 +551,6 @@ export const RelationshipHealingModal: React.FC<RelationshipHealingModalProps> =
 
               {/* 👉 Start Your Relationship Transformation Today */}
               <div className="pt-4 border-t border-emerald-800/70 text-center flex flex-col items-center justify-center gap-2">
-                <span className="p-1.5 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center">
-                  <Rocket className="w-5 h-5" />
-                </span>
                 <p className="font-bold text-white text-sm sm:text-base">
                   👉 Start Your Relationship Transformation Today
                 </p>

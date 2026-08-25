@@ -24,7 +24,6 @@ import {
   Lightbulb,
   ShieldAlert,
   Target,
-  Rocket,
   CheckCircle2,
   CalendarCheck2,
   BookCheck,
@@ -606,11 +605,8 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
                 </div>
               </div>
 
-              {/* 🚀 Your Inner Revolution Starts Now */}
+              {/* Your Inner Revolution Starts Now */}
               <div className="pt-4 border-t border-emerald-800/70 text-center flex items-center justify-center gap-2">
-                <span className="p-1.5 rounded-lg bg-[#B5363E]/20 text-rose-400 border border-[#B5363E]/40 flex items-center justify-center">
-                  <Rocket className="w-5 h-5" />
-                </span>
                 <p className="font-extrabold text-white text-lg">
                   Your Inner Revolution Starts Now
                 </p>

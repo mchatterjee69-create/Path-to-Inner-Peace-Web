@@ -18,7 +18,6 @@ import {
   Lightbulb,
   ShieldAlert,
   Target,
-  Rocket,
   CheckCircle2,
   Radio,
   RefreshCw,
@@ -482,13 +481,13 @@ export const MindfulnessJourneyModal: React.FC<MindfulnessJourneyModalProps> = (
                 </ul>
               </div>
 
-              {/* 🚀 Your Transformation */}
+              {/* Your Transformation */}
               <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <h3 className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center shrink-0">
                     <Target className="w-4 h-4 stroke-[2.2]" />
                   </span>
-                  <span>🚀 Your Transformation</span>
+                  <span>Your Transformation</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 pl-7 font-medium">
                   Imagine living each moment with clarity and awareness…
@@ -548,9 +547,6 @@ export const MindfulnessJourneyModal: React.FC<MindfulnessJourneyModalProps> = (
 
               {/* 👉 Begin Your Journey Into Mindfulness */}
               <div className="pt-4 border-t border-emerald-800/70 text-center flex flex-col items-center justify-center gap-2">
-                <span className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center">
-                  <Rocket className="w-5 h-5" />
-                </span>
                 <p className="font-bold text-white text-sm sm:text-base">
                   👉 Begin Your Journey Into Mindfulness
                 </p>

@@ -22,7 +22,6 @@ import {
   Lightbulb, 
   ShieldAlert, 
   Target, 
-  Rocket, 
   CheckCircle2, 
   Radio, 
   Layers, 
@@ -591,9 +590,6 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
 
               {/* 👉 Take Control of Your Inner System */}
               <div className="pt-4 border-t border-emerald-800/70 text-center flex flex-col items-center justify-center gap-2">
-                <span className="p-1.5 rounded-lg bg-[#307940]/20 text-emerald-400 border border-[#307940]/40 flex items-center justify-center">
-                  <Rocket className="w-5 h-5" />
-                </span>
                 <div>
                   <p className="text-xs font-semibold text-slate-300 uppercase tracking-wider">👉 Take Control of Your Inner System</p>
                   <p className="font-extrabold text-white text-lg sm:text-xl text-emerald-400">
