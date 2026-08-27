@@ -17,6 +17,7 @@ import {
   CalendarCheck
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import { PathStageNavigator } from '../Navigation/PathStageNavigator';
 
 // Configurable Booking & Contact Destination
 const CAREER_AXIS_BOOKING_URL = "https://wa.me/919163670300?text=Hello%20Career%20Axis%20Team,%20I%20would%20like%20to%20book%20a%201:1%20Career%20Clarity%20Session.";
@@ -59,9 +60,11 @@ export const CareerAxisView: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white text-slate-800 font-sans relative pb-16 selection:bg-[#0B6B53] selection:text-white">
+      {/* 3 Serial Pages Top Navigation Bar */}
+      <PathStageNavigator currentSection="career-axis" />
       
       {/* Container wrapper */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8 space-y-8 sm:space-y-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 space-y-8 sm:space-y-12">
         
         {/* ==================================================
             HERO / TOP BANNER SECTION

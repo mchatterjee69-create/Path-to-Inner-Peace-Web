@@ -4,20 +4,9 @@ import { PRICING_PLANS } from '../../data/mockData';
 import { PricingPlan } from '../../types';
 import { 
   Crown, 
-  Check, 
-  Headphones, 
-  ShieldCheck, 
-  Star, 
-  Zap, 
-  HeartHandshake, 
-  BookOpen, 
-  Users, 
-  Video, 
-  Target, 
-  Activity, 
-  FileText, 
-  Compass 
+  Check 
 } from 'lucide-react';
+import { HolisticWellnessSection } from '../Landing/HolisticWellnessSection';
 
 export const MindForgeUpgrade: React.FC = () => {
   const { user, setSelectedPlan, setIsPaymentModalOpen } = useApp();
@@ -27,27 +16,9 @@ export const MindForgeUpgrade: React.FC = () => {
     setIsPaymentModalOpen(true);
   };
 
-  const premiumFeatures = [
-    { name: 'Unlimited Guided Meditations', icon: Headphones },
-    { name: 'Stress Reset Toolkit', icon: Zap },
-    { name: 'Relationship Healing', icon: HeartHandshake },
-    { name: 'Mindset Coaching', icon: Crown },
-    { name: 'Emotional Mastery', icon: Star },
-    { name: 'MindForge Library Access', icon: BookOpen },
-    { name: 'Exclusive Community Access', icon: Users },
-    { name: 'Monthly Live Workshops', icon: Video },
-    { name: 'Goal Tracker & Milestones', icon: Target },
-    { name: 'Habit Builder Protocol', icon: Activity },
-    { name: 'Personalized Dashboard', icon: ShieldCheck },
-    { name: 'Exclusive PDF Workbooks', icon: FileText },
-    { name: 'Priority Coach Support', icon: ShieldCheck },
-    { name: '24/7 Personal Reflection Guide', icon: Compass },
-    { name: 'Physical Journal Shipped (Elite)', icon: BookOpen },
-  ];
-
   return (
-    <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-16 animate-fadeIn pb-16">
+    <div className="bg-white pt-10 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-14 animate-fadeIn pb-2 sm:pb-4">
       
       {/* Hero Banner */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -154,33 +125,8 @@ export const MindForgeUpgrade: React.FC = () => {
         })}
       </div>
 
-      {/* Full Premium Features Breakdown Table */}
-      <div className="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-sm space-y-8">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">
-            Everything Included in MindForge 360°™
-          </h2>
-          <p className="text-xs text-slate-500">
-            A complete suite of wellness tools engineered to transform your daily mental health.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {premiumFeatures.map((f, idx) => {
-            const Icon = f.icon;
-            return (
-              <div key={idx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-100 text-[#0B6B53] flex items-center justify-center shrink-0">
-                  <Icon className="w-5 h-5" />
-                </div>
-                <span className="font-heading font-bold text-xs text-slate-800">
-                  {f.name}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      {/* Holistic Wellness One-Stop Solution Section */}
+      <HolisticWellnessSection />
 
     </div>
   </div>

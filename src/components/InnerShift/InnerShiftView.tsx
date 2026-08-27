@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Sun
 } from 'lucide-react';
+import { PathStageNavigator } from '../Navigation/PathStageNavigator';
 
 export interface ServiceCardItem {
   id: string;
@@ -108,8 +109,11 @@ export const InnerShiftView: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 pt-8 pb-20 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
+    <div className="min-h-screen bg-white text-slate-900 pb-20 font-sans">
+      {/* 3 Serial Pages Top Navigation Bar */}
+      <PathStageNavigator currentSection="inner-shift" />
+
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12 px-4 sm:px-6 lg:px-8">
         
         {/* Page Title & Header Section */}
         <motion.div 

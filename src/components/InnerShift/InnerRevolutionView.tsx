@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useApp } from '../../context/AppContext';
+import { PathStageNavigator } from '../Navigation/PathStageNavigator';
 
 export interface InnerRevolutionProgramItem {
   id: string;
@@ -110,8 +111,11 @@ export const InnerRevolutionView: React.FC = () => {
   };
 
   return (
-    <div id="inner-revolution-page" className="min-h-screen bg-white text-slate-900 pt-6 sm:pt-8 pb-20 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
+    <div id="inner-revolution-page" className="min-h-screen bg-white text-slate-900 pb-20 font-sans">
+      {/* 3 Serial Pages Top Navigation Bar */}
+      <PathStageNavigator currentSection="inner-revolution" />
+
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 px-4 sm:px-6 lg:px-8">
         
         {/* Left-aligned heading with thin light grey divider below */}
         <motion.div 

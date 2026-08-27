@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
   const { setActiveView } = useApp();
 
   return (
-    <footer id="main-footer" className="bg-[#093d30] text-slate-200 border-t border-emerald-900 pt-16 pb-16 px-4 sm:px-6 lg:px-8">
+    <footer id="main-footer" className="bg-[#093d30] text-slate-200 border-t border-emerald-900 pt-12 pb-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         
         {/* Brand Column */}
