@@ -27,13 +27,13 @@ export const FounderSection: React.FC = () => {
           </div>
         </ScrollReveal>
 
-        {/* Founder Card with Image & Details Grid */}
-        <ScrollReveal variant="scale" delay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 items-stretch bg-white p-6 sm:p-10 rounded-3xl border border-slate-200/90 shadow-xl shadow-slate-200/40">
+        {/* Founder Details Grid (Full Screen / Unboxed Layout) */}
+        <ScrollReveal variant="fade" delay={0.1}>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center py-2 sm:py-4">
             
             {/* Left Column: Founder Photo Display */}
             <div className="md:col-span-5 flex flex-col items-center w-full">
-              <div className="relative w-full h-80 sm:h-96 md:h-full min-h-[360px] rounded-2xl overflow-hidden border-2 border-[#D4AF37] shadow-xl bg-emerald-950 flex items-center justify-center group">
+              <div className="relative w-full h-80 sm:h-96 md:h-[420px] rounded-3xl overflow-hidden border-2 border-[#D4AF37] shadow-xl bg-emerald-950 flex items-center justify-center group">
                 <img 
                   src={founderPhoto || FOUNDER_INFO.image} 
                   alt={FOUNDER_INFO.name} 
@@ -42,7 +42,7 @@ export const FounderSection: React.FC = () => {
                 />
                 
                 {/* Verified Mentor Badge */}
-                <div className="absolute bottom-3 left-3 right-3 bg-emerald-950/80 backdrop-blur-md px-3 py-2 rounded-xl border border-[#D4AF37]/40 flex items-center justify-between text-xs text-white shadow-md">
+                <div className="absolute bottom-3 left-3 right-3 bg-emerald-950/85 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-[#D4AF37]/40 flex items-center justify-between text-xs text-white shadow-md">
                   <div className="flex items-center gap-1.5 font-bold text-amber-200">
                     <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
                     <span>Verified Mentor</span>

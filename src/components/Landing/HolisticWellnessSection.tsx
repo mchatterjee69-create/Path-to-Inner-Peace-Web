@@ -84,13 +84,13 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
     <section 
       id="holistic-wellness-solutions"
       aria-label="Path to Inner Peace Holistic Solutions"
-      className={`relative overflow-hidden bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 lg:p-10 text-slate-900 shadow-sm ${className}`}
+      className={`relative w-full pt-6 pb-4 sm:pt-10 sm:pb-6 text-slate-900 ${className}`}
     >
       <div className="relative max-w-7xl mx-auto space-y-8 sm:space-y-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#062C22] border border-[#D4AF37]/40 text-[#D4AF37] text-xs font-semibold uppercase tracking-wider shadow-sm">
-            <Compass className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full bg-emerald-50 border border-emerald-200/80 text-[#0B6B53] text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider shadow-xs">
+            <Compass className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#0B6B53]" />
             <span>Holistic Wellness & Inner Transformation</span>
           </div>
 
