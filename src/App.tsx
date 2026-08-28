@@ -133,9 +133,7 @@ const MainContent: React.FC = () => {
         )}
 
         {activeView === 'dashboard' && <DashboardOverview />}
-        {activeView === 'inner-shift' && <InnerShiftView />}
-        {activeView === 'inner-revolution' && <InnerRevolutionView />}
-        {activeView === 'career-axis' && <CareerAxisView />}
+        {(activeView === 'inner-shift' || activeView === 'inner-revolution' || activeView === 'career-axis') && <InnerShiftView />}
         {activeView === 'career-axis-booking' && <CareerAxisBookingView />}
         {activeView === 'challenge' && <DailyChallengeView />}
         {activeView === 'breathing' && <BreathingExercise />}

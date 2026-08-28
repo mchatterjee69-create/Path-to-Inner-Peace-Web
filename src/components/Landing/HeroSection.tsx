@@ -95,7 +95,7 @@ export const HeroSection: React.FC = () => {
                 'Improve Focus',
                 'Sleep Better',
                 'Emotional Healing',
-                'MindForge Certificate'
+                'Reprogram Subconscious State'
               ].map((item, idx) => (
                 <div 
                   key={idx} 

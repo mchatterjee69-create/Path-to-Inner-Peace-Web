@@ -9,7 +9,7 @@ import {
   Sun, 
   Wind, 
   Headphones, 
-  BookOpen, 
+  Brain, 
   Activity
 } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
@@ -71,16 +71,16 @@ export const BenefitsSection: React.FC = () => {
       color: 'bg-purple-50 text-purple-700 border-purple-200'
     },
     {
-      title: 'Daily Journaling',
-      description: 'Reflect deeply with daily CBT prompts and gratitude logs.',
-      icon: BookOpen,
-      color: 'bg-amber-50 text-amber-800 border-amber-200'
-    },
-    {
       title: 'Healthy Habits',
       description: 'Build an unbroken streak of 10-minute daily mental reset rituals.',
       icon: Activity,
       color: 'bg-[#134E4A]/10 text-[#134E4A] border-emerald-300'
+    },
+    {
+      title: 'Subconscious Mastery',
+      description: 'Rewire limiting mental programs and anchor deep subconscious calm.',
+      icon: Brain,
+      color: 'bg-amber-50 text-amber-800 border-amber-200'
     }
   ];
 

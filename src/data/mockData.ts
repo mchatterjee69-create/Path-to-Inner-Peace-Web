@@ -164,34 +164,34 @@ Key Principle: Your self-worth is inherent and does not depend on external appro
   },
   {
     dayNumber: 5,
-    title: 'Future Self & Mastery',
-    subtitle: 'Purpose, Sustainable Action Plan & Graduation',
+    title: 'Subconscious Mind Reprogramming',
+    subtitle: 'Neural Conditioning, Limiting Belief Reframing & Lifelong Mastery',
     themeColor: '#D4AF37',
     durationMinutes: 30,
-    summary: 'Anchor your gains, map out your long-term mental clarity blueprint, and claim your official MindForge Certificate of Completion!',
+    summary: 'Reprogram deep subconscious belief patterns, anchor lifelong mental clarity, and establish sustainable neural conditioning for peak inner peace.',
     breathingGoalMinutes: 5,
     meditationTrack: {
-      title: 'Future Vision & Unshakable Life Mastery Meditation',
+      title: 'Subconscious Reprogramming & Deep Neural Reset Meditation',
       subtitle: 'Sunrise Meadow with 852Hz Sacred Life Mastery & Harmonic Triad',
       genre: 'Sunrise Meadow with 852Hz Sacred Life Mastery & Harmonic Chords',
       duration: '15:00',
       ambientSound: 'birds',
       soundName: 'Sunrise Meadow & 852Hz Sacred Frequency',
-      audioDescription: 'Full dawn meadow soundscape with multi-species bird symphony (Robin, Warbler, Dove) coupled with 852Hz Spiritual Order Solfeggio frequency and A-Major 432Hz Sacred Triad to anchor lifelong peace.'
+      audioDescription: 'Full dawn meadow soundscape with multi-species bird symphony coupled with 852Hz Spiritual Order Solfeggio frequency and A-Major 432Hz Sacred Triad to imprint deep subconscious tranquility.'
     },
-    lessonContent: `Congratulations on reaching Day 5! Today is your Future Self & Integration Day. You have built momentum, quieted stress, and cultivated emotional space. Now we anchor these daily resets into a permanent lifestyle.
+    lessonContent: `Congratulations on reaching Day 5! Today is your Subconscious Mind Reprogramming & Integration Day. You have built momentum, quieted acute stress, and cultivated emotional space. Now we rewire deep subconscious belief patterns and anchor these daily resets into permanent neural pathways.
 
-Key Principle: Consistency beats intensity. Small daily rituals create lifelong inner peace.`,
+Key Principle: The subconscious mind learns through repetition, emotion, and alpha-state conditioning. Small daily rituals create permanent inner peace.`,
     journalPrompts: [
-      'What key transformation or shift did you feel during this 5-day challenge?',
-      'What daily 10-minute ritual will you pledge to continue for the next 30 days?',
-      'How will your relationships and career improve as you operate from inner peace?'
+      'What old subconscious belief or story are you consciously choosing to replace today?',
+      'What daily 10-minute subconscious alignment ritual will you pledge to continue for the next 30 days?',
+      'How will your life, relationships, and decisions change when your subconscious mind is calibrated to inner peace?'
     ],
-    affirmation: 'I am committed to my daily inner peace ritual. My future is grounded in calm clarity.',
+    affirmation: 'My subconscious mind is wired for peace, clarity, and unwavering self-trust.',
     keyTakeaways: [
-      'Create a non-negotiable morning 10-minute mental reset.',
-      'Join the MindForge 360°™ community for sustained growth.',
-      'Download your official Certificate of Completion!'
+      'Reprogram subconscious thought triggers with daily neural conditioning.',
+      'Anchor deep alpha-state visualizations for emotional sovereignty.',
+      'Establish a non-negotiable 10-minute daily subconscious alignment ritual.'
     ]
   }
 ];
