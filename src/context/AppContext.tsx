@@ -94,7 +94,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const VALID_VIEWS: ActiveView[] = [
-    'landing', 'inner-shift', 'inner-revolution', 'career-axis', 'career-axis-booking',
+    'landing', 'explore-path', 'inner-shift', 'inner-revolution', 'career-axis', 'career-axis-booking',
     'dashboard', 'challenge', 'breathing', 'meditation', 'sound-therapy',
     'journal', 'mood', 'upgrade', 'profile', 'ai-coach', 'cbt-video', 'success'
   ];
@@ -102,7 +102,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [activeView, setActiveViewRaw] = useState<ActiveView>(() => {
     try {
       const hash = window.location.hash.replace('#', '') as ActiveView;
-      if (hash && ['landing', 'inner-shift', 'inner-revolution', 'career-axis', 'career-axis-booking', 'dashboard', 'challenge', 'breathing', 'meditation', 'sound-therapy', 'journal', 'mood', 'upgrade', 'profile', 'ai-coach', 'cbt-video', 'success'].includes(hash)) {
+      if (hash && ['landing', 'explore-path', 'inner-shift', 'inner-revolution', 'career-axis', 'career-axis-booking', 'dashboard', 'challenge', 'breathing', 'meditation', 'sound-therapy', 'journal', 'mood', 'upgrade', 'profile', 'ai-coach', 'cbt-video', 'success'].includes(hash)) {
         return hash;
       }
     } catch (e) {

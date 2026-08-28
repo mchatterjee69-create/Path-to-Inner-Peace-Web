@@ -77,7 +77,7 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
 
   const handleCtaClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setActiveView('inner-shift');
+    setActiveView('explore-path');
   };
 
   return (

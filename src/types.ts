@@ -1,5 +1,6 @@
 export type ActiveView = 
   | 'landing' 
+  | 'explore-path'
   | 'inner-shift'
   | 'inner-revolution'
   | 'career-axis'
