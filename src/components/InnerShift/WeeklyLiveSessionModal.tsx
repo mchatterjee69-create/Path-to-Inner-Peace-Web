@@ -12,8 +12,21 @@ import {
   MessageCircle, 
   ArrowRight,
   HelpCircle,
-  Sparkles
+  Sparkles,
+  Lock
 } from 'lucide-react';
+
+const GoogleMeetIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+  <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.5 12l4.5 3.5V8.5L14.5 12z" fill="#00832d"/>
+    <path d="M2.5 16.5V19c0 .83.67 1.5 1.5 1.5H6.5l.5-4H2.5z" fill="#0066da"/>
+    <path d="M6.5 3.5H4c-.83 0-1.5.67-1.5 1.5v2.5H7l-.5-4z" fill="#e53935"/>
+    <path d="M2.5 7.5h4.5v9H2.5v-9z" fill="#2684fc"/>
+    <path d="M19 5.5l-4.5 3.5v6L19 18.5c.83.62 2 .03 2-1V6.5c0-1.03-1.17-1.62-2-1z" fill="#00ac47"/>
+    <path d="M14.5 16.5H7V20.5h6c.83 0 1.5-.67 1.5-1.5v-2.5z" fill="#00aa47"/>
+    <path d="M14.5 3.5H7v4h7.5V5c0-.83-.67-1.5-1.5-1.5z" fill="#ffba00"/>
+  </svg>
+);
 
 export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
@@ -25,7 +38,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
   const [whatsapp, setWhatsapp] = useState(user.whatsapp || '');
   const [email, setEmail] = useState(user.email && !user.email.includes('@example.com') ? user.email : '');
   const [location, setLocation] = useState('');
-  const [attendanceMode, setAttendanceMode] = useState('Interactive Zoom (Ask Questions Live)');
+  const attendanceMode = 'Google Meet (Live Interactive Video & Q&A)';
   const [userQuestion, setUserQuestion] = useState('');
   const [agreedAlerts, setAgreedAlerts] = useState(true);
 
@@ -130,7 +143,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                   You're On The Guest List, {fullName}!
                 </h4>
                 <p className="text-sm text-slate-600 max-w-md mx-auto">
-                  We'll send your private Zoom link and session worksheet directly to your WhatsApp before Sunday 11:00 AM IST.
+                  We'll send your private Google Meet link and session worksheet directly to your WhatsApp before Sunday 11:00 AM IST.
                 </p>
               </div>
 
@@ -141,8 +154,11 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                   <span className="font-bold text-slate-900 text-right">Upcoming Sunday @ 11:00 AM IST</span>
                 </div>
                 <div className="flex justify-between items-center py-1 border-b border-emerald-100">
-                  <span className="text-slate-500 font-medium">Live Format:</span>
-                  <span className="font-bold text-[#0F4C45] text-right">{attendanceMode}</span>
+                  <span className="text-slate-500 font-medium">Live Platform:</span>
+                  <span className="font-bold text-[#0F4C45] text-right flex items-center gap-1.5">
+                    <GoogleMeetIcon className="w-4 h-4 inline" />
+                    Google Meet (Live Interactive)
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-1 border-b border-emerald-100">
                   <span className="text-slate-500 font-medium">WhatsApp Alerts:</span>
@@ -157,7 +173,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <a
-                  href={`https://wa.me/919163670300?text=${encodeURIComponent(`Hi Mainak, I have registered for the Weekly Live Mental Fitness Session on Sunday! Please send me the live link.`)}`}
+                  href={`https://wa.me/919163670300?text=${encodeURIComponent(`Hi Mainak, I have registered for the Weekly Live Mental Fitness Session on Sunday! Please send me the Google Meet live link.`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex-1 py-3.5 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
@@ -198,7 +214,9 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                   <Video className="w-4 h-4 text-[#0F4C45] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-slate-900 block">Platform</span>
-                    <span className="text-slate-500 text-[11px]">Zoom & Private YouTube</span>
+                    <span className="text-slate-500 text-[11px] flex items-center gap-1">
+                      <GoogleMeetIcon className="w-3.5 h-3.5 inline" /> Google Meet (Live)
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
@@ -245,7 +263,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                     placeholder="+91 98765 43210"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0F4C45] text-sm bg-white"
                   />
-                  <span className="text-[10px] text-slate-400 mt-0.5 block">For 15-min reminder & live Zoom link</span>
+                  <span className="text-[10px] text-slate-400 mt-0.5 block">For 15-min reminder & Google Meet link</span>
                 </div>
 
                 <div>
@@ -264,7 +282,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                 </div>
               </div>
 
-              {/* City & Attendance Mode in 2 columns */}
+              {/* City & Locked Attendance Mode in 2 columns */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
@@ -283,14 +301,21 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
                     Preferred Attendance Mode
                   </label>
-                  <select
-                    value={attendanceMode}
-                    onChange={(e) => setAttendanceMode(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#0F4C45] text-xs sm:text-sm bg-white font-medium"
-                  >
-                    <option value="Interactive Zoom (Ask Questions Live)">Interactive Zoom (Live Audio/Video & Q&A)</option>
-                    <option value="Private YouTube Live Stream (Listen-Only)">YouTube Live Stream (Listen & Chat Only)</option>
-                  </select>
+                  <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-emerald-300 bg-emerald-50/70 text-slate-900 shadow-xs">
+                    <GoogleMeetIcon className="w-5 h-5 shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs sm:text-sm font-bold text-slate-900 truncate">
+                        Google Meet
+                      </div>
+                      <div className="text-[10px] text-emerald-800 font-medium truncate">
+                        Interactive Video & Live Q&A
+                      </div>
+                    </div>
+                    <div className="shrink-0 flex items-center gap-1 text-[10px] font-bold text-[#0F4C45] bg-emerald-100/90 px-2 py-0.5 rounded-md border border-emerald-300">
+                      <Lock className="w-3 h-3 text-[#0F4C45]" />
+                      <span>Locked</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -317,7 +342,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                   className="w-4 h-4 rounded text-[#0F4C45] focus:ring-[#0F4C45] mt-0.5 cursor-pointer"
                 />
                 <span className="text-xs text-slate-600 leading-snug">
-                  I agree to receive the Sunday live session link, calendar reminder, and session worksheet on WhatsApp & Email.
+                  I agree to receive the Sunday Google Meet live link, calendar reminder, and session worksheet on WhatsApp & Email.
                 </span>
               </label>
 
@@ -342,7 +367,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
 
               <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500 text-center pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>100% Free Masterclass • Direct Live Access with Mainak</span>
+                <span>100% Free Live Masterclass • Interactive Access via Google Meet</span>
               </div>
             </form>
           )}
