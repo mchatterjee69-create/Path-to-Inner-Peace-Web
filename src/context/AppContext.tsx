@@ -45,6 +45,10 @@ interface AppContextType {
   setIsMindfulnessJourneyModalOpen: (open: boolean) => void;
   isDeeperAwakeningModalOpen: boolean;
   setIsDeeperAwakeningModalOpen: (open: boolean) => void;
+  isMeditationCampModalOpen: boolean;
+  setIsMeditationCampModalOpen: (open: boolean) => void;
+  isWeeklyLiveSessionModalOpen: boolean;
+  setIsWeeklyLiveSessionModalOpen: (open: boolean) => void;
   registerUser: (details: UserRegistration) => void;
   loginUser: (emailOrPhone: string, fullName?: string) => void;
   logoutUser: () => void;
@@ -165,6 +169,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setIsRelationshipHealingModalOpen(false);
       setIsMindfulnessJourneyModalOpen(false);
       setIsDeeperAwakeningModalOpen(false);
+      setIsMeditationCampModalOpen(false);
+      setIsWeeklyLiveSessionModalOpen(false);
       setIsAdminLeadsModalOpen(false);
 
       setActiveViewRaw(targetView);
@@ -222,6 +228,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isRelationshipHealingModalOpen, setIsRelationshipHealingModalOpen] = useState(false);
   const [isMindfulnessJourneyModalOpen, setIsMindfulnessJourneyModalOpen] = useState(false);
   const [isDeeperAwakeningModalOpen, setIsDeeperAwakeningModalOpen] = useState(false);
+  const [isMeditationCampModalOpen, setIsMeditationCampModalOpen] = useState(false);
+  const [isWeeklyLiveSessionModalOpen, setIsWeeklyLiveSessionModalOpen] = useState(false);
 
   const [founderPhoto, setFounderPhoto] = useState<string>(() => {
     try {
@@ -499,6 +507,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsMindfulnessJourneyModalOpen,
         isDeeperAwakeningModalOpen,
         setIsDeeperAwakeningModalOpen,
+        isMeditationCampModalOpen,
+        setIsMeditationCampModalOpen,
+        isWeeklyLiveSessionModalOpen,
+        setIsWeeklyLiveSessionModalOpen,
         registerUser,
         loginUser,
         logoutUser,

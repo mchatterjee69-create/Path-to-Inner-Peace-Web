@@ -40,6 +40,8 @@ import { StressResetModal } from './components/InnerShift/StressResetModal';
 import { RelationshipHealingModal } from './components/InnerShift/RelationshipHealingModal';
 import { MindfulnessJourneyModal } from './components/InnerShift/MindfulnessJourneyModal';
 import { DeeperAwakeningModal } from './components/InnerShift/DeeperAwakeningModal';
+import { MeditationCampModal } from './components/InnerShift/MeditationCampModal';
+import { WeeklyLiveSessionModal } from './components/InnerShift/WeeklyLiveSessionModal';
 import { ScrollToTop } from './components/Navigation/ScrollToTop';
 
 const MainContent: React.FC = () => {
@@ -63,7 +65,11 @@ const MainContent: React.FC = () => {
     isMindfulnessJourneyModalOpen,
     setIsMindfulnessJourneyModalOpen,
     isDeeperAwakeningModalOpen,
-    setIsDeeperAwakeningModalOpen 
+    setIsDeeperAwakeningModalOpen,
+    isMeditationCampModalOpen,
+    setIsMeditationCampModalOpen,
+    isWeeklyLiveSessionModalOpen,
+    setIsWeeklyLiveSessionModalOpen
   } = useApp();
 
   useEffect(() => {
@@ -181,6 +187,14 @@ const MainContent: React.FC = () => {
       <DeeperAwakeningModal
         isOpen={isDeeperAwakeningModalOpen}
         onClose={() => setIsDeeperAwakeningModalOpen(false)}
+      />
+      <MeditationCampModal
+        isOpen={isMeditationCampModalOpen}
+        onClose={() => setIsMeditationCampModalOpen(false)}
+      />
+      <WeeklyLiveSessionModal
+        isOpen={isWeeklyLiveSessionModalOpen}
+        onClose={() => setIsWeeklyLiveSessionModalOpen(false)}
       />
 
       {/* Floating Scroll to Top Button */}

@@ -80,7 +80,11 @@ export const INNER_SHIFT_SERVICES: ServiceCardItem[] = [
 ];
 
 export const InnerShiftView: React.FC = () => {
-  const { setActiveView, setIsRegistrationModalOpen } = useApp();
+  const { 
+    setActiveView, 
+    setIsMeditationCampModalOpen, 
+    setIsWeeklyLiveSessionModalOpen 
+  } = useApp();
 
   const handleAction = (item: ServiceCardItem) => {
     switch (item.actionType) {
@@ -88,13 +92,13 @@ export const InnerShiftView: React.FC = () => {
         setActiveView('breathing');
         break;
       case 'meditation':
-        setActiveView('meditation');
+        setIsMeditationCampModalOpen(true);
         break;
       case 'sound':
         setActiveView('sound-therapy');
         break;
       case 'register':
-        setIsRegistrationModalOpen(true);
+        setIsWeeklyLiveSessionModalOpen(true);
         break;
       case 'whatsapp':
         window.open('https://wa.me/919163670300', '_blank');
@@ -141,7 +145,10 @@ export const InnerShiftView: React.FC = () => {
               >
                 <div>
                   {/* Heading */}
-                  <div className="flex items-center gap-2.5 mb-3">
+                  <div 
+                    onClick={() => handleAction(item)}
+                    className="flex items-center gap-2.5 mb-3 cursor-pointer"
+                  >
                     <div className="p-2 rounded-lg bg-emerald-50 text-[#1b4d2e] group-hover:bg-[#1b4d2e] group-hover:text-white transition-colors">
                       <Icon className="w-5 h-5" />
                     </div>
@@ -151,7 +158,10 @@ export const InnerShiftView: React.FC = () => {
                   </div>
 
                   {/* Image */}
-                  <div className="relative overflow-hidden rounded-xl border border-slate-100 shadow-sm aspect-[16/9] mb-4 bg-slate-100">
+                  <div 
+                    onClick={() => handleAction(item)}
+                    className="relative overflow-hidden rounded-xl border border-slate-100 shadow-sm aspect-[16/9] mb-4 bg-slate-100 cursor-pointer"
+                  >
                     <img 
                       src={item.imageUrl} 
                       alt={item.heading} 

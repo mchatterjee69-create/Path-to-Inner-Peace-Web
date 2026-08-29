@@ -34,7 +34,9 @@ export const ExplorePathSerialView: React.FC = () => {
     setIsStressResetModalOpen,
     setIsRelationshipHealingModalOpen,
     setIsMindfulnessJourneyModalOpen,
-    setIsDeeperAwakeningModalOpen 
+    setIsDeeperAwakeningModalOpen,
+    setIsMeditationCampModalOpen,
+    setIsWeeklyLiveSessionModalOpen
   } = useApp();
 
   // Career Axis Floating Chat state
@@ -49,13 +51,13 @@ export const ExplorePathSerialView: React.FC = () => {
         setActiveView('breathing');
         break;
       case 'meditation':
-        setActiveView('meditation');
+        setIsMeditationCampModalOpen(true);
         break;
       case 'sound':
         setActiveView('sound-therapy');
         break;
       case 'register':
-        setIsRegistrationModalOpen(true);
+        setIsWeeklyLiveSessionModalOpen(true);
         break;
       case 'whatsapp':
         window.open('https://wa.me/919163670300', '_blank');
@@ -179,7 +181,10 @@ export const ExplorePathSerialView: React.FC = () => {
                 >
                   <div>
                     {/* Heading */}
-                    <div className="flex items-center gap-2.5 mb-3">
+                    <div 
+                      onClick={() => handleInnerShiftAction(item)}
+                      className="flex items-center gap-2.5 mb-3 cursor-pointer"
+                    >
                       <div className="p-2 rounded-lg bg-emerald-50 text-[#1b4d2e] group-hover:bg-[#1b4d2e] group-hover:text-white transition-colors">
                         <Icon className="w-5 h-5" />
                       </div>
@@ -189,7 +194,10 @@ export const ExplorePathSerialView: React.FC = () => {
                     </div>
 
                     {/* Image */}
-                    <div className="relative overflow-hidden rounded-xl border border-slate-100 shadow-sm aspect-[16/9] mb-4 bg-slate-100">
+                    <div 
+                      onClick={() => handleInnerShiftAction(item)}
+                      className="relative overflow-hidden rounded-xl border border-slate-100 shadow-sm aspect-[16/9] mb-4 bg-slate-100 cursor-pointer"
+                    >
                       <img 
                         src={item.imageUrl} 
                         alt={item.heading} 
