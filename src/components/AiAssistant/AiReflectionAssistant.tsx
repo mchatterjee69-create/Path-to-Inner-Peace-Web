@@ -118,26 +118,93 @@ export const AiReflectionAssistant: React.FC = () => {
   };
 
   const samplePrompts = [
-    "I'm feeling overwhelmed by work stress today.",
-    "How can I break out of negative overthinking loops?",
-    "Give me a 2-minute CBT re-frame for anxiety.",
-    "What meditation breath pattern helps before sleep?"
+    "What is the 5-Day Mental Reset roadmap?",
+    "How do I join the Sunday Live Masterclass on Google Meet?",
+    "How does 4-7-8 vagus breathing work?",
+    "How do 432Hz and 528Hz sound frequencies help?",
+    "I'm feeling overwhelmed by overthinking loops.",
+    "How do I book a 1:1 Career Axis consultation?"
   ];
+
+  // Helper to render basic markdown (bold text, lists, linebreaks) cleanly
+  const renderFormattedText = (rawText: string) => {
+    const lines = rawText.split('\n');
+    return (
+      <div className="space-y-2">
+        {lines.map((line, lIdx) => {
+          const trimmed = line.trim();
+          if (!trimmed) {
+            return <div key={lIdx} className="h-1" />;
+          }
+
+          // Bullet points
+          if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+            const content = trimmed.substring(2);
+            return (
+              <div key={lIdx} className="flex items-start gap-2 pl-2">
+                <span className="text-[#D4AF37] font-bold mt-0.5">•</span>
+                <span className="flex-1">{formatInline(content)}</span>
+              </div>
+            );
+          }
+
+          // Numbered lists
+          const numMatch = trimmed.match(/^(\d+)\.\s+(.*)/);
+          if (numMatch) {
+            return (
+              <div key={lIdx} className="flex items-start gap-2 pl-2">
+                <span className="text-[#0B6B53] font-bold text-xs mt-0.5">{numMatch[1]}.</span>
+                <span className="flex-1">{formatInline(numMatch[2])}</span>
+              </div>
+            );
+          }
+
+          return (
+            <p key={lIdx} className="leading-relaxed">
+              {formatInline(line)}
+            </p>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const formatInline = (text: string) => {
+    // Parse **bold** text
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, pIdx) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong key={pIdx} className="font-semibold text-slate-900">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      if (part.startsWith('*') && part.endsWith('*')) {
+        return (
+          <em key={pIdx} className="italic">
+            {part.slice(1, -1)}
+          </em>
+        );
+      }
+      return part;
+    });
+  };
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-6 animate-fadeIn pb-24">
       
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-[#0B6B53] font-bold text-xs rounded-full border border-emerald-100">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-[#0B6B53] font-bold text-xs rounded-full border border-emerald-100 shadow-sm">
           <Compass className="w-4 h-4 text-[#0B6B53]" />
-          <span>24/7 MIND MASTERY ASSISTANT</span>
+          <span>24/7 WELLNESS HUB COMPANION</span>
         </div>
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
-          Inner Peace Reflection Guide
+          Inner Peace Guide
         </h1>
         <p className="text-slate-600 text-sm">
-          Get real-time CBT re-framing, reflection guidance, and custom affirmations for your mind.
+          Ask any question about our Wellness Hub programs, daily practices, live masterclasses, or get real-time CBT reframing.
         </p>
       </div>
 
@@ -152,11 +219,11 @@ export const AiReflectionAssistant: React.FC = () => {
             </div>
             <div>
               <h3 className="font-heading font-bold text-sm text-white flex items-center gap-2">
-                <span>Mind Mastery & Stress Reset Coach</span>
+                <span>Inner Peace Guide & Coach</span>
               </h3>
               <span className="text-[10px] text-emerald-200 flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Reflection Guide Active & Ready
+                Context-Aware & Live
               </span>
             </div>
           </div>
@@ -176,7 +243,7 @@ export const AiReflectionAssistant: React.FC = () => {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`flex gap-3 max-w-[85%] ${
+              className={`flex gap-3 max-w-[88%] ${
                 msg.sender === 'user' ? 'ml-auto flex-row-reverse' : 'mr-auto'
               }`}
             >
@@ -191,16 +258,20 @@ export const AiReflectionAssistant: React.FC = () => {
               </div>
 
               <div
-                className={`p-4 rounded-2xl text-xs sm:text-sm space-y-2 shadow-sm ${
+                className={`p-4 rounded-2xl text-xs sm:text-sm space-y-2.5 shadow-sm ${
                   msg.sender === 'user'
                     ? 'bg-[#0B6B53] text-white rounded-tr-none'
                     : 'bg-white text-slate-800 border border-slate-200 rounded-tl-none'
                 }`}
               >
-                <p className="leading-relaxed whitespace-pre-line">{msg.text}</p>
+                {msg.sender === 'user' ? (
+                  <p className="leading-relaxed whitespace-pre-line">{msg.text}</p>
+                ) : (
+                  renderFormattedText(msg.text)
+                )}
 
                 {msg.affirmation && (
-                  <div className="p-3 bg-amber-50 border-l-2 border-[#D4AF37] text-slate-900 text-xs rounded-r-xl font-medium">
+                  <div className="p-3 bg-amber-50/90 border-l-2 border-[#D4AF37] text-slate-900 text-xs rounded-r-xl font-medium shadow-xs">
                     <span className="text-[#0B6B53] font-bold block mb-0.5">✨ Daily Affirmation:</span>
                     "{msg.affirmation}"
                   </div>
@@ -220,7 +291,7 @@ export const AiReflectionAssistant: React.FC = () => {
               </div>
               <div className="bg-white p-4 rounded-2xl border border-slate-200 text-xs text-slate-500 italic flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                Reflection Guide is crafting your personalized CBT reflection...
+                Inner Peace Guide is formulating your personalized answer...
               </div>
             </div>
           )}
@@ -228,15 +299,15 @@ export const AiReflectionAssistant: React.FC = () => {
         </div>
 
         {/* Suggested Quick Prompts */}
-        <div className="p-3 bg-white border-t border-slate-100 flex items-center gap-2 overflow-x-auto">
-          <Lightbulb className="w-4 h-4 text-[#D4AF37] shrink-0" />
+        <div className="p-2.5 bg-white border-t border-slate-100 flex items-center gap-2 overflow-x-auto scrollbar-none">
+          <Lightbulb className="w-4 h-4 text-[#D4AF37] shrink-0 ml-1" />
           {samplePrompts.map((sp, idx) => (
             <button
               key={idx}
               type="button"
               disabled={loading}
               onClick={() => sendQuery(sp)}
-              className="px-3 py-1 bg-slate-100 hover:bg-emerald-50 hover:text-[#0B6B53] text-[11px] font-medium text-slate-600 rounded-full whitespace-nowrap transition-colors disabled:opacity-50"
+              className="px-3 py-1 bg-slate-100 hover:bg-emerald-50 hover:text-[#0B6B53] text-[11px] font-medium text-slate-700 rounded-full whitespace-nowrap transition-colors disabled:opacity-50 border border-slate-200/60 shrink-0"
             >
               {sp}
             </button>
@@ -247,7 +318,7 @@ export const AiReflectionAssistant: React.FC = () => {
         <form onSubmit={handleSend} className="p-4 bg-white border-t border-slate-200 flex items-center gap-2">
           <input
             type="text"
-            placeholder="Ask Reflection Guide about your overthinking or feelings..."
+            placeholder="Ask anything about the wellness hub, practices, live sessions, or share what's on your mind..."
             value={inputPrompt}
             onChange={(e) => setInputPrompt(e.target.value)}
             className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
@@ -255,7 +326,7 @@ export const AiReflectionAssistant: React.FC = () => {
           <button
             type="submit"
             disabled={loading || !inputPrompt.trim()}
-            className="px-5 py-3 bg-[#0B6B53] hover:bg-[#134E4A] disabled:opacity-50 text-white font-bold text-sm rounded-xl transition-all flex items-center gap-1.5"
+            className="px-5 py-3 bg-[#0B6B53] hover:bg-[#134E4A] disabled:opacity-50 text-white font-bold text-sm rounded-xl transition-all flex items-center gap-1.5 shrink-0"
           >
             <Send className="w-4 h-4" />
           </button>

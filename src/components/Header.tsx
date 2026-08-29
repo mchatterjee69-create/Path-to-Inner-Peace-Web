@@ -16,7 +16,6 @@ import {
   Sparkles,
   PhoneCall,
   MessageCircle,
-  Video,
   ChevronRight
 } from 'lucide-react';
 
@@ -257,27 +256,6 @@ export const Header: React.FC = () => {
                   </button>
                 );
               })}
-
-              {/* Extra Practice & Video Shortcuts */}
-              <div className="pt-3 border-t border-slate-100 space-y-1">
-                <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-                  Quick Wellness Hub
-                </p>
-                <button
-                  onClick={() => { setActiveView('cbt-video'); setMobileMenuOpen(false); }}
-                  className="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-2.5"
-                >
-                  <Video className="w-4 h-4 text-[#0B6B53]" />
-                  <span>CBT 12 Master Video Techniques</span>
-                </button>
-                <button
-                  onClick={() => { setActiveView('breathing'); setMobileMenuOpen(false); }}
-                  className="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-2.5"
-                >
-                  <Sun className="w-4 h-4 text-[#0B6B53]" />
-                  <span>4-7-8 Breathing Reset</span>
-                </button>
-              </div>
             </div>
 
             {/* Drawer Footer Actions */}

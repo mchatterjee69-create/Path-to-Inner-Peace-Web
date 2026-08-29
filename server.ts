@@ -528,104 +528,202 @@ app.post(["/create-subscription", "/api/create-subscription"], async (req, res) 
   }
 });
 
-// Helper for dynamic intelligent CBT response when Gemini API is unavailable or unconfigured
+// Helper for dynamic intelligent CBT & Wellness Hub response when Gemini API is unavailable or offline
 function generateDynamicCbtResponse(prompt: string, currentDay: number = 1, mood: string = 'Calm') {
   const p = prompt.toLowerCase().trim();
   
-  if (p.includes('hi') || p.includes('hello') || p.includes('hey') || p.includes('namaste') || p.includes('greetings')) {
+  // 1. Greetings & Introductions
+  if (p.includes('hi') || p.includes('hello') || p.includes('hey') || p.includes('namaste') || p.includes('greetings') || p === 'who are you' || p.includes('what can you do')) {
     return {
-      response: `Namaste! I am your 24/7 Mind Mastery & Stress Reset Coach on Day ${currentDay} of your inner peace journey.\n\nWhether you are dealing with a busy mind, seeking CBT reframing for stress, or wanting a quick breath regulation exercise, I am here to support you. What is currently present in your mind right now?`,
-      suggestedAffirmation: "I welcome peace and clarity into this present moment."
+      response: `Namaste! I am your **Inner Peace Guide & Mind Mastery AI Companion** for the **Path to Inner Peace** Wellness Hub founded by Coach Mainak Chatterjee.\n\nI am here to support your mental wellness journey 24/7. You can ask me about:\n- **Wellness Hub Programs**: The 5-Day Mental Reset Challenge, Inner Shift, Inner Revolution, and Career Axis.\n- **Daily Practices**: 4-7-8 vagus breathwork, 432Hz/528Hz sound therapy, guided meditation camps, and CBT 12 master techniques.\n- **Live Masterclasses**: How to join our Sunday 11:00 AM IST live interactive session via Google Meet.\n- **Personal Guidance**: Overcoming overthinking, anxiety, work stress, sleep issues, relationship healing, and emotional reframing.\n\nWhat is on your mind or how can I assist your practice today?`,
+      suggestedAffirmation: "I welcome peace, clarity, and mindfulness into this moment."
     };
   }
 
-  if (p.includes('anxiety') || p.includes('anxious') || p.includes('fear') || p.includes('panic') || p.includes('worry') || p.includes('nervous')) {
+  // 2. Founder & Coach Mainak Chatterjee
+  if (p.includes('mainak') || p.includes('chatterjee') || p.includes('founder') || p.includes('coach') || p.includes('mentor') || p.includes('who created')) {
     return {
-      response: `Anxiety is your autonomic nervous system's misplaced attempt to protect you from uncertainty. When anxiety surges, your amygdala triggers a sympathetic fight-or-flight response.\n\nTo signal safety to your nervous system immediately, perform the **4-7-8 Vagus Nerve Reset**: Inhale through your nose for 4 seconds, gently hold for 7 seconds, and exhale slowly through un-pursed lips for 8 seconds. Repeat this 3 times.\n\nAsk yourself: *"Is this threat real right now in this exact room, or is my mind projecting into the future?"* Grounding yourself in physical facts brings immediate relief.`,
-      suggestedAffirmation: "I release the need to control the future and rest safely in the present moment."
+      response: `**Coach Mainak Chatterjee** is the founder of the **Path to Inner Peace** wellness platform.\n\nHe is an accomplished Mindset & Life Coach, Certified CBT Practitioner, International Wellness & Spiritual Mentor, and Career Consultant. Mainak combines evidence-based Cognitive Behavioral Therapy (CBT), somatic vagal nerve regulation, sound healing frequencies, and ancient mindfulness traditions to help thousands of individuals achieve emotional calm, mental clarity, and purposeful living.\n\nHe leads our **5-Day Mental Reset Challenge**, conducts **Weekly Live Masterclasses** every Sunday at 11:00 AM IST on Google Meet, and provides personalized 1:1 sessions through **Career Axis**.`,
+      suggestedAffirmation: "I am guided toward higher awareness and grounded inner peace."
     };
   }
 
-  if (p.includes('overthink') || p.includes('thought') || p.includes('loop') || p.includes('mind') || p.includes('head') || p.includes('ruminat')) {
+  // 3. 5-Day Mental Reset Challenge
+  if (p.includes('5-day') || p.includes('5 day') || p.includes('challenge') || p.includes('curriculum') || p.includes('roadmap') || (p.includes('day') && (p.includes('1') || p.includes('2') || p.includes('3') || p.includes('4') || p.includes('5')))) {
     return {
-      response: `Overthinking is cognitive entanglement—confusing the act of *thinking* with the act of *solving*.\n\nIn CBT psychology, we practice becoming the **Calm Observer**. Imagine sitting by a peaceful river. Each thought is simply a floating leaf drifting past. You do not need to jump into the water to grab every leaf—just observe them float away.\n\nTry labeling your thoughts silently: *"I am noticing the thought that..."* This simple linguistic shift instantly creates healthy space between your core self and the mental noise.`,
-      suggestedAffirmation: "I am the peaceful observer of my thoughts, not the noise itself."
+      response: `The **5-Day Mental Reset Challenge** is a transformative 30-minute daily roadmap:\n\n- **Day 1: Nervous System Reset & Box Breathing** — Regulate your autonomic nervous system, stimulate the vagus nerve, and dissolve physical fight-or-flight tension.\n- **Day 2: Sound Healing & Theta Frequencies** — Immerse in 432Hz miracle tones and 528Hz restorative frequencies to calm brainwave activity into theta states.\n- **Day 3: CBT Cognitive Distortions & Journaling** — Identify automatic negative thoughts, break catastrophic thought loops, and rewrite cognitive scripts.\n- **Day 4: Emotional Release & Forgiveness** — Release repressed emotional baggage, practice heart-centered release, and reclaim inner energy.\n- **Day 5: Awakening & Daily Habits** — Anchor sustainable morning/evening routines and earn your **Verified Certificate of Completion**.\n\nYou are currently on Day ${currentDay}! You can access today's lesson from your Dashboard.`,
+      suggestedAffirmation: "Day by day, I rewire my mind for lasting clarity and calm."
     };
   }
 
-  if (p.includes('stress') || p.includes('overwhelm') || p.includes('work') || p.includes('pressure') || p.includes('busy') || p.includes('exhaust')) {
+  // 4. Weekly Live Sessions
+  if (p.includes('weekly') || p.includes('live session') || p.includes('sunday') || p.includes('google meet') || p.includes('meet link') || p.includes('masterclass')) {
     return {
-      response: `Overwhelm happens when your mind tries to hold ten future tasks at once instead of honoring the single task before you.\n\nTake a 60-second physical reset right now: drop your shoulders away from your ears, unclench your jaw, and let your belly soften completely on your next breath.\n\nAsk yourself: *"What is the single most meaningful action I can take in the next 15 minutes?"* Focus on that one step. Excellence comes from focused calm, not hurried exhaustion.`,
-      suggestedAffirmation: "I prioritize my inner peace over external urgency."
+      response: `Our **Weekly Live Mental Fitness Masterclass** takes place every **Sunday at 11:00 AM IST** live on **Google Meet** with Coach Mainak Chatterjee.\n\n**Key Highlights:**\n- Live interactive video session & guided group meditation.\n- Deep-dive into CBT reframing, emotional resilience, and mindset mastery.\n- Direct **Live Q&A** where you can ask your personal questions.\n- Free session worksheet & actionable summary.\n\n**How to Join:**\nClick **"Register Now"** under Weekly Live Sessions on the Inner Shift or Explore page. Fill in your name and WhatsApp number to receive your private Google Meet invitation and a 15-minute start alert!`,
+      suggestedAffirmation: "I show up consistently for my growth, mental health, and community."
     };
   }
 
+  // 5. Guided Meditation & Meditation Camps
+  if (p.includes('camp') || p.includes('retreat') || p.includes('guided meditation') || p.includes('meditation') || p.includes('dhyana') || p.includes('vipassana') || p.includes('silence')) {
+    return {
+      response: `Under **Inner Shift**, we offer immersive **Guided Meditation & Camps** designed for both beginners and seasoned practitioners:\n\n- **Weekend Silence & Dhyana Retreat**: Deep sensory withdrawal, breath awareness, and silent reflection.\n- **7-Day Guided Inner Peace Camp**: Daily progressive mindfulness practices to balance emotional reactivity.\n- **21-Day Sunrise Mindfulness Camp**: Morning 6:00 AM IST routine establishment for neuroplasticity and emotional resilience.\n\n**Daily Batches**: Morning (6:00 AM IST) and Evening (7:00 PM IST).\nYou can register for upcoming camps anytime by clicking the **Guided Meditation** card in Inner Shift!`,
+      suggestedAffirmation: "In the stillness of meditation, I discover my infinite peace."
+    };
+  }
+
+  // 6. Sound Therapy & Binaural Frequencies
+  if (p.includes('sound') || p.includes('frequency') || p.includes('432') || p.includes('528') || p.includes('binaural') || p.includes('theta') || p.includes('healing audio') || p.includes('singing bowl')) {
+    return {
+      response: `**Sound Frequency Therapy** works through acoustic brainwave entrainment to shift your neural activity from frantic Beta states into calm Alpha and deep Theta states:\n\n- **432 Hz (Miracle Tone)**: Aligns with natural biological resonance, reduces cortisol, and brings deep emotional tranquility.\n- **528 Hz (Transformation & Repair)**: Known as the love frequency, enhances mental clarity, cell recovery, and emotional release.\n- **Theta Waves (4-7 Hz)**: Ideal for meditation, creative insight, and dissolving anxiety.\n- **Tibetan Singing Bowls**: Acoustic vibration that balances your energetic centers (Chakras).\n\nYou can listen to our soundscapes in the **Sound Therapy** player inside Inner Shift!`,
+      suggestedAffirmation: "Healing vibrations restore harmony to every cell of my body."
+    };
+  }
+
+  // 7. 4-7-8 Breathing & Breathwork
+  if (p.includes('breath') || p.includes('4-7-8') || p.includes('pranayama') || p.includes('box breath') || p.includes('vagus') || p.includes('nervous system')) {
+    return {
+      response: `The **4-7-8 Vagus Nerve Breathing Technique** is an evidence-backed natural tranquilizer for your nervous system:\n\n1. **Inhale (4s)**: Inhale deeply and quietly through your nose into your belly, counting to 4.\n2. **Hold (7s)**: Gently retain your breath for 7 seconds without straining.\n3. **Exhale (8s)**: Slowly and completely exhale through slightly parted lips for 8 seconds with a soft whoosh sound.\n\nRepeat this cycle 4 to 8 times. The extended 8-second exhale stimulates the vagus nerve, immediately slowing heart rate and activating the parasympathetic "rest-and-digest" response.\n\nPractice with our interactive animated breathing sphere in the **4-7-8 Breathing** module!`,
+      suggestedAffirmation: "With every conscious exhale, I release tension and invite peace."
+    };
+  }
+
+  // 8. CBT 12 Master Video Techniques & Psychology
+  if (p.includes('cbt') || p.includes('cognitive') || p.includes('distortion') || p.includes('reframe') || p.includes('video technique') || p.includes('psycholog') || p.includes('thought record')) {
+    return {
+      response: `**Cognitive Behavioral Therapy (CBT)** is built on the principle that *thoughts cause feelings, which drive behaviors*—not external events themselves.\n\nOur **CBT 12 Master Video Techniques** include:\n1. **Cognitive Restructuring**: Identifying unhelpful thoughts and replacing them with objective truths.\n2. **Decatastrophizing**: Answering "What is the realistic worst-case scenario and how will I handle it?"\n3. **Thought-Stopping & Thought Defusion**: Creating distance between the observer and the mental noise.\n4. **Behavioral Activation**: Taking small, values-driven actions to overcome emotional paralysis.\n\nYou can explore all 12 video modules under the CBT Video section in your dashboard!`,
+      suggestedAffirmation: "I am not my thoughts; I am the conscious master of my mind."
+    };
+  }
+
+  // 9. Career Axis (Consulting & Mentorship)
+  if (p.includes('career') || p.includes('career axis') || p.includes('job') || p.includes('consult') || p.includes('mentorship') || p.includes('interview') || p.includes('burnout') || p.includes('promotion')) {
+    return {
+      response: `**Career Axis** is our 1:1 professional consulting and mentorship wing led by Coach Mainak Chatterjee.\n\n**Who It Is For:**\n- Students choosing higher education specializations.\n- Professionals facing workplace burnout, imposter syndrome, or career stagnation.\n- Career switchers transitioning into tech, leadership, or entrepreneurship.\n\n**What You Get:**\n- 60-Minute 1:1 personalized Google Meet consultation.\n- Psychological strengths assessment & tailored roadmap.\n- Practical career resilience and interview mindset strategies.\n\nYou can book your session by visiting **Career Axis** in the navigation menu and selecting your preferred date and time slot!`,
+      suggestedAffirmation: "My career path is aligned with my core strengths, purpose, and peace."
+    };
+  }
+
+  // 10. Inner Revolution (Programs)
+  if (p.includes('inner revolution') || p.includes('programs') || p.includes('relationship') || p.includes('awakening') || p.includes('presence')) {
+    return {
+      response: `**Inner Revolution** is our advanced transformational suite featuring 4 comprehensive self-paced programs:\n\n1. **Stress & Anxiety Reset**: Comprehensive nervous system restoration and vagal toning.\n2. **Relationship & Emotional Healing**: Attachment style mastery, boundary setting, and empathetic communication.\n3. **Mindfulness & Presence Journey**: Dissolving autopilot living and cultivating deep everyday awareness.\n4. **Deeper Spiritual Awakening**: Transcending egoic conditioning and discovering unconditional inner freedom.\n\nYou can explore these programs and enroll directly from the **Inner Revolution** section!`,
+      suggestedAffirmation: "I step courageously into my inner transformation and emotional freedom."
+    };
+  }
+
+  // 11. WhatsApp Community
+  if (p.includes('whatsapp') || p.includes('community') || p.includes('group') || p.includes('morning mantra') || p.includes('daily motivation')) {
+    return {
+      response: `The **Path to Inner Peace WhatsApp Community** is a positive, supportive space where you receive:\n- Daily **Morning Mantras** and mindfulness quotes.\n- 15-minute reminders for Sunday Live Sessions.\n- Exclusive wellness resources, audio guided tracks, and book recommendations.\n- Safe cohort interaction with fellow practitioners.\n\nYou can join anytime by clicking the WhatsApp link in the **Inner Shift** view or reaching out to us at **+91 9163670300**!`,
+      suggestedAffirmation: "I am surrounded by positive, uplifting energy and community."
+    };
+  }
+
+  // 12. Certificates & Progress
+  if (p.includes('certificate') || p.includes('graduation') || p.includes('quiz') || p.includes('badge') || p.includes('complete')) {
+    return {
+      response: `You earn your official **Path to Inner Peace Certificate of Completion** upon finishing all 5 days of the Mental Reset Challenge!\n\n**To graduate:**\n1. Complete Days 1 through 5 of the challenge modules.\n2. Complete the daily reflection journal.\n3. Pass the interactive 5-Day Mind Mastery Quiz on Day 5.\n\nOnce completed, your certificate will be generated automatically in your Dashboard with your full name, verification badge, and downloadable PDF format!`,
+      suggestedAffirmation: "I honor my commitment to personal growth and self-mastery."
+    };
+  }
+
+  // 13. Overthinking, Anxiety, & Panic
+  if (p.includes('anxiety') || p.includes('anxious') || p.includes('panic') || p.includes('worry') || p.includes('nervous') || p.includes('fear')) {
+    return {
+      response: `Anxiety is your autonomic nervous system's misplaced attempt to protect you from uncertainty. When anxiety surges, your amygdala triggers a fight-or-flight response.\n\n**Immediate CBT Grounding (5-4-3-2-1):**\n- Notice **5 things you can see** around you.\n- Notice **4 things you can physically touch**.\n- Notice **3 distinct sounds**.\n- Notice **2 scents**.\n- Notice **1 positive truth about yourself**.\n\nCombine this with 3 cycles of **4-7-8 breathing** (Inhale 4s, Hold 7s, Exhale 8s). Ask yourself: *"Is this threat happening right now in this exact physical room, or is my mind anticipating the future?"* Grounding in sensory reality dissolves panic.`,
+      suggestedAffirmation: "I release the illusion of control and rest safely in this present moment."
+    };
+  }
+
+  // 14. Overthinking Loops
+  if (p.includes('overthink') || p.includes('loop') || p.includes('head') || p.includes('ruminat') || p.includes('racing')) {
+    return {
+      response: `Overthinking is cognitive entanglement—confusing the act of *thinking* with the act of *solving*.\n\nIn CBT psychology, we practice becoming the **Calm Observer**:\n1. **Externalize the thought**: Say silently, *"I am noticing the thought that everything might go wrong."* Notice the difference between *being* the thought and *witnessing* it.\n2. **The 10-Minute Worry Window**: Schedule a specific 10-minute window later in the day to write down your worries. If a worry arises now, write it down and return to the present.\n3. **Physical Anchoring**: Feel your feet firmly on the floor. Take 3 deep belly breaths. The mind cannot stay caught in a loop when you bring 100% awareness to the physical body.`,
+      suggestedAffirmation: "I am the calm sky; my thoughts are simply passing clouds."
+    };
+  }
+
+  // 15. Sleep & Insomnia
   if (p.includes('sleep') || p.includes('night') || p.includes('insomnia') || p.includes('bed') || p.includes('rest') || p.includes('tired')) {
     return {
-      response: `Preparing your mind for restorative sleep requires signaling physiological safety to your body.\n\nAs you lie down, try **Somatic Progressive Muscle Release**: gently squeeze your toes for 5 seconds, then let them fall completely limp. Work your way up through your legs, stomach, shoulders, and face.\n\nCombine this with our Day 1 or Day 2 Binaural Theta Soundscapes in the app to synchronize your brainwaves into deep delta sleep.`,
-      suggestedAffirmation: "I surrender today's efforts and rest in complete peace."
+      response: `Restful sleep requires signaling physiological safety to your autonomic nervous system.\n\n**Nighttime Sleep Routine:**\n1. **Theta Sound Frequency**: Put on headphones and play our 432Hz / Theta soundscape from the Sound Therapy tab.\n2. **Progressive Somatic Release**: As you lie in bed, gently tighten your toes for 5 seconds, then let them go completely limp. Work your way up your legs, belly, shoulders, jaw, and eyes.\n3. **Mental Download**: If your mind is racing with tomorrow's to-do list, write it on a piece of paper beside your bed to release cognitive load.\n\nRemind yourself: *"My day is complete. There is nothing I need to solve tonight."*`,
+      suggestedAffirmation: "I surrender today's efforts and allow my body and mind to deeply rest."
     };
   }
 
+  // 16. Anger & Frustration
   if (p.includes('anger') || p.includes('angry') || p.includes('frustrat') || p.includes('irritat') || p.includes('mad')) {
     return {
-      response: `Anger is often a secondary emotion—a boundary alarm signaling that a core value, expectation, or boundary was crossed.\n\nBefore reacting, practice the **Somatic Pause**: place your hand over your solar plexus, breathe deeply into your belly, and allow the heat of the anger to soften. \n\nAsk yourself: *"What underlying need or hurt is my anger trying to protect?"* Responding from calm awareness gives you back your personal power.`,
-      suggestedAffirmation: "I honor my feelings without letting anger drive my actions."
+      response: `Anger is a secondary emotion—an internal boundary alarm signaling that an expectation, boundary, or value was violated.\n\n**The Somatic Pause:**\n1. Do not speak or type while in high sympathetic arousal. Place your palm over your heart or solar plexus.\n2. Take 3 deep diaphragmatic breaths with extended exhales.\n3. Ask: *"What underlying hurt or vulnerable feeling is my anger trying to protect?"*\n\nWhen you understand the root cause of the trigger, you can respond with assertiveness and calm clarity rather than reactive anger.`,
+      suggestedAffirmation: "I honor my feelings without allowing anger to dictate my reactions."
     };
   }
 
-  if (p.includes('sad') || p.includes('grief') || p.includes('lonely') || p.includes('cry') || p.includes('depress') || p.includes('hurt')) {
+  // 17. Sadness, Grief, Loneliness & Depression
+  if (p.includes('sad') || p.includes('grief') || p.includes('lonely') || p.includes('cry') || p.includes('depress') || p.includes('hurt') || p.includes('heartbreak')) {
     return {
-      response: `Heavy emotions like sadness or grief are not signs of weakness—they are signs of your deep capacity to care and feel.\n\nInstead of pushing the feeling away or judging yourself, offer yourself radical self-compassion. Place both hands over your heart, feel the warmth of your skin, and tell yourself: *"It is okay to feel this way right now. I am here for myself."*\n\nGive yourself permission to go gently today. Healing is not linear, and every breath you take is progress.`,
-      suggestedAffirmation: "I meet myself with gentle kindness, love, and radical acceptance."
+      response: `Heavy emotions are not signs of weakness—they are proof of your deep human capacity to love and care.\n\n**Radical Self-Compassion Practice:**\n1. Place both hands over your heart. Feel the physical warmth of your skin.\n2. Speak to yourself as you would to a dear friend: *"It is completely okay to feel this way right now. I am here for myself."*\n3. Allow tears or heaviness to flow without self-judgment. Emotions are energy in motion; they need permission to move through you.\n\nBe gentle with yourself today. One breath at a time is all that is required.`,
+      suggestedAffirmation: "I meet myself with gentle kindness, love, and unconditional acceptance."
     };
   }
 
-  if (p.includes('focus') || p.includes('procrastinat') || p.includes('distract') || p.includes('motivation') || p.includes('lazy')) {
-    return {
-      response: `Procrastination is rarely a time-management issue; it is an emotional regulation response to perceived discomfort or fear of failure.\n\nTo break the resistance, apply the **5-Minute Micro-Step Rule**: promise yourself you will work on the task for just 5 minutes with zero expectation of perfection. Once you overcome the initial inertia, momentum naturally takes over.\n\nClean your physical space, take 3 deep breath cycles, and begin with just one small action.`,
-      suggestedAffirmation: "I move forward with ease, taking one small mindful step at a time."
-    };
-  }
-
-  if (p.includes('meditat') || p.includes('breath') || p.includes('challenge') || p.includes('day') || p.includes('mainak') || p.includes('certificate')) {
-    return {
-      response: `In the 5-Day Mental Reset Challenge by Coach Mainak Chatterjee, daily 30-minute practice is designed to rewire your neural pathways through sound therapy, box breathing, CBT journaling, and guided meditation.\n\nConsistency matters far more than perfection. Even 10-15 minutes of present awareness today strengthens your brain's prefrontal cortex and lowers cortisol levels.\n\nCheck your Dashboard for today's Day ${currentDay} guided lesson and soundscape!`,
-      suggestedAffirmation: "Every moment of present awareness rewires my mind for lasting peace."
-    };
-  }
-
-  // Extract key terms from user's custom prompt to make the response dynamically personalized
-  const userKeywords = prompt.trim().split(' ').filter(w => w.length > 3).slice(0, 3).join(', ');
+  // 18. Dynamic Contextual Fallback for any other custom prompt
+  const userKeywords = prompt.trim().split(' ').filter(w => w.length > 3).slice(0, 4).join(', ');
   const topicSummary = userKeywords ? `regarding "${userKeywords}"` : 'on your mind';
 
   return {
-    response: `Thank you for sharing your thoughts ${topicSummary}. On Day ${currentDay} of your Mind Reset journey, bringing conscious awareness to whatever you are experiencing is the first step toward freedom.\n\nIn CBT psychology, we recognize that our automatic interpretations create our emotional reality. When you examine your thoughts around this topic, ask yourself:\n1. *"Is this thought 100% true, or is it an assumption?"*\n2. *"How does holding this thought make me feel?"*\n3. *"What is a more compassionate, peaceful way to view this situation?"*\n\nPause, place a hand on your heart, and take three deep, slow belly breaths. You have the inner power to choose peace in every moment.`,
-    suggestedAffirmation: `I choose peace, clarity, and self-compassion when reflecting ${topicSummary}.`
+    response: `Thank you for bringing your question ${topicSummary} to the **Inner Peace Guide**.\n\nIn our Mind Mastery framework, conscious awareness is the foundation of transformation. Whenever you face questions or challenges around this topic, consider these 3 CBT reflection steps:\n\n1. **Examine the Interpretation**: *"Is my thought an absolute objective fact, or an automatic assumption?"*\n2. **Check the Emotional Impact**: *"How does holding this perspective affect my peace of mind and bodily tension?"*\n3. **Create an Empowered Reframe**: *"What is a more compassionate, grounded, and constructive perspective I can choose right now?"*\n\nTake three deep belly breaths (inhale for 4 seconds, exhale for 8 seconds). Feel free to explore our **4-7-8 Breathing**, **Sound Therapy**, or **5-Day Challenge** modules to ground yourself in peace!`,
+    suggestedAffirmation: `I choose clarity, peace of mind, and inner strength as I reflect ${topicSummary}.`
   };
 }
 
-// AI Reflection Assistant endpoint using Gemini 3.6 Flash
+// AI Reflection Assistant endpoint using Gemini 3.7 Flash
 app.post("/api/ai-reflection", async (req, res) => {
   try {
     const { prompt, journalContext, currentDay, mood, history } = req.body;
     
     const apiKey = process.env.GEMINI_API_KEY;
 
-    const systemPrompt = `You are the "Mind Mastery & Stress Reset Coach" for the "Path to Inner Peace" 5-Day Mental Reset Challenge by Coach Mainak Chatterjee.
-You are an empathetic psycho-spiritual guide trained in CBT psychology, breathwork, vagus nerve regulation, and mindfulness methods.
-Your goal is to answer ANY prompt or question from the user with direct, thoughtful, and specific guidance. Never give repetitive generic answers. Every response must address the user's exact words.
+    const systemPrompt = `You are the "Inner Peace Guide & Mind Mastery AI Companion" for the "Path to Inner Peace" wellness hub ecosystem founded by Coach Mainak Chatterjee.
 
-User Context:
-- Current Challenge Day: ${currentDay || 1}
-- Recent Mood: ${mood || 'Calm'}
-${journalContext ? `- Journal Entry: "${journalContext}"` : ''}
+ABOUT THE WELLNESS HUB & COACH MAINAK CHATTERJEE:
+- Founder: Mainak Chatterjee (Mindset & Life Coach, Certified CBT Practitioner, International Wellness & Spiritual Mentor, and Career Consultant).
+- Core Philosophy: Bridging modern CBT psychology, vagus nerve somatic regulation, sound therapy (432Hz/528Hz), and ancient mindfulness practices for practical daily transformation.
+- Hub Features & Services:
+  1. 5-Day Mental Reset Challenge:
+     - Day 1: Nervous System Reset & Box Breathing (Vagus nerve activation, 4-7-8 breathing, parasympathetic reset).
+     - Day 2: Sound Healing & Theta Frequencies (432Hz Miracle tone, 528Hz DNA repair, binaural theta frequencies, chakra balancing).
+     - Day 3: CBT Cognitive Distortions & Journaling (All-or-nothing thinking, catastrophizing, emotional reasoning, 3-column thought record).
+     - Day 4: Emotional Release & Forgiveness (Ho'oponopono, heart chakra clearing, emotional freedom).
+     - Day 5: Awakening, Daily Habits & Certificate of Completion (Morning mantras, evening reflections, sustainable routines, verified certificate).
+  2. Inner Shift:
+     - Guided Meditation & Camps: Dhyana, Silent Mindfulness, Vipassana, Weekend Silence Retreats, 7-Day / 21-Day Sunrise Camps (Morning 6:00 AM & Evening 7:00 PM IST batches).
+     - Sound Therapy: 432Hz, 528Hz, Tibetan Singing Bowls, Binaural Theta Frequencies for deep sleep and anxiety release.
+     - 4-7-8 Breathing Reset & Box Breathing: Interactive breathing sphere, parasympathetic vagus activation.
+     - CBT 12 Master Video Techniques: Cognitive restructuring, thought-stopping, decatastrophizing, emotional agility.
+     - Weekly Live Sessions: Free live interactive masterclasses every Sunday at 11:00 AM IST via Google Meet with Mainak Chatterjee + live Q&A.
+     - WhatsApp Community: Daily Morning Mantra, motivation, supportive peers (WhatsApp: +91 9163670300).
+  3. Inner Revolution:
+     - Stress & Anxiety Reset Program (Deep nervous system regulation).
+     - Relationship & Emotional Healing Blueprint (Attachment style healing, empathetic communication, boundary setting).
+     - Mindfulness & Presence Journey (Living in the now, reducing mental clutter).
+     - Deeper Spiritual Awakening & Consciousness (Higher awareness, purpose, inner freedom).
+  4. Career Axis:
+     - 1:1 Career Consulting & Mentorship with Mainak Chatterjee for students, professionals, career switchers, and executives navigating career roadblocks, burnout, or transition via 1:1 Google Meet sessions.
+  5. Interactive Tools:
+     - Daily Mood Tracker & Check-in.
+     - Private Guided CBT Journaling.
+     - Interactive Quizzes, Badges, and Downloadable Certificates.
 
-Rules:
-1. Speak with warm compassion, clarity, practical CBT reframing, and grounded wisdom.
-2. Directly answer the user's specific question or statement with 2-3 tailored, highly relevant paragraphs.
-3. At the very end of your message, add an affirmation formatted strictly as: "Affirmation: [A short, custom, uplifting 1-sentence affirmation customized for this topic]".
-4. Do not give medical diagnosis; focus on mental reset, breath awareness, emotional regulation, and inner clarity.`;
+RESPONSE GUIDELINES:
+1. Answer ANY question or statement from the user directly, thoroughly, and with deep relevance.
+2. If asked about the wellness hub, programs, camps, live sessions, schedule, techniques, or Coach Mainak Chatterjee, give accurate and helpful information.
+3. If asked about personal struggles (anxiety, overthinking, stress, insomnia, grief, anger, relationships, career burnout, spiritual growth), provide compassionate, structured CBT reframing and practical somatic/breathwork techniques.
+4. Keep the tone warm, grounded, professional, and encouraging. Use clear formatting (bullet points, bold highlights) for readability.
+5. At the very end of your response, ALWAYS include an affirmation on its own line formatted exactly as:
+Affirmation: [A short, uplifting, tailored 1-sentence affirmation matching the user's topic]
+6. Never give clinical/medical diagnosis or prescription advice.`;
 
     if (apiKey && apiKey !== "MY_GEMINI_API_KEY") {
       try {
@@ -652,7 +750,7 @@ Rules:
         });
 
         const response = await ai.models.generateContent({
-          model: 'gemini-3.6-flash',
+          model: 'gemini-3.7-flash',
           contents,
           config: {
             systemInstruction: systemPrompt,
