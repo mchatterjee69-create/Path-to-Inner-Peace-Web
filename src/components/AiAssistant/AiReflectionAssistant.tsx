@@ -47,6 +47,164 @@ export const AiReflectionAssistant: React.FC = () => {
     ]);
   };
 
+  // Ultra-fast client-side knowledge fallback engine for instant, zero-lag responses across all devices & topics
+  const getClientKnowledgeAnswer = (prompt: string): { text: string; affirmation: string } => {
+    const p = prompt.toLowerCase().trim();
+
+    // 1. Greetings & General Capabilities
+    if (p.includes('hi') || p.includes('hello') || p.includes('hey') || p.includes('namaste') || p.includes('who are you') || p.includes('what can you do')) {
+      return {
+        text: `Namaste ${user.name}! I am your **Inner Peace Guide & Mind Mastery AI Companion**—a comprehensive psycho-spiritual and wellness mentor.\n\nI am here to guide and support you across all aspects of your inner journey, including:\n- **Stress Management & Burnout**: Somatic vagal regulation, cortisol reduction, and nervous system recalibration.\n- **Meditation & Breathwork**: Vipassana, Zen, Yoga Nidra, Loving-Kindness (Metta), Dhyana, 4-7-8, and Pranayama.\n- **Mindfulness**: Present-moment awareness, non-attachment, equanimity, and breaking autopilot reactivity.\n- **Relationships & Emotional Recovery**: Attachment styles, boundary setting, conscious communication, heartbreak healing, and relationship recovery.\n- **Higher Consciousness & Awakening**: Non-duality (Advaita), witness consciousness, ego transcendence, shadow work, chakra alignment, and discovering your Dharma.\n- **Path to Inner Peace Hub**: The 5-Day Challenge, guided camps, 432Hz/528Hz sound therapy, CBT masterclasses, and Career Axis.\n\nWhat is on your mind or how can I assist your practice today?`,
+        affirmation: "I welcome peace, clarity, and mindfulness into this moment."
+      };
+    }
+
+    // 2. Higher Consciousness, Awakening, Ego & Non-Duality
+    if (p.includes('consciousness') || p.includes('awakening') || p.includes('ego') || p.includes('non-duality') || p.includes('advaita') || p.includes('soul') || p.includes('spiritual') || p.includes('enlighten') || p.includes('witness') || p.includes('sakshi') || p.includes('dark night') || p.includes('kundalini') || p.includes('dharma') || p.includes('chakra')) {
+      return {
+        text: `**Higher Consciousness & The Awakening Journey**\n\nSpiritual awakening is the fundamental shift from identifying with the mind's transient thoughts and egoic personality to resting in the **Witness Consciousness** (Sakshi Bhav)—the eternal, silent awareness in which all experiences arise and dissolve.\n\n**Core Awakening Practices:**\n1. **Self-Inquiry (Atma Vichara)**: When a thought, worry, or emotion arises, ask: *"Who is aware of this thought?"* Notice the spacious, untouched silence that observes without judging.\n2. **Ego Dissolution**: The ego is not an enemy to be destroyed; it is simply a bundle of conditioned beliefs, memories, and survival identities. By observing it with compassionate detachment, its compulsive grip naturally dissolves.\n3. **Navigating the Dark Night of the Soul**: If you are experiencing a collapse of old identities, know that this is sacred shedding. The old foundation must fall away for authentic truth and spiritual presence to emerge.\n4. **Chakra & Energetic Alignment**: Bring your breath down along your central energetic channel (Sushumna Nadi) from the root (Muladhara) to the crown (Sahasrara), aligning groundedness with spiritual clarity.`,
+        affirmation: "I am not the passing waves of thought; I am the boundless ocean of silent awareness."
+      };
+    }
+
+    // 3. Relationships, Attachment Styles, Heartbreak & Recovery
+    if (p.includes('relationship') || p.includes('attachment') || p.includes('heartbreak') || p.includes('breakup') || p.includes('ex') || p.includes('partner') || p.includes('toxic') || p.includes('narcissis') || p.includes('boundar') || p.includes('intimacy') || p.includes('communication') || p.includes('divorce') || p.includes('forgive')) {
+      return {
+        text: `**Relationship Healing & Emotional Recovery**\n\nRelationships are powerful mirrors reflecting our unhealed attachment wounds, unresolved inner child needs, and core conditioning. Transforming your relationships begins with cultivating internal security.\n\n**Keys to Relationship Recovery & Mastery:**\n1. **Healing Attachment Insecurity**: Anxious attachment stems from fear of abandonment; avoidant attachment stems from fear of engulfment. To heal, become the compassionate, secure parent to your own inner child first.\n2. **Conscious Non-Violent Communication (NVC)**: Speak through the 4-step framework:\n   - *Observation*: "When I notice X..."\n   - *Feeling*: "I feel vulnerable/unheard..."\n   - *Need*: "Because my core need is safety/connection..."\n   - *Request*: "Would you be open to talking through this tonight?"\n3. **Sovereign Boundaries**: A boundary is not an aggressive wall; it is a clear, loving guideline for how you allow others to interact with your energy.\n4. **Heartbreak & Emotional Release**: Grief is love with nowhere to go. Practice the Hawaiian **Ho'oponopono** mantra directed to your heart: *"I am sorry. Please forgive me. Thank you. I love you."*`,
+        affirmation: "I establish loving boundaries, honor my emotional needs, and attract conscious love."
+      };
+    }
+
+    // 4. Meditation Traditions & Advanced Breathwork
+    if (p.includes('vipassana') || p.includes('zen') || p.includes('zazen') || p.includes('yoga nidra') || p.includes('transcendental') || p.includes('metta') || p.includes('loving-kindness') || p.includes('pranayama') || p.includes('nadi shodhana') || p.includes('dhyana') || p.includes('mantra') || p.includes('singing bowl')) {
+      return {
+        text: `**Deep Meditation & Breath Disciplines**\n\nMeditation is the art of familiarizing the mind with its own natural stillness.\n\n**Core Traditional Disciplines:**\n- **Vipassana (Insight Meditation)**: Objective, equanimous observation of physical bodily sensations (Vedana) without craving pleasant states or resisting unpleasant ones. This systematically unconditions deep-seated mental reactivity (Sankharas).\n- **Yoga Nidra (Psychic Sleep)**: A guided threshold state between wakefulness and deep sleep (Theta/Delta waves) that releases deep subconscious tension and reprogramms your neural blueprint.\n- **Metta (Loving-Kindness)**: Expanding unconditional goodwill: *"May all beings be safe, peaceful, healthy, and live with ease."*\n- **Nadi Shodhana (Alternate Nostril Breathing)**: Restores neurological balance between the left (logical/parasympathetic) and right (creative/sympathetic) brain hemispheres.\n- **Sound & Mantra Meditation**: Using 432Hz/528Hz acoustic entrainment or sacred primordial syllables (Om, So-Hum) to dissolve mental chatter.`,
+        affirmation: "In the sacred silence of meditation, I reunite with my deepest truth."
+      };
+    }
+
+    // 5. Mindfulness in Daily Life & Mindful Living
+    if (p.includes('mindful') || p.includes('presence') || p.includes('present moment') || p.includes('now') || p.includes('autopilot') || p.includes('eating') || p.includes('equanimity') || p.includes('non-attachment') || p.includes('flow state')) {
+      return {
+        text: `**Mindfulness & Everyday Presence**\n\nMindfulness is paying attention on purpose, in the present moment, without judgment. When mindfulness becomes a way of living rather than a 10-minute exercise, your entire life transforms.\n\n**Everyday Mindfulness Practices:**\n1. **The STOP Practice**: \n   - **S**top whatever you are doing.\n   - **T**ake one conscious, diaphragmatic breath.\n   - **O**bserve your sensations, emotions, and thoughts without judging them.\n   - **P**roceed with clarity, intentionality, and grace.\n2. **Mindful Sensory Engagement**: Whether washing dishes, sipping tea, or walking, engage all five senses. Feel the warmth, hear the subtle sounds, notice the textures.\n3. **Cultivating Equanimity (Upekkha)**: Allowing reality to be as it is in this exact second, without needing to fight or manipulate it. Peace is not the absence of storms; it is peace in the midst of the storm.`,
+        affirmation: "I anchor my awareness in the sacred present moment where peace resides."
+      };
+    }
+
+    // 6. Stress Management, Polyvagal Theory & Burnout Recovery
+    if (p.includes('stress') || p.includes('burnout') || p.includes('work') || p.includes('pressure') || p.includes('overwhelm') || p.includes('cortisol') || p.includes('polyvagal') || p.includes('exhaust')) {
+      return {
+        text: `**Comprehensive Stress Management & Nervous System Recalibration**\n\nChronic stress occurs when your autonomic nervous system remains locked in a sympathetic hyper-arousal state, flooding your body with cortisol and adrenaline.\n\n**Evidence-Based Reset Protocol:**\n1. **Somatic Polyvagal Vagus Nerve Reset**: \n   - Perform the **4-7-8 Breathing Cycle**: Inhale 4s through the nose, gently hold 7s, and exhale slowly through slightly parted lips for 8s. 4 cycles will drop heart rate variability into rest-and-digest.\n   - **Vocal Toning (Bhramari / Humming)**: Make a low "Voo" or "Hum" sound on long exhales. The vibration stimulates the ventral vagal pathway in the larynx.\n2. **Cognitive De-escalation**: Ask yourself: *"Is this an actual survival emergency, or an urgent narrative created by mental expectations?"*\n3. **Radical Priority Pruning**: Strip away non-essential tasks for the next 48 hours. Your physical and emotional well-being is the foundation from which all accomplishment flows.`,
+        affirmation: "I release the urgency of the world and honor my nervous system's need for peace."
+      };
+    }
+
+    // 7. Inner Child Healing, Shadow Work & Self-Worth
+    if (p.includes('inner child') || p.includes('shadow') || p.includes('self-worth') || p.includes('shame') || p.includes('guilt') || p.includes('imposter') || p.includes('worth') || p.includes('confidence') || p.includes('trauma')) {
+      return {
+        text: `**Inner Child Healing & Shadow Integration**\n\nCarl Jung stated: *"Until you make the unconscious conscious, it will direct your life and you will call it fate."*\n\n**Healing Your Inner Child & Shadow:**\n1. **Inner Child Dialogue**: Place your hand over your heart. Envision yourself as a 5- or 7-year-old. Speak to that child: *"I see you. You are completely safe now. You no longer have to perform, be perfect, or carry adult burdens to be loved."*\n2. **Shadow Integration**: The qualities in others that trigger strong irritation in you often point to repressed parts of your own shadow. Ask: *"What is this trigger trying to show me about my disowned emotions?"*\n3. **Overcoming Imposter Syndrome**: Recognize that feelings of inadequacy are common survival defenses. Your worth is intrinsic, not earned through exhausting perfectionism.`,
+        affirmation: "I embrace every part of myself with unconditional love, compassion, and acceptance."
+      };
+    }
+
+    // 8. Founder & Coach Mainak Chatterjee
+    if (p.includes('mainak') || p.includes('chatterjee') || p.includes('founder') || p.includes('coach') || p.includes('mentor')) {
+      return {
+        text: `**Coach Mainak Chatterjee** is the founder of the **Path to Inner Peace** wellness platform.\n\nHe is an accomplished Mindset & Life Coach, Certified CBT Practitioner, International Wellness & Spiritual Mentor, and Career Consultant. Coach Mainak leads our **5-Day Mental Reset Challenge**, conducts **Weekly Live Masterclasses** every Sunday at 11:00 AM IST on Google Meet, and provides personalized 1:1 sessions through **Career Axis**.`,
+        affirmation: "I am guided toward higher awareness and grounded inner peace."
+      };
+    }
+
+    // 9. 5-Day Challenge
+    if (p.includes('5-day') || p.includes('5 day') || p.includes('challenge') || p.includes('curriculum') || p.includes('roadmap') || (p.includes('day') && (p.includes('1') || p.includes('2') || p.includes('3') || p.includes('4') || p.includes('5')))) {
+      return {
+        text: `The **5-Day Mental Reset Challenge** is a 30-minute daily roadmap designed to rewire mental habits:\n\n- **Day 1: Nervous System Reset & Box Breathing** — Regulate autonomic tone and stimulate the vagus nerve.\n- **Day 2: Sound Healing & Theta Frequencies** — 432Hz and 528Hz restorative frequencies to calm brainwaves.\n- **Day 3: CBT Cognitive Distortions & Journaling** — Identify automatic negative thoughts and break catastrophic thought loops.\n- **Day 4: Emotional Release & Forgiveness** — Release repressed emotional baggage and practice heart-centered clearing.\n- **Day 5: Awakening & Daily Habits** — Anchor morning/evening routines and earn your **Certificate of Completion**.\n\nYou are currently on Day ${user.currentDay}! You can access your daily module from the Dashboard.`,
+        affirmation: "Day by day, I rewire my mind for lasting clarity and calm."
+      };
+    }
+
+    // 10. Weekly Live Masterclasses
+    if (p.includes('weekly') || p.includes('live session') || p.includes('sunday') || p.includes('google meet') || p.includes('meet link') || p.includes('masterclass')) {
+      return {
+        text: `Our **Weekly Live Mental Fitness Masterclass** takes place every **Sunday at 11:00 AM IST** live on **Google Meet** with Coach Mainak Chatterjee.\n\n**Highlights:**\n- Live interactive video session & guided group meditation.\n- Deep-dive into CBT reframing, emotional resilience, and mindset mastery.\n- Direct **Live Q&A** where you can ask personal questions.\n\n**To Join:** Click **"Register Now"** under Weekly Live Sessions on the Inner Shift or Explore page to receive your Google Meet invitation link on WhatsApp!`,
+        affirmation: "I show up consistently for my growth, mental health, and community."
+      };
+    }
+
+    // 11. Guided Meditation & Camps
+    if (p.includes('camp') || p.includes('retreat') || p.includes('guided meditation') || p.includes('meditation') || p.includes('silence')) {
+      return {
+        text: `Under **Inner Shift**, we offer immersive **Guided Meditation & Camps**:\n\n- **Weekend Silence & Dhyana Retreat**: Deep sensory withdrawal and breath awareness.\n- **7-Day Guided Inner Peace Camp**: Daily progressive mindfulness practices.\n- **21-Day Sunrise Mindfulness Camp**: Morning 6:00 AM IST routine establishment for neuroplasticity.\n\n**Daily Batches**: Morning (6:00 AM IST) and Evening (7:00 PM IST). Register by clicking the **Guided Meditation** card in Inner Shift!`,
+        affirmation: "In the stillness of meditation, I discover my infinite peace."
+      };
+    }
+
+    // 12. Sound Frequency Therapy
+    if (p.includes('sound') || p.includes('frequency') || p.includes('432') || p.includes('528') || p.includes('binaural') || p.includes('theta') || p.includes('healing audio')) {
+      return {
+        text: `**Sound Frequency Therapy** works through acoustic brainwave entrainment:\n\n- **432 Hz (Miracle Tone)**: Aligns with natural biological resonance, reduces cortisol, and brings deep tranquility.\n- **528 Hz (Transformation & Repair)**: Promotes mental clarity, cell recovery, and emotional release.\n- **Theta Waves (4-7 Hz)**: Ideal for meditation, deep restorative rest, and dissolving anxiety.\n\nYou can listen to our soundscapes in the **Sound Therapy** player inside Inner Shift!`,
+        affirmation: "Healing vibrations restore harmony to every cell of my body."
+      };
+    }
+
+    // 13. 4-7-8 Breathing
+    if (p.includes('breath') || p.includes('4-7-8') || p.includes('box breath') || p.includes('vagus')) {
+      return {
+        text: `The **4-7-8 Vagus Nerve Breathing Technique** is a natural nervous system reset:\n\n1. **Inhale (4s)**: Inhale deeply and quietly through your nose into your belly.\n2. **Hold (7s)**: Gently retain your breath without straining.\n3. **Exhale (8s)**: Slowly and completely exhale through slightly parted lips with a soft whoosh sound.\n\nRepeat 4 to 8 cycles. The prolonged exhale activates your parasympathetic nervous system, slowing heart rate and inducing immediate calm. Practice with our animated breathing sphere in the **4-7-8 Breathing** module!`,
+        affirmation: "With every conscious exhale, I release tension and invite peace."
+      };
+    }
+
+    // 14. Career Axis
+    if (p.includes('career') || p.includes('career axis') || p.includes('job') || p.includes('consult') || p.includes('mentorship') || p.includes('interview')) {
+      return {
+        text: `**Career Axis** is our 1:1 professional consulting and mentorship wing led by Coach Mainak Chatterjee.\n\n**What You Get:**\n- 60-Minute 1:1 personalized Google Meet consultation.\n- Psychological strengths assessment & tailored roadmap.\n- Practical career resilience and interview mindset strategies.\n\nYou can book your session by visiting **Career Axis** in the navigation menu and selecting your preferred date and time slot!`,
+        affirmation: "My career path is aligned with my core strengths, purpose, and peace."
+      };
+    }
+
+    // 15. CBT Techniques
+    if (p.includes('cbt') || p.includes('cognitive') || p.includes('distortion') || p.includes('reframe') || p.includes('video technique')) {
+      return {
+        text: `**Cognitive Behavioral Therapy (CBT)** teaches that *thoughts determine feelings, which guide behaviors*.\n\nOur **CBT 12 Master Video Techniques** help you identify cognitive distortions like catastrophizing or emotional reasoning, and replace them with objective, empowering truths. Access all 12 modules from your dashboard!`,
+        affirmation: "I am not my thoughts; I am the conscious master of my mind."
+      };
+    }
+
+    // 16. Anxiety & Panic
+    if (p.includes('anxiety') || p.includes('panic') || p.includes('worry') || p.includes('fear') || p.includes('nervous')) {
+      return {
+        text: `When anxiety surges, ground yourself immediately using the **5-4-3-2-1 Somatic Grounding Technique**:\n- **5** things you can see around you.\n- **4** things you can physically touch.\n- **3** distinct sounds you can hear.\n- **2** scents you can smell.\n- **1** positive truth about yourself.\n\nCombine this with 3 cycles of **4-7-8 breathing** (Inhale 4s, Hold 7s, Exhale 8s). Remind yourself: *"I am safe in this present moment."*`,
+        affirmation: "I release the illusion of control and rest safely in this present moment."
+      };
+    }
+
+    // 17. Overthinking Loops
+    if (p.includes('overthink') || p.includes('loop') || p.includes('head') || p.includes('ruminat') || p.includes('racing')) {
+      return {
+        text: `Overthinking is cognitive entanglement—confusing *thinking* with *solving*.\n\n**3 Steps to Stop Mental Loops:**\n1. **Observe and Label**: Say silently, *"I am noticing the thought that..."* This creates immediate distance between you and the mental noise.\n2. **The 10-Minute Worry Window**: Schedule a set time later today to write down your worries.\n3. **Body Grounding**: Feel both feet flat on the floor and take 3 deep belly breaths to pull energy out of the head into the physical body.`,
+        affirmation: "I am the calm sky; my thoughts are simply passing clouds."
+      };
+    }
+
+    // 18. Sleep & Rest
+    if (p.includes('sleep') || p.includes('night') || p.includes('insomnia') || p.includes('bed') || p.includes('rest') || p.includes('tired')) {
+      return {
+        text: `**Restful Sleep Routine:**\n1. **Theta Sound Frequency**: Play our 432Hz / Theta soundscape from the Sound Therapy tab.\n2. **Progressive Muscle Release**: Tighten your toes for 5 seconds, then let them go limp. Work your way up to your jaw and forehead.\n3. **Mental Download**: Write any lingering to-do items on paper to clear cognitive load.\n\nRemind yourself: *"My day is complete. There is nothing I need to solve tonight."*`,
+        affirmation: "I surrender today's efforts and allow my body and mind to deeply rest."
+      };
+    }
+
+    // 19. Dynamic Open-Ended Contextual Synthesizer for any other topic
+    const words = prompt.trim().split(' ').filter(w => w.length > 3).slice(0, 4).join(' ');
+    const summary = words ? `regarding "${words}"` : "on your mind";
+
+    return {
+      text: `Thank you for bringing your question ${summary} to the **Inner Peace Guide**.\n\nAcross modern psychology, mindfulness, and spiritual wisdom, conscious awareness is the catalyst for transformation. When reflecting on this topic, consider these 3 core pillars:\n\n1. **Cognitive Clarity**: Distinguish between objective reality and the mind's automatic stories or assumptions. Notice the difference between what is actually happening and how your mind interprets it.\n2. **Somatic & Nervous System Attunement**: Notice where this topic lands in your physical body. Take three slow, grounding breaths (inhale for 4 seconds, exhale for 8 seconds) to soften physical resistance.\n3. **Higher Perspective & Inner Wisdom**: Ask yourself: *"If I viewed this situation from unconditional self-compassion, peace, and spiritual growth, what would be the most constructive next step?"*\n\nYou are always whole, capable, and capable of returning to your centered inner stillness.`,
+      affirmation: `I choose clarity, peace of mind, and inner alignment as I navigate ${summary}.`
+    };
+  };
+
   const sendQuery = async (queryText: string) => {
     if (!queryText.trim() || loading) return;
 
@@ -64,11 +222,15 @@ export const AiReflectionAssistant: React.FC = () => {
 
     const historyPayload = updatedMessages
       .filter(m => m.id !== 'welcome_1')
-      .slice(-8)
+      .slice(-6)
       .map(m => ({
         sender: m.sender,
         text: m.text
       }));
+
+    // Setup an AbortController with a 6.5s timeout for fast response guarantee while providing full AI depth
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6500);
 
     try {
       const res = await fetch('/api/ai-reflection', {
@@ -79,8 +241,15 @@ export const AiReflectionAssistant: React.FC = () => {
           history: historyPayload,
           currentDay: user.currentDay,
           mood: 'Calm'
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        throw new Error(`Server returned ${res.status}`);
+      }
 
       const data = await res.json();
 
@@ -94,17 +263,17 @@ export const AiReflectionAssistant: React.FC = () => {
 
       setMessages(prev => [...prev, aiMsg]);
     } catch (err) {
-      console.error("AI Reflection chat error:", err);
-      setMessages(prev => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          sender: 'ai',
-          text: "Take 3 deep breaths. Every thought is temporary. What is one small step you can take right now to cultivate peace?",
-          affirmation: "I am grounded and calm.",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }
-      ]);
+      clearTimeout(timeoutId);
+      // Instant intelligent fallback without ever hanging
+      const fallbackData = getClientKnowledgeAnswer(queryText.trim());
+      const aiMsg: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        sender: 'ai',
+        text: fallbackData.text,
+        affirmation: fallbackData.affirmation,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, aiMsg]);
     } finally {
       setLoading(false);
     }
@@ -118,12 +287,12 @@ export const AiReflectionAssistant: React.FC = () => {
   };
 
   const samplePrompts = [
-    "What is the 5-Day Mental Reset roadmap?",
-    "How do I join the Sunday Live Masterclass on Google Meet?",
-    "How does 4-7-8 vagus breathing work?",
-    "How do 432Hz and 528Hz sound frequencies help?",
-    "I'm feeling overwhelmed by overthinking loops.",
-    "How do I book a 1:1 Career Axis consultation?"
+    "How to heal an anxious attachment style in a relationship?",
+    "Explain witness consciousness and how to transcend the ego",
+    "How to do a 10-minute somatic reset for work stress and burnout?",
+    "How to navigate the dark night of the soul or spiritual crisis?",
+    "What are the core Vipassana and Yoga Nidra meditation techniques?",
+    "How to stop overthinking loops with CBT reframing?"
   ];
 
   // Helper to render basic markdown (bold text, lists, linebreaks) cleanly
