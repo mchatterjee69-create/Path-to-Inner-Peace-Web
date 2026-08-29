@@ -17,14 +17,49 @@ export const RazorpayModal: React.FC = () => {
   if (!isPaymentModalOpen || !selectedPlan) return null;
 
   const handleJoinInnerShift = () => {
-    const paymentLink = 
-      selectedPlan?.paymentUrl || 
-      (selectedPlan?.name?.toLowerCase().includes('revolution') ? 'https://rzp.io/rzp/pJfkvaT' : 
-      (selectedPlan?.id === 'INNER_SHIFT' || selectedPlan?.name?.toLowerCase().includes('basic')) ? 'https://rzp.io/rzp/O6VyUfSW' :
-      selectedPlan?.id === 'INNER_TRANSFORMATION_ELITE' ? 'https://rzp.io/rzp/x8BS9RM' : 
-      'https://rzp.io/rzp/Xv7Q6XB');
+    const nameLower = selectedPlan?.name?.toLowerCase() || '';
+    
+    let paymentLink = selectedPlan?.paymentUrl;
+    if (!paymentLink) {
+      if (nameLower.includes('mastery')) {
+        paymentLink = 'https://rzp.io/rzp/RhBSpwpY';
+      } else if (nameLower.includes('awakening')) {
+        paymentLink = 'https://rzp.io/rzp/IrdqANZ3';
+      } else if (nameLower.includes('mindfulness') || nameLower.includes('meditation')) {
+        paymentLink = 'https://rzp.io/rzp/bCi0e0t';
+      } else if (nameLower.includes('relationship')) {
+        paymentLink = 'https://rzp.io/rzp/JwfVE56z';
+      } else if (nameLower.includes('stress')) {
+        paymentLink = 'https://rzp.io/rzp/8xw8CNzv';
+      } else if (nameLower.includes('revolution')) {
+        paymentLink = 'https://rzp.io/rzp/pJfkvaT';
+      } else if (selectedPlan?.id === 'INNER_SHIFT' || nameLower.includes('basic')) {
+        paymentLink = 'https://rzp.io/rzp/O6VyUfSW';
+      } else if (selectedPlan?.id === 'INNER_TRANSFORMATION_ELITE') {
+        paymentLink = 'https://rzp.io/rzp/x8BS9RM';
+      } else {
+        paymentLink = 'https://rzp.io/rzp/Xv7Q6XB';
+      }
+    }
+    
     window.location.href = paymentLink;
   };
+
+  const isOneTimePayment = 
+    selectedPlan.period?.toLowerCase().includes('one-time') ||
+    selectedPlan.period?.toLowerCase().includes('week') ||
+    selectedPlan.period?.toLowerCase().includes('live') ||
+    selectedPlan.period?.toLowerCase().includes('program') ||
+    selectedPlan.period?.toLowerCase().includes('immersion') ||
+    selectedPlan.period?.toLowerCase().includes('masterclass') ||
+    selectedPlan.period?.toLowerCase().includes('workshop') ||
+    selectedPlan.name?.toLowerCase().includes('revolution') ||
+    selectedPlan.name?.toLowerCase().includes('mastery') ||
+    selectedPlan.name?.toLowerCase().includes('stress') ||
+    selectedPlan.name?.toLowerCase().includes('relationship') ||
+    selectedPlan.name?.toLowerCase().includes('mindfulness') ||
+    selectedPlan.name?.toLowerCase().includes('meditation') ||
+    selectedPlan.name?.toLowerCase().includes('awakening');
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-md p-3 sm:p-4 flex items-center justify-center min-h-full animate-fadeIn">
@@ -63,7 +98,7 @@ export const RazorpayModal: React.FC = () => {
           <div className="text-right whitespace-nowrap">
             <span className="font-heading font-extrabold text-2xl text-[#0F4C45]">₹{selectedPlan.priceINR}</span>
             <span className="text-xs text-emerald-800 font-bold ml-1">
-              {selectedPlan.period.includes('Annual') ? '/ year' : '/ month'}
+              {isOneTimePayment ? ' (one-time)' : selectedPlan.period.includes('Annual') ? '/ year' : '/ month'}
             </span>
           </div>
         </div>
@@ -76,7 +111,7 @@ export const RazorpayModal: React.FC = () => {
             onClick={handleJoinInnerShift}
             className="w-full py-4 bg-[#0F4C45] hover:bg-[#0B3B36] active:scale-[0.99] text-white font-extrabold text-base sm:text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2 group cursor-pointer border border-[#D4AF37]/30"
           >
-            <span>Join {selectedPlan.name} – ₹{selectedPlan.priceINR}</span>
+            <span>Join {selectedPlan.name} – ₹{selectedPlan.priceINR} {isOneTimePayment ? '(One-Time)' : ''}</span>
           </button>
 
           {/* Secure Payment Note */}
@@ -90,15 +125,15 @@ export const RazorpayModal: React.FC = () => {
             </p>
           </div>
 
-          {/* Membership Benefits List */}
+          {/* Membership / One-time Benefits List */}
           <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5 text-xs font-bold text-slate-700">
             <div className="flex items-center gap-2 text-slate-800">
               <CheckCircle2 className="w-4 h-4 text-[#0F4C45] shrink-0" />
-              <span>✔ Monthly Membership</span>
+              <span>{isOneTimePayment ? '✔ One-Time Payment (No Recurring Fees)' : '✔ Monthly Membership'}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-800">
               <CheckCircle2 className="w-4 h-4 text-[#0F4C45] shrink-0" />
-              <span>✔ Cancel Anytime</span>
+              <span>{isOneTimePayment ? '✔ Lifetime Access to Course & Materials' : '✔ Cancel Anytime'}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-800">
               <CheckCircle2 className="w-4 h-4 text-slate-800 shrink-0" />

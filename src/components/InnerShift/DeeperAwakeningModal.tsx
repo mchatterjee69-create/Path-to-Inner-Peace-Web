@@ -90,8 +90,8 @@ export const DeeperAwakeningModal: React.FC<DeeperAwakeningModalProps> = ({
       originalPriceINR: 5999,
       popular: true,
       badge: '33% OFF',
-      paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
-      period: '4 Weeks Live Masterclass',
+      paymentUrl: 'https://rzp.io/rzp/IrdqANZ3',
+      period: 'One-Time Live Masterclass (4 Weeks)',
       buttonText: 'Enroll Now (₹3,999)',
       colorScheme: 'darkEmerald',
       features: [
@@ -613,8 +613,9 @@ export const DeeperAwakeningModal: React.FC<DeeperAwakeningModalProps> = ({
               <div className="flex items-baseline gap-2">
                 <span className="text-xl sm:text-2xl font-black text-white">₹3999</span>
                 <span className="text-xs text-slate-400 line-through">₹5999</span>
+                <span className="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">33% OFF</span>
               </div>
-              <span className="text-[10px] text-amber-400 font-semibold">Cohort 2026 Registration Open</span>
+              <div className="text-[10px] text-slate-400">One-Time / Lifetime Access</div>
             </div>
 
             <button

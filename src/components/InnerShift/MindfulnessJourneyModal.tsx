@@ -88,8 +88,8 @@ export const MindfulnessJourneyModal: React.FC<MindfulnessJourneyModalProps> = (
       originalPriceINR: 3999,
       popular: true,
       badge: '50% OFF',
-      paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
-      period: '2 Weeks Live Immersion',
+      paymentUrl: 'https://rzp.io/rzp/bCi0e0t',
+      period: 'One-Time Live Immersion (2 Weeks)',
       buttonText: 'Enroll Now (₹1,999)',
       colorScheme: 'darkEmerald',
       features: [
@@ -580,8 +580,9 @@ export const MindfulnessJourneyModal: React.FC<MindfulnessJourneyModalProps> = (
               <div className="flex items-baseline gap-2">
                 <span className="text-xl sm:text-2xl font-black text-white">₹1999</span>
                 <span className="text-xs text-slate-400 line-through">₹3999</span>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">50% OFF</span>
               </div>
-              <span className="text-[10px] text-emerald-400 font-semibold">Special 50% Early Bird Offer</span>
+              <div className="text-[10px] text-slate-400">One-Time / Lifetime Access</div>
             </div>
 
             <button

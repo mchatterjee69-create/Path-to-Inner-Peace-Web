@@ -159,6 +159,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setIsRegistrationModalOpen(false);
       setIsPaymentModalOpen(false);
       setIsCertificateModalOpen(false);
+      setIsInnerRevolutionModalOpen(false);
+      setIsInnerMasteryModalOpen(false);
+      setIsStressResetModalOpen(false);
+      setIsRelationshipHealingModalOpen(false);
+      setIsMindfulnessJourneyModalOpen(false);
+      setIsDeeperAwakeningModalOpen(false);
+      setIsAdminLeadsModalOpen(false);
 
       setActiveViewRaw(targetView);
       window.scrollTo({ top: 0, behavior: 'instant' });

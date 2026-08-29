@@ -90,8 +90,8 @@ export const RelationshipHealingModal: React.FC<RelationshipHealingModalProps> =
       originalPriceINR: 2999,
       popular: true,
       badge: '33% OFF',
-      paymentUrl: 'https://rzp.io/rzp/x8BS9RM',
-      period: '2 Weeks Live Program',
+      paymentUrl: 'https://rzp.io/rzp/JwfVE56z',
+      period: 'One-Time Live Program (2 Weeks)',
       buttonText: 'Enroll Now (₹1,999)',
       colorScheme: 'darkEmerald',
       features: [
@@ -584,8 +584,9 @@ export const RelationshipHealingModal: React.FC<RelationshipHealingModalProps> =
               <div className="flex items-baseline gap-2">
                 <span className="text-xl sm:text-2xl font-black text-white">₹1999</span>
                 <span className="text-xs text-slate-400 line-through">₹2999</span>
+                <span className="text-[10px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">33% OFF</span>
               </div>
-              <span className="text-[10px] text-rose-400 font-semibold">Limited Seats Available</span>
+              <div className="text-[10px] text-slate-400">One-Time / Lifetime Access</div>
             </div>
 
             <button

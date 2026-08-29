@@ -101,7 +101,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
       popular: true,
       badge: '50% OFF',
       paymentUrl: 'https://rzp.io/rzp/pJfkvaT',
-      period: '4 Weeks Live Program',
+      period: 'One-Time Live Program (4 Weeks)',
       buttonText: 'Enroll Now (₹2,999)',
       colorScheme: 'darkEmerald',
       features: [

@@ -93,8 +93,8 @@ export const InnerMasteryModal: React.FC<InnerMasteryModalProps> = ({
       priceINR: 1199,
       popular: true,
       badge: '50% OFF',
-      paymentUrl: 'https://rzp.io/rzp/Xv7Q6XB',
-      period: '2 Weeks Live Access',
+      paymentUrl: 'https://rzp.io/rzp/RhBSpwpY',
+      period: 'One-Time Live Program (2 Weeks)',
       buttonText: 'Enroll Now (₹1,199)',
       colorScheme: 'gold',
       features: [

@@ -92,6 +92,10 @@ export const StressResetModal: React.FC<StressResetModalProps> = ({
       originalPriceINR: 999,
       popular: true,
       badge: '20% OFF',
+      paymentUrl: 'https://rzp.io/rzp/8xw8CNzv',
+      period: 'One-Time Live Program (2 Weeks)',
+      buttonText: 'Enroll Now (₹799)',
+      colorScheme: 'darkEmerald',
       features: [
         'Guided Weekly Live Two Sessions & Workshops',
         'Structured CBT-based exercises for stress reduction',
