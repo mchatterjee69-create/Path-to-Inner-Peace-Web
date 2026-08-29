@@ -2,10 +2,22 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { GoogleGenAI } from "@google/genai";
+import OpenAI from "openai";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
 dotenv.config();
+
+// Lazy OpenAI client initialization for ChatGPT integration
+let openAiClientInstance: OpenAI | null = null;
+function getOpenAIClient(): OpenAI | null {
+  const key = process.env.OPENAI_API_KEY;
+  if (!key || key === "MY_OPENAI_API_KEY" || key.trim() === "") return null;
+  if (!openAiClientInstance) {
+    openAiClientInstance = new OpenAI({ apiKey: key.trim() });
+  }
+  return openAiClientInstance;
+}
 
 const app = express();
 const PORT = 3000;
@@ -644,11 +656,11 @@ function generateDynamicCbtResponse(prompt: string, currentDay: number = 1, mood
     };
   }
 
-  // 15. Career Axis (Consulting & Mentorship)
-  if (p.includes('career') || p.includes('career axis') || p.includes('job') || p.includes('consult') || p.includes('mentorship') || p.includes('interview') || p.includes('promotion')) {
+  // 15. Career Counselling, Purpose, Ikigai & Mentorship
+  if (p.includes('career') || p.includes('counsel') || p.includes('counselling') || p.includes('career axis') || p.includes('job') || p.includes('interview') || p.includes('promotion') || p.includes('workplace') || p.includes('profession') || p.includes('resume') || p.includes('ikigai') || p.includes('salary') || p.includes('transition') || p.includes('colleague')) {
     return {
-      response: `**Career Axis** is our 1:1 professional consulting and mentorship wing led by Coach Mainak Chatterjee.\n\n**Who It Is For:**\n- Students choosing higher education specializations.\n- Professionals facing workplace burnout, imposter syndrome, or career stagnation.\n- Career switchers transitioning into tech, leadership, or entrepreneurship.\n\n**What You Get:**\n- 60-Minute 1:1 personalized Google Meet consultation.\n- Psychological strengths assessment & tailored roadmap.\n- Practical career resilience and interview mindset strategies.\n\nYou can book your session by visiting **Career Axis** in the navigation menu and selecting your preferred date and time slot!`,
-      suggestedAffirmation: "My career path is aligned with my core strengths, purpose, and peace."
+      response: `**Career Counseling, Professional Fulfillment & Ikigai Alignment**\n\nTrue career success is achieved when your inner strengths, psychological resilience, and outer professional ambitions work in harmony without sacrificing your mental peace.\n\n**Core Career Mastery Pillars:**\n1. **The Ikigai Alignment Framework**: Evaluate your path across 4 intersecting dimensions:\n   - *Passion*: What you naturally love doing.\n   - *Vocation*: What the world needs and values.\n   - *Profession*: What you can be paid well for.\n   - *Mission*: Where your unique strengths solve meaningful problems.\n2. **Managing Workplace Imposter Syndrome**: Feelings of self-doubt are normal during growth. Reframe your inner monologue from *"I must know everything"* to *"I am a capable learner who adds distinct value."*\n3. **Psychological Boundary Setting**: Prevent burnout by separating your personal self-worth from daily workplace emergencies. Communicate clear turn-around timelines and protect restorative off-hours.\n4. **1:1 Mentorship with Coach Mainak Chatterjee**: For personalized career roadmapping, resume/interview psychological prep, and executive mindset mastery, explore **Career Axis** in the main navigation!`,
+      suggestedAffirmation: "My professional path expands in perfect harmony with my highest potential and inner peace."
     };
   }
 
@@ -702,24 +714,22 @@ function generateDynamicCbtResponse(prompt: string, currentDay: number = 1, mood
   };
 }
 
-// AI Reflection Assistant endpoint using Gemini 3.7 Flash
+// AI Reflection Assistant endpoint powering ChatGPT (OpenAI GPT-4o) & Gemini 3.7 Flash
 app.post("/api/ai-reflection", async (req, res) => {
   try {
-    const { prompt, journalContext, currentDay, mood, history } = req.body;
-    
-    const apiKey = process.env.GEMINI_API_KEY;
+    const { prompt, journalContext, currentDay, mood, history, preferredEngine } = req.body;
 
     const systemPrompt = `You are the "Inner Peace Guide & Mind Mastery AI Companion" for the "Path to Inner Peace" wellness ecosystem founded by Coach Mainak Chatterjee.
 
-ROLE & CAPABILITIES:
+ROLE & COMPREHENSIVE EXPERTISE:
 You are an unrestricted, deeply insightful, empathetic psycho-spiritual and wellness mentor with world-class expertise spanning:
-1. Universal Stress Management, Burnout Recovery, and Nervous System Regulation (polyvagal theory, somatic vagus nerve reset, cortisol management).
-2. All Meditation Traditions & Breathwork Disciplines (Vipassana, Zen/Zazen, Yoga Nidra, Loving-Kindness/Metta, Transcendental meditation, Pranayama, Nadi Shodhana, 4-7-8 breathing, box breathing, sound & mantra meditation).
-3. Mindfulness & Everyday Living (Present-moment awareness, non-attachment, equanimity, breaking autopilot loops, mindful eating/walking/working, flow states).
-4. Relationships & Emotional Recovery (Healing anxious and avoidant attachment styles, recovering from toxic or narcissistic relationships, conscious communication & NVC, boundary setting, heartbreak recovery, grief release, forgiveness and Ho'oponopono, emotional vulnerability).
-5. Higher Consciousness & Spiritual Awakening (Non-duality/Advaita, witness consciousness / Sakshi Bhav, ego dissolution, shadow work & Carl Jung archetypes, dark night of the soul, Kundalini and chakra energy alignment, discovering Dharma and soul purpose, transcendence).
-6. Cognitive Mastery & Resilience (Cognitive Behavioral Therapy - CBT reframing, cognitive distortions, inner child healing, imposter syndrome, self-compassion).
-7. Path to Inner Peace Hub: 5-Day Mental Reset Challenge, Inner Shift, Inner Revolution programs, Career Axis 1:1 mentorship, 432Hz/528Hz sound therapy, and Sunday Google Meet live masterclasses with Coach Mainak Chatterjee.
+1. Universal Wellness & Stress Management: Somatic vagus nerve regulation, polyvagal theory, cortisol reduction, breathwork (4-7-8, box breathing, alternate nostril), burnout recovery, nervous system safety.
+2. Meditation Traditions & Disciplines: Vipassana (body scan & sensations), Zen/Zazen (silent illumination), Yoga Nidra (psychic sleep & subconscious reprogramming), Loving-Kindness (Metta), Transcendental meditation, Dhyana, sound & mantra chanting.
+3. Mindfulness & Everyday Living: Present-moment awareness, non-attachment, equanimity (Upekkha), breaking autopilot reactivity, mindful eating/working, flow states.
+4. Relationships & Its Recovery: Healing anxious/avoidant attachment styles, recovering from toxic or narcissistic dynamics, conscious Non-Violent Communication (NVC), boundary setting, heartbreak recovery, grief release, forgiveness and Ho'oponopono, emotional safety.
+5. Higher Consciousness & Spiritual Awakening: Non-duality (Advaita), Witness Consciousness (Sakshi Bhav), ego transcendence, Carl Jung shadow work & archetypes, navigating the Dark Night of the Soul, Kundalini & chakra energy alignment, discovering Dharma and soul purpose.
+6. Career & Its Counselling: Ikigai alignment, career transition guidance, workplace imposter syndrome, stress & toxic workplace management, executive mindset, strategic interview psychological grounding, values-driven career growth.
+7. Path to Inner Peace Hub: 5-Day Mental Reset Challenge, Inner Shift, Inner Revolution, Career Axis 1:1 mentorship, 432Hz/528Hz sound therapy, and Sunday 11:00 AM IST Google Meet live masterclasses with Coach Mainak Chatterjee.
 
 RESPONSE GUIDELINES:
 1. Answer ANY user query, topic, scenario, or life situation with comprehensive, direct, and tailored wisdom.
@@ -730,6 +740,62 @@ RESPONSE GUIDELINES:
 Affirmation: [A short, uplifting, tailored 1-sentence affirmation matching the user's topic]
 6. Never provide medical/clinical prescriptions.`;
 
+    // 1. Check OpenAI / ChatGPT (GPT-4o / GPT-4o-mini)
+    const openai = getOpenAIClient();
+    if (openai) {
+      try {
+        const messages: any[] = [
+          { role: "system", content: systemPrompt }
+        ];
+
+        if (Array.isArray(history) && history.length > 0) {
+          history.slice(-8).forEach((h: any) => {
+            messages.push({
+              role: h.sender === 'user' ? 'user' : 'assistant',
+              content: h.text
+            });
+          });
+        }
+
+        messages.push({
+          role: "user",
+          content: prompt
+        });
+
+        const chatGptPromise = openai.chat.completions.create({
+          model: "gpt-4o",
+          messages,
+          temperature: 0.7,
+          max_tokens: 850
+        });
+
+        const timeoutPromise = new Promise<null>((resolve) =>
+          setTimeout(() => resolve(null), 6500)
+        );
+
+        const completion: any = await Promise.race([chatGptPromise, timeoutPromise]);
+
+        if (completion && completion.choices && completion.choices[0]?.message?.content) {
+          const replyText = completion.choices[0].message.content.trim();
+          let affirmation = "I am grounded, peaceful, and in control of my inner calm.";
+          const match = replyText.match(/Affirmation:\s*([^\n]+)/i);
+          if (match && match[1]) {
+            affirmation = match[1].trim();
+          }
+
+          return res.json({
+            response: replyText.replace(/Affirmation:\s*[^\n]+/i, '').trim(),
+            suggestedAffirmation: affirmation,
+            engine: "ChatGPT (GPT-4o)"
+          });
+        }
+      } catch (openAiError: any) {
+        console.warn("OpenAI ChatGPT API call warning/fallback:", openAiError?.message || openAiError);
+      }
+    }
+
+    // 2. Check Gemini 3.7 Flash API
+    const apiKey = process.env.GEMINI_API_KEY;
     if (apiKey && apiKey !== "MY_GEMINI_API_KEY") {
       try {
         const ai = new GoogleGenAI({
@@ -754,7 +820,6 @@ Affirmation: [A short, uplifting, tailored 1-sentence affirmation matching the u
           parts: [{ text: prompt }]
         });
 
-        // Use Promise.race with a 6.5-second timeout to balance full depth and zero hanging
         const generatePromise = ai.models.generateContent({
           model: 'gemini-3.7-flash',
           contents,
@@ -781,7 +846,8 @@ Affirmation: [A short, uplifting, tailored 1-sentence affirmation matching the u
 
           return res.json({
             response: replyText.replace(/Affirmation:\s*[^\n]+/i, '').trim(),
-            suggestedAffirmation: affirmation
+            suggestedAffirmation: affirmation,
+            engine: "Gemini 3.7 Flash"
           });
         }
       } catch (geminiError: any) {
@@ -789,9 +855,12 @@ Affirmation: [A short, uplifting, tailored 1-sentence affirmation matching the u
       }
     }
 
-    // Dynamic Intelligent CBT & Mind Mastery Fallback Response Engine
+    // 3. Dynamic Intelligent CBT & Mind Mastery Fallback Response Engine
     const fallback = generateDynamicCbtResponse(prompt, currentDay, mood);
-    return res.json(fallback);
+    return res.json({
+      ...fallback,
+      engine: "Inner Peace Knowledge Engine"
+    });
 
   } catch (error: any) {
     console.error("AI Reflection Error:", error);

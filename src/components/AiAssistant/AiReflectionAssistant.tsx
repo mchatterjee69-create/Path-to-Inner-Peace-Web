@@ -155,11 +155,11 @@ export const AiReflectionAssistant: React.FC = () => {
       };
     }
 
-    // 14. Career Axis
-    if (p.includes('career') || p.includes('career axis') || p.includes('job') || p.includes('consult') || p.includes('mentorship') || p.includes('interview')) {
+    // 14. Career & Counselling, Ikigai, Purpose & Workplace Resilience
+    if (p.includes('career') || p.includes('counsel') || p.includes('counselling') || p.includes('career axis') || p.includes('job') || p.includes('interview') || p.includes('promotion') || p.includes('workplace') || p.includes('profession') || p.includes('resume') || p.includes('ikigai') || p.includes('salary') || p.includes('transition') || p.includes('colleague') || p.includes('leadership')) {
       return {
-        text: `**Career Axis** is our 1:1 professional consulting and mentorship wing led by Coach Mainak Chatterjee.\n\n**What You Get:**\n- 60-Minute 1:1 personalized Google Meet consultation.\n- Psychological strengths assessment & tailored roadmap.\n- Practical career resilience and interview mindset strategies.\n\nYou can book your session by visiting **Career Axis** in the navigation menu and selecting your preferred date and time slot!`,
-        affirmation: "My career path is aligned with my core strengths, purpose, and peace."
+        text: `**Career Counseling, Professional Fulfillment & Ikigai Alignment**\n\nTrue professional success is achieved when your inner strengths, psychological resilience, and outer ambitions work in harmony without sacrificing your mental peace.\n\n**Core Career Mastery Pillars:**\n1. **The Ikigai Alignment Framework**: Evaluate your path across 4 intersecting dimensions:\n   - *Passion*: What you naturally love doing.\n   - *Vocation*: What the world needs and values.\n   - *Profession*: What you can be paid well for.\n   - *Mission*: Where your unique strengths solve meaningful problems.\n2. **Managing Workplace Imposter Syndrome**: Feelings of self-doubt are normal during growth. Reframe your inner monologue from *"I must know everything"* to *"I am a capable learner who adds distinct value."*\n3. **Psychological Boundary Setting**: Prevent burnout by separating your personal self-worth from daily workplace emergencies. Communicate clear turn-around timelines and protect restorative off-hours.\n4. **1:1 Mentorship with Coach Mainak Chatterjee**: For personalized career roadmapping, resume/interview psychological prep, and executive mindset mastery, explore **Career Axis** in the main navigation!`,
+        affirmation: "My professional path expands in perfect harmony with my highest potential and inner peace."
       };
     }
 
@@ -286,14 +286,74 @@ export const AiReflectionAssistant: React.FC = () => {
     }
   };
 
-  const samplePrompts = [
-    "How to heal an anxious attachment style in a relationship?",
-    "Explain witness consciousness and how to transcend the ego",
-    "How to do a 10-minute somatic reset for work stress and burnout?",
-    "How to navigate the dark night of the soul or spiritual crisis?",
-    "What are the core Vipassana and Yoga Nidra meditation techniques?",
-    "How to stop overthinking loops with CBT reframing?"
+  // Domain categories with curated quick prompts
+  const topicCategories = [
+    { id: 'all', label: '🌟 All Topics' },
+    { id: 'wellness', label: '🌿 Stress & Somatics' },
+    { id: 'meditation', label: '🧘 Meditation' },
+    { id: 'mindfulness', label: '✨ Mindfulness' },
+    { id: 'relationships', label: '❤️ Relationships & Recovery' },
+    { id: 'consciousness', label: '🌌 Higher Consciousness' },
+    { id: 'career', label: '💼 Career & Counselling' },
+    { id: 'hub', label: '🏆 Hub Programs' }
   ];
+
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const promptsByCategory: Record<string, string[]> = {
+    all: [
+      "How to heal an anxious attachment style in a relationship?",
+      "Explain witness consciousness (Sakshi Bhav) and ego transcendence",
+      "How to align my career with Ikigai and overcome workplace burnout?",
+      "How to do a 10-minute somatic reset for anxiety & cortisol?",
+      "What are the core Vipassana & Yoga Nidra meditation techniques?",
+      "How to stop overthinking loops with CBT reframing?"
+    ],
+    wellness: [
+      "How to stimulate the vagus nerve using 4-7-8 breathing?",
+      "How to recover from chronic work burnout and nervous system exhaustion?",
+      "What is the 5-4-3-2-1 somatic grounding method for panic attacks?",
+      "How do 432Hz and 528Hz acoustic frequencies lower cortisol?"
+    ],
+    meditation: [
+      "What are the steps of Vipassana insight body scan meditation?",
+      "How does Yoga Nidra reprogram subconscious neural patterns?",
+      "How to practice Nadi Shodhana (alternate nostril breathing)?",
+      "How to practice Metta (Loving-Kindness) meditation for emotional release?"
+    ],
+    mindfulness: [
+      "How to break autopilot reactivity using the STOP mindfulness method?",
+      "How to cultivate non-attachment and equanimity (Upekkha)?",
+      "How to enter deep creative flow states through mindful focus?",
+      "How to practice mindful eating and sensory grounding in daily life?"
+    ],
+    relationships: [
+      "How to heal an anxious attachment style and overcome fear of abandonment?",
+      "How to recover from a toxic or narcissistic relationship dynamic?",
+      "How to set healthy emotional boundaries without guilt?",
+      "How to heal heartbreak and release grief using Ho'oponopono?"
+    ],
+    consciousness: [
+      "Explain Witness Consciousness (Sakshi Bhav) vs. the egoic mind",
+      "How to navigate the Dark Night of the Soul and spiritual crisis?",
+      "How to do Carl Jung shadow integration for repressed emotions?",
+      "How to align the 7 Chakras along the central Sushumna channel?"
+    ],
+    career: [
+      "How to align my career path with my natural strengths & Ikigai?",
+      "How to overcome imposter syndrome in a competitive workplace?",
+      "How to maintain psychological boundaries in high-stress jobs?",
+      "How does Coach Mainak's 1:1 Career Axis consultation work?"
+    ],
+    hub: [
+      "What is the 5-Day Mental Reset Challenge curriculum?",
+      "How do I join the Sunday 11:00 AM IST Live Masterclass on Google Meet?",
+      "What are the 12 CBT Video Masterclasses in the dashboard?",
+      "Tell me about the 21-Day Sunrise Mindfulness Camp"
+    ]
+  };
+
+  const currentPrompts = promptsByCategory[selectedCategory] || promptsByCategory.all;
 
   // Helper to render basic markdown (bold text, lists, linebreaks) cleanly
   const renderFormattedText = (rawText: string) => {
@@ -367,18 +427,36 @@ export const AiReflectionAssistant: React.FC = () => {
       <div className="text-center max-w-2xl mx-auto space-y-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-[#0B6B53] font-bold text-xs rounded-full border border-emerald-100 shadow-sm">
           <Compass className="w-4 h-4 text-[#0B6B53]" />
-          <span>24/7 WELLNESS HUB COMPANION</span>
+          <span>24/7 WELLNESS & COACH AI COMPANION</span>
         </div>
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
-          Inner Peace Guide
+          Inner Peace Guide & Coach AI
         </h1>
         <p className="text-slate-600 text-sm">
-          Ask any question about our Wellness Hub programs, daily practices, live masterclasses, or get real-time CBT reframing.
+          Powered by ChatGPT & Advanced AI. Ask anything regarding Wellness, Stress Management, Meditation, Mindfulness, Relationship Recovery, Higher Consciousness, or Career Counselling.
         </p>
       </div>
 
+      {/* Domain Category Filter Tabs */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none px-1">
+        {topicCategories.map((cat) => (
+          <button
+            key={cat.id}
+            type="button"
+            onClick={() => setSelectedCategory(cat.id)}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1 shrink-0 ${
+              selectedCategory === cat.id
+                ? 'bg-[#0B6B53] text-white shadow-sm ring-2 ring-[#0B6B53]/20'
+                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+            }`}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
       {/* Main Chat Box */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[600px]">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[620px]">
         
         {/* Chat Header */}
         <div className="bg-gradient-to-r from-[#0B6B53] to-[#134E4A] p-4 text-white flex items-center justify-between">
@@ -389,10 +467,13 @@ export const AiReflectionAssistant: React.FC = () => {
             <div>
               <h3 className="font-heading font-bold text-sm text-white flex items-center gap-2">
                 <span>Inner Peace Guide & Coach</span>
+                <span className="px-2 py-0.5 bg-emerald-800/80 text-emerald-200 text-[10px] font-semibold rounded-full border border-emerald-500/30">
+                  ChatGPT & AI Active
+                </span>
               </h3>
               <span className="text-[10px] text-emerald-200 flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Context-Aware & Live
+                Comprehensive Wellness, Consciousness & Career Mentor
               </span>
             </div>
           </div>
@@ -460,17 +541,17 @@ export const AiReflectionAssistant: React.FC = () => {
               </div>
               <div className="bg-white p-4 rounded-2xl border border-slate-200 text-xs text-slate-500 italic flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                Inner Peace Guide is formulating your personalized answer...
+                ChatGPT & Inner Peace Guide is formulating your personalized answer...
               </div>
             </div>
           )}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Suggested Quick Prompts */}
+        {/* Suggested Quick Prompts based on Active Category */}
         <div className="p-2.5 bg-white border-t border-slate-100 flex items-center gap-2 overflow-x-auto scrollbar-none">
           <Lightbulb className="w-4 h-4 text-[#D4AF37] shrink-0 ml-1" />
-          {samplePrompts.map((sp, idx) => (
+          {currentPrompts.map((sp, idx) => (
             <button
               key={idx}
               type="button"
@@ -487,7 +568,7 @@ export const AiReflectionAssistant: React.FC = () => {
         <form onSubmit={handleSend} className="p-4 bg-white border-t border-slate-200 flex items-center gap-2">
           <input
             type="text"
-            placeholder="Ask anything about the wellness hub, practices, live sessions, or share what's on your mind..."
+            placeholder="Ask anything on wellness, stress, meditation, mindfulness, relationships, higher consciousness, or career..."
             value={inputPrompt}
             onChange={(e) => setInputPrompt(e.target.value)}
             className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
