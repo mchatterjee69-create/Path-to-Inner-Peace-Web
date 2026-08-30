@@ -79,7 +79,7 @@ export const HowItWorks: React.FC = () => {
               SIMPLE 5-DAY ROADMAP
             </span>
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-white mt-4 tracking-tight">
-              How The 5-Day Mental Reset Works
+              How The 5-Day Mind Reset Challenge Works
             </h2>
             <p className="text-emerald-100/80 text-sm sm:text-base mt-2.5 font-inter">
               A frictionless, step-by-step transformation path designed for your busy routine.

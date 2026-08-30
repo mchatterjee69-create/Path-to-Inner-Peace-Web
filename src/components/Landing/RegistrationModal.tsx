@@ -91,7 +91,7 @@ export const RegistrationModal: React.FC = () => {
           <h3 className="font-heading font-bold text-xl sm:text-2xl text-white tracking-tight">
             {isSerialLocked 
               ? `Complete Day 1 to Unlock Day ${registrationTargetDay}`
-              : 'Join 5-Day Mental Reset Challenge'}
+              : '5 Day Mind Reset Challenge'}
           </h3>
           <p className="text-xs text-emerald-100 mt-0.5">
             {isSerialLocked && targetDayData
@@ -235,11 +235,11 @@ export const RegistrationModal: React.FC = () => {
 
             <button
               type="submit"
-              className="btn-glowing-gold w-full py-3.5 px-6 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-extrabold text-sm rounded-xl shadow-xl hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 border border-amber-200/60 cursor-pointer"
+              className="btn-glowing-gold w-full py-3.5 px-6 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-extrabold text-sm rounded-xl shadow-xl hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer"
             >
-              <CheckCircle2 className="w-5 h-5 text-slate-950" />
+              <CheckCircle2 className="w-5 h-5 text-slate-950 shrink-0" />
               <span>
-                {isSerialLocked ? `Register & Join 5-Day Mental Reset` : 'Join 5-Day Mental Reset Challenge Now'}
+                {isSerialLocked ? `Register & Unlock 5 Day Mind Reset` : '5 Day Mind Reset Challenge'}
               </span>
             </button>
 

@@ -25,7 +25,7 @@ export const CertificateModal: React.FC = () => {
     if (navigator.share) {
       navigator.share({
         title: 'My Path to Inner Peace Certificate',
-        text: `I completed the 5-Day Mental Reset Challenge with Mainak Chatterjee!`,
+        text: `I completed the 5-Day Mind Reset Challenge with Mainak Chatterjee!`,
         url: window.location.href
       });
     } else {
@@ -105,7 +105,7 @@ export const CertificateModal: React.FC = () => {
           </div>
 
           <p className="text-xs sm:text-sm text-slate-700 max-w-xl mx-auto leading-relaxed">
-            has successfully completed the <strong>5-Day 30-Minute Mental Reset Challenge</strong>, demonstrating exceptional commitment to nervous system regulation, CBT thought awareness, somatic breathwork, and emotional healing.
+            has successfully completed the <strong>5-Day 30-Minute Mind Reset Challenge</strong>, demonstrating exceptional commitment to nervous system regulation, CBT thought awareness, somatic breathwork, and emotional healing.
           </p>
 
           {/* Footer Metadata & Signatures */}

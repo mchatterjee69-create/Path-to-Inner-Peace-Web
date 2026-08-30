@@ -50,7 +50,7 @@ export const DAYS_DATA: DayLesson[] = [
       soundName: 'Gentle Rain & 6Hz Theta Brainwave',
       audioDescription: 'Soft continuous rainfall overlayed with 6Hz Theta binaural beat frequency (216Hz/222Hz carrier waves) designed for deep cognitive clearance and subconscious mental detox.'
     },
-    lessonContent: `Welcome to Day 1 of your 5-Day Mental Reset Challenge!
+    lessonContent: `Welcome to Day 1 of your 5-Day Mind Reset Challenge!
 Today we focus on Mental Detox. Most stress stems from unobserved automatic negative thoughts (ANTs). By bringing conscious awareness to these thought patterns without judgment, you loosen their grip on your nervous system.
 
 Key Principle: You are not your thoughts; you are the observer of your thoughts.`,
@@ -216,7 +216,7 @@ export const ALL_BADGES: Badge[] = [
   {
     id: 'challenge-master',
     title: 'Reset Champion',
-    description: 'Completed all 5 Days of the Mental Reset Challenge!',
+    description: 'Completed all 5 Days of the Mind Reset Challenge!',
     icon: 'Award',
     unlocked: false,
     category: 'challenge'
@@ -342,8 +342,8 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    question: 'Is the 5-Day Mental Reset Challenge completely free?',
-    answer: 'Yes! The 5-Day 30-Minute Mental Reset Challenge is 100% free with no hidden charges or credit card required.'
+    question: 'Is the 5-Day Mind Reset Challenge completely free?',
+    answer: 'Yes! The 5-Day 30-Minute Mind Reset Challenge is 100% free with no hidden charges or credit card required.'
   },
   {
     question: 'Can beginners with zero meditation experience join?',

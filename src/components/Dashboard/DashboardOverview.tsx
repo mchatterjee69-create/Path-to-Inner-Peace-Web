@@ -22,6 +22,7 @@ import {
   FileText
 } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
+import { FreeStarBadge } from '../Common/FreeStarBadge';
 
 export const DashboardOverview: React.FC = () => {
   const { user, setActiveView, setActiveDayNumber, setIsRegistrationModalOpen, setIsCertificateModalOpen } = useApp();
@@ -43,13 +44,14 @@ export const DashboardOverview: React.FC = () => {
           Welcome to Path to Inner Peace
         </h2>
         <p className="text-slate-600 text-sm max-w-md mx-auto">
-          You are one step away from unlocking your personal 5-Day Mental Reset dashboard!
+          You are one step away from unlocking your personal 5 Day Mind Reset Challenge dashboard!
         </p>
         <button
           onClick={() => setIsRegistrationModalOpen(true)}
-          className="btn-glowing-gold px-8 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold text-sm rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-xl border border-amber-200/50 cursor-pointer inline-flex items-center gap-2"
+          className="relative btn-glowing-gold pl-10 pr-7 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold text-sm rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-xl border border-amber-200/50 cursor-pointer inline-flex items-center gap-2.5 group"
         >
-          <span>Join 5-Day Mental Reset Free</span>
+          <FreeStarBadge size="sm" />
+          <span>5 Day Mind Reset Challenge</span>
           <ArrowRight className="w-4 h-4 text-slate-950" />
         </button>
       </div>

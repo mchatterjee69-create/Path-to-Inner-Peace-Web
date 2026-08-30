@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
+import { FreeStarBadge } from '../Common/FreeStarBadge';
 
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
@@ -55,13 +56,13 @@ export const HeroSection: React.FC = () => {
             </div>
           </ScrollReveal>
 
-          {/* 2. FREE 5-DAY MENTAL RESET CHALLENGE Live Badge */}
+          {/* 2. 5-DAY EXCLUSIVE MIND RESET CHALLENGE Live Badge */}
           <ScrollReveal variant="slide-down" delay={0.1}>
             <div className="flex justify-center">
               <div className="inline-flex items-center gap-2.5 bg-emerald-950/70 border border-[#D4AF37]/40 px-4 py-1.5 rounded-full shadow-inner backdrop-blur-md">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse shadow-sm shadow-[#D4AF37]"></span>
                 <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
-                  FREE 5-DAY MENTAL RESET CHALLENGE
+                  5-DAY EXCLUSIVE MIND RESET CHALLENGE
                 </span>
               </div>
             </div>
@@ -121,9 +122,16 @@ export const HeroSection: React.FC = () => {
                     setIsRegistrationModalOpen(true);
                   }
                 }}
-                className="btn-glowing-gold w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer group"
+                className="relative btn-glowing-gold w-full sm:w-auto pl-10 pr-6 sm:pl-12 sm:pr-8 py-3.5 sm:py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer group"
               >
-                <span>{user.registered ? 'Go to My Dashboard' : 'Join 5-Day Mental Reset Free'}</span>
+                {!user.registered && (
+                  <FreeStarBadge size="md" />
+                )}
+                {user.registered ? (
+                  <span>Go to My Dashboard</span>
+                ) : (
+                  <span>5 Day Mind Reset Challenge</span>
+                )}
                 <ArrowRight className="w-5 h-5 text-slate-950 group-hover:translate-x-1 transition-transform" />
               </button>
 
@@ -213,13 +221,13 @@ export const HeroSection: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-emerald-200/90 font-medium flex items-center gap-1.5">
-                      <Award className="w-3.5 h-3.5 text-amber-400" />
+                  <div className="flex items-center justify-between text-xs gap-2">
+                    <span className="text-emerald-200/90 font-medium flex items-center gap-1.5 shrink-0">
+                      <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                       Includes:
                     </span>
-                    <span className="text-amber-200 font-semibold text-right">
-                      WhatsApp Reminders & Certificate
+                    <span className="text-amber-200 font-semibold text-right whitespace-nowrap text-[11.5px] sm:text-xs">
+                      Exclusive pack of free Welcome Kit
                     </span>
                   </div>
 
@@ -230,7 +238,7 @@ export const HeroSection: React.FC = () => {
                     onClick={() => setIsRegistrationModalOpen(true)}
                     className="btn-glowing-gold px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm rounded-xl shadow-lg hover:brightness-110 active:scale-[0.98] transition-all text-center border border-amber-200/60 flex items-center justify-center gap-1.5 cursor-pointer group"
                   >
-                    <span>Join now.</span>
+                    <span>Join Now</span>
                     <ArrowRight className="w-4 h-4 text-slate-950 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </div>

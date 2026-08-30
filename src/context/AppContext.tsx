@@ -315,7 +315,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     // Automatically push registration data to mchatterjee69@gmail.com
     dispatchFormToAdmin({
-      formType: '5-Day Mental Reset Challenge Registration',
+      formType: '5-Day Mind Reset Challenge Registration',
       fullName: details.fullName,
       email: details.email || `${details.fullName.toLowerCase().replace(/\s+/g, '')}@example.com`,
       mobile: details.whatsapp,

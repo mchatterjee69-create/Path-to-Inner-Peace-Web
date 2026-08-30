@@ -110,7 +110,7 @@ export const AiReflectionAssistant: React.FC = () => {
     // 8. Founder & Coach Mainak Chatterjee
     if (p.includes('mainak') || p.includes('chatterjee') || p.includes('founder') || p.includes('coach') || p.includes('mentor')) {
       return {
-        text: `**Coach Mainak Chatterjee** is the founder of the **Path to Inner Peace** wellness platform.\n\nHe is an accomplished Mindset & Life Coach, Certified CBT Practitioner, International Wellness & Spiritual Mentor, and Career Consultant. Coach Mainak leads our **5-Day Mental Reset Challenge**, conducts **Weekly Live Masterclasses** every Sunday at 11:00 AM IST on Google Meet, and provides personalized 1:1 sessions through **Career Axis**.`,
+        text: `**Coach Mainak Chatterjee** is the founder of the **Path to Inner Peace** wellness platform.\n\nHe is an accomplished Mindset & Life Coach, Certified CBT Practitioner, International Wellness & Spiritual Mentor, and Career Consultant. Coach Mainak leads our **5-Day Mind Reset Challenge**, conducts **Weekly Live Masterclasses** every Sunday at 11:00 AM IST on Google Meet, and provides personalized 1:1 sessions through **Career Axis**.`,
         affirmation: "I am guided toward higher awareness and grounded inner peace."
       };
     }
@@ -118,7 +118,7 @@ export const AiReflectionAssistant: React.FC = () => {
     // 9. 5-Day Challenge
     if (p.includes('5-day') || p.includes('5 day') || p.includes('challenge') || p.includes('curriculum') || p.includes('roadmap') || (p.includes('day') && (p.includes('1') || p.includes('2') || p.includes('3') || p.includes('4') || p.includes('5')))) {
       return {
-        text: `The **5-Day Mental Reset Challenge** is a 30-minute daily roadmap designed to rewire mental habits:\n\n- **Day 1: Nervous System Reset & Box Breathing** — Regulate autonomic tone and stimulate the vagus nerve.\n- **Day 2: Sound Healing & Theta Frequencies** — 432Hz and 528Hz restorative frequencies to calm brainwaves.\n- **Day 3: CBT Cognitive Distortions & Journaling** — Identify automatic negative thoughts and break catastrophic thought loops.\n- **Day 4: Emotional Release & Forgiveness** — Release repressed emotional baggage and practice heart-centered clearing.\n- **Day 5: Awakening & Daily Habits** — Anchor morning/evening routines and earn your **Certificate of Completion**.\n\nYou are currently on Day ${user.currentDay}! You can access your daily module from the Dashboard.`,
+        text: `The **5-Day Mind Reset Challenge** is a 30-minute daily roadmap designed to rewire mental habits:\n\n- **Day 1: Nervous System Reset & Box Breathing** — Regulate autonomic tone and stimulate the vagus nerve.\n- **Day 2: Sound Healing & Theta Frequencies** — 432Hz and 528Hz restorative frequencies to calm brainwaves.\n- **Day 3: CBT Cognitive Distortions & Journaling** — Identify automatic negative thoughts and break catastrophic thought loops.\n- **Day 4: Emotional Release & Forgiveness** — Release repressed emotional baggage and practice heart-centered clearing.\n- **Day 5: Awakening & Daily Habits** — Anchor morning/evening routines and earn your **Certificate of Completion**.\n\nYou are currently on Day ${user.currentDay}! You can access your daily module from the Dashboard.`,
         affirmation: "Day by day, I rewire my mind for lasting clarity and calm."
       };
     }
@@ -346,7 +346,7 @@ export const AiReflectionAssistant: React.FC = () => {
       "How does Coach Mainak's 1:1 Career Axis consultation work?"
     ],
     hub: [
-      "What is the 5-Day Mental Reset Challenge curriculum?",
+      "What is the 5-Day Mind Reset Challenge curriculum?",
       "How do I join the Sunday 11:00 AM IST Live Masterclass on Google Meet?",
       "What are the 12 CBT Video Masterclasses in the dashboard?",
       "Tell me about the 21-Day Sunrise Mindfulness Camp"

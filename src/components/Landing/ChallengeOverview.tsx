@@ -48,10 +48,10 @@ export const ChallengeOverview: React.FC = () => {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53] bg-emerald-50 px-4 py-1.5 rounded-full border border-emerald-200/70 inline-flex items-center gap-1.5 shadow-xs">
               <CalendarDays className="w-3.5 h-3.5 text-[#0B6B53]" />
-              LIVE 5-DAY MENTAL RESET
+              5-DAY EXCLUSIVE MIND RESET CHALLENGE
             </span>
             <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 mt-4 tracking-tight">
-              The 5-Day Mental Reset Breakdown
+              The 5-Day Mind Reset Challenge Breakdown
             </h2>
             <p className="text-slate-600 text-sm sm:text-base mt-2.5 font-inter">
               30 minutes each day carefully engineered to rewire your nervous system. Complete serially starting with Day 1.

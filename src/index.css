@@ -170,26 +170,9 @@ html, body {
 
 .btn-glowing-gold {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   animation: goldGlowPulse 2.4s ease-in-out infinite;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-glowing-gold::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.45) 50%,
-    transparent 100%
-  );
-  animation: shimmerLight 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  pointer-events: none;
 }
 
 .btn-glowing-emerald {

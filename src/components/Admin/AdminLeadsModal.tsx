@@ -234,7 +234,7 @@ export const AdminLeadsModal: React.FC<AdminLeadsModalProps> = ({ isOpen, onClos
                 {searchTerm || selectedFormType !== 'ALL' ? 'No user records matching your search.' : 'No user form submissions recorded yet.'}
               </p>
               <p className="text-xs text-slate-400 max-w-sm mx-auto">
-                Submissions from the 5-Day Mental Reset Challenge, Career Axis 1:1 Sessions, and Inquiries will automatically appear here and be dispatched to {targetEmail}.
+                Submissions from the 5-Day Mind Reset Challenge, Career Axis 1:1 Sessions, and Inquiries will automatically appear here and be dispatched to {targetEmail}.
               </p>
             </div>
           ) : (

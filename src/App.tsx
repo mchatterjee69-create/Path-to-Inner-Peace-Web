@@ -43,6 +43,7 @@ import { DeeperAwakeningModal } from './components/InnerShift/DeeperAwakeningMod
 import { MeditationCampModal } from './components/InnerShift/MeditationCampModal';
 import { WeeklyLiveSessionModal } from './components/InnerShift/WeeklyLiveSessionModal';
 import { ScrollToTop } from './components/Navigation/ScrollToTop';
+import { FreeStarBadge } from './components/Common/FreeStarBadge';
 
 const MainContent: React.FC = () => {
   const { 
@@ -113,7 +114,7 @@ const MainContent: React.FC = () => {
                   Ready to Rewire Your Mind in 5 Days?
                 </h3>
                 <p className="text-xs sm:text-sm text-emerald-100/90 max-w-lg mx-auto font-inter leading-relaxed">
-                  Join 1,000+ seekers in the FREE 30-Minute Daily Mental Reset Challenge and experience true inner calm.
+                  Join 1,000+ seekers in the 5 Day Mind Reset Challenge and experience true inner calm.
                 </p>
                 <div className="pt-3">
                   <button
@@ -124,9 +125,10 @@ const MainContent: React.FC = () => {
                         setIsRegistrationModalOpen(true);
                       }
                     }}
-                    className="btn-glowing-gold px-8 py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-poppins font-extrabold text-sm sm:text-base rounded-2xl shadow-2xl active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2 border border-amber-200/60 group"
+                    className="relative btn-glowing-gold pl-10 pr-6 sm:pl-12 sm:pr-8 py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-poppins font-extrabold text-sm sm:text-base rounded-2xl shadow-2xl active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2.5 border border-amber-200/60 group"
                   >
-                    <span>Join 5-Day Mental Reset Free</span>
+                    <FreeStarBadge size="md" />
+                    <span>5 Day Mind Reset Challenge</span>
                     <span className="text-slate-950 font-bold group-hover:translate-x-1 transition-transform">→</span>
                   </button>
                 </div>
