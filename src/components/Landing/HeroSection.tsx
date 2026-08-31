@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift } from 'lucide-react';
+import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import { FreeStarBadge } from '../Common/FreeStarBadge';
 
@@ -122,7 +122,7 @@ export const HeroSection: React.FC = () => {
                     setIsRegistrationModalOpen(true);
                   }
                 }}
-                className="relative btn-glowing-gold w-full sm:w-auto pl-10 pr-6 sm:pl-12 sm:pr-8 py-3.5 sm:py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer group"
+                className="relative btn-glowing-gold w-full sm:w-auto px-7 sm:px-9 py-3.5 sm:py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer group"
               >
                 {!user.registered && (
                   <FreeStarBadge size="md" />
@@ -197,18 +197,29 @@ export const HeroSection: React.FC = () => {
                   
                   <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2.5">
                     <span className="text-emerald-200/90 font-medium flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                      Format:
-                    </span>
-                    <span className="font-semibold text-white">Daily 30-Min Guided Reset</span>
-                  </div>
-
-                  <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2.5">
-                    <span className="text-emerald-200/90 font-medium flex items-center gap-1.5">
                       <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
                       Coach:
                     </span>
                     <span className="font-semibold text-white">Mainak Chatterjee</span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2.5">
+                    <span className="text-emerald-200/90 font-medium flex items-center gap-1.5">
+                      <Video className="w-3.5 h-3.5 text-red-400" />
+                      Platform:
+                    </span>
+                    <span className="font-semibold text-white flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                      Youtube Live
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2.5">
+                    <span className="text-emerald-200/90 font-medium flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-emerald-400" />
+                      Format:
+                    </span>
+                    <span className="font-semibold text-white">Daily 30-Min Guided Reset</span>
                   </div>
 
                   <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2.5">

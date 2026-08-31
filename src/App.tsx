@@ -125,7 +125,7 @@ const MainContent: React.FC = () => {
                         setIsRegistrationModalOpen(true);
                       }
                     }}
-                    className="relative btn-glowing-gold pl-10 pr-6 sm:pl-12 sm:pr-8 py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-poppins font-extrabold text-sm sm:text-base rounded-2xl shadow-2xl active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2.5 border border-amber-200/60 group"
+                    className="relative btn-glowing-gold px-7 sm:px-9 py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 hover:brightness-110 text-slate-950 font-poppins font-extrabold text-sm sm:text-base rounded-2xl shadow-2xl active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2.5 border border-amber-200/60 group"
                   >
                     <FreeStarBadge size="md" />
                     <span>5 Day Mind Reset Challenge</span>

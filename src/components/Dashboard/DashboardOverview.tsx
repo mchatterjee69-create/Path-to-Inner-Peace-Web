@@ -48,7 +48,7 @@ export const DashboardOverview: React.FC = () => {
         </p>
         <button
           onClick={() => setIsRegistrationModalOpen(true)}
-          className="relative btn-glowing-gold pl-10 pr-7 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold text-sm rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-xl border border-amber-200/50 cursor-pointer inline-flex items-center gap-2.5 group"
+          className="relative btn-glowing-gold px-7 py-3.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold text-sm rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-xl border border-amber-200/50 cursor-pointer inline-flex items-center gap-2.5 group"
         >
           <FreeStarBadge size="sm" />
           <span>5 Day Mind Reset Challenge</span>

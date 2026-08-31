@@ -146,10 +146,10 @@ export const Header: React.FC = () => {
             {!user.registered ? (
               <button
                 onClick={() => setIsRegistrationModalOpen(true)}
-                className="flex items-center gap-1 xs:gap-1.5 px-2 xs:px-2.5 sm:px-3 py-1.5 bg-[#0B6B53] hover:bg-[#095743] text-white font-bold rounded-full text-[10px] sm:text-xs active:scale-95 transition-all shadow-xs shadow-emerald-900/20 border border-emerald-500/30 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider"
+                className="relative btn-join-free-animated flex items-center gap-1 xs:gap-1.5 px-2.5 xs:px-3 sm:px-3.5 py-1.5 bg-gradient-to-r from-[#0B6B53] via-emerald-600 to-[#0B6B53] hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-full text-[10px] sm:text-xs active:scale-95 transition-all shadow-md shadow-emerald-950/20 border border-emerald-400/50 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider group"
               >
-                <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
-                <span>Join Free</span>
+                <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0 animate-[spin_8s_linear_infinite]" />
+                <span className="relative z-10 font-bold text-amber-100 group-hover:text-white transition-colors">Join Free</span>
               </button>
             ) : (
               <button
@@ -260,12 +260,24 @@ export const Header: React.FC = () => {
 
             {/* Drawer Footer Actions */}
             <div className="p-4 bg-slate-50 border-t border-slate-200 space-y-2">
+              {!user.registered && (
+                <button
+                  onClick={() => {
+                    setIsRegistrationModalOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="relative btn-join-free-animated w-full py-3 bg-gradient-to-r from-[#0B6B53] via-emerald-600 to-[#0B6B53] text-white font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 uppercase tracking-wider group cursor-pointer border border-emerald-400/40"
+                >
+                  <Sun className="w-4 h-4 text-amber-300 shrink-0 animate-[spin_8s_linear_infinite]" />
+                  <span className="relative z-10 font-bold text-amber-100 group-hover:text-white">Join Free - 5 Day Reset</span>
+                </button>
+              )}
               <button
                 onClick={() => {
                   setActiveView('upgrade');
                   setMobileMenuOpen(false);
                 }}
-                className="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 cursor-pointer hover:brightness-105 transition-all"
               >
                 <Crown className="w-4 h-4 fill-slate-950" />
                 <span>Upgrade to MindForge 360°™</span>
