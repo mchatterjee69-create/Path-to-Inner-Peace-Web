@@ -7,6 +7,7 @@ import {
   Check 
 } from 'lucide-react';
 import { HolisticWellnessSection } from '../Landing/HolisticWellnessSection';
+import { DropUsALineSection } from '../Landing/DropUsALineSection';
 
 export const MindForgeUpgrade: React.FC = () => {
   const { user, setSelectedPlan, setIsPaymentModalOpen } = useApp();
@@ -17,8 +18,8 @@ export const MindForgeUpgrade: React.FC = () => {
   };
 
   return (
-    <div className="bg-white pt-10 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-14 animate-fadeIn pb-2 sm:pb-4">
+    <div className="bg-white pt-10 pb-2 sm:pb-3 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12 animate-fadeIn">
       
       {/* Hero Banner */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -127,6 +128,9 @@ export const MindForgeUpgrade: React.FC = () => {
 
       {/* Holistic Wellness One-Stop Solution Section */}
       <HolisticWellnessSection />
+
+      {/* Drop Us A Line Contact Form Section */}
+      <DropUsALineSection />
 
     </div>
   </div>

@@ -84,7 +84,7 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
     <section 
       id="holistic-wellness-solutions"
       aria-label="Path to Inner Peace Holistic Solutions"
-      className={`relative w-full pt-6 pb-4 sm:pt-10 sm:pb-6 text-slate-900 ${className}`}
+      className={`relative w-full pt-6 pb-2 sm:pt-8 sm:pb-3 text-slate-900 ${className}`}
     >
       <div className="relative max-w-7xl mx-auto space-y-8 sm:space-y-10">
         {/* Section Header */}
