@@ -102,6 +102,12 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li className="flex items-center gap-2">
+              <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
+              <a href={`mailto:${FOUNDER_INFO.founderEmail}`} className="hover:underline">
+                {FOUNDER_INFO.founderEmail}
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
               <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
               <a 
                 href={`https://wa.me/919163670300`} 

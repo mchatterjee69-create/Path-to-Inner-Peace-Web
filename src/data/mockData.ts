@@ -20,6 +20,7 @@ export const FOUNDER_INFO = {
   image: 'https://cdn.corenexis.com/f/H5nVGDp0Fk3.jpg',
   website: 'www.pathtoinnerpeace.in',
   email: 'connect@pathtoinnerpeace.in',
+  founderEmail: 'mainak.chatterjee@pathtoinnerpeace.in',
   whatsapp: '+91 91636 70300'
 };
 
