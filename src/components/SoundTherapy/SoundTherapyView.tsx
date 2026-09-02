@@ -105,7 +105,7 @@ const SOUND_TRACKS: SoundTrack[] = [
     category: 'crystal_bowls',
     categoryLabel: 'Crystal Bowls',
     frequency: '432 Hz Sacred Quartz',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
+    audioUrl: 'https://www.image2url.com/r2/default/audio/1788332218938-2e736c6f-9eea-4a45-a0ed-34f6baf3a9c2.mp3',
     description: 'Authentic acoustic recording of 99.9% pure silica quartz singing bowls sustaining long, shimmering crystalline overtones tuned to 432 Hz.',
     benefits: ['Purifies cellular energy', 'Dissolves emotional tension', 'Deepens meditative absorption'],
     chakaColor: '#D4AF37',

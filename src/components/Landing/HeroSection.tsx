@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
@@ -6,9 +6,37 @@ import { FreeStarBadge } from '../Common/FreeStarBadge';
 
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(err => {
+        console.log('Autoplay attempted:', err);
+      });
+    }
+  }, []);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
+    <>
+      {/* Full-Width Hero Video - Edge-to-Edge, No Crop, No Card, No Margins, Pure Video */}
+      <div className="w-full bg-[#041F18] overflow-hidden leading-none block">
+        <video
+          ref={videoRef}
+          src="/videos/hero_intro.mp4"
+          poster="/videos/hero_thumb.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="w-full h-auto block max-w-none m-0 p-0 border-0"
+        >
+          <source src="/videos/hero_intro.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
       
       {/* Ambient Radial Lights */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-emerald-500/15 via-[#D4AF37]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
@@ -265,5 +293,6 @@ export const HeroSection: React.FC = () => {
 
       </div>
     </section>
+    </>
   );
 };
