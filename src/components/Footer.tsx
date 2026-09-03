@@ -60,6 +60,16 @@ export const Footer: React.FC = () => {
               </button>
             </li>
             <li>
+              <button onClick={() => setActiveView('career-axis')} className="hover:text-white transition-colors text-amber-200 font-semibold">
+                Career Axis (1:1 Mapping)
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setActiveView('corporate-wellness')} className="hover:text-white transition-colors text-emerald-300 font-semibold">
+                Corporate Wellness Solutions
+              </button>
+            </li>
+            <li>
               <button onClick={() => setActiveView('dashboard')} className="hover:text-white transition-colors">
                 Personal Dashboard
               </button>

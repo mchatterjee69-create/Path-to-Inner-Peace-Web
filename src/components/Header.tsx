@@ -16,7 +16,8 @@ import {
   Sparkles,
   PhoneCall,
   MessageCircle,
-  ChevronRight
+  ChevronRight,
+  Building2
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -56,6 +57,7 @@ export const Header: React.FC = () => {
     { id: 'inner-shift', label: 'Inner Shift', icon: Sun },
     { id: 'inner-revolution', label: 'Inner Revolution', icon: Zap },
     { id: 'career-axis', label: 'Career Axis', icon: Compass },
+    { id: 'corporate-wellness', label: 'Corporate Wellness', icon: Building2 },
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, streak: user.streakDays },
     { id: 'ai-coach', label: 'Inner Peace Guide', icon: Sparkles },
     { id: 'profile', label: 'Member Access', icon: User },
@@ -93,7 +95,7 @@ export const Header: React.FC = () => {
           </div>
 
           {/* Desktop & Laptop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-2.5 font-inter text-[11px] 2xl:text-xs font-medium text-emerald-900/90 whitespace-nowrap shrink min-w-0">
+          <nav className="hidden xl:flex items-center gap-1 2xl:gap-2 font-inter text-[10.5px] 2xl:text-xs font-medium text-emerald-900/90 whitespace-nowrap shrink min-w-0">
             {navLinks.map((item) => {
               const Icon = item.icon;
               const isActive = activeView === item.id;
@@ -102,7 +104,7 @@ export const Header: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => setActiveView(item.id)}
-                  className={`transition-all duration-150 py-1.5 px-2 2xl:px-2.5 rounded-lg flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
+                  className={`transition-all duration-150 py-1.5 px-1.5 2xl:px-2.5 rounded-lg flex items-center gap-1 2xl:gap-1.5 whitespace-nowrap cursor-pointer ${
                     isActive 
                       ? 'text-emerald-950 font-bold bg-emerald-50/80 border-b-2 border-[#0B6B53]' 
                       : 'hover:text-emerald-950 hover:bg-slate-50 text-slate-700'

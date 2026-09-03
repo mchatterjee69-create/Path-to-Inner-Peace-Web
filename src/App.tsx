@@ -25,6 +25,7 @@ import { InnerRevolutionView } from './components/InnerShift/InnerRevolutionView
 import { CareerAxisView } from './components/CareerAxis/CareerAxisView';
 import { ExplorePathSerialView } from './components/Landing/ExplorePathSerialView';
 import { CareerAxisBookingView } from './components/CareerAxis/CareerAxisBookingView';
+import { CorporateWellnessView } from './components/CorporateWellness/CorporateWellnessView';
 import { JournalView } from './components/Journal/JournalView';
 import { MindForgeUpgrade } from './components/Pricing/MindForgeUpgrade';
 import { RazorpayModal } from './components/Payment/RazorpayModal';
@@ -147,6 +148,7 @@ const MainContent: React.FC = () => {
         {activeView === 'inner-revolution' && <InnerRevolutionView />}
         {activeView === 'career-axis' && <CareerAxisView />}
         {activeView === 'career-axis-booking' && <CareerAxisBookingView />}
+        {activeView === 'corporate-wellness' && <CorporateWellnessView />}
         {activeView === 'challenge' && <DailyChallengeView />}
         {activeView === 'breathing' && <BreathingExercise />}
         {activeView === 'meditation' && <MeditationPlayer />}

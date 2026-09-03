@@ -12,8 +12,11 @@ import {
   Target, 
   TrendingUp, 
   UserCheck, 
-  GraduationCap 
+  GraduationCap,
+  Building2,
+  ArrowRight
 } from 'lucide-react';
+import confusedLadyBg from '../../assets/images/confused_career_lady_1788439823753.jpg';
 
 export const CareerAxisView: React.FC = () => {
   const { setActiveView } = useApp();
@@ -47,15 +50,14 @@ export const CareerAxisView: React.FC = () => {
 
   return (
     <div id="career-axis-page" className="min-h-screen bg-white text-slate-900 pb-20 font-sans">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 space-y-8 sm:space-y-12">
-        {/* Header Banner */}
+      {/* Top Header Title */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="space-y-4"
         >
-          {/* Main Title Heading */}
           <div className="flex items-center gap-2.5">
             <Compass className="w-7 h-7 sm:w-9 sm:h-9 text-[#C89620]" />
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#C89620] sm:text-[#1b4d2e] tracking-tight">
@@ -63,114 +65,138 @@ export const CareerAxisView: React.FC = () => {
             </h1>
           </div>
           <div className="w-full h-px bg-slate-200" />
+        </motion.div>
+      </div>
 
-          {/* Official Career Axis Graphic Banner / Poster */}
-          <div className="relative rounded-2xl overflow-hidden shadow-lg border border-emerald-900/20 bg-gradient-to-br from-[#05281e] via-[#093d2e] to-[#031d15] text-white p-5 sm:p-8">
+      {/* FULL-WIDTH CAREER AXIS SECTION (NO CARD) WITH DIM SHADOW BACKGROUND IMAGE */}
+      <motion.section 
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative w-full my-6 sm:my-8 overflow-hidden bg-[#021811] text-white border-y border-emerald-900/40"
+      >
+        {/* Background Dim Shadow Image: Lady confused which career to choose */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+          <img 
+            src={confusedLadyBg}
+            alt="A student confused and contemplating which career to choose"
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover object-center scale-105 filter brightness-[0.38] contrast-[1.12] saturate-[0.85]"
+          />
+          {/* Dim Shadow and Vignette Gradients before text */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/95 via-[#04281c]/88 to-[#021811]/96" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#02140e] via-transparent to-[#02140e]/90" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#021811]/40 to-[#02140e]/95" />
+        </div>
+
+        {/* Content Container (Full Width Spanning Layout) */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          {/* Top Brand Header */}
+          <div className="flex flex-col items-center text-center space-y-2 border-b border-emerald-700/40 pb-5">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#021811]/90 border-2 border-[#D4AF37] flex items-center justify-center shadow-lg backdrop-blur-xs">
+              <Compass className="w-8 h-8 sm:w-10 sm:h-10 text-[#D4AF37]" />
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-wider text-[#D4AF37] uppercase drop-shadow-md">
+              CAREER AXIS
+            </h2>
+            <p className="text-[11px] sm:text-xs font-bold tracking-widest text-emerald-200 uppercase">
+              CLARITY. DIRECTION. SUCCESS.
+            </p>
+          </div>
+
+          {/* Main Body Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-7 sm:py-9">
             
-            {/* Top Brand Header */}
-            <div className="flex flex-col items-center text-center space-y-1.5 border-b border-emerald-700/40 pb-5">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#031d15] border-2 border-[#D4AF37] flex items-center justify-center shadow-md">
-                <Compass className="w-8 h-8 sm:w-10 sm:h-10 text-[#D4AF37]" />
+            {/* Left Column: Pain Points & Dilemmas */}
+            <div className="space-y-4 text-center md:text-left">
+              <div className="inline-block bg-amber-500/20 text-amber-300 font-extrabold text-xs sm:text-sm px-3.5 py-1 rounded-full border border-amber-400/35 backdrop-blur-xs shadow-sm">
+                YOU'RE NOT ALONE 🤯
               </div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-black tracking-wider text-[#D4AF37] uppercase">
-                CAREER AXIS
-              </h2>
-              <p className="text-[10px] sm:text-xs font-bold tracking-widest text-emerald-200 uppercase">
-                CLARITY. DIRECTION. SUCCESS.
-              </p>
-            </div>
-
-            {/* Poster Main Body Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center py-6">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-amber-400 leading-tight drop-shadow-sm">
+                90% STUDENTS FEEL CONFUSED ABOUT CAREERS.
+              </h3>
               
-              {/* Left Column: Pain Points & Dilemmas */}
-              <div className="space-y-4 text-center md:text-left">
-                <div className="inline-block bg-amber-500/20 text-amber-300 font-extrabold text-xs sm:text-sm px-3 py-1 rounded-full border border-amber-400/30">
-                  YOU'RE NOT ALONE 🤯
-                </div>
-                <h3 className="text-xl sm:text-2xl font-black text-amber-400 leading-tight">
-                  90% STUDENTS FEEL CONFUSED ABOUT CAREERS.
-                </h3>
-                
-                <ul className="space-y-2 text-xs sm:text-sm text-emerald-100 font-medium">
-                  <li className="flex items-center gap-2 justify-center md:justify-start">
-                    <span className="text-amber-400 font-bold">➤</span> Too many choices.
-                  </li>
-                  <li className="flex items-center gap-2 justify-center md:justify-start">
-                    <span className="text-amber-400 font-bold">➤</span> Too much pressure.
-                  </li>
-                  <li className="flex items-center gap-2 justify-center md:justify-start">
-                    <span className="text-amber-400 font-bold">➤</span> Too little clarity.
-                  </li>
-                </ul>
+              <ul className="space-y-2.5 text-xs sm:text-sm text-emerald-100 font-medium">
+                <li className="flex items-center gap-2.5 justify-center md:justify-start">
+                  <span className="text-amber-400 font-bold text-sm">➤</span> Too many choices.
+                </li>
+                <li className="flex items-center gap-2.5 justify-center md:justify-start">
+                  <span className="text-amber-400 font-bold text-sm">➤</span> Too much pressure.
+                </li>
+                <li className="flex items-center gap-2.5 justify-center md:justify-start">
+                  <span className="text-amber-400 font-bold text-sm">➤</span> Too little clarity.
+                </li>
+              </ul>
 
-                {/* Career Fields Badges */}
-                <div className="flex flex-wrap gap-1.5 justify-center md:justify-start pt-2">
-                  <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
-                    B.Tech / Engineering
-                  </span>
-                  <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
-                    B.Arch
-                  </span>
-                  <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
-                    Merchant Navy
-                  </span>
-                  <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
-                    B.Pharma
-                  </span>
-                  <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[10px] sm:text-xs px-2.5 py-1 rounded-full">
-                    Paramedical
-                  </span>
-                  <span className="bg-amber-400/20 text-amber-200 text-[10px] sm:text-xs px-2.5 py-1 rounded-full font-bold">
-                    And Many More...
-                  </span>
-                </div>
-              </div>
-
-              {/* Right Column: Key Pillar Benefits */}
-              <div className="bg-black/20 p-4 sm:p-5 rounded-xl border border-emerald-700/30 space-y-3">
-                <div className="flex items-center gap-3 text-xs sm:text-sm text-emerald-100 font-bold">
-                  <div className="w-8 h-8 rounded-full bg-emerald-800/60 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                    <UserCheck className="w-4 h-4 text-amber-300" />
-                  </div>
-                  <span>1:1 Guidance</span>
-                </div>
-
-                <div className="flex items-center gap-3 text-xs sm:text-sm text-emerald-100 font-bold">
-                  <div className="w-8 h-8 rounded-full bg-emerald-800/60 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                    <Target className="w-4 h-4 text-amber-300" />
-                  </div>
-                  <span>Right Direction</span>
-                </div>
-
-                <div className="flex items-center gap-3 text-xs sm:text-sm text-emerald-100 font-bold">
-                  <div className="w-8 h-8 rounded-full bg-emerald-800/60 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                    <TrendingUp className="w-4 h-4 text-amber-300" />
-                  </div>
-                  <span>Career Growth</span>
-                </div>
-
-                <div className="flex items-center gap-3 text-xs sm:text-sm text-emerald-100 font-bold">
-                  <div className="w-8 h-8 rounded-full bg-emerald-800/60 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                    <GraduationCap className="w-4 h-4 text-amber-300" />
-                  </div>
-                  <span>Action Roadmap</span>
-                </div>
+              {/* Career Fields Badges */}
+              <div className="flex flex-wrap gap-2 justify-center md:justify-start pt-3">
+                <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[11px] sm:text-xs px-3 py-1 rounded-full backdrop-blur-xs">
+                  B.Tech / Engineering
+                </span>
+                <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[11px] sm:text-xs px-3 py-1 rounded-full backdrop-blur-xs">
+                  B.Arch
+                </span>
+                <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[11px] sm:text-xs px-3 py-1 rounded-full backdrop-blur-xs">
+                  Merchant Navy
+                </span>
+                <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[11px] sm:text-xs px-3 py-1 rounded-full backdrop-blur-xs">
+                  B.Pharma
+                </span>
+                <span className="bg-emerald-950/80 border border-emerald-600/40 text-emerald-200 text-[11px] sm:text-xs px-3 py-1 rounded-full backdrop-blur-xs">
+                  Paramedical
+                </span>
+                <span className="bg-amber-400/20 border border-amber-400/30 text-amber-200 text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold backdrop-blur-xs">
+                  And Many More...
+                </span>
               </div>
             </div>
 
-            {/* Poster Bottom Slogan */}
-            <div className="text-center border-t border-emerald-700/40 pt-4 space-y-1">
-              <p className="text-xs sm:text-sm italic font-serif text-emerald-200">
-                Discover Your Path. Design Your Future.
-              </p>
-              <p className="text-[10px] sm:text-xs font-bold text-[#D4AF37] tracking-wider uppercase">
-                GUIDANCE TODAY. SUCCESS TOMORROW.
-              </p>
+            {/* Right Column: Key Pillar Benefits (integrated dim background panel) */}
+            <div className="bg-emerald-950/50 backdrop-blur-md p-5 sm:p-6 rounded-xl border border-emerald-600/30 space-y-3.5 shadow-xl">
+              <div className="flex items-center gap-3.5 text-xs sm:text-sm text-emerald-100 font-bold">
+                <div className="w-8 h-8 rounded-full bg-emerald-800/70 border border-emerald-400/40 flex items-center justify-center shrink-0 shadow-sm">
+                  <UserCheck className="w-4 h-4 text-amber-300" />
+                </div>
+                <span>1:1 Guidance</span>
+              </div>
+
+              <div className="flex items-center gap-3.5 text-xs sm:text-sm text-emerald-100 font-bold">
+                <div className="w-8 h-8 rounded-full bg-emerald-800/70 border border-emerald-400/40 flex items-center justify-center shrink-0 shadow-sm">
+                  <Target className="w-4 h-4 text-amber-300" />
+                </div>
+                <span>Right Direction</span>
+              </div>
+
+              <div className="flex items-center gap-3.5 text-xs sm:text-sm text-emerald-100 font-bold">
+                <div className="w-8 h-8 rounded-full bg-emerald-800/70 border border-emerald-400/40 flex items-center justify-center shrink-0 shadow-sm">
+                  <TrendingUp className="w-4 h-4 text-amber-300" />
+                </div>
+                <span>Career Growth</span>
+              </div>
+
+              <div className="flex items-center gap-3.5 text-xs sm:text-sm text-emerald-100 font-bold">
+                <div className="w-8 h-8 rounded-full bg-emerald-800/70 border border-emerald-400/40 flex items-center justify-center shrink-0 shadow-sm">
+                  <GraduationCap className="w-4 h-4 text-amber-300" />
+                </div>
+                <span>Action Roadmap</span>
+              </div>
             </div>
           </div>
-        </motion.div>
 
+          {/* Bottom Slogan */}
+          <div className="text-center border-t border-emerald-700/40 pt-5 space-y-1.5">
+            <p className="text-xs sm:text-sm italic font-serif text-emerald-200">
+              Discover Your Path. Design Your Future.
+            </p>
+            <p className="text-[10px] sm:text-xs font-bold text-[#D4AF37] tracking-wider uppercase">
+              GUIDANCE TODAY. SUCCESS TOMORROW.
+            </p>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Main Content Sections */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* SECTION 1: ABOUT CAREER AXIS */}
         <motion.section 
           initial={{ opacity: 0, y: 15 }}
@@ -327,6 +353,38 @@ export const CareerAxisView: React.FC = () => {
               <span>Book Now</span>
             </button>
           </div>
+        </motion.div>
+
+        {/* Corporate Wellness Banner for HR & Organizations */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="rounded-2xl bg-gradient-to-r from-[#021811] via-[#063525] to-[#021811] p-6 sm:p-8 text-white border border-emerald-800/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6"
+        >
+          <div className="space-y-2 text-center sm:text-left">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D4AF37] uppercase tracking-wider">
+              <Building2 className="w-3.5 h-3.5" />
+              <span>For Organizations & Teams</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
+              Looking for Corporate Wellness Solutions?
+            </h3>
+            <p className="text-xs sm:text-sm text-emerald-100/80 max-w-xl">
+              Empower your teams with evidence-informed stress management, mindfulness, and emotional resilience workshops tailored to your organization.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setActiveView('corporate-wellness');
+            }}
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#C89620] text-slate-950 font-bold text-xs sm:text-sm shadow-md hover:brightness-105 transition-all flex items-center gap-2 shrink-0 cursor-pointer"
+          >
+            <span>Explore Corporate Wellness</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </motion.div>
 
       </div>

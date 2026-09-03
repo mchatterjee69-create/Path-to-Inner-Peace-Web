@@ -5,6 +5,7 @@ export type ActiveView =
   | 'inner-revolution'
   | 'career-axis'
   | 'career-axis-booking'
+  | 'corporate-wellness'
   | 'dashboard' 
   | 'challenge' 
   | 'breathing' 
@@ -17,6 +18,19 @@ export type ActiveView =
   | 'ai-coach'
   | 'cbt-video'
   | 'success';
+
+export interface CorporateConsultationPayload {
+  fullName: string;
+  workEmail: string;
+  company: string;
+  designation?: string;
+  phone?: string;
+  employeeCount?: string;
+  preferredProgram: string;
+  preferredFormat: 'Online' | 'Offline' | 'Either';
+  preferredDate?: string;
+  requirementDetails?: string;
+}
 
 export interface BlogArticle {
   id: string;

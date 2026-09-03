@@ -491,6 +491,138 @@ app.get("/api/career-axis/bookings", (_req, res) => {
   });
 });
 
+// ==========================================
+// CORPORATE WELLNESS CONSULTATIONS ENGINE
+// ==========================================
+interface CorporateWellnessConsultationRecord {
+  id: string;
+  fullName: string;
+  workEmail: string;
+  company: string;
+  designation: string;
+  phone: string;
+  employeeCount: string;
+  preferredProgram: string;
+  preferredFormat: 'Online' | 'Offline' | 'Either';
+  preferredDate: string;
+  requirementDetails: string;
+  createdAt: string;
+}
+
+const corporateWellnessConsultationsStore: CorporateWellnessConsultationRecord[] = [];
+
+// Submit Corporate Wellness Consultation Request
+app.post("/api/corporate-wellness/consultations", async (req, res) => {
+  try {
+    const {
+      fullName,
+      workEmail,
+      company,
+      designation,
+      phone,
+      employeeCount,
+      preferredProgram,
+      preferredFormat,
+      preferredDate,
+      requirementDetails
+    } = req.body;
+
+    // Strict validation
+    if (!fullName || typeof fullName !== 'string' || fullName.trim().length < 2) {
+      return res.status(400).json({ success: false, error: "Please enter your full name (minimum 2 characters)." });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!workEmail || !emailRegex.test(workEmail.trim())) {
+      return res.status(400).json({ success: false, error: "Please provide a valid work email address." });
+    }
+
+    if (!company || typeof company !== 'string' || company.trim().length < 2) {
+      return res.status(400).json({ success: false, error: "Please enter your company or organization name." });
+    }
+
+    // Generate unique corporate lead reference code
+    const randomCode = Math.random().toString(36).substring(2, 7).toUpperCase();
+    const referenceId = `CW-2026-${randomCode}`;
+
+    const newRecord: CorporateWellnessConsultationRecord = {
+      id: referenceId,
+      fullName: fullName.trim(),
+      workEmail: workEmail.trim(),
+      company: company.trim(),
+      designation: (designation || '').trim(),
+      phone: (phone || '').trim(),
+      employeeCount: (employeeCount || '').trim(),
+      preferredProgram: (preferredProgram || 'Customized Corporate Wellness Program').trim(),
+      preferredFormat: preferredFormat === 'Offline' ? 'Offline' : preferredFormat === 'Either' ? 'Either' : 'Online',
+      preferredDate: (preferredDate || '').trim(),
+      requirementDetails: (requirementDetails || '').trim(),
+      createdAt: new Date().toISOString()
+    };
+
+    corporateWellnessConsultationsStore.push(newRecord);
+
+    // Also register in universal userRegistrationsStore for dashboard/admin tracking
+    userRegistrationsStore.push({
+      id: newRecord.id,
+      formType: "Corporate Wellness Consultation",
+      fullName: newRecord.fullName,
+      email: newRecord.workEmail,
+      mobile: newRecord.phone,
+      details: {
+        referenceId: newRecord.id,
+        company: newRecord.company,
+        designation: newRecord.designation,
+        employeeCount: newRecord.employeeCount,
+        preferredProgram: newRecord.preferredProgram,
+        preferredFormat: newRecord.preferredFormat,
+        preferredDate: newRecord.preferredDate,
+        requirementDetails: newRecord.requirementDetails
+      },
+      receivedAt: newRecord.createdAt
+    });
+
+    // Send email alert to admin
+    sendRegistrationEmailToAdmin({
+      formType: "Corporate Wellness Consultation Enquiry",
+      fullName: newRecord.fullName,
+      email: newRecord.workEmail,
+      mobile: newRecord.phone,
+      details: {
+        referenceId: newRecord.id,
+        company: newRecord.company,
+        designation: newRecord.designation,
+        employeeCount: newRecord.employeeCount,
+        preferredProgram: newRecord.preferredProgram,
+        preferredFormat: newRecord.preferredFormat,
+        preferredDate: newRecord.preferredDate,
+        requirementDetails: newRecord.requirementDetails
+      },
+      receivedAt: newRecord.createdAt
+    }).catch(err => console.error("Corporate Consultation Email Notify Error:", err));
+
+    console.log(`[Corporate Wellness Backend] Successfully saved consultation ${referenceId} from ${newRecord.fullName} (${newRecord.company})`);
+
+    return res.json({
+      success: true,
+      message: "Thank you for reaching out to Path to Inner Peace. Your corporate wellness enquiry has been received. Our team will connect with you shortly.",
+      referenceId: newRecord.id,
+      consultation: newRecord
+    });
+  } catch (error: any) {
+    console.error("Error creating Corporate Wellness consultation:", error);
+    res.status(500).json({ success: false, error: "Server error occurred while submitting enquiry. Please try again." });
+  }
+});
+
+// Admin list corporate enquiries
+app.get("/api/corporate-wellness/consultations", (_req, res) => {
+  res.json({
+    total: corporateWellnessConsultationsStore.length,
+    consultations: corporateWellnessConsultationsStore
+  });
+});
+
 // Razorpay Create Subscription endpoint
 app.post(["/create-subscription", "/api/create-subscription"], async (req, res) => {
   try {
