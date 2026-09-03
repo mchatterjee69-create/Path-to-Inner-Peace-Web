@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { CorporateConsultationModal } from './CorporateConsultationModal';
 import corporateWellnessBg from '../../assets/images/corporate_wellness_bg_1788440459846.jpg';
+import corporateBurnoutImage from '../../assets/images/corporate_burnout_stress_1788454326993.jpg';
 
 export const CorporateWellnessView: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -176,26 +177,69 @@ export const CorporateWellnessView: React.FC = () => {
   return (
     <div id="corporate-wellness-page" className="min-h-screen bg-slate-50 text-slate-900 pb-24 font-sans">
       
+      {/* Top Breadcrumb & Portal Header */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10">
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center justify-between gap-4 pb-4 border-b border-slate-200"
+        >
+          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 tracking-wide uppercase">
+            <Building2 className="w-4 h-4 text-[#0B6B53]" />
+            <span>Path to Inner Peace • Corporate Wellness Solutions</span>
+          </div>
+          <span className="hidden sm:inline-block text-xs text-slate-500 font-medium">
+            Workplace Mental Health & Leadership Resilience
+          </span>
+        </motion.div>
+      </div>
+
+      {/* PROMINENT FOREGROUND LAYERED IMAGE (ELEVATED 3D EFFECT OVERLAPPING DEEP EMERALD HERO) */}
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 -mb-16 sm:-mb-24 md:-mb-32 lg:-mb-40">
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="relative group"
+        >
+          {/* Multi-layered soft ambient drop shadow behind the image for 3D elevation */}
+          <div 
+            aria-hidden="true"
+            className="absolute -inset-2 sm:-inset-4 bg-gradient-to-b from-black/20 via-[#021811]/40 to-[#021811]/70 rounded-3xl blur-2xl opacity-80 transform translate-y-4 sm:translate-y-8 pointer-events-none"
+          />
+
+          {/* Elevated Floating Image Card - Not a flat box, pure rounded image with subtle ring & deep layered shadow */}
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5),0_12px_28px_-8px_rgba(2,24,17,0.4)] ring-1 ring-black/5 bg-white border border-white/80">
+            <img 
+              src={corporateBurnoutImage}
+              alt="Workplace Burnout & Stress - Back-to-back meetings, deadlines and employee mental health"
+              className="w-full h-auto object-cover transform hover:scale-[1.008] transition-transform duration-500"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        </motion.div>
+      </div>
+
       {/* =========================================================================
-          HERO & INTRO SECTION (With Subtle Workplace Wellness Background & Shadow)
+          HERO & INTRO SECTION (Extending Behind Elevated Foreground Image)
       ========================================================================= */}
-      <section className="relative w-full overflow-hidden bg-[#021811] text-white border-b border-emerald-900/40">
+      <section className="relative z-10 w-full overflow-hidden bg-gradient-to-b from-[#021811] via-[#032419] to-[#021811] text-white border-b border-emerald-900/40">
         {/* Background Image with sophisticated darkening gradients */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
           <img 
             src={corporateWellnessBg}
             alt="Corporate Wellness Environment - Mindful professional workplace"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center filter brightness-[0.32] contrast-[1.15] saturate-[0.9] scale-105"
+            className="w-full h-full object-cover object-center filter brightness-[0.28] contrast-[1.15] saturate-[0.9] scale-105"
           />
           {/* Subtle multi-layer emerald gradient overlays for clean text contrast */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/95 via-[#032318]/90 to-[#021811]/92" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#021811] via-transparent to-[#021811]/90" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/20 via-transparent to-[#021811]/95" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/30 via-transparent to-[#021811]/95" />
         </div>
 
-        {/* Hero Content Container */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+        {/* Hero Content Container (With top padding so green background & text remain clearly visible behind & below overlapping image) */}
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 md:pt-40 lg:pt-48 pb-14 sm:pb-20">
           <div className="max-w-3xl space-y-6">
             
             {/* Tagline / Eyebrow Pill */}

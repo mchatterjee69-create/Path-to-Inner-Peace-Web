@@ -68,29 +68,47 @@ export const CareerAxisView: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* FULL-WIDTH CAREER AXIS SECTION (NO CARD) WITH DIM SHADOW BACKGROUND IMAGE */}
+      {/* PROMINENT FOREGROUND LAYERED IMAGE (ELEVATED 3D EFFECT OVERLAPPING DEEP EMERALD HERO) */}
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 -mb-16 sm:-mb-24 md:-mb-32 lg:-mb-40">
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="relative group"
+        >
+          {/* Multi-layered soft ambient drop shadow behind the image for 3D elevation */}
+          <div 
+            aria-hidden="true"
+            className="absolute -inset-2 sm:-inset-4 bg-gradient-to-b from-black/20 via-[#021811]/40 to-[#021811]/70 rounded-3xl blur-2xl opacity-80 transform translate-y-4 sm:translate-y-8 pointer-events-none"
+          />
+
+          {/* Elevated Floating Image Card - Not a flat box, pure rounded image with subtle ring & deep layered shadow */}
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5),0_12px_28px_-8px_rgba(2,24,17,0.4)] ring-1 ring-black/5 bg-white border border-white/80">
+            <img 
+              src={confusedLadyBg}
+              alt="Career Confusion & Student Dilemmas - What am I really going to do?"
+              className="w-full h-auto object-cover transform hover:scale-[1.008] transition-transform duration-500"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* FULL-WIDTH CAREER AXIS HERO SECTION EXTENDING BEHIND THE ELEVATED FOREGROUND IMAGE */}
       <motion.section 
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full my-6 sm:my-8 overflow-hidden bg-[#021811] text-white border-y border-emerald-900/40"
+        className="relative z-10 w-full overflow-hidden bg-gradient-to-b from-[#021811] via-[#04281c] to-[#021811] text-white border-y border-emerald-900/40"
       >
-        {/* Background Dim Shadow Image: Lady confused which career to choose */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-          <img 
-            src={confusedLadyBg}
-            alt="A student confused and contemplating which career to choose"
-            referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center scale-105 filter brightness-[0.38] contrast-[1.12] saturate-[0.85]"
-          />
-          {/* Dim Shadow and Vignette Gradients before text */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/95 via-[#04281c]/88 to-[#021811]/96" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#02140e] via-transparent to-[#02140e]/90" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#021811]/40 to-[#02140e]/95" />
+        {/* Subtle Luxury Green Atmospheric Patterns (Glows & Mesh) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-72 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-600/20 via-emerald-900/10 to-transparent blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl" />
         </div>
 
-        {/* Content Container (Full Width Spanning Layout) */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        {/* Content Container (Full Width Spanning Layout) with top padding so green background and text sit clearly visible behind/around the overlapping image */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 md:pt-36 lg:pt-44 pb-8 sm:py-12">
           {/* Top Brand Header */}
           <div className="flex flex-col items-center text-center space-y-2 border-b border-emerald-700/40 pb-5">
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#021811]/90 border-2 border-[#D4AF37] flex items-center justify-center shadow-lg backdrop-blur-xs">
