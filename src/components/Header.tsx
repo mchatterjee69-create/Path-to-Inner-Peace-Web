@@ -66,17 +66,17 @@ export const Header: React.FC = () => {
   return (
     <>
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-900/10 shadow-xs transition-all w-full">
-        <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-2 lg:gap-4 overflow-hidden">
+        <div className="max-w-[1700px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-2 lg:gap-2 xl:gap-3 w-full">
           
           {/* Brand Logo & Name */}
           <div 
             onClick={() => { setActiveView('landing'); setMobileMenuOpen(false); }} 
-            className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer group min-w-0 shrink"
+            className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer group shrink-0"
             role="button"
             tabIndex={0}
             aria-label="Path to Inner Peace Home"
           >
-            <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-9 lg:h-9 xl:w-10 xl:h-10 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
               <img 
                 src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
                 alt="Path to Inner Peace Logo" 
@@ -84,18 +84,18 @@ export const Header: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="flex flex-col min-w-0 overflow-hidden">
-              <span className="font-poppins font-bold text-[11px] sm:text-sm lg:text-base text-[#0B6B53] tracking-tight whitespace-nowrap leading-tight truncate">
+            <div className="flex flex-col min-w-0">
+              <span className="font-poppins font-bold text-xs sm:text-sm lg:text-[13px] xl:text-base text-[#0B6B53] tracking-tight whitespace-nowrap leading-tight">
                 Path to Inner Peace
               </span>
-              <span className="text-[7px] sm:text-[9.5px] font-semibold gold-text tracking-normal whitespace-nowrap leading-none mt-0.5 truncate">
+              <span className="text-[7.5px] sm:text-[9px] xl:text-[9.5px] font-semibold gold-text tracking-normal whitespace-nowrap leading-none mt-0.5 hidden sm:inline lg:hidden xl:inline">
                 Transform Your Mind, Elevate Your Life
               </span>
             </div>
           </div>
 
-          {/* Desktop & Laptop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1 2xl:gap-2 font-inter text-[10.5px] 2xl:text-xs font-medium text-emerald-900/90 whitespace-nowrap shrink min-w-0">
+          {/* Desktop & Laptop Navigation Links - Visible on all desktop screens */}
+          <nav className="hidden lg:flex items-center gap-0.5 lg:gap-1 xl:gap-1.5 2xl:gap-2 font-inter text-[11px] xl:text-[11.5px] 2xl:text-xs font-medium text-emerald-900/90 whitespace-nowrap shrink min-w-0">
             {navLinks.map((item) => {
               const Icon = item.icon;
               const isActive = activeView === item.id;
@@ -104,13 +104,13 @@ export const Header: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => setActiveView(item.id)}
-                  className={`transition-all duration-150 py-1.5 px-1.5 2xl:px-2.5 rounded-lg flex items-center gap-1 2xl:gap-1.5 whitespace-nowrap cursor-pointer ${
+                  className={`transition-all duration-150 py-1.5 px-1.5 lg:px-1.5 xl:px-2 2xl:px-2.5 rounded-lg flex items-center gap-1 xl:gap-1.5 whitespace-nowrap cursor-pointer ${
                     isActive 
                       ? 'text-emerald-950 font-bold bg-emerald-50/80 border-b-2 border-[#0B6B53]' 
                       : 'hover:text-emerald-950 hover:bg-slate-50 text-slate-700'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-[#0B6B53]' : 'text-slate-500'}`} />
+                  <Icon className={`w-3 h-3 xl:w-3.5 xl:h-3.5 shrink-0 ${isActive ? 'text-[#0B6B53]' : 'text-slate-500'}`} />
                   <span className="whitespace-nowrap">{item.label}</span>
                   {'streak' in item && typeof item.streak === 'number' && item.streak > 0 && (
                     <span className="bg-amber-100 text-amber-900 text-[9px] px-1 py-0.2 rounded-full flex items-center gap-0.5 font-bold shrink-0">
@@ -129,34 +129,36 @@ export const Header: React.FC = () => {
             {user.completedDays.length >= 5 && (
               <button
                 onClick={() => setIsCertificateModalOpen(true)}
-                className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 bg-amber-50 text-amber-900 border border-amber-300 rounded-full text-[11px] font-bold hover:bg-amber-100 transition-colors shadow-xs shrink-0 whitespace-nowrap cursor-pointer"
+                className="hidden 2xl:flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-900 border border-amber-300 rounded-full text-[10px] font-bold hover:bg-amber-100 transition-colors shadow-xs shrink-0 whitespace-nowrap cursor-pointer"
               >
-                <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <Award className="w-3 h-3 text-[#D4AF37]" />
                 <span>Certificate</span>
               </button>
             )}
 
+            {/* MindForge 360°™ CTA - sized to fit comfortably */}
             <button
               onClick={() => setActiveView('upgrade')}
-              className="flex items-center gap-1 xs:gap-1.5 px-2 xs:px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold rounded-full text-[10px] sm:text-xs hover:brightness-105 active:scale-95 transition-all shadow-xs shadow-amber-500/20 shrink-0 whitespace-nowrap cursor-pointer"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 lg:px-2.5 xl:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold rounded-full text-[10px] sm:text-[10.5px] xl:text-xs hover:brightness-105 active:scale-95 transition-all shadow-xs shadow-amber-500/20 shrink-0 whitespace-nowrap cursor-pointer"
             >
               <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-slate-950 shrink-0" />
-              <span className="hidden sm:inline uppercase tracking-wider text-[11px] whitespace-nowrap">MindForge 360°™</span>
+              <span className="hidden sm:inline uppercase tracking-wider text-[10px] sm:text-[10.5px] xl:text-[11px] whitespace-nowrap">MindForge 360°™</span>
               <span className="sm:hidden text-[10px]">Upgrade</span>
             </button>
 
+            {/* Join Free CTA - sized to fit comfortably */}
             {!user.registered ? (
               <button
                 onClick={() => setIsRegistrationModalOpen(true)}
-                className="relative btn-join-free-animated flex items-center gap-1 xs:gap-1.5 px-2.5 xs:px-3 sm:px-3.5 py-1.5 bg-gradient-to-r from-[#0B6B53] via-emerald-600 to-[#0B6B53] hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-full text-[10px] sm:text-xs active:scale-95 transition-all shadow-md shadow-emerald-950/20 border border-emerald-400/50 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider group"
+                className="relative btn-join-free-animated flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 lg:px-2.5 xl:px-3.5 py-1 sm:py-1.5 bg-gradient-to-r from-[#0B6B53] via-emerald-600 to-[#0B6B53] hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-full text-[10px] sm:text-[10.5px] xl:text-xs active:scale-95 transition-all shadow-md shadow-emerald-950/20 border border-emerald-400/50 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider group"
               >
                 <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0 animate-[spin_8s_linear_infinite]" />
-                <span className="relative z-10 font-bold text-amber-100 group-hover:text-white transition-colors">Join Free</span>
+                <span className="relative z-10 font-bold text-amber-100 group-hover:text-white transition-colors text-[10px] sm:text-[10.5px] xl:text-xs">Join Free</span>
               </button>
             ) : (
               <button
                 onClick={() => setActiveView('profile')}
-                className="w-7 h-7 sm:w-9 sm:h-9 rounded-full border-2 border-[#0B6B53] overflow-hidden hover:opacity-90 transition-opacity shrink-0 cursor-pointer"
+                className="w-7 h-7 sm:w-8 sm:h-8 lg:w-8 lg:h-8 xl:w-9 xl:h-9 rounded-full border-2 border-[#0B6B53] overflow-hidden hover:opacity-90 transition-opacity shrink-0 cursor-pointer"
                 title="Member Access"
                 aria-label="View member profile"
               >
@@ -169,10 +171,10 @@ export const Header: React.FC = () => {
               </button>
             )}
 
-            {/* Mobile & Tablet 3-Dots Menu Button (Hidden on Desktop & Laptop) */}
+            {/* Mobile & Tablet 3-Dots Menu Button (Hidden on Desktop) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden w-7 h-7 sm:w-8 sm:h-8 text-slate-800 hover:text-emerald-950 bg-slate-100 hover:bg-emerald-50 border border-slate-300 rounded-full shrink-0 flex items-center justify-center transition-all cursor-pointer shadow-2xs active:scale-95 z-10"
+              className="lg:hidden w-7 h-7 sm:w-8 sm:h-8 text-slate-800 hover:text-emerald-950 bg-slate-100 hover:bg-emerald-50 border border-slate-300 rounded-full shrink-0 flex items-center justify-center transition-all cursor-pointer shadow-2xs active:scale-95 z-10"
               aria-label="Toggle navigation menu"
               title="Navigation Menu"
               aria-expanded={mobileMenuOpen}
@@ -185,7 +187,7 @@ export const Header: React.FC = () => {
 
       {/* Slide-over Mobile & Tablet Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 xl:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden">
           {/* Backdrop */}
           <div 
             className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity animate-fadeIn"
