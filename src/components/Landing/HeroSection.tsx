@@ -19,8 +19,8 @@ export const HeroSection: React.FC = () => {
 
   return (
     <>
-      {/* Full-Width Hero Video - Edge-to-Edge, No Crop, No Card, No Margins, Pure Video */}
-      <div className="w-full bg-[#041F18] overflow-hidden leading-none block">
+      {/* Full-Width Hero Video - Edge-to-Edge, No Crop, No Card, No Margins, Pure Ultra-HD Video */}
+      <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative">
         <video
           ref={videoRef}
           src="/videos/hero_intro.mp4"
@@ -30,7 +30,13 @@ export const HeroSection: React.FC = () => {
           loop
           playsInline
           preload="auto"
-          className="w-full h-auto block max-w-none m-0 p-0 border-0"
+          disablePictureInPicture
+          className="w-full h-auto block max-w-none m-0 p-0 border-0 contrast-[1.04] saturate-[1.04] brightness-[1.01] will-change-transform select-none"
+          style={{
+            imageRendering: '-webkit-optimize-contrast',
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'translateZ(0)'
+          }}
         >
           <source src="/videos/hero_intro.mp4" type="video/mp4" />
         </video>
