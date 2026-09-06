@@ -13,6 +13,7 @@ import { FounderSection } from './components/Landing/FounderSection';
 import { TestimonialsSection } from './components/Landing/TestimonialsSection';
 import { FaqSection } from './components/Landing/FaqSection';
 import { RegistrationModal } from './components/Landing/RegistrationModal';
+import { MindResetChallengeModal } from './components/Landing/MindResetChallengeModal';
 
 // App Views & Modals
 import { DashboardOverview } from './components/Dashboard/DashboardOverview';
@@ -165,6 +166,7 @@ const MainContent: React.FC = () => {
 
       {/* Global Modals */}
       <RegistrationModal />
+      <MindResetChallengeModal />
       <RazorpayModal />
       <CertificateModal />
       <AdminLeadsModal isOpen={isAdminLeadsModalOpen} onClose={() => setIsAdminLeadsModalOpen(false)} />

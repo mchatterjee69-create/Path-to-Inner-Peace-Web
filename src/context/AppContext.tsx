@@ -49,6 +49,8 @@ interface AppContextType {
   setIsMeditationCampModalOpen: (open: boolean) => void;
   isWeeklyLiveSessionModalOpen: boolean;
   setIsWeeklyLiveSessionModalOpen: (open: boolean) => void;
+  isChallengeDetailsModalOpen: boolean;
+  setIsChallengeDetailsModalOpen: (open: boolean) => void;
   registerUser: (details: UserRegistration) => void;
   loginUser: (emailOrPhone: string, fullName?: string) => void;
   logoutUser: () => void;
@@ -230,6 +232,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isDeeperAwakeningModalOpen, setIsDeeperAwakeningModalOpen] = useState(false);
   const [isMeditationCampModalOpen, setIsMeditationCampModalOpen] = useState(false);
   const [isWeeklyLiveSessionModalOpen, setIsWeeklyLiveSessionModalOpen] = useState(false);
+  const [isChallengeDetailsModalOpen, setIsChallengeDetailsModalOpen] = useState(false);
 
   const [founderPhoto, setFounderPhoto] = useState<string>(() => {
     try {
@@ -310,6 +313,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
     setUser(updated);
     setIsRegistrationModalOpen(false);
+    setIsChallengeDetailsModalOpen(true);
     triggerConfetti();
     setActiveView('dashboard');
 
@@ -511,6 +515,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setIsMeditationCampModalOpen,
         isWeeklyLiveSessionModalOpen,
         setIsWeeklyLiveSessionModalOpen,
+        isChallengeDetailsModalOpen,
+        setIsChallengeDetailsModalOpen,
         registerUser,
         loginUser,
         logoutUser,

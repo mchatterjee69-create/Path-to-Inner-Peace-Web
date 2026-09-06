@@ -12,7 +12,8 @@ export const RegistrationModal: React.FC = () => {
     setRegistrationTargetDay,
     registerUser,
     setActiveDayNumber,
-    setActiveView
+    setActiveView,
+    setIsChallengeDetailsModalOpen
   } = useApp();
 
   const [fullName, setFullName] = useState('');
@@ -22,8 +23,6 @@ export const RegistrationModal: React.FC = () => {
   const [agreedWhatsapp, setAgreedWhatsapp] = useState(true);
   const [error, setError] = useState('');
 
-  if (!isRegistrationModalOpen) return null;
-
   const isSerialLocked = Boolean(registrationTargetDay && registrationTargetDay > 1);
   const targetDayData = isSerialLocked ? DAYS_DATA.find(d => d.dayNumber === registrationTargetDay) : null;
   const day1Data = DAYS_DATA[0];
@@ -32,6 +31,16 @@ export const RegistrationModal: React.FC = () => {
     setIsRegistrationModalOpen(false);
     setRegistrationTargetDay(null);
   };
+
+  React.useEffect(() => {
+    if (isRegistrationModalOpen && user.registered && !isSerialLocked) {
+      setIsRegistrationModalOpen(false);
+      setRegistrationTargetDay(null);
+      setIsChallengeDetailsModalOpen(true);
+    }
+  }, [isRegistrationModalOpen, user.registered, isSerialLocked, setIsRegistrationModalOpen, setRegistrationTargetDay, setIsChallengeDetailsModalOpen]);
+
+  if (!isRegistrationModalOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,12 +63,7 @@ export const RegistrationModal: React.FC = () => {
     });
 
     handleClose();
-
-    const liveUrl = 'https://www.youtube.com/live/u42RK5eV_c8?si=wg7ziJNLQNRu7hID';
-    const newWin = window.open(liveUrl, '_blank');
-    if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
-      window.location.href = liveUrl;
-    }
+    setIsChallengeDetailsModalOpen(true);
   };
 
   return (
