@@ -22,7 +22,49 @@ function getOpenAIClient(): OpenAI | null {
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
+app.use(express.json({ limit: "30mb" }));
+app.use(express.urlencoded({ extended: true, limit: "30mb" }));
+
+// Hero banner management endpoints
+app.post("/api/upload-hero-banner", (req, res) => {
+  try {
+    const { imageBase64 } = req.body;
+    if (!imageBase64) {
+      return res.status(400).json({ error: "No image data provided" });
+    }
+    const publicDir = path.join(process.cwd(), "public", "images");
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
+    const targetFile = path.join(publicDir, "hero_custom.png");
+    const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, "");
+    const buffer = Buffer.from(base64Data, "base64");
+    fs.writeFileSync(targetFile, buffer);
+
+    // Also sync to dist/images if dist directory exists
+    const distDir = path.join(process.cwd(), "dist", "images");
+    if (fs.existsSync(distDir)) {
+      fs.writeFileSync(path.join(distDir, "hero_custom.png"), buffer);
+    }
+    return res.json({ success: true, url: `/images/hero_custom.png?v=${Date.now()}` });
+  } catch (err: any) {
+    console.error("Failed to save custom hero banner:", err);
+    return res.status(500).json({ error: err.message || "Failed to save banner image" });
+  }
+});
+
+app.get("/api/hero-banner", (_req, res) => {
+  try {
+    const customBannerPath = path.join(process.cwd(), "public", "images", "hero_custom.png");
+    if (fs.existsSync(customBannerPath)) {
+      const stats = fs.statSync(customBannerPath);
+      return res.json({ hasCustomBanner: true, url: `/images/hero_custom.png?v=${Math.floor(stats.mtimeMs)}` });
+    }
+    return res.json({ hasCustomBanner: false });
+  } catch (err: any) {
+    return res.json({ hasCustomBanner: false });
+  }
+});
 
 // Target recipient email for all form registrations
 const ADMIN_NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "mchatterjee69@gmail.com";
