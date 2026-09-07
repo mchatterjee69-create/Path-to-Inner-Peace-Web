@@ -12,15 +12,15 @@ export const HeroSection: React.FC = () => {
       {/* Full-Width Hero Banner Image - Edge-to-Edge, High-Definition Display */}
       <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative">
         <img
-          src="https://cdn.phototourl.com/free/2026-09-07-c3bd04e2-158d-4468-ad2c-e0e7bcdcd682.png"
+          src="https://cdn.phototourl.com/free/2026-09-07-c17ab2cd-6558-40d3-8c23-cf99d1a7bb68.png"
           alt="Serene Mind - 5 Day Mind Reset Challenge"
           className="w-full h-auto block max-w-none m-0 p-0 border-0 select-none object-cover sm:object-contain"
           loading="eager"
           referrerPolicy="no-referrer"
           onError={(e) => {
             const target = e.currentTarget;
-            if (target.src !== '/images/hero_banner_live.png' && !target.src.endsWith('/images/hero_banner_live.png')) {
-              target.src = '/images/hero_banner_live.png';
+            if (target.src !== '/images/hero_banner_current.png' && !target.src.endsWith('/images/hero_banner_current.png')) {
+              target.src = '/images/hero_banner_current.png';
             }
           }}
         />
