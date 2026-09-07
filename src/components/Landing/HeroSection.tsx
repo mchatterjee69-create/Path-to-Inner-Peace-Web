@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
@@ -6,24 +6,35 @@ import { FreeStarBadge } from '../Common/FreeStarBadge';
 
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasError, setHasError] = useState(false);
 
   return (
     <>
-      {/* Full-Width Hero Banner Image - Edge-to-Edge, High-Definition Display */}
-      <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative">
-        <img
-          src="https://cdn.phototourl.com/free/2026-09-07-c17ab2cd-6558-40d3-8c23-cf99d1a7bb68.png"
-          alt="Serene Mind - 5 Day Mind Reset Challenge"
-          className="w-full h-auto block max-w-none m-0 p-0 border-0 select-none object-cover sm:object-contain"
-          loading="eager"
-          referrerPolicy="no-referrer"
-          onError={(e) => {
-            const target = e.currentTarget;
-            if (target.src !== '/images/hero_banner_current.png' && !target.src.endsWith('/images/hero_banner_current.png')) {
-              target.src = '/images/hero_banner_current.png';
-            }
-          }}
-        />
+      {/* Full-Width Hero Video - 1920x1080 Native Resolution Display */}
+      <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative max-w-[1920px] mx-auto select-none">
+        <div className="relative w-full aspect-[16/9] max-h-[85vh] bg-[#041F18] flex items-center justify-center">
+          {!hasError ? (
+            <video
+              ref={videoRef}
+              src="/videos/hero_intro.mp4"
+              poster="/videos/hero_thumb.jpg"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              onError={() => setHasError(true)}
+              className="w-full h-full object-cover sm:object-contain"
+            />
+          ) : (
+            <img
+              src="/videos/hero_thumb.jpg"
+              alt="Serene Mind - 5 Day Mind Reset Challenge"
+              className="w-full h-full object-cover sm:object-contain"
+            />
+          )}
+        </div>
       </div>
 
       <section className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
