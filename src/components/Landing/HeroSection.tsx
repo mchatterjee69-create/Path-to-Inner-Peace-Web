@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
@@ -6,40 +6,25 @@ import { FreeStarBadge } from '../Common/FreeStarBadge';
 
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.play().catch(err => {
-        console.log('Autoplay attempted:', err);
-      });
-    }
-  }, []);
 
   return (
     <>
-      {/* Full-Width Hero Video - Edge-to-Edge, No Crop, No Card, No Margins, Pure Ultra-HD Video */}
+      {/* Full-Width Hero Banner Image - Edge-to-Edge, High-Definition Display */}
       <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative">
-        <video
-          ref={videoRef}
-          src="/videos/hero_intro.mp4"
-          poster="/videos/hero_thumb.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          className="w-full h-auto block max-w-none m-0 p-0 border-0 contrast-[1.04] saturate-[1.04] brightness-[1.01] will-change-transform select-none"
-          style={{
-            imageRendering: '-webkit-optimize-contrast',
-            WebkitBackfaceVisibility: 'hidden',
-            transform: 'translateZ(0)'
+        <img
+          src="https://plain-apac-prod-public.komododecks.com/202609/07/fn3vwl7yvA4PH9tyWv4J/image.png"
+          alt="5 Day Mind Reset Challenge - Serene Mind"
+          className="w-full h-auto block max-w-none m-0 p-0 border-0 select-none object-cover sm:object-contain"
+          loading="eager"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            // Fallback in case external temporary link has network or expiry constraints
+            const target = e.currentTarget;
+            if (target.src !== '/videos/hero_thumb.jpg') {
+              target.src = '/videos/hero_thumb.jpg';
+            }
           }}
-        >
-          <source src="/videos/hero_intro.mp4" type="video/mp4" />
-        </video>
+        />
       </div>
 
       <section className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
