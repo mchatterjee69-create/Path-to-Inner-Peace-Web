@@ -25,6 +25,11 @@ const PORT = 3000;
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 
+// Explicitly serve public assets to guarantee immediate access in dev and prod
+app.use("/images", express.static(path.join(process.cwd(), "public", "images")));
+app.use("/videos", express.static(path.join(process.cwd(), "public", "videos")));
+app.use(express.static(path.join(process.cwd(), "public")));
+
 // Hero banner management endpoints
 app.post("/api/upload-hero-banner", (req, res) => {
   try {
