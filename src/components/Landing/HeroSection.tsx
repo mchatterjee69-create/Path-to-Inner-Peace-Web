@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
@@ -6,31 +6,35 @@ import { FreeStarBadge } from '../Common/FreeStarBadge';
 
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasError, setHasError] = useState(false);
 
   return (
     <>
-      {/* Full-Width Hero Banner Image - Ultra-High-Resolution (3860x1630 Enhanced Retina Display) */}
-      <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative">
-        <picture className="w-full block">
-          <source
-            srcSet="/images/hero_banner_hires.png 2x, https://cdn.phototourl.com/free/2026-09-07-06af0f0f-84da-473e-8b43-76c82c34a4c3.png 1x"
-            type="image/png"
-          />
-          <img
-            src="/images/hero_banner_hires.png"
-            srcSet="/images/hero_banner_hires.png 2x, https://cdn.phototourl.com/free/2026-09-07-06af0f0f-84da-473e-8b43-76c82c34a4c3.png 1x"
-            alt="Serene Mind - 5 Day Mind Reset Challenge"
-            className="w-full h-auto block max-w-none m-0 p-0 border-0 select-none object-cover sm:object-contain"
-            loading="eager"
-            referrerPolicy="no-referrer"
-            onError={(e) => {
-              const target = e.currentTarget;
-              if (target.src !== 'https://cdn.phototourl.com/free/2026-09-07-06af0f0f-84da-473e-8b43-76c82c34a4c3.png') {
-                target.src = 'https://cdn.phototourl.com/free/2026-09-07-06af0f0f-84da-473e-8b43-76c82c34a4c3.png';
-              }
-            }}
-          />
-        </picture>
+      {/* Full-Width Hero Video - 1920x1080 Native Resolution Display */}
+      <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative max-w-[1920px] mx-auto select-none">
+        <div className="relative w-full aspect-[16/9] max-h-[85vh] bg-[#041F18] flex items-center justify-center">
+          {!hasError ? (
+            <video
+              ref={videoRef}
+              src="/videos/hero_intro.mp4"
+              poster="/videos/hero_thumb.jpg"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              onError={() => setHasError(true)}
+              className="w-full h-full object-cover sm:object-contain"
+            />
+          ) : (
+            <img
+              src="/videos/hero_thumb.jpg"
+              alt="Serene Mind - 5 Day Mind Reset Challenge"
+              className="w-full h-full object-cover sm:object-contain"
+            />
+          )}
+        </div>
       </div>
 
       <section className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
