@@ -11,9 +11,12 @@ export const HeroSection: React.FC = () => {
 
   return (
     <>
-      {/* Full-Width Hero Video - 1920x1080 Native Resolution Display */}
-      <div className="w-full bg-[#041F18] overflow-hidden leading-none block relative max-w-[1920px] mx-auto select-none">
-        <div className="relative w-full aspect-[16/9] max-h-[85vh] bg-[#041F18] flex items-center justify-center">
+      {/* Edge-to-Edge Hero Video - Proportional Height Without Cutting or Cropping */}
+      <div 
+        id="hero-video-container"
+        className="w-full bg-[#041F18] overflow-hidden leading-none block relative select-none"
+      >
+        <div className="w-full flex items-center justify-center">
           {!hasError ? (
             <video
               ref={videoRef}
@@ -25,19 +28,19 @@ export const HeroSection: React.FC = () => {
               playsInline
               preload="auto"
               onError={() => setHasError(true)}
-              className="w-full h-full object-cover sm:object-contain"
+              className="w-full h-auto block object-contain"
             />
           ) : (
             <img
               src="/videos/hero_thumb.jpg"
               alt="Serene Mind - 5 Day Mind Reset Challenge"
-              className="w-full h-full object-cover sm:object-contain"
+              className="w-full h-auto block object-contain"
             />
           )}
         </div>
       </div>
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
+      <section id="hero-content-section" className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
       
       {/* Ambient Radial Lights */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-emerald-500/15 via-[#D4AF37]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
