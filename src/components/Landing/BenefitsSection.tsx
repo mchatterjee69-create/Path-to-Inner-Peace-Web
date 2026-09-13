@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  HeartPulse, 
-  Compass, 
+  Brain, 
+  Target, 
   Moon, 
   Heart, 
-  Lightbulb, 
-  Zap, 
-  Sun, 
+  Shield, 
+  RefreshCw, 
   Wind, 
-  Headphones, 
-  Brain, 
-  Activity
+  Sun, 
+  Sprout, 
+  Sparkles,
+  HeartPulse 
 } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 
@@ -20,70 +20,94 @@ export const BenefitsSection: React.FC = () => {
 
   const benefits = [
     {
-      title: 'Reduce Stress',
-      description: 'Lower cortisol levels through targeted vagus nerve stimulation and somatic stress release.',
-      icon: HeartPulse,
+      id: 1,
+      title: '1. Stress & Anxiety Reduction',
+      point1: 'Learn practical breathing, mindfulness and mental-reset techniques to reduce everyday stress.',
+      point2: 'Develop the ability to respond to pressure with greater calm rather than automatic reactions.',
+      description: 'Learn practical breathing, mindfulness and mental-reset techniques to reduce everyday stress. Develop the ability to respond to pressure with greater calm rather than automatic reactions.',
+      icon: Brain,
       image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Calm Overthinking',
-      description: 'Break anxious thought loops and catastrophizing using proven cognitive re-framing techniques.',
-      icon: Compass,
+      id: 2,
+      title: '2. Improved Focus & Mental Clarity',
+      point1: 'Train your attention to reduce mental distractions, overthinking and cognitive clutter.',
+      point2: 'Create greater clarity so you can concentrate on what actually deserves your attention.',
+      description: 'Train your attention to reduce mental distractions, overthinking and cognitive clutter. Create greater clarity so you can concentrate on what actually deserves your attention.',
+      icon: Target,
       image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Better Sleep',
-      description: 'Unwind your mind before bedtime with deep restorative soundscapes and delta wave pacing.',
+      id: 3,
+      title: '3. Better Sleep & Deep Relaxation',
+      point1: 'Use relaxation and mindfulness practices to help quiet an overactive mind before sleep.',
+      point2: 'Build a calmer mental state that supports more restorative and consistent rest.',
+      description: 'Use relaxation and mindfulness practices to help quiet an overactive mind before sleep. Build a calmer mental state that supports more restorative and consistent rest.',
       icon: Moon,
       image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Emotional Healing',
-      description: 'Release past grievances, unburden unresolved stress, and cultivate radical self-compassion.',
+      id: 4,
+      title: '4. Emotional Balance',
+      point1: 'Understand your emotional patterns and learn techniques to create space between emotion and reaction.',
+      point2: 'Develop greater emotional stability, self-awareness and control during challenging situations.',
+      description: 'Understand your emotional patterns and learn techniques to create space between emotion and reaction. Develop greater emotional stability, self-awareness and control during challenging situations.',
       icon: Heart,
       image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Mental Clarity',
-      description: 'Eliminate brain fog and gain sharp, razor-focused clarity for work and critical daily decisions.',
-      icon: Lightbulb,
-      image: 'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Confidence Reset',
-      description: 'Overcome imposter syndrome, dismantle self-doubt, and step boldly into your innate core worth.',
-      icon: Zap,
+      id: 5,
+      title: '5. Mental Strength & Resilience',
+      point1: 'Build the ability to handle setbacks, pressure and difficult thoughts without becoming overwhelmed.',
+      point2: 'Strengthen your capacity to recover, adapt and move forward with greater confidence.',
+      description: 'Build the ability to handle setbacks, pressure and difficult thoughts without becoming overwhelmed. Strengthen your capacity to recover, adapt and move forward with greater confidence.',
+      icon: Shield,
       image: 'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Mindfulness',
-      description: 'Cultivate grounded, non-judgmental present-moment awareness throughout busy workdays.',
-      icon: Sun,
+      id: 6,
+      title: '6. Subconscious Pattern Awareness',
+      point1: 'Explore how repeated thoughts, beliefs and habits can influence your everyday behaviour.',
+      point2: 'Begin identifying unhelpful mental patterns and consciously replacing them with healthier responses.',
+      description: 'Explore how repeated thoughts, beliefs and habits can influence your everyday behaviour. Begin identifying unhelpful mental patterns and consciously replacing them with healthier responses.',
+      icon: RefreshCw,
+      image: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80'
+    },
+    {
+      id: 7,
+      title: '7. Mindfulness & Present-Moment Awareness',
+      point1: 'Learn to bring your attention back from past regrets and future worries to the present moment.',
+      point2: 'Develop greater awareness of your thoughts, emotions, body and surroundings.',
+      description: 'Learn to bring your attention back from past regrets and future worries to the present moment. Develop greater awareness of your thoughts, emotions, body and surroundings.',
+      icon: Wind,
       image: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Breathing Exercises',
-      description: 'Master 3-10 minute Box Breathing and 4-7-8 calming breath patterns for instant physiological calm.',
-      icon: Wind,
-      image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Guided Meditation',
-      description: 'Immerse in daily audio tracks accompanied by 432Hz ambient natural acoustic frequencies.',
-      icon: Headphones,
+      id: 8,
+      title: '8. Inner Calm & Nervous-System Regulation',
+      point1: 'Experience guided practices designed to shift you from constant mental activation toward a calmer state.',
+      point2: 'Learn simple techniques you can continue using whenever you feel mentally overloaded.',
+      description: 'Experience guided practices designed to shift you from constant mental activation toward a calmer state. Learn simple techniques you can continue using whenever you feel mentally overloaded.',
+      icon: Sun,
       image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Healthy Habits',
-      description: 'Build an unbroken streak of 10-minute daily mental reset rituals that compound effortlessly.',
-      icon: Activity,
+      id: 9,
+      title: '9. Healthier Mental Habits',
+      point1: 'Discover how small, consistent practices can influence your thinking patterns and daily behaviour.',
+      point2: 'Create a practical foundation for replacing reactive habits with more conscious choices.',
+      description: 'Discover how small, consistent practices can influence your thinking patterns and daily behaviour. Create a practical foundation for replacing reactive habits with more conscious choices.',
+      icon: Sprout,
       image: 'https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?auto=format&fit=crop&w=1200&q=80'
     },
     {
-      title: 'Subconscious Mastery',
-      description: 'Rewire limiting subconscious thought programs and anchor deep, unwavering internal stillness.',
-      icon: Brain,
-      image: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80'
+      id: 10,
+      title: '10. Personal Reset & Inner Transformation',
+      point1: 'Step back from mental autopilot and reconnect with greater clarity, balance and self-awareness.',
+      point2: 'Use the five-day experience as a starting point for a deeper Path to Inner Peace.',
+      description: 'Step back from mental autopilot and reconnect with greater clarity, balance and self-awareness. Use the five-day experience as a starting point for a deeper Path to Inner Peace.',
+      icon: Sparkles,
+      image: 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1200&q=80'
     }
   ];
 
@@ -99,7 +123,7 @@ export const BenefitsSection: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % benefits.length);
-    }, 3200);
+    }, 3800);
     return () => clearInterval(interval);
   }, [benefits.length]);
 
@@ -127,10 +151,10 @@ export const BenefitsSection: React.FC = () => {
                 Reset Your Mind. Reclaim Your Inner Peace.
               </p>
               <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-600">
-                Reduce stress and overthinking while building emotional balance, confidence, mindfulness, and healthier daily habits through breathing exercises and guided meditation.
+                A structured 10-pillar transformation designed to dissolve stress and anxiety, sharpen mental focus, and restore restorative sleep through nervous-system regulation and present-moment mindfulness.
               </p>
               <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-600">
-                Learn to work with your subconscious patterns, strengthen self-awareness, and create a calmer, more focused, and empowered version of yourself in just 5 days.
+                Cultivate emotional balance, strengthen mental resilience, and illuminate subconscious patterns to build lasting healthy habits—guiding your personal reset toward genuine inner transformation.
               </p>
             </div>
           </div>
@@ -147,7 +171,7 @@ export const BenefitsSection: React.FC = () => {
               <div className="lg:col-span-6 flex flex-col justify-center text-left">
 
                 {/* Animated Single Line Title Container */}
-                <div className="min-h-[58px] sm:min-h-[68px] overflow-hidden flex items-center">
+                <div className="min-h-[68px] sm:min-h-[80px] overflow-hidden flex items-center">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeIndex}
@@ -166,18 +190,23 @@ export const BenefitsSection: React.FC = () => {
                 </div>
 
                 {/* Synchronized Animated Description Subline */}
-                <div className="mt-3 sm:mt-4 min-h-[52px] sm:min-h-[60px] overflow-hidden">
+                <div className="mt-4 sm:mt-5 min-h-[110px] sm:min-h-[120px] overflow-hidden">
                   <AnimatePresence mode="wait">
-                    <motion.p
+                    <motion.div
                       key={activeIndex}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.35, ease: 'easeOut', delay: 0.05 }}
-                      className="text-base sm:text-lg text-slate-600 font-inter leading-relaxed"
+                      className="space-y-2 text-slate-600 font-inter"
                     >
-                      {activeBenefit.description}
-                    </motion.p>
+                      <p className="text-base sm:text-lg text-slate-800 font-medium leading-relaxed">
+                        {activeBenefit.point1}
+                      </p>
+                      <p className="text-sm sm:text-base text-slate-500 font-normal leading-relaxed">
+                        {activeBenefit.point2}
+                      </p>
+                    </motion.div>
                   </AnimatePresence>
                 </div>
 

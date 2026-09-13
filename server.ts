@@ -20,10 +20,40 @@ function getOpenAIClient(): OpenAI | null {
 }
 
 const app = express();
+
+// The platform reverse proxy routes external traffic exclusively to port 3000.
 const PORT = 3000;
+
+// Health check endpoints for Cloud Run container probes & load balancers
+app.get("/_health", (_req, res) => res.status(200).send("OK"));
+app.get("/healthz", (_req, res) => res.status(200).send("OK"));
+app.get("/api/health", (_req, res) => res.status(200).json({ status: "ok" }));
 
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
+
+// Stream routes for hero video and thumbnail
+app.get(["/videos/hero_intro.mp4", "/videos/hero_intro_uhd.mp4"], (_req, res) => {
+  const primaryPath = path.join(process.cwd(), "public", "videos", "hero_intro.mp4");
+  const distPath = path.join(process.cwd(), "dist", "videos", "hero_intro.mp4");
+  if (fs.existsSync(primaryPath)) {
+    return res.sendFile(primaryPath);
+  } else if (fs.existsSync(distPath)) {
+    return res.sendFile(distPath);
+  }
+  res.status(404).send("Video not found");
+});
+
+app.get(["/videos/hero_thumb.jpg", "/videos/hero_thumb_uhd.jpg"], (_req, res) => {
+  const primaryPath = path.join(process.cwd(), "public", "videos", "hero_thumb.jpg");
+  const distPath = path.join(process.cwd(), "dist", "videos", "hero_thumb.jpg");
+  if (fs.existsSync(primaryPath)) {
+    return res.sendFile(primaryPath);
+  } else if (fs.existsSync(distPath)) {
+    return res.sendFile(distPath);
+  }
+  res.status(404).send("Thumbnail not found");
+});
 
 // Explicitly serve public assets to guarantee immediate access in dev and prod
 app.use("/images", express.static(path.join(process.cwd(), "public", "images")));
@@ -1051,7 +1081,11 @@ Affirmation: [A short, uplifting, tailored 1-sentence affirmation matching the u
 });
 
 async function startServer() {
-  if (process.env.NODE_ENV !== "production") {
+  const isCompiled = typeof __filename !== "undefined" && __filename.endsWith(".cjs");
+  const hasDist = fs.existsSync(path.join(process.cwd(), "dist", "index.html"));
+  const isProduction = process.env.NODE_ENV === "production" || isCompiled || (hasDist && process.env.NODE_ENV !== "development");
+
+  if (!isProduction) {
     const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -1059,32 +1093,49 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = fs.existsSync(path.join(process.cwd(), 'dist'))
-      ? path.join(process.cwd(), 'dist')
-      : path.resolve(__dirname, '..', 'dist');
-
-    const indexHtmlPath = fs.existsSync(path.join(distPath, 'index.html'))
-      ? path.join(distPath, 'index.html')
-      : path.join(process.cwd(), 'index.html');
+    const distPath = path.join(process.cwd(), "dist");
+    const indexHtmlPath = path.join(distPath, "index.html");
 
     app.use(express.static(distPath, {
       setHeaders: (res) => {
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.setHeader("Pragma", "no-cache");
+        res.setHeader("Expires", "0");
       }
     }));
-    app.get('*', (_req, res) => {
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
-      res.sendFile(indexHtmlPath);
+    app.get("*", (_req, res) => {
+      res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
+      if (fs.existsSync(indexHtmlPath)) {
+        res.sendFile(indexHtmlPath);
+      } else {
+        res.sendFile(path.join(process.cwd(), "index.html"));
+      }
     });
   }
 
+  // Primary listener on port 3000 (standard reverse-proxy target)
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Path to Inner Peace server running on http://0.0.0.0:${PORT}`);
   });
+
+  // If Cloud Run or an external runner specifies a custom PORT environment variable,
+  // attempt to also listen on that port, gracefully catching EADDRINUSE if an Nginx
+  // reverse proxy is already running on it.
+  const extraPort = process.env.PORT ? parseInt(process.env.PORT, 10) : null;
+  if (extraPort && extraPort !== PORT) {
+    try {
+      const extraServer = app.listen(extraPort, "0.0.0.0", () => {
+        console.log(`Also listening on http://0.0.0.0:${extraPort}`);
+      });
+      extraServer.on("error", (err: any) => {
+        console.log(`Note: Port ${extraPort} ingress handled by fronting proxy (${err.code || err.message}). App active on ${PORT}.`);
+      });
+    } catch (_err) {
+      // Ignored
+    }
+  }
 }
 
 startServer();

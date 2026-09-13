@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
@@ -7,37 +7,88 @@ import { FreeStarBadge } from '../Common/FreeStarBadge';
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [, setIsPlaying] = useState(true);
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Ensure DOM muted property is set so browsers allow autoplay
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          // Autoplay was restricted by browser policy; user can click to play
+          setIsPlaying(false);
+        });
+    }
+
+    return () => {
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+    };
+  }, []);
+
+  const togglePlay = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
 
   return (
     <>
-      {/* Edge-to-Edge Hero Video - Proportional Height Without Cutting or Cropping */}
+      {/* Full-Fledged Edge-to-Edge Hero Video */}
       <div 
         id="hero-video-container"
-        className="w-full bg-[#041F18] overflow-hidden leading-none block relative select-none"
+        ref={containerRef}
+        onClick={togglePlay}
+        className="w-full min-w-full max-w-none bg-[#041F18] overflow-hidden leading-none block relative select-none p-0 m-0 cursor-pointer group"
       >
-        <div className="w-full flex items-center justify-center">
-          {!hasError ? (
-            <video
-              ref={videoRef}
-              src="/videos/hero_intro.mp4"
-              poster="/videos/hero_thumb.jpg"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              onError={() => setHasError(true)}
-              className="w-full h-auto block object-contain"
-            />
-          ) : (
-            <img
-              src="/videos/hero_thumb.jpg"
-              alt="Serene Mind - 5 Day Mind Reset Challenge"
-              className="w-full h-auto block object-contain"
-            />
-          )}
-        </div>
+        {!hasError ? (
+          <video
+            ref={videoRef}
+            src="/videos/hero_intro.mp4"
+            poster="/videos/hero_thumb.jpg"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            onError={() => {
+              setHasError(true);
+            }}
+            className="w-full min-w-full max-w-none h-auto block p-0 m-0 border-0"
+          >
+            <source src="/videos/hero_intro.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src="/videos/hero_thumb.jpg"
+            alt="Serene Mind - 5 Day Mind Reset Challenge"
+            className="w-full min-w-full max-w-none h-auto block p-0 m-0 border-0"
+          />
+        )}
       </div>
 
       <section id="hero-content-section" className="relative overflow-hidden bg-gradient-to-b from-[#041F18] via-[#083D30] to-[#0D4D3E] text-white pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8">
