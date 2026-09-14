@@ -10,6 +10,7 @@ export const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [, setIsPlaying] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [selectedBatch, setSelectedBatch] = useState<string>('6:30 AM');
 
   useEffect(() => {
     const video = videoRef.current;
@@ -194,30 +195,124 @@ export const HeroSection: React.FC = () => {
             </div>
           </ScrollReveal>
 
-          {/* Primary Action Buttons */}
+          {/* Time Schedule (Reference: Join Any Batch) with Destination Color Scheme */}
           <ScrollReveal variant="slide-up" delay={0.3}>
-            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full">
-              <button
-                onClick={() => {
-                  if (user.registered) {
-                    setActiveView('dashboard');
-                  } else {
-                    setIsRegistrationModalOpen(true);
-                  }
-                }}
-                className="relative btn-glowing-gold w-full sm:w-auto px-7 sm:px-9 py-3.5 sm:py-4 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer group"
-              >
-                {!user.registered && (
-                  <FreeStarBadge size="md" />
-                )}
-                {user.registered ? (
-                  <span>Go to My Dashboard</span>
-                ) : (
-                  <span>5 Day Mind Reset Challenge</span>
-                )}
-                <ArrowRight className="w-5 h-5 text-slate-950 group-hover:translate-x-1 transition-transform" />
-              </button>
+            <div className="mt-6 w-full max-w-xl mx-auto rounded-3xl bg-gradient-to-b from-[#063025]/90 to-[#041F18]/95 backdrop-blur-xl border border-emerald-400/30 p-5 sm:p-6 shadow-2xl relative overflow-hidden text-center">
+              
+              {/* Subtle ambient glows */}
+              <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#D4AF37]/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[#0B6B53]/40 rounded-full blur-3xl pointer-events-none" />
 
+              {/* Schedule Title */}
+              <div className="relative z-10">
+                <h3 className="font-heading font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
+                  JOIN ANY BATCH
+                </h3>
+                <p className="text-xs sm:text-sm font-inter text-emerald-200/90 font-medium mt-1 flex items-center justify-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <span>30 min each session, Indian Standard Time</span>
+                </p>
+              </div>
+
+              {/* Morning & Evening Batch Cards */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-5 relative z-10 text-left">
+                
+                {/* Morning Card */}
+                <div className="rounded-2xl bg-white/[0.05] hover:bg-white/[0.08] border border-emerald-400/30 overflow-hidden shadow-lg transition-all flex flex-col">
+                  <div className="bg-gradient-to-r from-[#0B6B53] to-emerald-600 px-3 py-2 sm:py-2.5 text-center flex items-center justify-center gap-1.5 border-b border-emerald-400/30">
+                    <span className="text-base sm:text-lg select-none" role="img" aria-label="Morning sun">🌤️</span>
+                    <span className="font-poppins font-bold text-xs sm:text-sm text-white tracking-wide">
+                      Morning
+                    </span>
+                  </div>
+                  <div className="p-3 sm:p-4 flex flex-col items-center justify-center gap-2 sm:gap-2.5 font-inter">
+                    {['6:30 AM', '7:30 AM', '8:30 AM'].map((time) => {
+                      const isSelected = selectedBatch === time;
+                      return (
+                        <button
+                          key={time}
+                          type="button"
+                          onClick={() => setSelectedBatch(time)}
+                          className={`w-full py-2 px-2.5 rounded-xl text-center text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold shadow-md ring-2 ring-amber-300/80 scale-[1.02]'
+                              : 'bg-emerald-950/70 hover:bg-emerald-900/90 text-emerald-100 hover:text-white border border-emerald-500/20'
+                          }`}
+                        >
+                          {time}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Evening Card */}
+                <div className="rounded-2xl bg-white/[0.05] hover:bg-white/[0.08] border border-emerald-400/30 overflow-hidden shadow-lg transition-all flex flex-col">
+                  <div className="bg-gradient-to-r from-emerald-900 to-[#041F18] px-3 py-2 sm:py-2.5 text-center flex items-center justify-center gap-1.5 border-b border-emerald-400/30">
+                    <span className="font-poppins font-bold text-xs sm:text-sm text-white tracking-wide">
+                      Evening
+                    </span>
+                    <span className="text-base sm:text-lg select-none" role="img" aria-label="Evening moon">🌙</span>
+                  </div>
+                  <div className="p-3 sm:p-4 flex flex-col items-center justify-center gap-2 sm:gap-2.5 font-inter">
+                    {['5:00 PM', '6:00 PM', '7:00 PM'].map((time) => {
+                      const isSelected = selectedBatch === time;
+                      return (
+                        <button
+                          key={time}
+                          type="button"
+                          onClick={() => setSelectedBatch(time)}
+                          className={`w-full py-2 px-2.5 rounded-xl text-center text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-bold shadow-md ring-2 ring-amber-300/80 scale-[1.02]'
+                              : 'bg-emerald-950/70 hover:bg-emerald-900/90 text-emerald-100 hover:text-white border border-emerald-500/20'
+                          }`}
+                        >
+                          {time}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* CTA Button matching screenshot with destination colors */}
+              <div className="mt-5 relative z-10 flex flex-col items-center">
+                <button
+                  onClick={() => {
+                    if (user.registered) {
+                      setActiveView('dashboard');
+                    } else {
+                      setIsRegistrationModalOpen(true);
+                    }
+                  }}
+                  className="relative btn-glowing-gold w-full py-3.5 sm:py-4 px-6 sm:px-8 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-2xl shadow-2xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 border border-amber-200/60 cursor-pointer group"
+                >
+                  {!user.registered && (
+                    <FreeStarBadge size="md" />
+                  )}
+                  {user.registered ? (
+                    <span>Go to My Dashboard</span>
+                  ) : (
+                    <span>Click to Join Free Challenge</span>
+                  )}
+                  <ArrowRight className="w-5 h-5 text-slate-950 group-hover:translate-x-1 transition-transform shrink-0" />
+                </button>
+
+                {/* Social Proof Attendance Count */}
+                <p className="mt-3 text-xs sm:text-sm font-inter font-bold text-emerald-100 tracking-tight flex items-center justify-center gap-1.5">
+                  <span className="text-[#D4AF37] text-sm sm:text-base font-extrabold">2k+</span>
+                  <span className="text-emerald-100/90 font-medium">already attended</span>
+                </p>
+              </div>
+
+            </div>
+          </ScrollReveal>
+
+          {/* Secondary Curriculum Link & Social Proof Badges */}
+          <ScrollReveal variant="fade" delay={0.35}>
+            <div className="pt-4 flex flex-col items-center justify-center gap-3 w-full">
               <button
                 onClick={() => {
                   const element = document.getElementById('curriculum-section');
@@ -227,29 +322,26 @@ export const HeroSection: React.FC = () => {
                     setActiveView('landing');
                   }
                 }}
-                className="w-full sm:w-auto px-6 py-3.5 sm:py-4 bg-white/10 hover:bg-white/15 border border-white/20 hover:border-[#D4AF37]/50 text-white font-semibold text-xs sm:text-sm rounded-2xl backdrop-blur-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-emerald-200 hover:text-white transition-colors cursor-pointer group"
               >
-                <Play className="w-4 h-4 fill-white" />
-                <span>Explore 5-Day Curriculum</span>
+                <Play className="w-3.5 h-3.5 fill-[#D4AF37] text-[#D4AF37]" />
+                <span className="underline underline-offset-4 decoration-emerald-400/50 group-hover:decoration-white">Explore Full 5-Day Curriculum</span>
               </button>
-            </div>
-          </ScrollReveal>
 
-          {/* Social Proof Badges */}
-          <ScrollReveal variant="fade" delay={0.35}>
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 text-xs text-emerald-200/90 text-center">
-              <span className="flex items-center justify-center gap-1.5 font-inter">
-                <Users className="w-4 h-4 text-[#D4AF37]" />
-                <strong className="text-white">1,000+</strong> Lives Impacted
-              </span>
-              <span className="flex items-center justify-center gap-1.5 font-inter">
-                <Shield className="w-4 h-4 text-emerald-300" />
-                100% Beginner Friendly
-              </span>
-              <span className="flex items-center justify-center gap-1.5 font-inter">
-                <Award className="w-4 h-4 text-[#D4AF37]" />
-                Certificate Included
-              </span>
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-emerald-200/90 text-center pt-1">
+                <span className="flex items-center justify-center gap-1.5 font-inter">
+                  <Users className="w-4 h-4 text-[#D4AF37]" />
+                  <strong className="text-white">1,000+</strong> Lives Impacted
+                </span>
+                <span className="flex items-center justify-center gap-1.5 font-inter">
+                  <Shield className="w-4 h-4 text-emerald-300" />
+                  100% Beginner Friendly
+                </span>
+                <span className="flex items-center justify-center gap-1.5 font-inter">
+                  <Award className="w-4 h-4 text-[#D4AF37]" />
+                  Certificate Included
+                </span>
+              </div>
             </div>
           </ScrollReveal>
 
