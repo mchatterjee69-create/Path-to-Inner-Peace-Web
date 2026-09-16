@@ -17,7 +17,8 @@ import {
   PhoneCall,
   MessageCircle,
   ChevronRight,
-  Building2
+  Building2,
+  Handshake
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -57,7 +58,7 @@ export const Header: React.FC = () => {
     { id: 'inner-shift', label: 'Inner Shift', icon: Sun },
     { id: 'inner-revolution', label: 'Inner Revolution', icon: Zap },
     { id: 'career-axis', label: 'Career Axis', icon: Compass },
-    { id: 'corporate-wellness', label: 'Corporate Wellness', icon: Building2 },
+    { id: 'partner-with-us', label: 'Partner With Us', icon: Handshake },
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, streak: user.streakDays },
     { id: 'ai-coach', label: 'Inner Peace Guide', icon: Sparkles },
     { id: 'profile', label: 'Member Access', icon: User },
@@ -98,7 +99,7 @@ export const Header: React.FC = () => {
           <nav className="hidden lg:flex items-center gap-0.5 lg:gap-0.5 xl:gap-1 2xl:gap-1.5 font-inter text-[9.5px] lg:text-[10px] xl:text-[11px] 2xl:text-xs font-medium text-emerald-900/90 whitespace-nowrap shrink min-w-0">
             {navLinks.map((item) => {
               const Icon = item.icon;
-              const isActive = activeView === item.id;
+              const isActive = activeView === item.id || (item.id === 'partner-with-us' && (activeView as string) === 'corporate-wellness');
 
               return (
                 <button
@@ -228,7 +229,7 @@ export const Header: React.FC = () => {
             <div className="p-4 space-y-1.5 flex-1">
               {navLinks.map((item) => {
                 const Icon = item.icon;
-                const isActive = activeView === item.id;
+                const isActive = activeView === item.id || (item.id === 'partner-with-us' && (activeView as string) === 'corporate-wellness');
 
                 return (
                   <button

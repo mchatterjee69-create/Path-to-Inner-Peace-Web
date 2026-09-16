@@ -595,21 +595,26 @@ interface CorporateWellnessConsultationRecord {
 
 const corporateWellnessConsultationsStore: CorporateWellnessConsultationRecord[] = [];
 
-// Submit Corporate Wellness Consultation Request
-app.post("/api/corporate-wellness/consultations", async (req, res) => {
+// Submit Partner or Corporate Wellness Consultation Request
+app.post(["/api/partner/consultations", "/api/corporate-wellness/consultations"], async (req, res) => {
   try {
     const {
       fullName,
       workEmail,
       company,
+      organizationName,
+      partnerCategory,
       designation,
       phone,
       employeeCount,
+      estimatedCohortSize,
       preferredProgram,
       preferredFormat,
       preferredDate,
       requirementDetails
     } = req.body;
+
+    const orgName = (organizationName || company || '').trim();
 
     // Strict validation
     if (!fullName || typeof fullName !== 'string' || fullName.trim().length < 2) {
@@ -621,23 +626,24 @@ app.post("/api/corporate-wellness/consultations", async (req, res) => {
       return res.status(400).json({ success: false, error: "Please provide a valid work email address." });
     }
 
-    if (!company || typeof company !== 'string' || company.trim().length < 2) {
-      return res.status(400).json({ success: false, error: "Please enter your company or organization name." });
+    if (!orgName || orgName.length < 2) {
+      return res.status(400).json({ success: false, error: "Please enter your gym, college, or company name." });
     }
 
-    // Generate unique corporate lead reference code
+    // Generate unique partner lead reference code
+    const prefix = partnerCategory === 'gym' ? 'GYM' : partnerCategory === 'college' ? 'EDU' : 'PTR';
     const randomCode = Math.random().toString(36).substring(2, 7).toUpperCase();
-    const referenceId = `CW-2026-${randomCode}`;
+    const referenceId = `${prefix}-2026-${randomCode}`;
 
     const newRecord: CorporateWellnessConsultationRecord = {
       id: referenceId,
       fullName: fullName.trim(),
       workEmail: workEmail.trim(),
-      company: company.trim(),
+      company: orgName,
       designation: (designation || '').trim(),
       phone: (phone || '').trim(),
-      employeeCount: (employeeCount || '').trim(),
-      preferredProgram: (preferredProgram || 'Customized Corporate Wellness Program').trim(),
+      employeeCount: (estimatedCohortSize || employeeCount || '').trim(),
+      preferredProgram: (preferredProgram || 'Customized Institutional Partnership Program').trim(),
       preferredFormat: preferredFormat === 'Offline' ? 'Offline' : preferredFormat === 'Either' ? 'Either' : 'Online',
       preferredDate: (preferredDate || '').trim(),
       requirementDetails: (requirementDetails || '').trim(),
@@ -699,8 +705,8 @@ app.post("/api/corporate-wellness/consultations", async (req, res) => {
   }
 });
 
-// Admin list corporate enquiries
-app.get("/api/corporate-wellness/consultations", (_req, res) => {
+// Admin list partner & corporate enquiries
+app.get(["/api/partner/consultations", "/api/corporate-wellness/consultations"], (_req, res) => {
   res.json({
     total: corporateWellnessConsultationsStore.length,
     consultations: corporateWellnessConsultationsStore

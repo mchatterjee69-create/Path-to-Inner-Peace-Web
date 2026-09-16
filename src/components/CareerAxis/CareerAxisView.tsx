@@ -387,20 +387,20 @@ export const CareerAxisView: React.FC = () => {
               <span>For Organizations & Teams</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
-              Looking for Corporate Wellness Solutions?
+              Partner With Us for Gyms, Colleges & Corporates
             </h3>
             <p className="text-xs sm:text-sm text-emerald-100/80 max-w-xl">
-              Empower your teams with evidence-informed stress management, mindfulness, and emotional resilience workshops tailored to your organization.
+              Empower your members, students, or workforce with evidence-informed stress management, mindfulness, and somatic recovery workshops.
             </p>
           </div>
           <button
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
-              setActiveView('corporate-wellness');
+              setActiveView('partner-with-us');
             }}
             className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#C89620] text-slate-950 font-bold text-xs sm:text-sm shadow-md hover:brightness-105 transition-all flex items-center gap-2 shrink-0 cursor-pointer"
           >
-            <span>Explore Corporate Wellness</span>
+            <span>Partner With Us</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </motion.div>

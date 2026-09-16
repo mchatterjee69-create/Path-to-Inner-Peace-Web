@@ -6,6 +6,7 @@ export type ActiveView =
   | 'career-axis'
   | 'career-axis-booking'
   | 'corporate-wellness'
+  | 'partner-with-us'
   | 'dashboard' 
   | 'challenge' 
   | 'breathing' 
@@ -19,7 +20,24 @@ export type ActiveView =
   | 'cbt-video'
   | 'success';
 
+export type PartnerCategory = 'corporate' | 'gym' | 'college' | 'other';
+
+export interface PartnerConsultationPayload {
+  partnerCategory?: PartnerCategory;
+  fullName: string;
+  workEmail: string;
+  organizationName: string;
+  designation?: string;
+  phone?: string;
+  estimatedCohortSize?: string;
+  preferredProgram: string;
+  preferredFormat: 'Online' | 'Offline' | 'Either';
+  preferredDate?: string;
+  requirementDetails?: string;
+}
+
 export interface CorporateConsultationPayload {
+  partnerCategory?: PartnerCategory;
   fullName: string;
   workEmail: string;
   company: string;

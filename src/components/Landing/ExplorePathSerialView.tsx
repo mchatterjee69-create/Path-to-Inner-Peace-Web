@@ -775,11 +775,11 @@ export const ExplorePathSerialView: React.FC = () => {
               <button
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
-                  setActiveView('corporate-wellness');
+                  setActiveView('partner-with-us');
                 }}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-950/80 hover:bg-emerald-900/80 text-emerald-100 font-semibold text-sm border border-emerald-700/50 backdrop-blur-xs transition-all cursor-pointer"
               >
-                <span>Open Dedicated Portal</span>
+                <span>Open Partner With Us Portal</span>
                 <ArrowRight className="w-4 h-4 text-emerald-300" />
               </button>
             </div>

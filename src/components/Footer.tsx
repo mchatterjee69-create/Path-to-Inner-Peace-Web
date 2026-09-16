@@ -65,8 +65,8 @@ export const Footer: React.FC = () => {
               </button>
             </li>
             <li>
-              <button onClick={() => setActiveView('corporate-wellness')} className="hover:text-white transition-colors text-emerald-300 font-semibold">
-                Corporate Wellness Solutions
+              <button onClick={() => setActiveView('partner-with-us')} className="hover:text-white transition-colors text-emerald-300 font-semibold">
+                Partner With Us (Gym, College & Corporates)
               </button>
             </li>
             <li>
