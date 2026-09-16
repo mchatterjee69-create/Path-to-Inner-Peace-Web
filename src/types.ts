@@ -179,6 +179,7 @@ export interface Testimonial {
   role: string;
   location: string;
   avatar: string;
+  fallbackAvatar?: string;
   rating: number;
   text: string;
   videoUrl?: string;

@@ -1,15 +1,12 @@
 import { DayLesson, FAQItem, Testimonial, Badge, PricingPlan } from '../types';
 import founderMainak from '../assets/images/mainak-chatterjee.jpg';
-import avatarAnanya from '../assets/images/indian_female_ananya_1785860347769.jpg';
-import avatarRajesh from '../assets/images/indian_male_rajesh_1785860363712.jpg';
-import avatarPriya from '../assets/images/indian_female_priya_1785860377497.jpg';
-import avatarSiddharth from '../assets/images/indian_male_siddharth_1785860391166.jpg';
-import avatarKavita from '../assets/images/indian_female_kavita_1785860403016.jpg';
-import avatarVikram from '../assets/images/indian_male_vikram_1785860417507.jpg';
-import avatarMeera from '../assets/images/indian_female_meera_1785860431407.jpg';
-import avatarArjun from '../assets/images/indian_male_arjun_1785860445982.jpg';
-import avatarSunita from '../assets/images/indian_female_sunita_1785860459859.jpg';
-import avatarRohan from '../assets/images/indian_male_rohan_1785860470161.jpg';
+import avatarKakali from '../assets/images/seeker_kakali_mukherjee_circle.png';
+import avatarUjjal from '../assets/images/seeker_ujjal_gayan_circle.png';
+import avatarSwati from '../assets/images/seeker_swati_das_circle.png';
+import avatarManabendra from '../assets/images/seeker_manabendra_roy_circle.png';
+import avatarMoloy from '../assets/images/seeker_moloy_gayan_circle.png';
+import avatarBiswajot from '../assets/images/seeker_biswajot_roy_circle.png';
+import avatarAmrita from '../assets/images/seeker_amrita_ghosh_circle.png';
 
 export const FOUNDER_INFO = {
   name: 'Mainak Chatterjee',
@@ -251,93 +248,73 @@ export const ALL_BADGES: Badge[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
-    name: 'Ananya Sharma',
-    role: 'IT Project Manager',
-    location: 'Bengaluru, India',
-    avatar: avatarAnanya,
+    name: 'Kakali Mukherjee',
+    role: 'Sr. Executive, Antardarshan',
+    location: 'Kolkata, India',
+    avatar: 'https://aesthetic-tan-eqomvyi8.edgeone.dev/',
+    fallbackAvatar: avatarKakali,
     rating: 5,
-    text: 'Mainak sir’s 5-Day Challenge changed my life. After struggling with acute work burnout and sleepless nights for 2 years, the Day 2 stress reset and box breathing gave me immediate relief!'
+    text: 'I never imagined such clarity and emotional healing was possible in such a short time. An absolute blessing for my emotional well-being.'
   },
   {
     id: '2',
-    name: 'Rajesh Verma',
-    role: 'Entrepreneur & Founder',
-    location: 'Mumbai, India',
-    avatar: avatarRajesh,
+    name: 'Ujjal Gayan',
+    role: 'Facilitator, Antardarshan',
+    location: 'Kolkata, India',
+    avatar: 'https://used-fuchsia-rde93htk.edgeone.dev/',
+    fallbackAvatar: avatarUjjal,
     rating: 5,
-    text: 'The combination of practical CBT psychology and spiritual depth is unmatched. I upgraded to MindForge 360°™ Pro on Day 4 and my focus has doubled during high-stakes decisions.'
+    text: 'Whole Program completely changed how I think, feel, and live.'
   },
   {
     id: '3',
-    name: 'Priya Mukherjee',
-    role: 'Senior Educator',
-    location: 'Kolkata, India',
-    avatar: avatarPriya,
+    name: 'Swati Das',
+    role: 'Coordinator, Antardarshan',
+    location: 'West Bengal, India',
+    avatar: 'https://net-magenta-haioh5hu.edgeone.dev/',
+    fallbackAvatar: avatarSwati,
     rating: 5,
-    text: 'The journal prompts on Day 3 Emotional Healing brought me to peaceful tears. I released resentment I was carrying for years. Forever grateful to Path to Inner Peace!'
+    text: 'My relationship and emotional stability improved a lot.'
   },
   {
     id: '4',
-    name: 'Dr. Siddharth Menon',
-    role: 'Consultant Physician',
-    location: 'New Delhi, India',
-    avatar: avatarSiddharth,
+    name: 'Manabendra Roy',
+    role: 'Executive, Antardarshan',
+    location: 'Kolkata, India',
+    avatar: 'https://ethnic-amber-k6lbldsr.edgeone.dev/',
+    fallbackAvatar: avatarManabendra,
     rating: 5,
-    text: 'As a doctor, I recommend Mainak Chatterjee’s scientifically backed breathwork and vagus nerve regulation techniques to anyone suffering from chronic anxiety and workplace stress.'
+    text: 'I came broken, I left empowered. thanks to Path to Inner peace.'
   },
   {
     id: '5',
-    name: 'Kavita Reddy',
-    role: 'Corporate HR Director',
-    location: 'Hyderabad, India',
-    avatar: avatarKavita,
+    name: 'Moloy Gayan',
+    role: 'Executive, Antardarshan',
+    location: 'West Bengal, India',
+    avatar: 'https://silky-aquamarine-yeaklugg.edgeone.dev/',
+    fallbackAvatar: avatarMoloy,
     rating: 5,
-    text: 'The AI Reflection Assistant and daily 30-minute protocols transformed my morning routine. I feel far more grounded, patient, and calm with my team and family.'
+    text: 'Within weeks, my stress reduced and my clarity improved. It feels like I finally have control over my life.'
   },
   {
     id: '6',
-    name: 'Vikramaditya Roy',
-    role: 'Senior Financial Analyst',
-    location: 'Pune, India',
-    avatar: avatarVikram,
+    name: 'Biswajot Roy',
+    role: 'Secretary, Antardarshan',
+    location: 'Kolkata, India',
+    avatar: 'https://provincial-green-tucj1wp8.edgeone.dev/',
+    fallbackAvatar: avatarBiswajot,
     rating: 5,
-    text: 'Overthinking used to consume my evenings. Learning cognitive reframing and body-scan meditation here gave me the exact tools to quiet my mind on demand.'
+    text: 'From confusion to clarity, the transformations we have seen during holistic program of Path to Inner Peace are truly remarkable.'
   },
   {
     id: '7',
-    name: 'Meera Iyer',
-    role: 'Software Engineer',
-    location: 'Chennai, India',
-    avatar: avatarMeera,
+    name: 'Amrita Ghosh',
+    role: 'Owner, Monginis Batanagar',
+    location: 'Kolkata, India',
+    avatar: 'https://zealous-peach-nh74nijk.edgeone.dev/',
+    fallbackAvatar: avatarAmrita,
     rating: 5,
-    text: 'I was skeptical about online meditation programs, but the structured 5-day framework and 432Hz soundscapes cured my bedtime anxiety loops within a week.'
-  },
-  {
-    id: '8',
-    name: 'Arjun Deshmukh',
-    role: 'Creative Director',
-    location: 'Ahmedabad, India',
-    avatar: avatarArjun,
-    rating: 5,
-    text: 'Mainak’s teaching style is clear, compassionate, and deeply practical. The daily streak gamification and sound therapy helped me stay consistent for 30 straight days.'
-  },
-  {
-    id: '9',
-    name: 'Sunita Joshi',
-    role: 'Wellness Specialist',
-    location: 'Rishikesh, India',
-    avatar: avatarSunita,
-    rating: 5,
-    text: 'A masterclass in emotional resilience! Path to Inner Peace integrates modern CBT neuroscience with ancient mindfulness wisdom seamlessly.'
-  },
-  {
-    id: '10',
-    name: 'Rohan Banerjee',
-    role: 'Product Marketing Lead',
-    location: 'Gurugram, India',
-    avatar: avatarRohan,
-    rating: 5,
-    text: 'The MindForge 360° upgrade and guided meditation library are worth 10x the price. I start every morning with the 10-minute reset and feel focused and calm.'
+    text: 'Very much satisfied after 3 sessions, I just tell it is really helpful for me..'
   }
 ];
 

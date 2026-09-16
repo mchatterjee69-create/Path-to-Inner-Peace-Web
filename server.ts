@@ -24,9 +24,16 @@ const app = express();
 // The platform reverse proxy routes external traffic exclusively to port 3000.
 const PORT = 3000;
 
-// Health check endpoints for Cloud Run container probes & load balancers
-app.get("/_health", (_req, res) => res.status(200).send("OK"));
-app.get("/healthz", (_req, res) => res.status(200).send("OK"));
+// Global process safety handlers to prevent unexpected background exits
+process.on("unhandledRejection", (reason, promise) => {
+  console.warn("Unhandled Rejection at:", promise, "reason:", reason);
+});
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+// Health check endpoints for Cloud Run container probes, load balancers, and platforms
+app.get(["/_health", "/healthz", "/health", "/ping"], (_req, res) => res.status(200).send("OK"));
 app.get("/api/health", (_req, res) => res.status(200).json({ status: "ok" }));
 
 app.use(express.json({ limit: "30mb" }));
@@ -1115,22 +1122,32 @@ async function startServer() {
     });
   }
 
-  // Primary listener on port 3000 (standard reverse-proxy target)
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Path to Inner Peace server running on http://0.0.0.0:${PORT}`);
+  // Determine port configuration based on runtime environment:
+  // - In AI Studio container: Nginx runs on NGINX_PORT (8080) and reverse-proxies to DEFAULT_APP_PORT (3000).
+  //   The app MUST listen on port 3000 and MUST NOT bind to 8080 (which is already bound by Nginx).
+  // - In standalone Cloud Run: There is no Nginx. Cloud Run injects PORT (typically 8080) and expects traffic on it.
+  //   The app MUST listen on process.env.PORT (or 8080).
+  const isNginxFronted = Boolean(process.env.NGINX_PORT || process.env.DEFAULT_APP_PORT);
+  const primaryPort = isNginxFronted
+    ? parseInt(process.env.DEFAULT_APP_PORT || "3000", 10)
+    : parseInt(process.env.PORT || "8080", 10);
+
+  const server = app.listen(primaryPort, "0.0.0.0", () => {
+    console.log(`Path to Inner Peace server running on http://0.0.0.0:${primaryPort}`);
   });
 
-  // If Cloud Run or an external runner specifies a custom PORT environment variable,
-  // attempt to also listen on that port, gracefully catching EADDRINUSE if an Nginx
-  // reverse proxy is already running on it.
-  const extraPort = process.env.PORT ? parseInt(process.env.PORT, 10) : null;
-  if (extraPort && extraPort !== PORT) {
+  server.on("error", (err: any) => {
+    console.error(`Primary server error on port ${primaryPort}:`, err);
+  });
+
+  // If in standalone Cloud Run and primaryPort !== 3000, also bind port 3000 as secondary fallback
+  if (!isNginxFronted && primaryPort !== 3000) {
     try {
-      const extraServer = app.listen(extraPort, "0.0.0.0", () => {
-        console.log(`Also listening on http://0.0.0.0:${extraPort}`);
+      const secondaryServer = app.listen(3000, "0.0.0.0", () => {
+        console.log(`Secondary listener active on http://0.0.0.0:3000`);
       });
-      extraServer.on("error", (err: any) => {
-        console.log(`Note: Port ${extraPort} ingress handled by fronting proxy (${err.code || err.message}). App active on ${PORT}.`);
+      secondaryServer.on("error", (err: any) => {
+        console.log(`Secondary port 3000 listener note:`, err.code || err.message);
       });
     } catch (_err) {
       // Ignored

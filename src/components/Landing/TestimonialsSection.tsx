@@ -3,6 +3,14 @@ import { TESTIMONIALS } from '../../data/mockData';
 import { Star, ChevronLeft, ChevronRight, Quote, CheckCircle2, MessageSquareQuote } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 
+const resolveAvatarUrl = (url: string) => {
+  if (!url) return '';
+  if (url.includes('.edgeone.dev') && !url.endsWith('.png') && !url.endsWith('.jpg')) {
+    return url.endsWith('/') ? `${url}file.png` : `${url}/file.png`;
+  }
+  return url;
+};
+
 export const TestimonialsSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -36,14 +44,14 @@ export const TestimonialsSection: React.FC = () => {
           </div>
         </ScrollReveal>
 
-        {/* Avatar Selection Strip for All 10 Seekers */}
+        {/* Avatar Selection Strip for All Seekers */}
         <ScrollReveal variant="fade" delay={0.1}>
           <div className="flex items-center justify-center gap-2.5 overflow-x-auto py-3 mb-8 scrollbar-none">
             {TESTIMONIALS.map((item, idx) => (
               <button
                 key={item.id}
                 onClick={() => setCurrentIndex(idx)}
-                className={`flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-medium transition-all cursor-pointer border ${
+                className={`flex-shrink-0 flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer border ${
                   idx === currentIndex
                     ? 'bg-[#0B6B53] text-white border-[#0B6B53] shadow-md scale-105 ring-2 ring-emerald-400/30'
                     : 'bg-slate-50 text-slate-700 border-slate-200/90 hover:bg-slate-100'
@@ -51,10 +59,15 @@ export const TestimonialsSection: React.FC = () => {
                 title={item.name}
               >
                 <img
-                  src={item.avatar}
+                  src={resolveAvatarUrl(item.avatar)}
                   alt={item.name}
-                  className="w-6 h-6 rounded-full object-cover border border-white"
+                  className="w-7 h-7 rounded-full object-cover border border-white shadow-xs shrink-0"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    if (item.fallbackAvatar && e.currentTarget.src !== item.fallbackAvatar) {
+                      e.currentTarget.src = item.fallbackAvatar;
+                    }
+                  }}
                 />
                 <span className="whitespace-nowrap font-semibold">{item.name.split(' ')[0]}</span>
               </button>
@@ -71,12 +84,17 @@ export const TestimonialsSection: React.FC = () => {
               
               <div className="relative shrink-0">
                 <img 
-                  src={active.avatar} 
+                  src={resolveAvatarUrl(active.avatar)} 
                   alt={active.name}
-                  className="w-22 h-22 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-[#D4AF37] shadow-lg"
+                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-full aspect-square object-cover border-2 border-[#D4AF37] shadow-lg"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    if (active.fallbackAvatar && e.currentTarget.src !== active.fallbackAvatar) {
+                      e.currentTarget.src = active.fallbackAvatar;
+                    }
+                  }}
                 />
-                <div className="absolute -bottom-2 -right-2 bg-emerald-700 text-white p-1 rounded-full border border-white shadow-xs">
+                <div className="absolute bottom-0 right-0 bg-emerald-700 text-white p-1 rounded-full border-2 border-white shadow-xs">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
               </div>
