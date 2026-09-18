@@ -722,10 +722,10 @@ export const ExplorePathSerialView: React.FC = () => {
               src={corporateWellnessBg}
               alt="Corporate Wellness Atmosphere"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover brightness-[0.28] contrast-[1.15] scale-105"
+              className="w-full h-full object-cover brightness-[0.60] contrast-[1.15] opacity-80 scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/95 via-[#032318]/90 to-[#021811]/95" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/30 via-transparent to-[#021811]/95" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/85 via-[#032318]/60 to-[#021811]/85" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/40 via-transparent to-[#021811]/85" />
           </div>
 
           <div className="relative z-10 max-w-5xl mx-auto space-y-6">

@@ -270,10 +270,10 @@ export const PartnerWithUsView: React.FC = () => {
             src={corporateWellnessBg}
             alt="Wellness Partnership Environment"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center filter brightness-[0.22] contrast-[1.15] saturate-[0.8] scale-105"
+            className="w-full h-full object-cover object-center filter brightness-[0.60] contrast-[1.15] saturate-[0.85] opacity-80 scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/95 via-[#032318]/90 to-[#021811]/95" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#021811] via-transparent to-[#021811]/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/85 via-[#032419]/60 to-[#021811]/85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#021811] via-emerald-950/30 to-[#021811]/80" />
         </div>
 
         {/* Hero Content */}
