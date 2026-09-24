@@ -4,8 +4,8 @@ interface AppDownloadSectionProps {
   className?: string;
 }
 
-// Crisp official Apple SVG Icon
-const AppleIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
+// Crisp official Apple SVG Icon - slightly bigger
+const AppleIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6 sm:w-7 sm:h-7' }) => (
   <svg 
     className={className} 
     viewBox="0 0 24 24" 
@@ -16,8 +16,8 @@ const AppleIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) 
   </svg>
 );
 
-// Crisp official Android Robot SVG Icon
-const AndroidIcon: React.FC<{ className?: string }> = ({ className = 'w-5 h-5' }) => (
+// Crisp official Android Robot SVG Icon - slightly bigger
+const AndroidIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6 sm:w-7 sm:h-7' }) => (
   <svg 
     className={className} 
     viewBox="0 0 24 24" 
@@ -36,35 +36,35 @@ export const AppDownloadSection: React.FC<AppDownloadSectionProps> = ({ classNam
     <section 
       id="app-download-section"
       aria-label="Download Path to Inner Peace Mobile App"
-      className={`w-full bg-white py-4 sm:py-6 ${className}`}
+      className={`w-full bg-white !mt-2 sm:!mt-3 py-1 sm:py-2 ${className}`}
     >
-      <div className="w-full max-w-4xl mx-auto px-4 text-center">
-        {/* Title with Android & iOS Icons */}
-        <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
-          <h3 className="font-heading text-lg sm:text-2xl font-bold text-slate-900 tracking-tight">
+      <div className="w-full max-w-4xl mx-auto px-4 flex flex-col items-center text-center gap-1 sm:gap-1.5">
+        {/* Title row with slightly bigger Android & iOS icons and text */}
+        <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap leading-tight m-0 p-0">
+          <h3 className="font-heading text-lg sm:text-2xl font-bold text-slate-900 tracking-tight m-0 p-0">
             Now <span className="text-[#0B6B53]">Path to Inner Peace</span> is available on
           </h3>
 
-          <div className="inline-flex items-center gap-2.5 px-3 py-1 bg-slate-50 border border-slate-200/80 rounded-full shadow-xs">
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-800">
-              <AndroidIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#3DDC84]" />
+          <div className="inline-flex items-center gap-3 px-3.5 py-1 bg-slate-50 border border-slate-200 rounded-full shadow-xs">
+            <span className="inline-flex items-center gap-2 text-base sm:text-lg font-bold text-slate-800">
+              <AndroidIcon className="w-6 h-6 sm:w-7 sm:h-7 text-[#3DDC84]" />
               <span className="text-emerald-800">Android</span>
             </span>
-            <span className="text-slate-300 font-light">|</span>
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-800">
-              <AppleIcon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-900" />
+            <span className="text-slate-300 font-light text-lg leading-none">|</span>
+            <span className="inline-flex items-center gap-2 text-base sm:text-lg font-bold text-slate-800">
+              <AppleIcon className="w-6 h-6 sm:w-7 sm:h-7 text-slate-900" />
               <span>iOS</span>
             </span>
           </div>
         </div>
 
-        {/* Prompt */}
-        <p className="text-xs sm:text-sm font-semibold text-slate-700 mt-2 mb-3">
+        {/* Prompt with zero gap */}
+        <p className="text-sm sm:text-base font-semibold text-slate-800 m-0 p-0 leading-tight">
           Click to download &amp; install:
         </p>
 
-        {/* Simple QR Image (No download button) */}
-        <div className="flex justify-center">
+        {/* QR Image immediately attached below without gaps */}
+        <div className="m-0 p-0">
           <a
             href={downloadUrl}
             target="_blank"
@@ -72,11 +72,11 @@ export const AppDownloadSection: React.FC<AppDownloadSectionProps> = ({ classNam
             title="Click to download & install"
             className="inline-block group cursor-pointer"
           >
-            <div className="p-1 bg-white rounded-xl border border-slate-200/90 shadow-xs hover:shadow-md transition-all duration-200">
+            <div className="p-0.5 bg-white rounded-lg border border-slate-200/90 shadow-xs hover:shadow-md transition-all duration-200">
               <img
                 src={qrImageUrl}
                 alt="Scan QR code or click to download and install Path to Inner Peace on Android and iOS"
-                className="w-40 sm:w-48 h-auto object-contain rounded-lg block"
+                className="w-40 sm:w-48 h-auto object-contain rounded-md block m-0"
                 referrerPolicy="no-referrer"
               />
             </div>
