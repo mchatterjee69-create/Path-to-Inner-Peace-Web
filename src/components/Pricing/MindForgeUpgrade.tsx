@@ -7,6 +7,7 @@ import {
   Check 
 } from 'lucide-react';
 import { HolisticWellnessSection } from '../Landing/HolisticWellnessSection';
+import { AppDownloadSection } from '../Landing/AppDownloadSection';
 import { DropUsALineSection } from '../Landing/DropUsALineSection';
 
 export const MindForgeUpgrade: React.FC = () => {
@@ -128,6 +129,9 @@ export const MindForgeUpgrade: React.FC = () => {
 
       {/* Holistic Wellness One-Stop Solution Section */}
       <HolisticWellnessSection />
+
+      {/* Mobile App Download Section (Android & iOS) */}
+      <AppDownloadSection />
 
       {/* Drop Us A Line Contact Form Section */}
       <DropUsALineSection />
