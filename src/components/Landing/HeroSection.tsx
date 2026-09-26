@@ -16,18 +16,19 @@ export const HeroSection: React.FC = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-emerald-500/15 via-[#D4AF37]/10 to-transparent blur-3xl pointer-events-none rounded-full" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-600/10 blur-3xl pointer-events-none rounded-full" />
 
-      {/* Subtle Background Pattern & Image Overlay */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden mix-blend-overlay">
+      {/* Full length & width shadow image for desktop & laptop only (no image for tab & mobile) */}
+      <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
         <img 
-          src="/src/assets/images/hero_wellness_1785602450811.jpg" 
-          alt="Serene Lotus Wellness"
-          className="w-full h-full object-cover scale-105 filter blur-[1px]"
+          src={corporateWellnessBg}
+          alt="Path to Inner Peace Serene Wellness"
           referrerPolicy="no-referrer"
+          className="w-full h-full object-cover object-center filter brightness-[0.60] contrast-[1.15] saturate-[0.85] opacity-80 scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#041F18]/95 via-[#083D30]/85 to-[#0D4D3E]/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/85 via-[#032419]/60 to-[#021811]/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#021811] via-emerald-950/30 to-[#021811]/80" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
         
         {/* Left / Center Column: High-Impact Typography & Value Proposition */}
         <div className="lg:col-span-7 space-y-6 sm:space-y-7 text-center flex flex-col items-center">
@@ -267,22 +268,6 @@ export const HeroSection: React.FC = () => {
 
         {/* Right Column: High-End Interactive Fast Registration Card */}
         <div className="lg:col-span-5 space-y-6">
-          {/* Relevant Full Width Shadow Image (Just like shadow image in hero section of partner with us menu, only image no texts) */}
-          <ScrollReveal variant="fade" delay={0.15}>
-            <div className="relative w-full h-48 sm:h-56 md:h-64 rounded-3xl overflow-hidden shadow-2xl border border-white/15 glow-emerald">
-              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-                <img 
-                  src={corporateWellnessBg}
-                  alt="Path to Inner Peace Serene Wellness"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-center filter brightness-[0.60] contrast-[1.15] saturate-[0.85] opacity-80 scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/85 via-[#032419]/60 to-[#021811]/85" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#021811] via-emerald-950/30 to-[#021811]/80" />
-              </div>
-            </div>
-          </ScrollReveal>
-
           <ScrollReveal variant="scale" delay={0.2}>
             <div className="relative rounded-3xl glass-panel-dark p-7 sm:p-8 shadow-2xl border border-white/15 soft-shadow glow-emerald">
               
