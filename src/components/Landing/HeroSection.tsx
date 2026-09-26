@@ -368,7 +368,8 @@ export const HeroSection: React.FC = () => {
 
                 </div>
 
-                <div className="flex justify-center pt-0.5">
+                {/* Mobile / Tablet only Join Now button */}
+                <div className="flex justify-center pt-0.5 lg:hidden">
                   <button
                     onClick={() => setIsRegistrationModalOpen(true)}
                     className="btn-glowing-gold px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm rounded-xl shadow-lg hover:brightness-110 active:scale-[0.98] transition-all text-center border border-amber-200/60 flex items-center justify-center gap-1.5 cursor-pointer group"
@@ -378,7 +379,7 @@ export const HeroSection: React.FC = () => {
                   </button>
                 </div>
 
-                <p className="text-[10px] text-center text-emerald-200/70 font-inter italic">
+                <p className="text-[10px] text-center text-emerald-200/70 font-inter italic lg:hidden">
                   MindForge 360°™ Certification included upon completion.
                 </p>
               </div>
@@ -461,6 +462,20 @@ export const HeroSection: React.FC = () => {
 
                 <p className="mt-2 text-[10.5px] text-emerald-200/80 font-inter text-center">
                   <span className="text-[#D4AF37] font-bold">2k+ Seekers Joined</span> • Batch: <strong className="text-white">{selectedBatch}</strong>
+                </p>
+              </div>
+
+              {/* Desktop-Only Join Now button placed naturally after Join Any Batch card */}
+              <div className="mt-3 flex flex-col items-center gap-1.5">
+                <button
+                  onClick={() => setIsRegistrationModalOpen(true)}
+                  className="w-full btn-glowing-gold py-2.5 px-6 bg-gradient-to-r from-[#D4AF37] via-amber-400 to-amber-500 text-slate-950 font-poppins font-bold text-sm sm:text-base rounded-xl shadow-xl hover:brightness-110 active:scale-[0.98] transition-all text-center border border-amber-200/60 flex items-center justify-center gap-2 cursor-pointer group"
+                >
+                  <span>Join Now</span>
+                  <ArrowRight className="w-4 h-4 text-slate-950 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <p className="text-[10px] text-center text-emerald-200/75 font-inter italic">
+                  MindForge 360°™ Certification included upon completion.
                 </p>
               </div>
             </ScrollReveal>
