@@ -36,7 +36,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
-            Science-backed mindfulness, CBT cognitive reframing, and emotional mastery designed for modern lives.
+            Transform Your Mind, Elevate Your Life<br />
+            Your Holistic Wellness Coach at your doorstep
           </p>
         </div>
 
