@@ -3,6 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import { FreeStarBadge } from '../Common/FreeStarBadge';
+import corporateWellnessBg from '../../assets/images/corporate_wellness_bg_1788440459846.jpg';
 
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
@@ -265,7 +266,23 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Right Column: High-End Interactive Fast Registration Card */}
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-5 space-y-6">
+          {/* Relevant Full Width Shadow Image (Just like shadow image in hero section of partner with us menu, only image no texts) */}
+          <ScrollReveal variant="fade" delay={0.15}>
+            <div className="relative w-full h-48 sm:h-56 md:h-64 rounded-3xl overflow-hidden shadow-2xl border border-white/15 glow-emerald">
+              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+                <img 
+                  src={corporateWellnessBg}
+                  alt="Path to Inner Peace Serene Wellness"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-center filter brightness-[0.60] contrast-[1.15] saturate-[0.85] opacity-80 scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/85 via-[#032419]/60 to-[#021811]/85" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#021811] via-emerald-950/30 to-[#021811]/80" />
+              </div>
+            </div>
+          </ScrollReveal>
+
           <ScrollReveal variant="scale" delay={0.2}>
             <div className="relative rounded-3xl glass-panel-dark p-7 sm:p-8 shadow-2xl border border-white/15 soft-shadow glow-emerald">
               
