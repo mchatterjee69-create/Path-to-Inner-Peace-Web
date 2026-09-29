@@ -30,6 +30,10 @@ import { useApp } from '../../context/AppContext';
 import journalPhoto from '../../assets/images/inner_healing_journal_1790660025558.jpg';
 import singingBowlPhoto from '../../assets/images/tibetan_singing_bowl_1790660045207.jpg';
 import innerAlgorithmPhoto from '../../assets/images/inner_algorithm_book_1790661685776.jpg';
+import tshirtPhoto from '../../assets/images/inner_peace_tshirt_1790662367932.jpg';
+import malaPhoto from '../../assets/images/sandalwood_japa_mala_1790662384710.jpg';
+import incensePhoto from '../../assets/images/brass_lotus_incense_1790662400266.jpg';
+import cushionPhoto from '../../assets/images/zafu_meditation_cushion_1790662441124.jpg';
 
 interface ProductFormat {
   id: string;
@@ -305,6 +309,283 @@ const PRODUCTS: ProductItem[] = [
         helpfulCount: 47
       }
     ]
+  },
+  {
+    id: 'prod-tshirt',
+    title: 'Official "Path to Inner Peace" Organic Cotton T-Shirt with Golden Sacred Emblem',
+    subtitle: 'Breathable 220 GSM Bio-Washed Combed Cotton with Sacred Golden Emblem (Hero Section Official Logo)',
+    authorOrMaker: 'Path to Inner Peace Official Wear',
+    category: 'Official Apparel & Merch',
+    badge: '#1 Best Seller in Mindful Apparel',
+    rating: 4.9,
+    ratingCount: 784,
+    boughtCount: '600+ bought in past month',
+    imageUrl: tshirtPhoto,
+    formats: [
+      {
+        id: 'size-s',
+        name: 'Size S (38")',
+        badge: 'Small (Chest 38", Length 27")',
+        price: 499,
+        mrp: 999,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'Small size (38" chest) — 100% Super-combed organic cotton featuring the official golden radiant lotus logo.'
+      },
+      {
+        id: 'size-m',
+        name: 'Size M (40")',
+        badge: 'Medium (Chest 40", Length 28")',
+        price: 499,
+        mrp: 999,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'Medium size (40" chest) — 100% Super-combed organic cotton featuring the official golden radiant lotus logo.'
+      },
+      {
+        id: 'size-l',
+        name: 'Size L (42")',
+        badge: 'Large (Chest 42", Length 29")',
+        price: 499,
+        mrp: 999,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'Large size (42" chest) — 100% Super-combed organic cotton featuring the official golden radiant lotus logo.'
+      },
+      {
+        id: 'size-xl',
+        name: 'Size XL (44")',
+        badge: 'Extra Large (Chest 44", Length 30")',
+        price: 499,
+        mrp: 999,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'Extra Large size (44" chest) — 100% Super-combed organic cotton featuring the official golden radiant lotus logo.'
+      },
+      {
+        id: 'size-xxl',
+        name: 'Size XXL (46")',
+        badge: 'Double XL (Chest 46", Length 31")',
+        price: 499,
+        mrp: 999,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'Double XL size (46" chest) — 100% Super-combed organic cotton featuring the official golden radiant lotus logo.'
+      }
+    ],
+    bulletPoints: [
+      'OFFICIAL HERO SECTION SACRED LOGO: Features the exact iconic Path to Inner Peace circular golden emblem with the radiant lotus & sunburst seal printed on the center chest.',
+      '100% COMBED ORGANIC COTTON (220 GSM): Premium heavyweight fabric that feels feather-soft, highly breathable, and cooling whether meditating, practicing yoga, or lounging.',
+      'DOUBLE BIO-WASHED & PRE-SHRUNK: Treated with eco-conscious bio-enzymes to prevent post-wash shrinkage and eliminate fabric pilling over prolonged wear.',
+      'HIGH-DENSITY METALLIC GOLD INK: Specialized heat-cured screen print engineered to endure 100+ machine washes without peeling, fading, or cracking.',
+      'UNISEX MODERN COMFORT CUT: Engineered with tubular body construction, reinforced shoulder-to-shoulder taping, and a shape-retaining ribbed Lycra crew neckline.'
+    ],
+    specs: [
+      { label: 'Brand', value: 'Path to Inner Peace Official Wear' },
+      { label: 'Emblem Logo', value: 'Official Golden Radiant Lotus (Hero Section Seal)' },
+      { label: 'Fit Type', value: 'Unisex Regular Comfort Fit' },
+      { label: 'Fabric Composition', value: '100% Super-Combed Bio-Washed Organic Cotton' },
+      { label: 'Fabric Weight', value: '220 GSM Heavyweight Premium Weave' },
+      { label: 'Collar Style', value: 'Ribbed Crew Neck with Lycra Shape Retention' },
+      { label: 'Sleeve Type', value: 'Comfort Half Sleeves' },
+      { label: 'Wash Care Instructions', value: 'Machine wash cold inside-out, gentle cycle, do not iron directly on print' },
+      { label: 'Country of Origin', value: 'India (Crafted ethically in Tirupur, Tamil Nadu)' }
+    ],
+    reviews: [
+      {
+        id: 'rev-ts1',
+        name: 'Aakash Verma',
+        date: 'September 27, 2026',
+        rating: 5,
+        title: 'Outstanding fabric quality! The gold lotus emblem is crisp and vibrant',
+        comment: 'Received my T-shirt in Size L today. The 220 GSM cotton feels substantially more luxurious than standard branded tees. The gold emblem from the homepage looks majestic in person. Wore it to morning meditation and it feels incredibly breathable.',
+        verified: true,
+        helpfulCount: 56
+      },
+      {
+        id: 'rev-ts2',
+        name: 'Deepa Nambiar',
+        date: 'September 25, 2026',
+        rating: 5,
+        title: 'True to size, super soft bio-washed feel',
+        comment: 'The ribbed collar sits perfectly flat without gaping. The black color is deep pitch-black and after the first wash, the golden logo stayed as bright as day one. Great value for ₹499.',
+        verified: true,
+        helpfulCount: 39
+      }
+    ]
+  },
+  {
+    id: 'prod-mala',
+    title: 'Authentic 108 Natural Sandalwood & Sacred Bodhi Seed Japa Mala Beads (8mm)',
+    subtitle: 'Hand-Knotted 108 Bead Meditation Rosary with Traditional Saffron Silk Tassel & Brass Spacers',
+    authorOrMaker: 'Handcrafted by Himalayan Spiritual Artisans',
+    category: 'Sacred Space & Meditation',
+    badge: "Amazon's Choice for Meditation Mala",
+    rating: 4.9,
+    ratingCount: 512,
+    boughtCount: '350+ bought in past month',
+    imageUrl: malaPhoto,
+    formats: [
+      {
+        id: 'mala-standard',
+        name: '108 Mala Beads',
+        badge: 'Classic 108 Beads + Silk Tassel',
+        price: 549,
+        mrp: 1199,
+        deliveryText: 'FREE Express Delivery in 2-4 business days',
+        description: 'Authentic 108 hand-knotted sandalwood & bodhi seed rosary with guru bead and golden saffron silk tassel.'
+      },
+      {
+        id: 'mala-deluxe',
+        name: 'Sacred Duo Set',
+        badge: 'Mala + Silk Brocade Pouch',
+        price: 649,
+        mrp: 1499,
+        deliveryText: 'FREE Express Delivery in 2-4 business days',
+        description: 'Includes 108 Mala beads plus an embroidered silk brocade storage pouch for travel and daily japa protection.'
+      }
+    ],
+    bulletPoints: [
+      'GENUINE AROMATIC SANDALWOOD: Naturally fragrant white sandalwood beads release a delicate, soothing aroma that anchors focus and quietens an overactive mind.',
+      '108 SACRED TRADITIONAL COUNT: Exactly 108 natural 8mm beads plus 1 Guru Meru bead, individually hand-knotted to allow smooth, effortless finger movement.',
+      'NATURAL HIMALAYAN BODHI SEEDS: Hand-selected authentic bodhi seeds symbolize enlightenment, mental clarity, and spiritual groundedness.',
+      'DURABLE REINFORCED CORD: Strung on high-tensile multi-ply sacred thread designed to withstand hundreds of thousands of daily mantra cycles without breaking.',
+      'TACTILE MINDFULNESS ANCHOR: Wear as a sacred wrist wrap / necklace or use for japa meditation, conscious breath counts, and somatic anxiety relief.'
+    ],
+    specs: [
+      { label: 'Bead Count', value: '108 Sacred Beads + 1 Guru (Meru) Bead' },
+      { label: 'Bead Diameter', value: '8 mm Uniform Spherical Beads' },
+      { label: 'Materials', value: 'Natural White Sandalwood, Himalayan Bodhi Seeds, Brass Spacers' },
+      { label: 'Tassel', value: 'Pure Saffron Golden Silk Thread' },
+      { label: 'Knotting Style', value: 'Hand-knotted between each individual bead' },
+      { label: 'Circumference', value: 'Approx. 85 cm (Wearable as necklace or 4-fold wrist wrap)' },
+      { label: 'Country of Origin', value: 'India' }
+    ],
+    reviews: [
+      {
+        id: 'rev-m1',
+        name: 'Kavita Sengupta',
+        date: 'September 23, 2026',
+        rating: 5,
+        title: 'Authentic natural sandalwood fragrance that fills the room',
+        comment: 'You can immediately tell this is genuine sandalwood by the delicate woody scent. The hand-knotting makes it so comfortable to rotate between thumb and middle finger during morning chanting. Absolutely divine.',
+        verified: true,
+        helpfulCount: 42
+      }
+    ]
+  },
+  {
+    id: 'prod-incense',
+    title: 'Handcrafted Antique Brass Lotus Incense Burner & Sacred Organic Herbal Dhoop Set',
+    subtitle: 'Detachable 6-Hole Brass Lotus Ash Catcher with 30 Charcoal-Free Sandalwood & Frankincense Cones',
+    authorOrMaker: 'Traditional Heritage Brass Artisans',
+    category: 'Sacred Space & Meditation',
+    badge: 'Top Rated in Aromatherapy & Sacred Decor',
+    rating: 4.8,
+    ratingCount: 428,
+    boughtCount: '250+ bought in past month',
+    imageUrl: incensePhoto,
+    formats: [
+      {
+        id: 'incense-standard',
+        name: 'Lotus + 30 Dhoop Cones',
+        badge: 'Solid Brass Burner + 30 Cones',
+        price: 399,
+        mrp: 799,
+        deliveryText: 'FREE Express Delivery in 2-4 business days',
+        description: 'Solid brass lotus burner with 30 organic natural sandalwood and frankincense dhoop cones.'
+      },
+      {
+        id: 'incense-bundle',
+        name: 'Sanctum Sanctuary Bundle',
+        badge: 'Burner + 30 Cones + Palo Santo',
+        price: 499,
+        mrp: 999,
+        deliveryText: 'FREE Express Delivery in 2-4 business days',
+        description: 'Includes brass lotus burner, 30 herbal cones, plus 2 sustainably harvested Peruvian Palo Santo smudge sticks.'
+      }
+    ],
+    bulletPoints: [
+      'SOLID VINTAGE BRASS LOTUS: Intricately cast solid brass with 6 tiered incense holes accommodating stick incense, dhoop cones, and coil incense.',
+      '100% ORGANIC & CHARCOAL-FREE: Cones made from rolled temple flower petals, pure essential oils, and therapeutic herbs; zero toxic black smoke.',
+      'ELEGANT ASH CATCHER: Broad 3.5-inch scalloped brass petal base catches all falling ash cleanly to keep your altar and table pristine.',
+      'PURIFIES & ELEVATES ENERGY: Ideal for morning meditation priming, evening wind-down, space clearing, and sound therapy ambiance.',
+      'HEIRLOOM CRAFTSMANSHIP: Heavyweight brass that develops a graceful vintage patina over time; easy to rinse and polish.'
+    ],
+    specs: [
+      { label: 'Burner Diameter', value: '3.5 inches (9 cm)' },
+      { label: 'Material', value: 'Solid Cast Antique Brass Alloy' },
+      { label: 'Holes', value: '6 Multipurpose Caliber Holes (Stick / Cone / Coil)' },
+      { label: 'Included Cones', value: '30 Organic Herbal Dhoop Cones' },
+      { label: 'Smoke Profile', value: 'Low Smoke / 100% Charcoal-Free & Sulfur-Free' },
+      { label: 'Country of Origin', value: 'India' }
+    ],
+    reviews: [
+      {
+        id: 'rev-in1',
+        name: 'Gaurav Banerjee',
+        date: 'September 21, 2026',
+        rating: 5,
+        title: 'Heavy solid brass, catches all ash and looks gorgeous',
+        comment: 'No more messy ash scattered across my meditation altar. The brass has a wonderful antique sheen, and the dhoop cones smell genuinely calming without any harsh chemical smoke.',
+        verified: true,
+        helpfulCount: 31
+      }
+    ]
+  },
+  {
+    id: 'prod-cushion',
+    title: 'Ergonomic Zafu Meditation Cushion with Golden Lotus Embroidery & Organic Buckwheat Hulls',
+    subtitle: 'Spine-Aligning Round Sitting Pillow with Removable Washable Forest Green Canvas Cover',
+    authorOrMaker: 'Path to Inner Peace Wellness Studio',
+    category: 'Sacred Space & Meditation',
+    badge: 'Physiotherapist Recommended',
+    rating: 4.9,
+    ratingCount: 340,
+    boughtCount: '200+ bought in past month',
+    imageUrl: cushionPhoto,
+    formats: [
+      {
+        id: 'cushion-standard',
+        name: 'Standard Zafu Cushion',
+        badge: '14" x 5" Ergonomic Round Zafu',
+        price: 799,
+        mrp: 1699,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'Full-size ergonomic 14"x5" Zafu cushion filled with 100% organic cleaned buckwheat hulls.'
+      },
+      {
+        id: 'cushion-master',
+        name: 'Meditation Master Set',
+        badge: 'Zafu Pillow + Zabuton Mat',
+        price: 1399,
+        mrp: 2999,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'Includes Zafu pillow plus matching high-density cushioned floor mat for complete knee and ankle support.'
+      }
+    ],
+    bulletPoints: [
+      'PERFECT POSTURAL ALIGNMENT: Elevates the pelvis to naturally tilt the spine into a healthy S-curve, eliminating lower back fatigue and leg numbness.',
+      '100% ORGANIC BUCKWHEAT HULLS: Molds precisely to your body contours while allowing natural airflow so you remain cool and comfortable.',
+      'GOLDEN EMBROIDERED LOTUS: Features the sacred gold lotus motif with durable double-stitched seams and a reinforced side carry handle.',
+      'REMOVABLE & WASHABLE COVER: Premium heavyweight cotton canvas outer cover with concealed zipper for easy machine washing.',
+      'ADJUSTABLE FIRMNESS: Inner zippered cotton liner lets you easily add or remove buckwheat hulls to customize your ideal sitting height.'
+    ],
+    specs: [
+      { label: 'Dimensions', value: '14 inches diameter x 5 inches height (35 x 13 cm)' },
+      { label: 'Weight', value: 'Approx. 2.1 kg (Filled with natural hulls)' },
+      { label: 'Cover Fabric', value: 'Heavy-Duty 100% Cotton Canvas (Forest Green)' },
+      { label: 'Filling', value: '100% Triple-Cleaned Natural Organic Buckwheat Hulls' },
+      { label: 'Embroidery', value: 'Metallic Golden Thread Sacred Lotus Emblem' },
+      { label: 'Country of Origin', value: 'India' }
+    ],
+    reviews: [
+      {
+        id: 'rev-c1',
+        name: 'Tanvi Agarwal',
+        date: 'September 18, 2026',
+        rating: 5,
+        title: 'Eliminated my lower back strain during 30-minute sits',
+        comment: 'Before this cushion, my legs would fall asleep after 10 minutes. The buckwheat hulls adapt perfectly to your pelvic angle and keep your spine upright effortlessly. The forest green canvas with gold embroidery is stunning.',
+        verified: true,
+        helpfulCount: 37
+      }
+    ]
   }
 ];
 
@@ -482,7 +763,7 @@ export const PremiumStoreSection: React.FC = () => {
 
         {/* Category Filters */}
         <div className="flex items-center gap-2 overflow-x-auto pt-4 scrollbar-none">
-          {['All', 'Journals & Workbooks', 'Books & Philosophy', 'Sound Healing & Meditation'].map((cat) => (
+          {['All', 'Official Apparel & Merch', 'Journals & Workbooks', 'Books & Philosophy', 'Sound Healing & Meditation', 'Sacred Space & Meditation'].map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoryFilter(cat)}
@@ -515,7 +796,7 @@ export const PremiumStoreSection: React.FC = () => {
       {/* ====================================================================
          PRODUCT CATALOG CAROUSEL / QUICK SELECT CARDS (AMAZON STYLE)
          ==================================================================== */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredProducts.map((prod) => {
           const isSelected = prod.id === selectedProductId;
           const minPrice = Math.min(...prod.formats.map(f => f.price));
@@ -539,14 +820,14 @@ export const PremiumStoreSection: React.FC = () => {
                   className="w-full h-full object-contain hover:scale-105 transition-transform"
                 />
                 <span className="absolute top-1 left-1 bg-[#232F3E] text-amber-400 font-bold text-[8.5px] px-1.5 py-0.5 rounded shadow">
-                  {prod.id === 'prod-journal' ? 'Journal' : prod.id === 'prod-algorithm' ? 'Amazon Book' : 'Singing Bowl'}
+                  {prod.id === 'prod-tshirt' ? 'T-Shirt' : prod.id === 'prod-journal' ? 'Journal' : prod.id === 'prod-algorithm' ? 'Amazon Book' : prod.id === 'prod-bowl' ? 'Singing Bowl' : prod.id === 'prod-mala' ? 'Japa Mala' : prod.id === 'prod-incense' ? 'Incense' : 'Cushion'}
                 </span>
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-1">
                   <span className="bg-[#E67A00] text-white text-[9px] font-bold px-1.5 py-0.2 rounded-xs whitespace-nowrap">
-                    {prod.id === 'prod-journal' ? '#1 Best Seller' : prod.id === 'prod-algorithm' ? '#1 New Release' : "Amazon's Choice"}
+                    {prod.badge.includes('Best Seller') ? '#1 Best Seller' : prod.badge.includes('Choice') ? "Amazon's Choice" : prod.badge.includes('New Release') ? '#1 New Release' : 'Top Rated'}
                   </span>
                   <span className="text-[10px] text-slate-500 font-inter line-clamp-1">
                     {prod.category}
@@ -629,7 +910,7 @@ export const PremiumStoreSection: React.FC = () => {
 
             {/* Thumbnail Strip */}
             <div className="flex items-center gap-3 overflow-x-auto pb-1">
-              <div className="w-16 h-16 rounded-xl border-2 border-amber-400 p-1 bg-white cursor-pointer shadow-xs shrink-0">
+              <div className="w-16 h-16 rounded-xl border-2 border-amber-400 p-1 bg-white cursor-pointer shadow-xs shrink-0 flex items-center justify-center">
                 <img 
                   src={currentProduct.imageUrl} 
                   alt="Thumbnail" 
@@ -637,11 +918,32 @@ export const PremiumStoreSection: React.FC = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
+
+              {currentProduct.id === 'prod-tshirt' && (
+                <div 
+                  className="w-16 h-16 rounded-xl border-2 border-amber-400/80 p-1 bg-black cursor-pointer shadow-xs shrink-0 flex flex-col items-center justify-center relative overflow-hidden group" 
+                  title="Official Hero Section Golden Emblem Logo printed on center chest"
+                >
+                  <img 
+                    src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
+                    alt="Official Hero Section Sacred Logo" 
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover scale-110 rounded-lg group-hover:scale-125 transition-transform"
+                  />
+                  <span className="absolute bottom-0 inset-x-0 bg-black/90 text-[7px] text-[#D4AF37] font-bold text-center leading-tight py-0.5">
+                    Hero Logo
+                  </span>
+                </div>
+              )}
               
               <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-600 flex items-center justify-between">
                 <div>
                   <span className="font-bold text-slate-800 block">Amazon A+ Certified Content</span>
-                  <span className="text-[11px] text-slate-500">Curated specifically for member inner healing</span>
+                  <span className="text-[11px] text-slate-500">
+                    {currentProduct.id === 'prod-tshirt'
+                      ? 'Features the official hero section golden emblem lotus logo'
+                      : 'Curated specifically for member inner healing'}
+                  </span>
                 </div>
                 <Award className="w-5 h-5 text-amber-500 shrink-0" />
               </div>
@@ -717,10 +1019,17 @@ export const PremiumStoreSection: React.FC = () => {
 
             {/* FORMAT / EDITION SELECTOR (AMAZON STYLE CARDS) */}
             <div className="space-y-2">
-              <span className="text-xs font-bold text-slate-800 block">
-                Select Edition / Format:
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-800 block">
+                  {currentProduct.id === 'prod-tshirt' ? 'Select T-Shirt Size:' : 'Select Edition / Format:'}
+                </span>
+                {currentProduct.id === 'prod-tshirt' && (
+                  <span className="text-[10px] text-slate-500 font-medium">
+                    Unisex Regular Fit • Pre-Shrunk
+                  </span>
+                )}
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {currentProduct.formats.map((fmt) => {
                   const isSelected = fmt.id === selectedFormatId;
                   const discountPercent = Math.round(((fmt.mrp - fmt.price) / fmt.mrp) * 100);
