@@ -23,11 +23,13 @@ import {
   MessageSquare,
   Search,
   BookOpen,
-  Music
+  Music,
+  ExternalLink
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import journalPhoto from '../../assets/images/inner_healing_journal_1790660025558.jpg';
 import singingBowlPhoto from '../../assets/images/tibetan_singing_bowl_1790660045207.jpg';
+import innerAlgorithmPhoto from '../../assets/images/inner_algorithm_book_1790661685776.jpg';
 
 interface ProductFormat {
   id: string;
@@ -50,6 +52,7 @@ interface ProductItem {
   ratingCount: number;
   boughtCount: string;
   imageUrl: string;
+  amazonUrl?: string;
   formats: ProductFormat[];
   specs: { label: string; value: string }[];
   bulletPoints: string[];
@@ -218,6 +221,88 @@ const PRODUCTS: ProductItem[] = [
         comment: 'My meditation corner looks and feels complete now. The tone instantly calms my thoughts whenever I sit down after a chaotic work day. Very easy to sing even for complete beginners.',
         verified: true,
         helpfulCount: 38
+      }
+    ]
+  },
+  {
+    id: 'prod-algorithm',
+    title: 'The Inner Algorithm: Journey from Chaos to Consciousness',
+    subtitle: 'A Step-by-Step Blueprint to Rewire Subconscious Patterns, Master Mindfulness & Awaken Inner Stillness',
+    authorOrMaker: 'Mainak Chatterjee (Founder, Path to Inner Peace)',
+    category: 'Books & Philosophy',
+    badge: '#1 New Release in Cognitive Psychology & Meditation',
+    rating: 4.9,
+    ratingCount: 1246,
+    boughtCount: '400+ bought in past month',
+    imageUrl: innerAlgorithmPhoto,
+    amazonUrl: 'https://www.amazon.in/Inner-Algorithm-Journey-Chaos-Consciousness-ebook/dp/B0GYX4MKQ5?dplnkId=ef66a2ab-da84-4a7e-98cd-f17124566710',
+    formats: [
+      {
+        id: 'kindle',
+        name: 'Kindle Edition',
+        badge: 'Instant Digital eBook',
+        price: 149,
+        mrp: 449,
+        deliveryText: 'Instant One-Click Delivery to your Kindle App / Device',
+        description: 'Instant digital edition compatible with Kindle e-readers, Kindle iOS/Android apps, iPad, and web reader with adjustable typography & night mode.'
+      },
+      {
+        id: 'paperback',
+        name: 'Paperback',
+        badge: 'Classic Print Edition',
+        price: 299,
+        mrp: 599,
+        deliveryText: 'FREE Doorstep Delivery in 2-4 business days',
+        description: 'High-quality trade paperback printed on eye-comfort cream paper with matte velvet cover lamination and chapter reflection workbooks.'
+      },
+      {
+        id: 'hardcover',
+        name: 'Hardcover',
+        badge: "Collector's Founder Edition",
+        price: 499,
+        mrp: 899,
+        deliveryText: 'FREE Expedited Courier in 2-3 business days',
+        description: "Deluxe hardcover collector's edition with gold foil debossing, satin ribbon page marker, and personally signed author note by Mainak Chatterjee."
+      }
+    ],
+    bulletPoints: [
+      'BREAK FREE FROM THE CHAOS LOOP: Discover why the modern human brain defaults to hyper-vigilance, overthinking, and emotional exhaustion—and how to intentionally recode those neural circuits.',
+      'THE INNER ALGORITHM PROTOCOL: A pragmatic, non-dogmatic methodology combining Cognitive Behavioral Therapy (CBT), neuroplasticity, and mindfulness to unhook from automated reactive scripts.',
+      'MASTERING EMOTIONAL DE-ESCALATION: Practical somatic techniques to calm the amygdala within 90 seconds during high-stress conflicts, career decisions, and personal relationship strain.',
+      'FROM NOISE TO INNER STILLNESS: Proven meditative practices to transition from chaotic external dependency to deep, unshakeable self-reliance and conscious presence.',
+      'INCLUDES COMPANION AUDIO MEDITATIONS: Embedded QR codes throughout chapters give readers instant access to exclusive guided audio sessions recorded by author Mainak Chatterjee.'
+    ],
+    specs: [
+      { label: 'Author', value: 'Mainak Chatterjee' },
+      { label: 'Publisher', value: 'Path to Inner Peace Publishing' },
+      { label: 'ASIN', value: 'B0GYX4MKQ5' },
+      { label: 'Language', value: 'English' },
+      { label: 'Print Length', value: '248 Pages' },
+      { label: 'Format Dimensions', value: '5.5 x 8.5 inches' },
+      { label: 'Item Weight', value: '320 g' },
+      { label: 'Categories', value: 'Cognitive Psychology, Meditation, Self-Help, Neuroscience' },
+      { label: 'Country of Origin', value: 'India' }
+    ],
+    reviews: [
+      {
+        id: 'rev-ia1',
+        name: 'Siddharth Roy',
+        date: 'September 26, 2026',
+        rating: 5,
+        title: 'The clearest manual on human consciousness and overthinking I’ve ever read',
+        comment: 'Mainak brings an engineer’s precision to spiritual awakening. There is zero fluff. The breakdown of how automated mental loops create unnecessary suffering completely changed how I respond to work stress.',
+        verified: true,
+        helpfulCount: 68
+      },
+      {
+        id: 'rev-ia2',
+        name: 'Meera Deshmukh',
+        date: 'September 20, 2026',
+        rating: 5,
+        title: 'Must read for anyone feeling overwhelmed by modern chaotic life',
+        comment: 'I bought the Kindle edition first, read it in two sittings, and immediately ordered the physical copy for my bookshelf. The chapters on emotional de-escalation are pure gold.',
+        verified: true,
+        helpfulCount: 47
       }
     ]
   }
@@ -397,7 +482,7 @@ export const PremiumStoreSection: React.FC = () => {
 
         {/* Category Filters */}
         <div className="flex items-center gap-2 overflow-x-auto pt-4 scrollbar-none">
-          {['All', 'Journals & Workbooks', 'Sound Healing & Meditation'].map((cat) => (
+          {['All', 'Journals & Workbooks', 'Books & Philosophy', 'Sound Healing & Meditation'].map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoryFilter(cat)}
@@ -430,7 +515,7 @@ export const PremiumStoreSection: React.FC = () => {
       {/* ====================================================================
          PRODUCT CATALOG CAROUSEL / QUICK SELECT CARDS (AMAZON STYLE)
          ==================================================================== */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {filteredProducts.map((prod) => {
           const isSelected = prod.id === selectedProductId;
           const minPrice = Math.min(...prod.formats.map(f => f.price));
@@ -446,24 +531,24 @@ export const PremiumStoreSection: React.FC = () => {
                   : 'border-slate-200 hover:border-slate-300'
               }`}
             >
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 shrink-0 relative p-1 flex items-center justify-center">
+              <div className="w-24 h-24 sm:w-26 sm:h-26 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 shrink-0 relative p-1 flex items-center justify-center">
                 <img 
                   src={prod.imageUrl} 
                   alt={prod.title} 
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-contain hover:scale-105 transition-transform"
                 />
-                <span className="absolute top-1 left-1 bg-[#232F3E] text-amber-400 font-bold text-[9px] px-1.5 py-0.5 rounded shadow">
-                  {prod.id === 'prod-journal' ? 'Journal' : 'Singing Bowl'}
+                <span className="absolute top-1 left-1 bg-[#232F3E] text-amber-400 font-bold text-[8.5px] px-1.5 py-0.5 rounded shadow">
+                  {prod.id === 'prod-journal' ? 'Journal' : prod.id === 'prod-algorithm' ? 'Amazon Book' : 'Singing Bowl'}
                 </span>
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-1">
-                  <span className="bg-[#E67A00] text-white text-[9.5px] font-bold px-2 py-0.2 rounded-xs">
-                    {prod.id === 'prod-journal' ? '#1 Best Seller' : "Amazon's Choice"}
+                  <span className="bg-[#E67A00] text-white text-[9px] font-bold px-1.5 py-0.2 rounded-xs whitespace-nowrap">
+                    {prod.id === 'prod-journal' ? '#1 Best Seller' : prod.id === 'prod-algorithm' ? '#1 New Release' : "Amazon's Choice"}
                   </span>
-                  <span className="text-[11px] text-slate-500 font-inter">
+                  <span className="text-[10px] text-slate-500 font-inter line-clamp-1">
                     {prod.category}
                   </span>
                 </div>
@@ -587,9 +672,22 @@ export const PremiumStoreSection: React.FC = () => {
           <div className="lg:col-span-4 space-y-4">
             
             <div>
-              <span className="text-xs font-bold text-blue-700 hover:underline cursor-pointer">
-                Visit the Path to Inner Peace Store
-              </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-bold text-blue-700 hover:underline cursor-pointer">
+                  Visit the Path to Inner Peace Store
+                </span>
+                {currentProduct.amazonUrl && (
+                  <a
+                    href={currentProduct.amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] text-amber-800 hover:text-amber-950 font-bold bg-amber-100/90 hover:bg-amber-200 px-2 py-0.5 rounded-md border border-amber-300 transition-colors"
+                  >
+                    <span>Amazon.in ASIN: B0GYX4MKQ5</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </a>
+                )}
+              </div>
               <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 leading-snug mt-1">
                 {currentProduct.title}
               </h2>
@@ -764,6 +862,18 @@ export const PremiumStoreSection: React.FC = () => {
                   <ShoppingCart className="w-3.5 h-3.5" />
                   <span>Add to Cart</span>
                 </button>
+
+                {currentProduct.amazonUrl && (
+                  <a
+                    href={currentProduct.amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-4 bg-[#232F3E] hover:bg-[#131921] text-amber-300 hover:text-white font-poppins font-bold text-xs rounded-2xl shadow-xs transition-all flex items-center justify-center gap-2 border border-slate-700 cursor-pointer"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
+                    <span>View & Buy on Amazon.in</span>
+                  </a>
+                )}
               </div>
 
               {/* Security & Dispatch meta */}

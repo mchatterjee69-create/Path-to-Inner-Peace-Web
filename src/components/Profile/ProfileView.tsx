@@ -832,7 +832,7 @@ export const ProfileView: React.FC = () => {
                       <span className="text-[10px] bg-[#D4AF37] text-slate-950 px-1.5 py-0.2 rounded-full font-extrabold">Exclusive</span>
                     </h4>
                     <p className="text-emerald-100/90 text-xs mt-0.5 leading-snug">
-                      Official 21-Day Inner Healing Journal (Hard Copy ₹199, Web/App ₹299, Interactive PDF ₹399) & Authentic Tibetan Singing Bowls (₹900) with Prime fast delivery.
+                      Official 21-Day Inner Healing Journal (from ₹199), "The Inner Algorithm" Amazon Bestseller (from ₹149) & Authentic Tibetan Singing Bowls (₹900).
                     </p>
                   </div>
                 </div>
