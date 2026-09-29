@@ -1,0 +1,1326 @@
+import React, { useState } from 'react';
+import { 
+  Star, 
+  ShieldCheck, 
+  Truck, 
+  RotateCcw, 
+  Check, 
+  Heart, 
+  Share2, 
+  ChevronRight, 
+  ShoppingBag, 
+  ShoppingCart, 
+  Package, 
+  Award, 
+  Sparkles, 
+  Info, 
+  CheckCircle2, 
+  X, 
+  CreditCard, 
+  Smartphone, 
+  Lock, 
+  ThumbsUp, 
+  MessageSquare,
+  Search,
+  BookOpen,
+  Music
+} from 'lucide-react';
+import { useApp } from '../../context/AppContext';
+import journalPhoto from '../../assets/images/inner_healing_journal_1790660025558.jpg';
+import singingBowlPhoto from '../../assets/images/tibetan_singing_bowl_1790660045207.jpg';
+
+interface ProductFormat {
+  id: string;
+  name: string;
+  badge: string;
+  price: number;
+  mrp: number;
+  deliveryText: string;
+  description: string;
+}
+
+interface ProductItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  authorOrMaker: string;
+  category: string;
+  badge: string;
+  rating: number;
+  ratingCount: number;
+  boughtCount: string;
+  imageUrl: string;
+  formats: ProductFormat[];
+  specs: { label: string; value: string }[];
+  bulletPoints: string[];
+  reviews: {
+    id: string;
+    name: string;
+    date: string;
+    rating: number;
+    title: string;
+    comment: string;
+    verified: boolean;
+    helpfulCount: number;
+  }[];
+}
+
+const PRODUCTS: ProductItem[] = [
+  {
+    id: 'prod-journal',
+    title: '21-Day Inner Healing Journal: A Guided Daily Journey to Release, Reconnect, Rebuild & Transform',
+    subtitle: 'Official MindForge 360°™ Workbook by Mainak Chatterjee',
+    authorOrMaker: 'Mainak Chatterjee (Founder, Path to Inner Peace)',
+    category: 'Journals & Workbooks',
+    badge: '#1 Best Seller in Mental Wellness & Meditation',
+    rating: 4.9,
+    ratingCount: 1482,
+    boughtCount: '500+ bought in past month',
+    imageUrl: journalPhoto,
+    formats: [
+      {
+        id: 'hardcopy',
+        name: 'Hard Copy',
+        badge: 'Deluxe Spiral-Bound',
+        price: 199,
+        mrp: 499,
+        deliveryText: 'FREE Doorstep Delivery in 3-5 business days',
+        description: 'Premium physical spiral-bound workbook with 120 GSM bleed-proof ivory paper, gold foil accents, and lay-flat wire binding.'
+      },
+      {
+        id: 'webapp',
+        name: 'Web & Application',
+        badge: 'Cloud Sync & Mobile App',
+        price: 299,
+        mrp: 699,
+        deliveryText: 'Instant Digital Access on Web & Android/iOS App',
+        description: 'Interactive digital portal with daily guided prompts, cloud mood journal, daily streak badges, and biometric relaxation audio integration.'
+      },
+      {
+        id: 'pdf',
+        name: 'Interactive PDF',
+        badge: 'Fillable Tablet & GoodNotes',
+        price: 399,
+        mrp: 899,
+        deliveryText: 'Instant One-Click Download + Lifetime Updates',
+        description: 'Interactive hyperlinked PDF workbook with fillable text forms, clickable daily navigation, fully optimized for iPad, Android tablets, Kindle, and Apple Pencil.'
+      }
+    ],
+    bulletPoints: [
+      'RELEASE & RECONNECT: A science-backed 21-day self-reflection protocol engineered by Mainak Chatterjee to dismantle overthinking, emotional fatigue, and subconscious tension.',
+      'TARGETED 5-PILLAR ARCHITECTURE: Features structured daily routines for Greater Self-Awareness, Emotional Balance, Healthier Relationships, Positive Habits, and a Meaningful Life.',
+      'MINDFORGE 360°™ CBT PROTOCOLS: Includes morning intention priming, afternoon cognitive resets, and evening gratitude grounding with somatic breathwork cues.',
+      'PREMIUM ARTISAN QUALITY: Printed on archival-grade 120 GSM paper with a durable double-wire spiral spine that opens 360° flat on any desk or nightstand.',
+      'EXCLUSIVE BONUS CONTENT: Includes scanned QR codes for companion binaural audio soundscapes and instant access to the Path to Inner Peace community.'
+    ],
+    specs: [
+      { label: 'Author', value: 'Mainak Chatterjee (Founder, Path to Inner Peace)' },
+      { label: 'Publisher', value: 'Path to Inner Peace Publications' },
+      { label: 'Language', value: 'English (Clear, Beginner Friendly)' },
+      { label: 'Edition', value: 'Official 1st Edition (2026)' },
+      { label: 'Print Length', value: '120 Illustrated Pages' },
+      { label: 'Format Dimensions', value: '8.5 x 11 inches (A4 Deluxe Workbook)' },
+      { label: 'Paper Quality', value: '120 GSM Bleed-Proof Natural Ivory Paper' },
+      { label: 'Binding', value: 'Double-Loop Metal Spiral Lay-Flat Binding' },
+      { label: 'Cover Finish', value: 'Matte Soft-Touch with Spot UV Gold Emboss' },
+      { label: 'Country of Origin', value: 'India' }
+    ],
+    reviews: [
+      {
+        id: 'rev-1',
+        name: 'Priya Mukherjee',
+        date: 'September 24, 2026',
+        rating: 5,
+        title: 'Life changing workbook — the paper quality and prompts are exceptional!',
+        comment: 'I ordered the Hard Copy after attending Day 1 of the 5-day challenge. The physical journal is magnificent. The 120 GSM paper means my ink doesn’t bleed through at all. Doing the 10-minute morning prompt before checking my phone has completely eliminated my morning anxiety spikes.',
+        verified: true,
+        helpfulCount: 84
+      },
+      {
+        id: 'rev-2',
+        name: 'Dr. Rajesh Sundaram',
+        date: 'September 19, 2026',
+        rating: 5,
+        title: 'Scientific, structured, and profoundly therapeutic',
+        comment: 'As a practicing clinician, I often see patients struggling with unstructured journaling. Mainak’s 21-day framework provides cognitive guardrails rooted in CBT and somatic grounding. The Interactive PDF works seamlessly on my iPad with Apple Pencil.',
+        verified: true,
+        helpfulCount: 52
+      },
+      {
+        id: 'rev-3',
+        name: 'Ananya Sharma',
+        date: 'September 12, 2026',
+        rating: 5,
+        title: 'Best Rs. 199 I have ever invested in my mental health',
+        comment: 'The prompts feel like having Mainak guiding you through your emotional blocks in private. The sunrise cover art is inspiring, and the habit tracker helps me stay accountable every single night.',
+        verified: true,
+        helpfulCount: 41
+      }
+    ]
+  },
+  {
+    id: 'prod-bowl',
+    title: 'Authentic Handcrafted Tibetan Singing Bowl Set (4.5" 7-Metal Himalayan Bronze Alloy, 432 Hz Resonant Frequency)',
+    subtitle: 'Includes Dual-Ended Suede Wooden Striker & Hand-Sewn Brocade Silk Ring Cushion',
+    authorOrMaker: 'Handcrafted by Traditional Himalayan Artisans',
+    category: 'Sound Healing & Meditation',
+    badge: "Amazon's Choice for Tibetan Singing Bowl",
+    rating: 4.9,
+    ratingCount: 894,
+    boughtCount: '300+ bought in past month',
+    imageUrl: singingBowlPhoto,
+    formats: [
+      {
+        id: 'bowl-set',
+        name: 'Complete Artisan Set',
+        badge: 'Bowl + Striker + Brocade Cushion',
+        price: 900,
+        mrp: 1899,
+        deliveryText: 'FREE Express Doorstep Delivery in 2-4 business days',
+        description: 'Includes hand-hammered 4.5" antique bronze singing bowl, custom wooden striker with suede leather rim, hand-sewn brocade ring cushion, and quickstart sound guide.'
+      }
+    ],
+    bulletPoints: [
+      'AUTHENTIC 7-METAL ALLOY: Hand-hammered by master Himalayan metalworkers using traditional bronze and brass acoustic alloys for rich, lingering harmonic overtones.',
+      'TUNED TO 432 HZ HEALING FREQUENCY: Emits a deeply calming, low-distortion acoustic chime that stimulates Alpha and Theta brainwaves to soothe an overactive nervous system.',
+      'DUAL-SIDED STRIKER MALLET: Solid hardwood mallet featuring one smooth wooden edge for crisp bell strikes and one plush suede wrap for warm, sustained singing friction.',
+      'HAND-SEWN BROCADE SILK CUSHION: Traditional round donut cushion stabilizes the bowl while in use and isolates acoustic vibration from dampening table surfaces.',
+      'IDEAL FOR MEDITATION & YOGA: Perfect for chakra alignment, sound baths, yoga studio sessions, deep relaxation pauses, and office desk stress resets.'
+    ],
+    specs: [
+      { label: 'Bowl Diameter', value: '4.5 inches (11.5 cm)' },
+      { label: 'Bowl Weight', value: 'approx. 420 grams' },
+      { label: 'Material', value: 'Hand-hammered 7-metal acoustic bronze & brass alloy' },
+      { label: 'Tuned Frequency', value: '432 Hz (Heart & Mind Chakra Harmonic)' },
+      { label: 'Mallet Length', value: '5 inches solid teakwood with premium suede' },
+      { label: 'Cushion', value: 'Hand-embroidered silk brocade ring cushion (crimson/gold)' },
+      { label: 'Craftsmanship', value: '100% Traditional Handcrafted Himalayan Artisanship' },
+      { label: 'Included Items', value: '1x Bowl, 1x Striker Mallet, 1x Brocade Cushion, 1x Meditation Guide' },
+      { label: 'Country of Origin', value: 'India / Himalayan Region' }
+    ],
+    reviews: [
+      {
+        id: 'rev-b1',
+        name: 'Vikramaditya Sen',
+        date: 'September 22, 2026',
+        rating: 5,
+        title: 'Deep, sustained resonance — rings for over 45 seconds!',
+        comment: 'I was blown away by the sonic quality for just ₹900. When you glide the suede striker around the rim, it starts humming with a deep, rich vibration that you can literally feel in your chest. Arrived safely packaged in 3 days.',
+        verified: true,
+        helpfulCount: 79
+      },
+      {
+        id: 'rev-b2',
+        name: 'Sunita Ghosh',
+        date: 'September 15, 2026',
+        rating: 5,
+        title: 'Beautiful craftsmanship and authentic brass tone',
+        comment: 'My meditation corner looks and feels complete now. The tone instantly calms my thoughts whenever I sit down after a chaotic work day. Very easy to sing even for complete beginners.',
+        verified: true,
+        helpfulCount: 38
+      }
+    ]
+  }
+];
+
+export const PremiumStoreSection: React.FC = () => {
+  const { user } = useApp();
+  
+  // Selected product and active format
+  const [selectedProductId, setSelectedProductId] = useState<string>('prod-journal');
+  const [selectedFormatId, setSelectedFormatId] = useState<string>('hardcopy');
+  const [quantity, setQuantity] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [categoryFilter, setCategoryFilter] = useState<string>('All');
+  
+  // Interactive Reviews state
+  const [newReviewAuthor, setNewReviewAuthor] = useState<string>(user?.name || '');
+  const [newReviewRating, setNewReviewRating] = useState<number>(5);
+  const [newReviewTitle, setNewReviewTitle] = useState<string>('');
+  const [newReviewComment, setNewReviewComment] = useState<string>('');
+  const [isReviewFormOpen, setIsReviewFormOpen] = useState<boolean>(false);
+  const [userSubmittedReviews, setUserSubmittedReviews] = useState<Record<string, any[]>>({});
+  const [reviewToast, setReviewToast] = useState<string | null>(null);
+
+  // Checkout Modal State
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState<boolean>(false);
+  const [checkoutStep, setCheckoutStep] = useState<'details' | 'success'>('details');
+  const [customerName, setCustomerName] = useState<string>(user?.name || 'Valued Member');
+  const [customerEmail, setCustomerEmail] = useState<string>(user?.email || 'member@pathtoinnerpeace.in');
+  const [customerPhone, setCustomerPhone] = useState<string>(user?.whatsapp || '+91 98765 43210');
+  const [customerAddress, setCustomerAddress] = useState<string>('Flat 402, Green Valley Apartments, Near Lake Road');
+  const [customerCity, setCustomerCity] = useState<string>('Kolkata');
+  const [customerPincode, setCustomerPincode] = useState<string>('700029');
+  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'cod'>('upi');
+  const [orderConfirmedId, setOrderConfirmedId] = useState<string>('');
+
+  const currentProduct = PRODUCTS.find(p => p.id === selectedProductId) || PRODUCTS[0];
+  const currentFormat = currentProduct.formats.find(f => f.id === selectedFormatId) || currentProduct.formats[0];
+
+  const handleSelectProduct = (product: ProductItem) => {
+    setSelectedProductId(product.id);
+    setSelectedFormatId(product.formats[0].id);
+    setQuantity(1);
+    window.scrollTo({ top: 380, behavior: 'smooth' });
+  };
+
+  const handleSelectFormat = (formatId: string) => {
+    setSelectedFormatId(formatId);
+  };
+
+  const handleBuyNow = () => {
+    setIsCheckoutModalOpen(true);
+    setCheckoutStep('details');
+  };
+
+  const handlePlaceOrder = (e: React.FormEvent) => {
+    e.preventDefault();
+    const generatedId = `AMZ-PIP-${Math.floor(100000 + Math.random() * 900000)}`;
+    setOrderConfirmedId(generatedId);
+    setCheckoutStep('success');
+  };
+
+  const handleAddReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newReviewTitle.trim() || !newReviewComment.trim()) return;
+
+    const newRev = {
+      id: `custom-rev-${Date.now()}`,
+      name: newReviewAuthor.trim() || 'Verified Member',
+      date: 'Just now',
+      rating: newReviewRating,
+      title: newReviewTitle.trim(),
+      comment: newReviewComment.trim(),
+      verified: true,
+      helpfulCount: 0
+    };
+
+    setUserSubmittedReviews(prev => ({
+      ...prev,
+      [currentProduct.id]: [newRev, ...(prev[currentProduct.id] || [])]
+    }));
+
+    setNewReviewTitle('');
+    setNewReviewComment('');
+    setIsReviewFormOpen(false);
+    setReviewToast('Thank you! Your verified review has been published to the store.');
+    setTimeout(() => setReviewToast(null), 4000);
+  };
+
+  // Combine static and user reviews
+  const allCurrentReviews = [
+    ...(userSubmittedReviews[currentProduct.id] || []),
+    ...currentProduct.reviews
+  ];
+
+  const filteredProducts = PRODUCTS.filter(p => {
+    const matchesCategory = categoryFilter === 'All' || p.category === categoryFilter;
+    const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          p.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          p.category.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  return (
+    <div className="space-y-6 animate-fadeIn pb-12">
+
+      {/* ====================================================================
+         AMAZON-STYLE STORE TOP NAVIGATION & BANNER
+         ==================================================================== */}
+      <div className="bg-[#131921] text-white rounded-3xl p-4 sm:p-6 shadow-xl border border-slate-800">
+        
+        {/* Upper Amazon Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-700/80 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF9900] to-amber-300 flex items-center justify-center text-slate-950 font-black shadow-md">
+              <ShoppingBag className="w-5 h-5 text-slate-950" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight">
+                  Path to Inner Peace Store
+                </span>
+                <span className="bg-[#232F3E] text-amber-400 border border-amber-400/40 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <Check className="w-2.5 h-2.5" />
+                  <span>Amazon Verified</span>
+                </span>
+              </div>
+              <p className="text-xs text-slate-300 font-inter">
+                Official Mindfulness Journals, Himalayan Sound Bowls & Member Exclusives
+              </p>
+            </div>
+          </div>
+
+          {/* Search Bar */}
+          <div className="w-full md:w-80 relative">
+            <input 
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search products in official store..."
+              className="w-full bg-[#232F3E] border border-slate-600 rounded-xl py-2 pl-9 pr-3 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 transition-colors"
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2.5 top-2.5 text-slate-400 hover:text-white"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Member Exclusive Prime Perks Ticker */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3.5 text-xs text-slate-300">
+          <div className="flex items-center gap-2">
+            <span className="bg-[#FF9900] text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-sm">
+              prime
+            </span>
+            <span className="text-white font-medium">
+              Free Delivery & Member Priority Dispatch on all items
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4 text-[11px] text-slate-400">
+            <span className="flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+              <span>100% Authentic Founder Edition</span>
+            </span>
+            <span className="flex items-center gap-1">
+              <RotateCcw className="w-3.5 h-3.5 text-emerald-400" />
+              <span>7-Day Replacement Guarantee</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex items-center gap-2 overflow-x-auto pt-4 scrollbar-none">
+          {['All', 'Journals & Workbooks', 'Sound Healing & Meditation'].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setCategoryFilter(cat)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                categoryFilter === cat
+                  ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
+                  : 'bg-[#232F3E] text-slate-300 hover:bg-[#2c3b4e] border border-slate-700'
+              }`}
+            >
+              {cat === 'All' ? 'All Products' : cat}
+            </button>
+          ))}
+        </div>
+
+      </div>
+
+      {/* Toast Notification */}
+      {reviewToast && (
+        <div className="bg-emerald-900 border border-emerald-500 text-emerald-100 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-lg">
+          <div className="flex items-center gap-2 text-xs font-semibold">
+            <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+            <span>{reviewToast}</span>
+          </div>
+          <button onClick={() => setReviewToast(null)}>
+            <X className="w-4 h-4 text-emerald-300" />
+          </button>
+        </div>
+      )}
+
+      {/* ====================================================================
+         PRODUCT CATALOG CAROUSEL / QUICK SELECT CARDS (AMAZON STYLE)
+         ==================================================================== */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {filteredProducts.map((prod) => {
+          const isSelected = prod.id === selectedProductId;
+          const minPrice = Math.min(...prod.formats.map(f => f.price));
+          const maxMrp = Math.max(...prod.formats.map(f => f.mrp));
+
+          return (
+            <div 
+              key={prod.id}
+              onClick={() => handleSelectProduct(prod)}
+              className={`p-4 rounded-3xl cursor-pointer transition-all border-2 flex items-center gap-4 relative overflow-hidden bg-white shadow-sm hover:shadow-md ${
+                isSelected 
+                  ? 'border-amber-400 bg-amber-50/20 ring-2 ring-amber-400/30' 
+                  : 'border-slate-200 hover:border-slate-300'
+              }`}
+            >
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 shrink-0 relative p-1 flex items-center justify-center">
+                <img 
+                  src={prod.imageUrl} 
+                  alt={prod.title} 
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-contain hover:scale-105 transition-transform"
+                />
+                <span className="absolute top-1 left-1 bg-[#232F3E] text-amber-400 font-bold text-[9px] px-1.5 py-0.5 rounded shadow">
+                  {prod.id === 'prod-journal' ? 'Journal' : 'Singing Bowl'}
+                </span>
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span className="bg-[#E67A00] text-white text-[9.5px] font-bold px-2 py-0.2 rounded-xs">
+                    {prod.id === 'prod-journal' ? '#1 Best Seller' : "Amazon's Choice"}
+                  </span>
+                  <span className="text-[11px] text-slate-500 font-inter">
+                    {prod.category}
+                  </span>
+                </div>
+
+                <h4 className="font-heading font-bold text-sm text-slate-900 line-clamp-2 leading-snug">
+                  {prod.title}
+                </h4>
+
+                <div className="flex items-center gap-1.5 mt-1.5 text-xs">
+                  <div className="flex text-amber-500">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="text-blue-700 font-bold text-[11px]">
+                    {prod.ratingCount}
+                  </span>
+                </div>
+
+                <div className="flex items-baseline gap-2 mt-2">
+                  <span className="text-rose-600 font-semibold text-xs">
+                    from
+                  </span>
+                  <span className="text-slate-950 font-black text-lg">
+                    ₹{minPrice}
+                  </span>
+                  <span className="text-slate-400 line-through text-xs">
+                    ₹{maxMrp}
+                  </span>
+                </div>
+              </div>
+
+              {isSelected && (
+                <div className="absolute top-3 right-3 bg-amber-400 text-slate-950 rounded-full p-1 shadow">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ====================================================================
+         AMAZON-STYLE EXPANDED PRODUCT DETAIL SHOWCASE
+         ==================================================================== */}
+      <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-slate-200">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Column 1: Image Gallery & Badges (Lg: 5 Cols) */}
+          <div className="lg:col-span-5 space-y-4">
+            
+            {/* Main Product Image Stage */}
+            <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 p-4 aspect-[4/4] flex items-center justify-center shadow-inner group">
+              <img 
+                src={currentProduct.imageUrl} 
+                alt={currentProduct.title}
+                referrerPolicy="no-referrer"
+                className="max-h-[360px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+
+              {/* Badges Over Image */}
+              <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+                <span className="bg-[#E67A00] text-white font-extrabold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded shadow">
+                  {currentProduct.badge}
+                </span>
+                <span className="bg-[#0B6B53] text-white font-bold text-[10px] px-2 py-0.5 rounded shadow flex items-center gap-1">
+                  <Check className="w-3 h-3 text-amber-300" />
+                  <span>Verified Founder Stock</span>
+                </span>
+              </div>
+
+              <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-700 text-[11px] font-semibold px-2.5 py-1 rounded-full border border-slate-200 shadow-sm flex items-center gap-1">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>High Res Photography</span>
+              </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div className="flex items-center gap-3 overflow-x-auto pb-1">
+              <div className="w-16 h-16 rounded-xl border-2 border-amber-400 p-1 bg-white cursor-pointer shadow-xs shrink-0">
+                <img 
+                  src={currentProduct.imageUrl} 
+                  alt="Thumbnail" 
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              
+              <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-600 flex items-center justify-between">
+                <div>
+                  <span className="font-bold text-slate-800 block">Amazon A+ Certified Content</span>
+                  <span className="text-[11px] text-slate-500">Curated specifically for member inner healing</span>
+                </div>
+                <Award className="w-5 h-5 text-amber-500 shrink-0" />
+              </div>
+            </div>
+
+            {/* Trust Assurance Strip */}
+            <div className="grid grid-cols-3 gap-2 text-center pt-2">
+              <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center">
+                <Truck className="w-4 h-4 text-emerald-600 mb-1" />
+                <span className="text-[10px] font-bold text-slate-800">FREE Delivery</span>
+                <span className="text-[9px] text-slate-500">Across India</span>
+              </div>
+              <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center">
+                <ShieldCheck className="w-4 h-4 text-blue-600 mb-1" />
+                <span className="text-[10px] font-bold text-slate-800">100% Genuine</span>
+                <span className="text-[9px] text-slate-500">Direct From Hub</span>
+              </div>
+              <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center">
+                <RotateCcw className="w-4 h-4 text-amber-600 mb-1" />
+                <span className="text-[10px] font-bold text-slate-800">Easy Returns</span>
+                <span className="text-[9px] text-slate-500">7-Day Guarantee</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Column 2: Product Info, Formats & Specifications (Lg: 4 Cols) */}
+          <div className="lg:col-span-4 space-y-4">
+            
+            <div>
+              <span className="text-xs font-bold text-blue-700 hover:underline cursor-pointer">
+                Visit the Path to Inner Peace Store
+              </span>
+              <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 leading-snug mt-1">
+                {currentProduct.title}
+              </h2>
+              <p className="text-xs text-slate-600 mt-1">
+                by <strong className="text-slate-800">{currentProduct.authorOrMaker}</strong>
+              </p>
+            </div>
+
+            {/* Ratings & Social Proof */}
+            <div className="flex flex-wrap items-center gap-2 text-xs border-b border-slate-200 pb-3">
+              <div className="flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 text-amber-900 font-bold">
+                <span>{currentProduct.rating}</span>
+                <div className="flex text-amber-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+              </div>
+              <span className="text-blue-700 font-medium hover:underline cursor-pointer">
+                {currentProduct.ratingCount.toLocaleString()} ratings
+              </span>
+              <span className="text-slate-300">•</span>
+              <span className="text-slate-500 font-medium">
+                {currentProduct.boughtCount}
+              </span>
+            </div>
+
+            {/* FORMAT / EDITION SELECTOR (AMAZON STYLE CARDS) */}
+            <div className="space-y-2">
+              <span className="text-xs font-bold text-slate-800 block">
+                Select Edition / Format:
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {currentProduct.formats.map((fmt) => {
+                  const isSelected = fmt.id === selectedFormatId;
+                  const discountPercent = Math.round(((fmt.mrp - fmt.price) / fmt.mrp) * 100);
+
+                  return (
+                    <button
+                      key={fmt.id}
+                      type="button"
+                      onClick={() => handleSelectFormat(fmt.id)}
+                      className={`p-2.5 rounded-2xl text-left border-2 transition-all cursor-pointer relative ${
+                        isSelected
+                          ? 'border-amber-500 bg-amber-50/50 shadow-sm ring-1 ring-amber-400'
+                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-slate-900 block leading-tight">
+                          {fmt.name}
+                        </span>
+                        {isSelected && (
+                          <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                        )}
+                      </div>
+                      <span className="text-[10px] text-slate-500 block mt-0.5 leading-tight line-clamp-1">
+                        {fmt.badge}
+                      </span>
+                      <div className="mt-2 flex items-baseline gap-1.5">
+                        <span className="text-slate-950 font-black text-sm">
+                          ₹{fmt.price}
+                        </span>
+                        <span className="text-slate-400 text-[11px] line-through">
+                          ₹{fmt.mrp}
+                        </span>
+                      </div>
+                      <span className="text-[9.5px] font-bold text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded mt-1 inline-block">
+                        Save {discountPercent}%
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                <strong className="text-slate-800">{currentFormat.name}:</strong> {currentFormat.description}
+              </p>
+            </div>
+
+            {/* "About this item" Bullet points */}
+            <div className="space-y-2 border-t border-slate-200 pt-3">
+              <h4 className="font-heading font-bold text-sm text-slate-900">
+                About this item
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-700">
+                {currentProduct.bulletPoints.map((bp, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></span>
+                    <span className="leading-relaxed">{bp}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+
+          {/* Column 3: Amazon Buy Box & Action Panel (Lg: 3 Cols) */}
+          <div className="lg:col-span-3">
+            <div className="rounded-3xl border-2 border-slate-200 p-5 bg-white shadow-lg space-y-4 sticky top-24">
+              
+              {/* Dynamic Price Display */}
+              <div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-rose-600 font-extrabold text-2xl">
+                    -{Math.round(((currentFormat.mrp - currentFormat.price) / currentFormat.mrp) * 100)}%
+                  </span>
+                  <div className="flex items-start">
+                    <span className="text-xs font-semibold mt-1">₹</span>
+                    <span className="text-3xl font-black text-slate-950">
+                      {currentFormat.price}
+                    </span>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-500 mt-0.5">
+                  M.R.P.: <span className="line-through">₹{currentFormat.mrp}</span>
+                </div>
+                <div className="text-[11px] text-slate-500 mt-0.5">
+                  Inclusive of all taxes
+                </div>
+              </div>
+
+              {/* Prime Delivery Promise */}
+              <div className="bg-amber-50/60 p-3 rounded-2xl border border-amber-200/80 space-y-1 text-xs">
+                <div className="flex items-center gap-1.5 text-slate-900 font-bold">
+                  <span className="bg-[#FF9900] text-slate-950 text-[10px] px-1.5 py-0.2 rounded font-black">
+                    prime
+                  </span>
+                  <span>FREE Delivery</span>
+                </div>
+                <p className="text-[11px] text-slate-600 leading-snug">
+                  {currentFormat.deliveryText}
+                </p>
+              </div>
+
+              {/* In Stock Badge */}
+              <div className="flex items-center gap-1.5 text-emerald-700 font-bold text-sm">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>In Stock.</span>
+              </div>
+
+              {/* Quantity Selector */}
+              <div className="flex items-center justify-between text-xs border border-slate-200 rounded-xl px-3 py-2 bg-slate-50">
+                <span className="font-semibold text-slate-700">Quantity:</span>
+                <select
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="bg-transparent font-bold text-slate-900 focus:outline-none cursor-pointer"
+                >
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={5}>5 (Family & Friends)</option>
+                </select>
+              </div>
+
+              {/* Action Buttons: Buy Now & Add to Cart */}
+              <div className="space-y-2.5 pt-1">
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  className="w-full py-3 px-4 bg-gradient-to-r from-[#FFA41C] to-[#FF8F00] hover:from-[#f39b15] hover:to-[#e67e00] text-slate-950 font-poppins font-black text-sm rounded-2xl shadow-md hover:shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-amber-500/40"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Buy Now — ₹{currentFormat.price * quantity}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  className="w-full py-2.5 px-4 bg-[#FFD814] hover:bg-[#F7CA00] text-slate-950 font-poppins font-bold text-xs rounded-2xl shadow-xs hover:shadow active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-amber-300"
+                >
+                  <ShoppingCart className="w-3.5 h-3.5" />
+                  <span>Add to Cart</span>
+                </button>
+              </div>
+
+              {/* Security & Dispatch meta */}
+              <div className="space-y-1.5 text-[11px] text-slate-600 border-t border-slate-100 pt-3">
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Payment:</span>
+                  <span className="font-semibold text-blue-700 flex items-center gap-1">
+                    <Lock className="w-3 h-3 text-emerald-600" />
+                    <span>Secure transaction</span>
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Dispatches from:</span>
+                  <span className="font-semibold text-slate-800">Path to Inner Peace Hub</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Sold by:</span>
+                  <span className="font-semibold text-slate-800">MindForge Wellness</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* ====================================================================
+           PRODUCT SPECIFICATIONS TABLE (AMAZON STYLE)
+           ==================================================================== */}
+        <div className="mt-10 border-t border-slate-200 pt-8">
+          <div className="max-w-4xl">
+            <h3 className="font-heading font-extrabold text-lg text-slate-900 mb-4 flex items-center gap-2">
+              <Package className="w-5 h-5 text-amber-500" />
+              <span>Product Specifications & Details</span>
+            </h3>
+
+            <div className="rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+              <table className="w-full text-left text-xs divide-y divide-slate-200">
+                <tbody className="divide-y divide-slate-200 bg-white">
+                  {currentProduct.specs.map((item, idx) => (
+                    <tr key={idx} className={idx % 2 === 0 ? 'bg-slate-50/70' : 'bg-white'}>
+                      <td className="py-2.5 px-4 font-bold text-slate-700 w-1/3 sm:w-1/4">
+                        {item.label}
+                      </td>
+                      <td className="py-2.5 px-4 text-slate-900 font-medium">
+                        {item.value}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* ====================================================================
+           CUSTOMER REVIEWS & USER REVIEW SUBMISSION (AMAZON STYLE)
+           ==================================================================== */}
+        <div className="mt-12 border-t border-slate-200 pt-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            {/* Reviews Summary Column (Lg: 4 cols) */}
+            <div className="lg:col-span-4 space-y-4">
+              <h3 className="font-heading font-extrabold text-lg text-slate-900">
+                Customer Reviews
+              </h3>
+
+              <div className="flex items-center gap-2">
+                <div className="flex text-amber-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <span className="font-heading font-black text-xl text-slate-900">
+                  {currentProduct.rating} out of 5
+                </span>
+              </div>
+              <p className="text-xs text-slate-500">
+                {allCurrentReviews.length + 1480} global ratings across India
+              </p>
+
+              {/* Star breakdown bar chart */}
+              <div className="space-y-2 pt-2 text-xs">
+                {[
+                  { star: '5 star', percent: 89 },
+                  { star: '4 star', percent: 8 },
+                  { star: '3 star', percent: 2 },
+                  { star: '2 star', percent: 1 },
+                  { star: '1 star', percent: 0 }
+                ].map((row) => (
+                  <div key={row.star} className="flex items-center gap-2">
+                    <span className="w-12 text-blue-700 font-medium hover:underline cursor-pointer">
+                      {row.star}
+                    </span>
+                    <div className="flex-1 h-4 bg-slate-100 rounded-md overflow-hidden border border-slate-200 relative">
+                      <div 
+                        className="h-full bg-amber-400 rounded-md"
+                        style={{ width: `${row.percent}%` }}
+                      />
+                    </div>
+                    <span className="w-8 text-right font-medium text-slate-600">
+                      {row.percent}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Write a Review Button */}
+              <div className="border-t border-slate-200 pt-4 space-y-2">
+                <h4 className="font-heading font-bold text-sm text-slate-900">
+                  Review this product
+                </h4>
+                <p className="text-xs text-slate-600">
+                  Share your thoughts and inner transformation with other community seekers.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setIsReviewFormOpen(!isReviewFormOpen)}
+                  className="w-full py-2 px-4 rounded-xl border border-slate-300 text-slate-800 font-bold text-xs hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-amber-500" />
+                  <span>{isReviewFormOpen ? 'Cancel Review' : 'Write a customer review'}</span>
+                </button>
+              </div>
+
+            </div>
+
+            {/* Reviews List & Submission Form (Lg: 8 cols) */}
+            <div className="lg:col-span-8 space-y-5">
+              
+              {/* Write Review Form */}
+              {isReviewFormOpen && (
+                <form 
+                  onSubmit={handleAddReview}
+                  className="p-5 rounded-2xl bg-amber-50/40 border border-amber-200 space-y-3.5 shadow-sm animate-fadeIn"
+                >
+                  <h4 className="font-heading font-bold text-sm text-slate-900">
+                    Create Review for {currentProduct.title.slice(0, 40)}...
+                  </h4>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div>
+                      <label className="font-semibold text-slate-700 block mb-1">Your Name</label>
+                      <input 
+                        type="text"
+                        value={newReviewAuthor}
+                        onChange={(e) => setNewReviewAuthor(e.target.value)}
+                        placeholder="e.g. Priya Sharma"
+                        required
+                        className="w-full bg-white border border-slate-300 rounded-xl p-2 focus:outline-none focus:border-amber-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-semibold text-slate-700 block mb-1">Overall Rating</label>
+                      <div className="flex items-center gap-1.5 pt-1">
+                        {[1, 2, 3, 4, 5].map((starVal) => (
+                          <button
+                            type="button"
+                            key={starVal}
+                            onClick={() => setNewReviewRating(starVal)}
+                            className="cursor-pointer"
+                          >
+                            <Star 
+                              className={`w-6 h-6 ${
+                                starVal <= newReviewRating 
+                                  ? 'fill-amber-400 text-amber-400' 
+                                  : 'text-slate-300'
+                              }`} 
+                            />
+                          </button>
+                        ))}
+                        <span className="text-xs font-bold text-slate-700 ml-2">
+                          {newReviewRating} Star{newReviewRating > 1 ? 's' : ''}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-xs">
+                    <label className="font-semibold text-slate-700 block mb-1">Add a Headline</label>
+                    <input 
+                      type="text"
+                      value={newReviewTitle}
+                      onChange={(e) => setNewReviewTitle(e.target.value)}
+                      placeholder="What's most important to know?"
+                      required
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 focus:outline-none focus:border-amber-500"
+                    />
+                  </div>
+
+                  <div className="text-xs">
+                    <label className="font-semibold text-slate-700 block mb-1">Write your review</label>
+                    <textarea 
+                      rows={3}
+                      value={newReviewComment}
+                      onChange={(e) => setNewReviewComment(e.target.value)}
+                      placeholder="What did you like or dislike? How did this support your inner healing?"
+                      required
+                      className="w-full bg-white border border-slate-300 rounded-xl p-2 focus:outline-none focus:border-amber-500"
+                    />
+                  </div>
+
+                  <div className="flex justify-end gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setIsReviewFormOpen(false)}
+                      className="px-4 py-1.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-semibold hover:bg-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-5 py-1.5 bg-[#FFD814] hover:bg-[#F7CA00] text-slate-950 font-bold text-xs rounded-xl shadow-xs"
+                    >
+                      Submit Review
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* Filter Reviews Header */}
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="font-heading font-bold text-sm text-slate-900">
+                  Top reviews from India
+                </span>
+                <span className="text-xs text-slate-500">
+                  Showing verified member feedback
+                </span>
+              </div>
+
+              {/* Review Cards */}
+              <div className="space-y-4">
+                {allCurrentReviews.map((rev) => (
+                  <div key={rev.id} className="p-4 rounded-2xl bg-slate-50/70 border border-slate-200 space-y-2">
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-full bg-emerald-950 text-amber-300 font-bold text-xs flex items-center justify-center">
+                          {rev.name.charAt(0)}
+                        </div>
+                        <span className="text-xs font-bold text-slate-900">{rev.name}</span>
+                      </div>
+                      <span className="text-[11px] text-slate-400">{rev.date}</span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <div className="flex text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className={`w-3.5 h-3.5 ${
+                              i < rev.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'
+                            }`} 
+                          />
+                        ))}
+                      </div>
+                      <h5 className="font-bold text-xs text-slate-900">
+                        {rev.title}
+                      </h5>
+                    </div>
+
+                    {rev.verified && (
+                      <span className="text-[#C45500] font-bold text-[10.5px] block">
+                        Verified Purchase
+                      </span>
+                    )}
+
+                    <p className="text-xs text-slate-700 leading-relaxed font-inter">
+                      {rev.comment}
+                    </p>
+
+                    <div className="flex items-center gap-3 pt-1 text-[11px] text-slate-500">
+                      <button 
+                        type="button" 
+                        className="px-2.5 py-0.5 border border-slate-300 rounded-md hover:bg-white flex items-center gap-1 font-medium cursor-pointer"
+                      >
+                        <ThumbsUp className="w-3 h-3 text-slate-400" />
+                        <span>Helpful ({rev.helpfulCount})</span>
+                      </button>
+                      <span className="cursor-pointer hover:underline">Report</span>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* ====================================================================
+         AMAZON-STYLE 1-CLICK CHECKOUT MODAL
+         ==================================================================== */}
+      {isCheckoutModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden animate-scale my-8">
+            
+            {/* Modal Header */}
+            <div className="bg-[#131921] text-white p-4 sm:p-5 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="bg-[#FF9900] text-slate-950 font-black text-xs px-2 py-0.5 rounded">
+                  AMAZON PAY
+                </span>
+                <span className="font-heading font-extrabold text-sm sm:text-base text-white">
+                  Secure 1-Click Checkout
+                </span>
+              </div>
+              <button 
+                onClick={() => setIsCheckoutModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {checkoutStep === 'details' ? (
+              <form onSubmit={handlePlaceOrder} className="p-5 sm:p-6 space-y-4 text-xs">
+                
+                {/* Order Summary Strip */}
+                <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-2xl flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-xl bg-white border border-slate-200 overflow-hidden shrink-0 p-1 flex items-center justify-center">
+                    <img 
+                      src={currentProduct.imageUrl} 
+                      alt={currentProduct.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h5 className="font-bold text-slate-900 text-xs line-clamp-1">
+                      {currentProduct.title}
+                    </h5>
+                    <div className="text-[11px] text-slate-600">
+                      Edition: <strong className="text-slate-800">{currentFormat.name}</strong> • Qty: <strong>{quantity}</strong>
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="font-black text-slate-950 text-sm">
+                        ₹{currentFormat.price * quantity}
+                      </span>
+                      <span className="text-slate-400 line-through text-[11px]">
+                        ₹{currentFormat.mrp * quantity}
+                      </span>
+                      <span className="text-emerald-700 font-bold text-[10px]">
+                        FREE Delivery
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Delivery Information */}
+                <div className="space-y-2">
+                  <h5 className="font-heading font-bold text-slate-900 text-xs uppercase tracking-wide flex items-center gap-1.5">
+                    <Truck className="w-3.5 h-3.5 text-amber-500" />
+                    <span>Delivery Address & Contact</span>
+                  </h5>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div>
+                      <label className="text-[11px] text-slate-600 block mb-0.5">Full Name</label>
+                      <input 
+                        type="text" 
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        required
+                        className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] text-slate-600 block mb-0.5">Phone / WhatsApp</label>
+                      <input 
+                        type="text" 
+                        value={customerPhone}
+                        onChange={(e) => setCustomerPhone(e.target.value)}
+                        required
+                        className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] text-slate-600 block mb-0.5">Email (for order invoice & digital copy)</label>
+                    <input 
+                      type="email" 
+                      value={customerEmail}
+                      onChange={(e) => setCustomerEmail(e.target.value)}
+                      required
+                      className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+
+                  {currentFormat.id === 'hardcopy' || currentProduct.id === 'prod-bowl' ? (
+                    <>
+                      <div>
+                        <label className="text-[11px] text-slate-600 block mb-0.5">Street Address</label>
+                        <input 
+                          type="text" 
+                          value={customerAddress}
+                          onChange={(e) => setCustomerAddress(e.target.value)}
+                          required
+                          className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="text-[11px] text-slate-600 block mb-0.5">City</label>
+                          <input 
+                            type="text" 
+                            value={customerCity}
+                            onChange={(e) => setCustomerCity(e.target.value)}
+                            required
+                            className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-600 block mb-0.5">PIN Code</label>
+                          <input 
+                            type="text" 
+                            value={customerPincode}
+                            onChange={(e) => setCustomerPincode(e.target.value)}
+                            required
+                            className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400"
+                          />
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="p-2.5 bg-blue-50 border border-blue-200 text-blue-900 rounded-xl text-[11px]">
+                      ⚡ Instant Access: Link will be sent to your email immediately upon completion.
+                    </div>
+                  )}
+                </div>
+
+                {/* Payment Method Selector */}
+                <div className="space-y-2 border-t border-slate-200 pt-3">
+                  <h5 className="font-heading font-bold text-slate-900 text-xs uppercase tracking-wide flex items-center gap-1.5">
+                    <CreditCard className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Select Payment Method</span>
+                  </h5>
+
+                  <div className="space-y-1.5">
+                    {[
+                      { id: 'upi', label: 'UPI / Google Pay / PhonePe / Paytm', tag: 'Fastest' },
+                      { id: 'card', label: 'Credit / Debit Card / Net Banking', tag: 'All Banks' },
+                      { id: 'cod', label: 'Cash on Delivery (Available for physical items)', tag: 'Verified' }
+                    ].map((m) => (
+                      <label 
+                        key={m.id}
+                        className={`flex items-center justify-between p-2.5 rounded-xl border cursor-pointer transition-all ${
+                          paymentMethod === m.id 
+                            ? 'border-amber-400 bg-amber-50/50' 
+                            : 'border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <input 
+                            type="radio" 
+                            name="paymentMethod" 
+                            checked={paymentMethod === m.id}
+                            onChange={() => setPaymentMethod(m.id as any)}
+                            className="text-amber-500 focus:ring-amber-400"
+                          />
+                          <span className="font-bold text-slate-800 text-xs">{m.label}</span>
+                        </div>
+                        <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-semibold">
+                          {m.tag}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Order Summary Total Box */}
+                <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-1 text-xs">
+                  <div className="flex justify-between text-slate-600">
+                    <span>Items Total:</span>
+                    <span>₹{currentFormat.price * quantity}</span>
+                  </div>
+                  <div className="flex justify-between text-slate-600">
+                    <span>Member Delivery:</span>
+                    <span className="text-emerald-700 font-bold">FREE (Saved ₹80)</span>
+                  </div>
+                  <div className="flex justify-between text-slate-950 font-black text-sm pt-1 border-t border-slate-200">
+                    <span>Order Total:</span>
+                    <span className="text-rose-700">₹{currentFormat.price * quantity}</span>
+                  </div>
+                </div>
+
+                {/* Submit Order Button */}
+                <button
+                  type="submit"
+                  className="w-full py-3 px-4 bg-gradient-to-r from-[#FFA41C] to-[#FF8F00] hover:from-[#f39b15] hover:to-[#e67e00] text-slate-950 font-poppins font-black text-sm rounded-2xl shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-amber-500/50"
+                >
+                  <Lock className="w-4 h-4" />
+                  <span>Place Your Order — ₹{currentFormat.price * quantity}</span>
+                </button>
+
+                <p className="text-[10.5px] text-center text-slate-500">
+                  By placing your order, you agree to Path to Inner Peace terms of sale & delivery policy.
+                </p>
+
+              </form>
+            ) : (
+              /* Success Screen */
+              <div className="p-6 sm:p-8 text-center space-y-4 animate-scale">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
+                  <CheckCircle2 className="w-10 h-10" />
+                </div>
+
+                <div>
+                  <h4 className="font-heading font-extrabold text-xl text-slate-900">
+                    Order Placed Successfully!
+                  </h4>
+                  <p className="text-xs text-slate-600 mt-1">
+                    An order confirmation & tax invoice have been dispatched to <strong className="text-slate-800">{customerEmail}</strong>.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-left text-xs space-y-2">
+                  <div className="flex justify-between border-b border-slate-200 pb-1.5">
+                    <span className="text-slate-500">Order ID:</span>
+                    <span className="font-mono font-bold text-slate-900">{orderConfirmedId}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-200 pb-1.5">
+                    <span className="text-slate-500">Item Ordered:</span>
+                    <span className="font-bold text-slate-900 line-clamp-1">{currentProduct.title.slice(0, 30)}...</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-200 pb-1.5">
+                    <span className="text-slate-500">Selected Format:</span>
+                    <span className="font-bold text-slate-900">{currentFormat.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Estimated Delivery:</span>
+                    <span className="font-bold text-emerald-700">Within 3 Business Days</span>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsCheckoutModalOpen(false)}
+                    className="w-full py-2.5 px-4 bg-[#FFD814] hover:bg-[#F7CA00] text-slate-950 font-bold text-xs rounded-xl shadow-xs"
+                  >
+                    Continue Shopping in Store
+                  </button>
+                </div>
+              </div>
+            )}
+
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+};

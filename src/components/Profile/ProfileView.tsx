@@ -53,8 +53,10 @@ import {
   Headphones,
   Moon,
   Compass,
-  Sparkles
+  Sparkles,
+  ShoppingBag
 } from 'lucide-react';
+import { PremiumStoreSection } from '../Store/PremiumStoreSection';
 
 export const ProfileView: React.FC = () => {
   const { 
@@ -87,8 +89,8 @@ export const ProfileView: React.FC = () => {
   const [signupAgreeWhatsapp, setSignupAgreeWhatsapp] = useState(true);
   const [signupError, setSignupError] = useState('');
 
-  // Logged-in Portal Tab & Search States
-  const [activePortalTab, setActivePortalTab] = useState<'profile' | 'articles' | 'magazine' | 'programs' | 'downloads'>('downloads');
+  // Logged-in Portal Tab & Search States (Premium Store as first point)
+  const [activePortalTab, setActivePortalTab] = useState<'store' | 'downloads' | 'profile' | 'articles' | 'magazine' | 'programs'>('store');
   
   // Profile Form Edit States
   const [editName, setEditName] = useState(user.name);
@@ -422,7 +424,7 @@ export const ProfileView: React.FC = () => {
     setLoginIdentifier('');
     setLoginPassword('');
     setLoginError('');
-    setActivePortalTab('profile');
+    setActivePortalTab('store');
     setActionToast('You have been logged out successfully.');
     setTimeout(() => setActionToast(null), 3500);
   };
@@ -819,6 +821,23 @@ export const ProfileView: React.FC = () => {
 
               <div className="space-y-3 text-xs">
                 
+                {/* POINT 1: PREMIUM STORE (FIRST POINT) */}
+                <div className="flex items-start gap-3 bg-gradient-to-r from-amber-400/25 to-amber-500/10 p-3 rounded-2xl backdrop-blur-sm border border-amber-300/60 shadow-sm">
+                  <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <ShoppingBag className="w-4 h-4 text-slate-950" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[#D4AF37] text-sm flex items-center gap-1.5">
+                      <span>Premium Store</span>
+                      <span className="text-[10px] bg-[#D4AF37] text-slate-950 px-1.5 py-0.2 rounded-full font-extrabold">Exclusive</span>
+                    </h4>
+                    <p className="text-emerald-100/90 text-xs mt-0.5 leading-snug">
+                      Official 21-Day Inner Healing Journal (Hard Copy ₹199, Web/App ₹299, Interactive PDF ₹399) & Authentic Tibetan Singing Bowls (₹900) with Prime fast delivery.
+                    </p>
+                  </div>
+                </div>
+
+                {/* POINT 2: FREE WELCOME KIT */}
                 <div className="flex items-start gap-3 bg-amber-400/15 p-3 rounded-2xl backdrop-blur-sm border border-amber-300/50 shadow-xs">
                   <div className="w-8 h-8 rounded-xl bg-amber-400/20 border border-amber-300/40 flex items-center justify-center shrink-0 mt-0.5">
                     <Gift className="w-4 h-4 text-amber-300" />
@@ -971,6 +990,22 @@ export const ProfileView: React.FC = () => {
       {/* Pro Member Navigation Portal Tabs */}
       <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-slate-200">
         
+        {/* TAB 0: PREMIUM STORE (FIRST POINT BEFORE OTHER RESOURCES) */}
+        <button
+          onClick={() => setActivePortalTab('store')}
+          className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
+            activePortalTab === 'store'
+              ? 'bg-[#0B6B53] text-white shadow-md'
+              : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+          }`}
+        >
+          <ShoppingBag className="w-4 h-4 text-amber-300" />
+          <span>Premium Store</span>
+          <span className="bg-amber-400 text-slate-950 text-[10px] px-1.5 py-0.5 rounded-full font-extrabold">
+            Store
+          </span>
+        </button>
+
         <button
           onClick={() => setActivePortalTab('downloads')}
           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 ${
@@ -1038,6 +1073,13 @@ export const ProfileView: React.FC = () => {
         </button>
 
       </div>
+
+      {/* ====================================================================
+         TAB 0: OFFICIAL PREMIUM STORE (FIRST POINT)
+         ==================================================================== */}
+      {activePortalTab === 'store' && (
+        <PremiumStoreSection />
+      )}
 
       {/* ====================================================================
          TAB 1: PROFILE & PROGRESS OVERVIEW
