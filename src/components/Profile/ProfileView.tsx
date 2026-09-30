@@ -832,7 +832,7 @@ export const ProfileView: React.FC = () => {
                       <span className="text-[10px] bg-[#D4AF37] text-slate-950 px-1.5 py-0.2 rounded-full font-extrabold">Exclusive</span>
                     </h4>
                     <p className="text-emerald-100/90 text-xs mt-0.5 leading-snug">
-                      Official 21-Day Inner Healing Journal (from ₹199), "The Inner Algorithm" Amazon Bestseller (from ₹149) & Authentic Tibetan Singing Bowls (₹900).
+                      Official 21-Day Inner Healing Journal (from ₹199), "The Inner Algorithm" Bestseller (from ₹149) & Authentic Tibetan Singing Bowls (₹900).
                     </p>
                   </div>
                 </div>
@@ -1002,7 +1002,7 @@ export const ProfileView: React.FC = () => {
           <ShoppingBag className="w-4 h-4 text-amber-300" />
           <span>Premium Store</span>
           <span className="bg-amber-400 text-slate-950 text-[10px] px-1.5 py-0.5 rounded-full font-extrabold">
-            Store
+            Exclusive
           </span>
         </button>
 

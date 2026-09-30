@@ -171,7 +171,7 @@ const PRODUCTS: ProductItem[] = [
     subtitle: 'Includes Dual-Ended Suede Wooden Striker & Hand-Sewn Brocade Silk Ring Cushion',
     authorOrMaker: 'Handcrafted by Traditional Himalayan Artisans',
     category: 'Sound Healing & Meditation',
-    badge: "Amazon's Choice for Tibetan Singing Bowl",
+    badge: "Founder's Choice for Tibetan Singing Bowl",
     rating: 4.9,
     ratingCount: 894,
     boughtCount: '300+ bought in past month',
@@ -415,7 +415,7 @@ const PRODUCTS: ProductItem[] = [
     subtitle: 'Hand-Knotted 108 Bead Meditation Rosary with Traditional Saffron Silk Tassel & Brass Spacers',
     authorOrMaker: 'Handcrafted by Himalayan Spiritual Artisans',
     category: 'Sacred Space & Meditation',
-    badge: "Amazon's Choice for Meditation Mala",
+    badge: "Founder's Choice for Meditation Mala",
     rating: 4.9,
     ratingCount: 512,
     boughtCount: '350+ bought in past month',
@@ -691,14 +691,17 @@ export const PremiumStoreSection: React.FC = () => {
     <div className="space-y-6 animate-fadeIn pb-12">
 
       {/* ====================================================================
-         AMAZON-STYLE STORE TOP NAVIGATION & BANNER
+         PREMIUM STORE HERO SECTION & TOP NAVIGATION (DEEP GREEN THEME)
          ==================================================================== */}
-      <div className="bg-[#131921] text-white rounded-3xl p-4 sm:p-6 shadow-xl border border-slate-800">
+      <div className="bg-gradient-to-br from-[#021811] via-[#053225] to-[#0B6B53] text-white rounded-3xl p-4 sm:p-6 shadow-xl border border-emerald-600/40 relative overflow-hidden">
+        {/* Ambient atmospheric emerald glows matching other sections */}
+        <div className="absolute top-0 right-0 transform translate-x-12 -translate-y-12 w-64 h-64 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 transform -translate-x-12 translate-y-12 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none" />
         
-        {/* Upper Amazon Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-700/80 pb-4">
+        {/* Upper Store Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-emerald-600/30 pb-4 relative z-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF9900] to-amber-300 flex items-center justify-center text-slate-950 font-black shadow-md">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#D4AF37] to-amber-300 flex items-center justify-center text-slate-950 font-black shadow-md">
               <ShoppingBag className="w-5 h-5 text-slate-950" />
             </div>
             <div>
@@ -706,12 +709,12 @@ export const PremiumStoreSection: React.FC = () => {
                 <span className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight">
                   Path to Inner Peace Store
                 </span>
-                <span className="bg-[#232F3E] text-amber-400 border border-amber-400/40 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                  <Check className="w-2.5 h-2.5" />
-                  <span>Amazon Verified</span>
+                <span className="bg-emerald-900/80 text-amber-300 border border-amber-300/40 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                  <Sparkles className="w-2.5 h-2.5 text-[#D4AF37]" />
+                  <span>Exclusive Member Store</span>
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-inter">
+              <p className="text-xs text-emerald-100/90 font-inter">
                 Official Mindfulness Journals, Himalayan Sound Bowls & Member Exclusives
               </p>
             </div>
@@ -724,13 +727,13 @@ export const PremiumStoreSection: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search products in official store..."
-              className="w-full bg-[#232F3E] border border-slate-600 rounded-xl py-2 pl-9 pr-3 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 transition-colors"
+              className="w-full bg-[#021811]/60 border border-emerald-600/40 rounded-xl py-2 pl-9 pr-3 text-xs text-white placeholder-emerald-200/50 focus:outline-none focus:border-amber-400 transition-colors shadow-inner"
             />
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
+            <Search className="w-4 h-4 text-emerald-300/70 absolute left-3 top-2.5 pointer-events-none" />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-2.5 text-slate-400 hover:text-white"
+                className="absolute right-2.5 top-2.5 text-emerald-300 hover:text-white"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -738,39 +741,39 @@ export const PremiumStoreSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Member Exclusive Prime Perks Ticker */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-3.5 text-xs text-slate-300">
+        {/* Member Exclusive Perks Ticker */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3.5 text-xs text-emerald-100/90 relative z-10">
           <div className="flex items-center gap-2">
-            <span className="bg-[#FF9900] text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-sm">
-              prime
+            <span className="bg-gradient-to-r from-amber-400 to-[#D4AF37] text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-sm shadow-xs">
+              EXCLUSIVE
             </span>
             <span className="text-white font-medium">
               Free Delivery & Member Priority Dispatch on all items
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px] text-slate-400">
+          <div className="flex items-center gap-4 text-[11px] text-emerald-200/80">
             <span className="flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
               <span>100% Authentic Founder Edition</span>
             </span>
             <span className="flex items-center gap-1">
-              <RotateCcw className="w-3.5 h-3.5 text-emerald-400" />
+              <RotateCcw className="w-3.5 h-3.5 text-emerald-300" />
               <span>7-Day Replacement Guarantee</span>
             </span>
           </div>
         </div>
 
         {/* Category Filters */}
-        <div className="flex items-center gap-2 overflow-x-auto pt-4 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pt-4 scrollbar-none relative z-10">
           {['All', 'Official Apparel & Merch', 'Journals & Workbooks', 'Books & Philosophy', 'Sound Healing & Meditation', 'Sacred Space & Meditation'].map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoryFilter(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 categoryFilter === cat
-                  ? 'bg-amber-400 text-slate-950 font-bold shadow-sm'
-                  : 'bg-[#232F3E] text-slate-300 hover:bg-[#2c3b4e] border border-slate-700'
+                  ? 'bg-gradient-to-r from-amber-400 to-[#D4AF37] text-slate-950 font-bold shadow-sm'
+                  : 'bg-[#021811]/50 text-emerald-100/90 hover:bg-[#021811]/80 hover:text-white border border-emerald-600/30'
               }`}
             >
               {cat === 'All' ? 'All Products' : cat}
@@ -794,7 +797,7 @@ export const PremiumStoreSection: React.FC = () => {
       )}
 
       {/* ====================================================================
-         PRODUCT CATALOG CAROUSEL / QUICK SELECT CARDS (AMAZON STYLE)
+         PRODUCT CATALOG CAROUSEL / QUICK SELECT CARDS
          ==================================================================== */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredProducts.map((prod) => {
@@ -819,15 +822,15 @@ export const PremiumStoreSection: React.FC = () => {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-contain hover:scale-105 transition-transform"
                 />
-                <span className="absolute top-1 left-1 bg-[#232F3E] text-amber-400 font-bold text-[8.5px] px-1.5 py-0.5 rounded shadow">
-                  {prod.id === 'prod-tshirt' ? 'T-Shirt' : prod.id === 'prod-journal' ? 'Journal' : prod.id === 'prod-algorithm' ? 'Amazon Book' : prod.id === 'prod-bowl' ? 'Singing Bowl' : prod.id === 'prod-mala' ? 'Japa Mala' : prod.id === 'prod-incense' ? 'Incense' : 'Cushion'}
+                <span className="absolute top-1 left-1 bg-[#0B6B53] text-white font-bold text-[8.5px] px-1.5 py-0.5 rounded shadow-xs">
+                  {prod.id === 'prod-tshirt' ? 'T-Shirt' : prod.id === 'prod-journal' ? 'Journal' : prod.id === 'prod-algorithm' ? 'Philosophy Book' : prod.id === 'prod-bowl' ? 'Singing Bowl' : prod.id === 'prod-mala' ? 'Japa Mala' : prod.id === 'prod-incense' ? 'Incense' : 'Cushion'}
                 </span>
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-1">
                   <span className="bg-[#E67A00] text-white text-[9px] font-bold px-1.5 py-0.2 rounded-xs whitespace-nowrap">
-                    {prod.badge.includes('Best Seller') ? '#1 Best Seller' : prod.badge.includes('Choice') ? "Amazon's Choice" : prod.badge.includes('New Release') ? '#1 New Release' : 'Top Rated'}
+                    {prod.badge.includes('Best Seller') ? '#1 Best Seller' : prod.badge.includes('Choice') ? "Founder's Choice" : prod.badge.includes('New Release') ? '#1 New Release' : 'Top Rated'}
                   </span>
                   <span className="text-[10px] text-slate-500 font-inter line-clamp-1">
                     {prod.category}
@@ -873,7 +876,7 @@ export const PremiumStoreSection: React.FC = () => {
       </div>
 
       {/* ====================================================================
-         AMAZON-STYLE EXPANDED PRODUCT DETAIL SHOWCASE
+         EXPANDED PRODUCT DETAIL SHOWCASE
          ==================================================================== */}
       <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-slate-200">
         
@@ -938,7 +941,7 @@ export const PremiumStoreSection: React.FC = () => {
               
               <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-600 flex items-center justify-between">
                 <div>
-                  <span className="font-bold text-slate-800 block">Amazon A+ Certified Content</span>
+                  <span className="font-bold text-slate-800 block">Official Founder Certified Content</span>
                   <span className="text-[11px] text-slate-500">
                     {currentProduct.id === 'prod-tshirt'
                       ? 'Features the official hero section golden emblem lotus logo'
@@ -985,7 +988,7 @@ export const PremiumStoreSection: React.FC = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-[11px] text-amber-800 hover:text-amber-950 font-bold bg-amber-100/90 hover:bg-amber-200 px-2 py-0.5 rounded-md border border-amber-300 transition-colors"
                   >
-                    <span>Amazon.in ASIN: B0GYX4MKQ5</span>
+                    <span>Official Publication ASIN: B0GYX4MKQ5</span>
                     <ExternalLink className="w-2.5 h-2.5" />
                   </a>
                 )}
@@ -1017,7 +1020,7 @@ export const PremiumStoreSection: React.FC = () => {
               </span>
             </div>
 
-            {/* FORMAT / EDITION SELECTOR (AMAZON STYLE CARDS) */}
+            {/* FORMAT / EDITION SELECTOR */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-800 block">
@@ -1093,7 +1096,7 @@ export const PremiumStoreSection: React.FC = () => {
 
           </div>
 
-          {/* Column 3: Amazon Buy Box & Action Panel (Lg: 3 Cols) */}
+          {/* Column 3: Store Buy Box & Action Panel (Lg: 3 Cols) */}
           <div className="lg:col-span-3">
             <div className="rounded-3xl border-2 border-slate-200 p-5 bg-white shadow-lg space-y-4 sticky top-24">
               
@@ -1177,7 +1180,7 @@ export const PremiumStoreSection: React.FC = () => {
                     href={currentProduct.amazonUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 bg-[#232F3E] hover:bg-[#131921] text-amber-300 hover:text-white font-poppins font-bold text-xs rounded-2xl shadow-xs transition-all flex items-center justify-center gap-2 border border-slate-700 cursor-pointer"
+                    className="w-full py-2.5 px-4 bg-gradient-to-r from-[#021811] to-[#0B6B53] hover:brightness-115 text-amber-300 hover:text-white font-poppins font-bold text-xs rounded-2xl shadow-xs transition-all flex items-center justify-center gap-2 border border-emerald-600/40 cursor-pointer"
                   >
                     <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
                     <span>View & Buy on Amazon.in</span>
@@ -1210,7 +1213,7 @@ export const PremiumStoreSection: React.FC = () => {
         </div>
 
         {/* ====================================================================
-           PRODUCT SPECIFICATIONS TABLE (AMAZON STYLE)
+           PRODUCT SPECIFICATIONS TABLE
            ==================================================================== */}
         <div className="mt-10 border-t border-slate-200 pt-8">
           <div className="max-w-4xl">
@@ -1239,7 +1242,7 @@ export const PremiumStoreSection: React.FC = () => {
         </div>
 
         {/* ====================================================================
-           CUSTOMER REVIEWS & USER REVIEW SUBMISSION (AMAZON STYLE)
+           CUSTOMER REVIEWS & USER REVIEW SUBMISSION
            ==================================================================== */}
         <div className="mt-12 border-t border-slate-200 pt-8">
           
@@ -1479,25 +1482,25 @@ export const PremiumStoreSection: React.FC = () => {
       </div>
 
       {/* ====================================================================
-         AMAZON-STYLE 1-CLICK CHECKOUT MODAL
+         1-CLICK CHECKOUT MODAL
          ==================================================================== */}
       {isCheckoutModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden animate-scale my-8">
             
             {/* Modal Header */}
-            <div className="bg-[#131921] text-white p-4 sm:p-5 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#021811] via-[#0B6B53] to-[#021811] text-white p-4 sm:p-5 flex items-center justify-between border-b border-emerald-600/40">
               <div className="flex items-center gap-2">
-                <span className="bg-[#FF9900] text-slate-950 font-black text-xs px-2 py-0.5 rounded">
-                  AMAZON PAY
+                <span className="bg-gradient-to-r from-amber-400 to-[#D4AF37] text-slate-950 font-black text-xs px-2 py-0.5 rounded shadow-xs">
+                  SECURE PAY
                 </span>
                 <span className="font-heading font-extrabold text-sm sm:text-base text-white">
-                  Secure 1-Click Checkout
+                  Fast 1-Click Checkout
                 </span>
               </div>
               <button 
                 onClick={() => setIsCheckoutModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center"
+                className="w-8 h-8 rounded-full bg-emerald-900/60 text-emerald-200 hover:text-white flex items-center justify-center"
               >
                 <X className="w-4 h-4" />
               </button>
