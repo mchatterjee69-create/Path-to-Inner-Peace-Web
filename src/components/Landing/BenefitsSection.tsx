@@ -26,7 +26,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Develop the ability to respond to pressure with greater calm rather than automatic reactions.',
       description: 'Learn practical breathing, mindfulness and mental-reset techniques to reduce everyday stress. Develop the ability to respond to pressure with greater calm rather than automatic reactions.',
       icon: Brain,
-      image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/stress_anxiety_reduction.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/dsFqIhlfmp.webp'
     },
     {
       id: 2,
@@ -35,7 +36,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Create greater clarity so you can concentrate on what actually deserves your attention.',
       description: 'Train your attention to reduce mental distractions, overthinking and cognitive clutter. Create greater clarity so you can concentrate on what actually deserves your attention.',
       icon: Target,
-      image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/improved_focus_clarity.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/EuA1wl07rR.webp'
     },
     {
       id: 3,
@@ -44,7 +46,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Build a calmer mental state that supports more restorative and consistent rest.',
       description: 'Use relaxation and mindfulness practices to help quiet an overactive mind before sleep. Build a calmer mental state that supports more restorative and consistent rest.',
       icon: Moon,
-      image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/better_sleep_deep_relax.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/yWc9sur5nQ.webp'
     },
     {
       id: 4,
@@ -53,7 +56,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Develop greater emotional stability, self-awareness and control during challenging situations.',
       description: 'Understand your emotional patterns and learn techniques to create space between emotion and reaction. Develop greater emotional stability, self-awareness and control during challenging situations.',
       icon: Heart,
-      image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/emotional_balance.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/uRtH6ZjTvk.webp'
     },
     {
       id: 5,
@@ -62,7 +66,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Strengthen your capacity to recover, adapt and move forward with greater confidence.',
       description: 'Build the ability to handle setbacks, pressure and difficult thoughts without becoming overwhelmed. Strengthen your capacity to recover, adapt and move forward with greater confidence.',
       icon: Shield,
-      image: 'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/mental_strength_resilience.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/zROIjlO5Gu.webp'
     },
     {
       id: 6,
@@ -71,7 +76,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Begin identifying unhelpful mental patterns and consciously replacing them with healthier responses.',
       description: 'Explore how repeated thoughts, beliefs and habits can influence your everyday behaviour. Begin identifying unhelpful mental patterns and consciously replacing them with healthier responses.',
       icon: RefreshCw,
-      image: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/subconscious_pattern_awareness.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/whX6SClYlK.webp'
     },
     {
       id: 7,
@@ -80,7 +86,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Develop greater awareness of your thoughts, emotions, body and surroundings.',
       description: 'Learn to bring your attention back from past regrets and future worries to the present moment. Develop greater awareness of your thoughts, emotions, body and surroundings.',
       icon: Wind,
-      image: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/mindfulness_present_moment.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/BviIu7nTyT.webp'
     },
     {
       id: 8,
@@ -89,7 +96,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Learn simple techniques you can continue using whenever you feel mentally overloaded.',
       description: 'Experience guided practices designed to shift you from constant mental activation toward a calmer state. Learn simple techniques you can continue using whenever you feel mentally overloaded.',
       icon: Sun,
-      image: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/inner_calm_nervous_system.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/5MwsjZPqtZ.webp'
     },
     {
       id: 9,
@@ -98,7 +106,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Create a practical foundation for replacing reactive habits with more conscious choices.',
       description: 'Discover how small, consistent practices can influence your thinking patterns and daily behaviour. Create a practical foundation for replacing reactive habits with more conscious choices.',
       icon: Sprout,
-      image: 'https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/healthier_mental_habits.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/MvP9qFXMmY.webp'
     },
     {
       id: 10,
@@ -107,7 +116,8 @@ export const BenefitsSection: React.FC = () => {
       point2: 'Use the five-day experience as a starting point for a deeper Path to Inner Peace.',
       description: 'Step back from mental autopilot and reconnect with greater clarity, balance and self-awareness. Use the five-day experience as a starting point for a deeper Path to Inner Peace.',
       icon: Sparkles,
-      image: 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1200&q=80'
+      image: '/images/benefits/personal_reset_transformation.webp',
+      fallbackUrl: 'https://yourimageshare.com/ib/DRr0S4yTST.webp'
     }
   ];
 
@@ -257,6 +267,12 @@ export const BenefitsSection: React.FC = () => {
                         className="w-full h-full object-cover select-none"
                         loading="eager"
                         referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (activeBenefit.fallbackUrl && target.src !== activeBenefit.fallbackUrl) {
+                            target.src = activeBenefit.fallbackUrl;
+                          }
+                        }}
                       />
                     </motion.div>
                   </AnimatePresence>
