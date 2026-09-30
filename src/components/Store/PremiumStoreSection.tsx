@@ -30,7 +30,8 @@ import {
   Trash2,
   ArrowRight,
   Banknote,
-  Loader2
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import journalPhoto from '../../assets/images/inner_healing_journal_1790660025558.jpg';
@@ -605,6 +606,16 @@ const PRODUCTS: ProductItem[] = [
   }
 ];
 
+const INDIAN_STATES = [
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+  'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
+  'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
+  'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab',
+  'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura',
+  'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Delhi', 'Jammu and Kashmir',
+  'Ladakh', 'Puducherry', 'Chandigarh', 'Other State'
+];
+
 export const PremiumStoreSection: React.FC = () => {
   const { user } = useApp();
   
@@ -629,21 +640,25 @@ export const PremiumStoreSection: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [cartToast, setCartToast] = useState<{ title: string; formatName: string } | null>(null);
 
-  // Checkout State & Form
+  // Checkout State & Form (All fields mandatory - starts empty)
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState<boolean>(false);
   const [checkoutMode, setCheckoutMode] = useState<'single' | 'cart'>('single');
   const [checkoutStep, setCheckoutStep] = useState<'details' | 'success'>('details');
   const [paymentOption, setPaymentOption] = useState<'cod' | 'pay'>('cod');
   const [isProcessingPayment, setIsProcessingPayment] = useState<boolean>(false);
   
-  // Delivery Information Form
-  const [customerName, setCustomerName] = useState<string>(user?.name || 'Valued Member');
-  const [customerEmail, setCustomerEmail] = useState<string>(user?.email || 'member@pathtoinnerpeace.in');
-  const [customerPhone, setCustomerPhone] = useState<string>(user?.whatsapp || '+91 98765 43210');
-  const [customerAddress, setCustomerAddress] = useState<string>('Flat 402, Green Valley Apartments, Near Lake Road');
-  const [customerCity, setCustomerCity] = useState<string>('Kolkata');
-  const [customerState, setCustomerState] = useState<string>('West Bengal');
-  const [customerPincode, setCustomerPincode] = useState<string>('700029');
+  // Delivery Information Form: Empty by default so customer enters their genuine real details
+  const [customerName, setCustomerName] = useState<string>('');
+  const [customerEmail, setCustomerEmail] = useState<string>('');
+  const [customerPhone, setCustomerPhone] = useState<string>('');
+  const [customerAddress, setCustomerAddress] = useState<string>('');
+  const [customerCity, setCustomerCity] = useState<string>('');
+  const [customerState, setCustomerState] = useState<string>('');
+  const [customerPincode, setCustomerPincode] = useState<string>('');
+  
+  // Form Validation State
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState<boolean>(false);
   
   const [orderConfirmedId, setOrderConfirmedId] = useState<string>('');
   const [confirmedOrderSummary, setConfirmedOrderSummary] = useState<{
@@ -727,10 +742,60 @@ export const PremiumStoreSection: React.FC = () => {
     setCartItems(prev => prev.filter(item => item.id !== cartItemId));
   };
 
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+
+    if (!customerName.trim()) {
+      errors.customerName = 'Full Name is mandatory';
+    } else if (customerName.trim().length < 2) {
+      errors.customerName = 'Please enter your real full name';
+    }
+
+    const cleanPhone = customerPhone.replace(/\D/g, '');
+    if (!customerPhone.trim()) {
+      errors.customerPhone = 'Phone / WhatsApp number is mandatory';
+    } else if (cleanPhone.length < 10) {
+      errors.customerPhone = 'Enter a valid 10-digit mobile number';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!customerEmail.trim()) {
+      errors.customerEmail = 'Email address is mandatory for invoice & tracking';
+    } else if (!emailRegex.test(customerEmail.trim())) {
+      errors.customerEmail = 'Enter a valid email address (e.g. name@domain.com)';
+    }
+
+    if (!customerAddress.trim()) {
+      errors.customerAddress = 'Street Delivery Address is mandatory';
+    } else if (customerAddress.trim().length < 5) {
+      errors.customerAddress = 'Please enter your complete street / house address';
+    }
+
+    if (!customerCity.trim()) {
+      errors.customerCity = 'City is mandatory';
+    }
+
+    if (!customerState.trim()) {
+      errors.customerState = 'State is mandatory';
+    }
+
+    const cleanPin = customerPincode.replace(/\D/g, '');
+    if (!customerPincode.trim()) {
+      errors.customerPincode = 'PIN Code is mandatory';
+    } else if (cleanPin.length !== 6) {
+      errors.customerPincode = 'Enter a valid 6-digit postal PIN code';
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   // Buy Now: Express checkout for this single item directly opening the form
   const handleBuyNow = () => {
     setCheckoutMode('single');
     setCheckoutStep('details');
+    setFormErrors({});
+    setHasAttemptedSubmit(false);
     setIsCheckoutModalOpen(true);
   };
 
@@ -739,12 +804,19 @@ export const PremiumStoreSection: React.FC = () => {
     if (cartItems.length === 0) return;
     setCheckoutMode('cart');
     setCheckoutStep('details');
+    setFormErrors({});
+    setHasAttemptedSubmit(false);
     setIsCartOpen(false);
     setIsCheckoutModalOpen(true);
   };
 
   const handlePlaceOrder = (e: React.FormEvent) => {
     e.preventDefault();
+    setHasAttemptedSubmit(true);
+
+    if (!validateForm()) {
+      return;
+    }
 
     const itemsToOrder = checkoutMode === 'single'
       ? [{
@@ -1958,95 +2030,223 @@ export const PremiumStoreSection: React.FC = () => {
                   </div>
                 )}
 
-                {/* Delivery Information Form */}
-                <div className="space-y-2.5">
-                  <h5 className="font-heading font-bold text-slate-900 text-xs uppercase tracking-wide flex items-center gap-1.5">
-                    <Truck className="w-3.5 h-3.5 text-amber-500" />
-                    <span>Delivery Address & Contact Details</span>
-                  </h5>
+                {/* Delivery Information Form (ALL FIELDS MANDATORY) */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h5 className="font-heading font-bold text-slate-900 text-xs uppercase tracking-wide flex items-center gap-1.5">
+                      <Truck className="w-3.5 h-3.5 text-amber-500" />
+                      <span>Delivery Address & Contact Details</span>
+                    </h5>
+                    <span className="text-[10.5px] bg-rose-100 text-rose-700 font-extrabold px-2 py-0.5 rounded-full border border-rose-300">
+                      All Fields Mandatory *
+                    </span>
+                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {hasAttemptedSubmit && Object.keys(formErrors).length > 0 && (
+                    <div className="p-3 bg-rose-50 border-2 border-rose-300 rounded-2xl flex items-center gap-2.5 text-xs text-rose-800 font-semibold shadow-xs">
+                      <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+                      <div>
+                        <span className="font-bold">Missing Mandatory Details:</span>
+                        <span className="ml-1 text-rose-700">Please fill out all {Object.keys(formErrors).length} required fields highlighted in red below to activate your order.</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label className="text-[11px] text-slate-600 block mb-0.5 font-medium">Full Name *</label>
+                      <label className="text-[11px] text-slate-700 block mb-1 font-bold flex items-center justify-between">
+                        <span>Full Name <span className="text-rose-600 font-black">*</span></span>
+                        <span className="text-[10px] text-rose-600 font-semibold">Mandatory</span>
+                      </label>
                       <input 
                         type="text" 
                         value={customerName}
-                        onChange={(e) => setCustomerName(e.target.value)}
-                        placeholder="Your Full Name"
-                        required
-                        className="w-full border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400 text-xs"
+                        onChange={(e) => {
+                          setCustomerName(e.target.value);
+                          if (formErrors.customerName) setFormErrors(prev => { const n = { ...prev }; delete n.customerName; return n; });
+                        }}
+                        placeholder="e.g. Rahul Sharma"
+                        className={`w-full border rounded-xl p-2.5 text-xs transition-all ${
+                          formErrors.customerName 
+                            ? 'border-rose-500 bg-rose-50/40 ring-1 ring-rose-400 focus:border-rose-600' 
+                            : 'border-slate-300 bg-slate-50 focus:bg-white focus:border-amber-400'
+                        }`}
                       />
+                      {formErrors.customerName && (
+                        <p className="text-[10.5px] text-rose-600 font-bold mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{formErrors.customerName}</span>
+                        </p>
+                      )}
                     </div>
+
                     <div>
-                      <label className="text-[11px] text-slate-600 block mb-0.5 font-medium">Phone / WhatsApp *</label>
+                      <label className="text-[11px] text-slate-700 block mb-1 font-bold flex items-center justify-between">
+                        <span>Phone / WhatsApp <span className="text-rose-600 font-black">*</span></span>
+                        <span className="text-[10px] text-rose-600 font-semibold">Mandatory</span>
+                      </label>
                       <input 
                         type="tel" 
                         value={customerPhone}
-                        onChange={(e) => setCustomerPhone(e.target.value)}
-                        placeholder="+91 98765 43210"
-                        required
-                        className="w-full border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400 text-xs"
+                        onChange={(e) => {
+                          setCustomerPhone(e.target.value);
+                          if (formErrors.customerPhone) setFormErrors(prev => { const n = { ...prev }; delete n.customerPhone; return n; });
+                        }}
+                        placeholder="e.g. 9876543210 (10 digits)"
+                        maxLength={14}
+                        className={`w-full border rounded-xl p-2.5 text-xs transition-all ${
+                          formErrors.customerPhone 
+                            ? 'border-rose-500 bg-rose-50/40 ring-1 ring-rose-400 focus:border-rose-600' 
+                            : 'border-slate-300 bg-slate-50 focus:bg-white focus:border-amber-400'
+                        }`}
                       />
+                      {formErrors.customerPhone && (
+                        <p className="text-[10.5px] text-rose-600 font-bold mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{formErrors.customerPhone}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-[11px] text-slate-600 block mb-0.5 font-medium">Email Address (for order invoice & tracking) *</label>
+                    <label className="text-[11px] text-slate-700 block mb-1 font-bold flex items-center justify-between">
+                      <span>Email Address (for order invoice & live courier tracking) <span className="text-rose-600 font-black">*</span></span>
+                      <span className="text-[10px] text-rose-600 font-semibold">Mandatory</span>
+                    </label>
                     <input 
                       type="email" 
                       value={customerEmail}
-                      onChange={(e) => setCustomerEmail(e.target.value)}
-                      placeholder="yourname@gmail.com"
-                      required
-                      className="w-full border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400 text-xs"
+                      onChange={(e) => {
+                        setCustomerEmail(e.target.value);
+                        if (formErrors.customerEmail) setFormErrors(prev => { const n = { ...prev }; delete n.customerEmail; return n; });
+                      }}
+                      placeholder="e.g. yourname@example.com"
+                      className={`w-full border rounded-xl p-2.5 text-xs transition-all ${
+                        formErrors.customerEmail 
+                          ? 'border-rose-500 bg-rose-50/40 ring-1 ring-rose-400 focus:border-rose-600' 
+                          : 'border-slate-300 bg-slate-50 focus:bg-white focus:border-amber-400'
+                      }`}
                     />
+                    {formErrors.customerEmail && (
+                      <p className="text-[10.5px] text-rose-600 font-bold mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3 shrink-0" />
+                        <span>{formErrors.customerEmail}</span>
+                      </p>
+                    )}
                   </div>
 
                   <div>
-                    <label className="text-[11px] text-slate-600 block mb-0.5 font-medium">Street Delivery Address (House/Flat, Street, Locality) *</label>
+                    <label className="text-[11px] text-slate-700 block mb-1 font-bold flex items-center justify-between">
+                      <span>Street Delivery Address (House/Flat No., Building, Street, Locality) <span className="text-rose-600 font-black">*</span></span>
+                      <span className="text-[10px] text-rose-600 font-semibold">Mandatory</span>
+                    </label>
                     <input 
                       type="text" 
                       value={customerAddress}
-                      onChange={(e) => setCustomerAddress(e.target.value)}
-                      placeholder="e.g. Flat 402, Green Valley Apartments, Near Lake Road"
-                      required
-                      className="w-full border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400 text-xs"
+                      onChange={(e) => {
+                        setCustomerAddress(e.target.value);
+                        if (formErrors.customerAddress) setFormErrors(prev => { const n = { ...prev }; delete n.customerAddress; return n; });
+                      }}
+                      placeholder="e.g. Flat 302, Lotus Residency, 4th Cross Road"
+                      className={`w-full border rounded-xl p-2.5 text-xs transition-all ${
+                        formErrors.customerAddress 
+                          ? 'border-rose-500 bg-rose-50/40 ring-1 ring-rose-400 focus:border-rose-600' 
+                          : 'border-slate-300 bg-slate-50 focus:bg-white focus:border-amber-400'
+                      }`}
                     />
+                    {formErrors.customerAddress && (
+                      <p className="text-[10.5px] text-rose-600 font-bold mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3 shrink-0" />
+                        <span>{formErrors.customerAddress}</span>
+                      </p>
+                    )}
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                     <div>
-                      <label className="text-[11px] text-slate-600 block mb-0.5 font-medium">City *</label>
+                      <label className="text-[11px] text-slate-700 block mb-1 font-bold flex items-center justify-between">
+                        <span>City <span className="text-rose-600 font-black">*</span></span>
+                        <span className="text-[10px] text-rose-600 font-semibold">Mandatory</span>
+                      </label>
                       <input 
                         type="text" 
                         value={customerCity}
-                        onChange={(e) => setCustomerCity(e.target.value)}
-                        placeholder="City"
-                        required
-                        className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400 text-xs"
+                        onChange={(e) => {
+                          setCustomerCity(e.target.value);
+                          if (formErrors.customerCity) setFormErrors(prev => { const n = { ...prev }; delete n.customerCity; return n; });
+                        }}
+                        placeholder="e.g. Kolkata"
+                        className={`w-full border rounded-xl p-2.5 text-xs transition-all ${
+                          formErrors.customerCity 
+                            ? 'border-rose-500 bg-rose-50/40 ring-1 ring-rose-400 focus:border-rose-600' 
+                            : 'border-slate-300 bg-slate-50 focus:bg-white focus:border-amber-400'
+                        }`}
                       />
+                      {formErrors.customerCity && (
+                        <p className="text-[10.5px] text-rose-600 font-bold mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{formErrors.customerCity}</span>
+                        </p>
+                      )}
                     </div>
+
                     <div>
-                      <label className="text-[11px] text-slate-600 block mb-0.5 font-medium">State *</label>
-                      <input 
-                        type="text" 
+                      <label className="text-[11px] text-slate-700 block mb-1 font-bold flex items-center justify-between">
+                        <span>State <span className="text-rose-600 font-black">*</span></span>
+                        <span className="text-[10px] text-rose-600 font-semibold">Mandatory</span>
+                      </label>
+                      <select
                         value={customerState}
-                        onChange={(e) => setCustomerState(e.target.value)}
-                        placeholder="State"
-                        required
-                        className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400 text-xs"
-                      />
+                        onChange={(e) => {
+                          setCustomerState(e.target.value);
+                          if (formErrors.customerState) setFormErrors(prev => { const n = { ...prev }; delete n.customerState; return n; });
+                        }}
+                        className={`w-full border rounded-xl p-2.5 text-xs cursor-pointer transition-all ${
+                          formErrors.customerState 
+                            ? 'border-rose-500 bg-rose-50/40 ring-1 ring-rose-400 focus:border-rose-600 text-rose-900 font-bold' 
+                            : 'border-slate-300 bg-slate-50 focus:bg-white focus:border-amber-400 text-slate-800'
+                        }`}
+                      >
+                        <option value="">-- Select State --</option>
+                        {INDIAN_STATES.map((st) => (
+                          <option key={st} value={st}>{st}</option>
+                        ))}
+                      </select>
+                      {formErrors.customerState && (
+                        <p className="text-[10.5px] text-rose-600 font-bold mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{formErrors.customerState}</span>
+                        </p>
+                      )}
                     </div>
+
                     <div>
-                      <label className="text-[11px] text-slate-600 block mb-0.5 font-medium">PIN Code *</label>
+                      <label className="text-[11px] text-slate-700 block mb-1 font-bold flex items-center justify-between">
+                        <span>PIN Code <span className="text-rose-600 font-black">*</span></span>
+                        <span className="text-[10px] text-rose-600 font-semibold">Mandatory</span>
+                      </label>
                       <input 
                         type="text" 
                         value={customerPincode}
-                        onChange={(e) => setCustomerPincode(e.target.value)}
-                        placeholder="PIN Code"
-                        required
-                        className="w-full border border-slate-300 rounded-xl p-2 bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-400 text-xs"
+                        onChange={(e) => {
+                          setCustomerPincode(e.target.value);
+                          if (formErrors.customerPincode) setFormErrors(prev => { const n = { ...prev }; delete n.customerPincode; return n; });
+                        }}
+                        placeholder="6-digit PIN"
+                        maxLength={6}
+                        className={`w-full border rounded-xl p-2.5 text-xs transition-all ${
+                          formErrors.customerPincode 
+                            ? 'border-rose-500 bg-rose-50/40 ring-1 ring-rose-400 focus:border-rose-600' 
+                            : 'border-slate-300 bg-slate-50 focus:bg-white focus:border-amber-400'
+                        }`}
                       />
+                      {formErrors.customerPincode && (
+                        <p className="text-[10.5px] text-rose-600 font-bold mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{formErrors.customerPincode}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -21,8 +21,7 @@ function getOpenAIClient(): OpenAI | null {
 
 const app = express();
 
-// The platform reverse proxy routes external traffic exclusively to port 3000.
-const PORT = 3000;
+// Port configuration handled in startServer() based on process.env.PORT
 
 // Global process safety handlers to prevent unexpected background exits
 process.on("unhandledRejection", (reason, promise) => {
@@ -1094,9 +1093,9 @@ Affirmation: [A short, uplifting, tailored 1-sentence affirmation matching the u
 });
 
 async function startServer() {
-  const isCompiled = typeof __filename !== "undefined" && __filename.endsWith(".cjs");
+  const isDev = process.env.NODE_ENV === "development" || process.env.npm_lifecycle_event === "dev";
   const hasDist = fs.existsSync(path.join(process.cwd(), "dist", "index.html"));
-  const isProduction = process.env.NODE_ENV === "production" || isCompiled || (hasDist && process.env.NODE_ENV !== "development");
+  const isProduction = !isDev && (process.env.NODE_ENV === "production" || hasDist);
 
   if (!isProduction) {
     const { createServer: createViteServer } = await import("vite");
@@ -1128,37 +1127,41 @@ async function startServer() {
     });
   }
 
-  // Determine port configuration based on runtime environment:
-  // - In AI Studio container: Nginx runs on NGINX_PORT (8080) and reverse-proxies to DEFAULT_APP_PORT (3000).
-  //   The app MUST listen on port 3000 and MUST NOT bind to 8080 (which is already bound by Nginx).
-  // - In standalone Cloud Run: There is no Nginx. Cloud Run injects PORT (typically 8080) and expects traffic on it.
-  //   The app MUST listen on process.env.PORT (or 8080).
-  const isNginxFronted = Boolean(process.env.NGINX_PORT || process.env.DEFAULT_APP_PORT);
-  const primaryPort = isNginxFronted
-    ? parseInt(process.env.DEFAULT_APP_PORT || "3000", 10)
-    : parseInt(process.env.PORT || "8080", 10);
+  // Cloud Run passes PORT in environment (typically 8080).
+  // Development and local environments default to port 3000.
+  const targetPort = parseInt(process.env.PORT || "3000", 10);
 
-  const server = app.listen(primaryPort, "0.0.0.0", () => {
-    console.log(`Path to Inner Peace server running on http://0.0.0.0:${primaryPort}`);
+  const primaryServer = app.listen(targetPort, "0.0.0.0", () => {
+    console.log(`Path to Inner Peace primary server running on http://0.0.0.0:${targetPort}`);
   });
 
-  server.on("error", (err: any) => {
-    console.error(`Primary server error on port ${primaryPort}:`, err);
+  primaryServer.on("error", (err: any) => {
+    console.error(`Primary server error on port ${targetPort}:`, err);
   });
 
-  // If in standalone Cloud Run and primaryPort !== 3000, also bind port 3000 as secondary fallback
-  if (!isNginxFronted && primaryPort !== 3000) {
+  // If Cloud Run or custom env specified a port other than 3000,
+  // also bind port 3000 (if free) so local reverse proxies can also reach it.
+  if (targetPort !== 3000) {
     try {
       const secondaryServer = app.listen(3000, "0.0.0.0", () => {
-        console.log(`Secondary listener active on http://0.0.0.0:3000`);
+        console.log(`Also listening on internal port 3000`);
       });
       secondaryServer.on("error", (err: any) => {
-        console.log(`Secondary port 3000 listener note:`, err.code || err.message);
+        if (err.code !== "EADDRINUSE") {
+          console.warn("Secondary port 3000 note:", err);
+        }
       });
-    } catch (_err) {
-      // Ignored
+    } catch {
+      // ignore
     }
   }
+
+  process.on("SIGTERM", () => {
+    console.log("SIGTERM received, closing server...");
+    primaryServer.close(() => {
+      process.exit(0);
+    });
+  });
 }
 
 startServer();
