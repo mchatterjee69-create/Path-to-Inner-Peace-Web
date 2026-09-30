@@ -3,8 +3,6 @@ import { useApp } from '../../context/AppContext';
 import { Play, Shield, Users, Award, ArrowRight, Check, Clock, UserCheck, Gift, Video } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import { FreeStarBadge } from '../Common/FreeStarBadge';
-import corporateWellnessBg from '../../assets/images/corporate_wellness_bg_1788440459846.jpg';
-
 export const HeroSection: React.FC = () => {
   const { setIsRegistrationModalOpen, setActiveView, user } = useApp();
   const [selectedBatch, setSelectedBatch] = useState<string>('6:30 AM');
@@ -19,9 +17,15 @@ export const HeroSection: React.FC = () => {
       {/* Full length & width shadow image for desktop & laptop only (no image for tab & mobile) */}
       <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
         <img 
-          src={corporateWellnessBg}
+          src="/images/hero_shadow_bg.webp"
           alt="Path to Inner Peace Serene Wellness"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (target.src !== 'https://yourimageshare.com/ib/aUSh5gpVQA.webp') {
+              target.src = 'https://yourimageshare.com/ib/aUSh5gpVQA.webp';
+            }
+          }}
           className="w-full h-full object-cover object-center filter brightness-[0.60] contrast-[1.15] saturate-[0.85] opacity-80 scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#021811]/85 via-[#032419]/60 to-[#021811]/85" />
