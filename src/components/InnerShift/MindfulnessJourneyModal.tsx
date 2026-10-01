@@ -129,10 +129,9 @@ export const MindfulnessJourneyModal: React.FC<MindfulnessJourneyModalProps> = (
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
                 <img 
-                  src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
+                  src="/images/logo.png" 
                   alt="Path to Inner Peace Logo" 
-                  className="w-full h-full object-cover scale-[1.15] rounded-full"
-                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover rounded-full"
                 />
               </div>
               <span className="text-xs sm:text-sm font-semibold text-slate-100 tracking-tight">

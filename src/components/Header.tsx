@@ -79,10 +79,9 @@ export const Header: React.FC = () => {
           >
             <div className="w-7 h-7 sm:w-8 sm:h-8 lg:w-7.5 lg:h-7.5 xl:w-8.5 xl:h-8.5 2xl:w-9 2xl:h-9 rounded-full overflow-hidden border border-[#D4AF37] shadow-xs bg-black flex items-center justify-center shrink-0">
               <img 
-                src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
+                src="/images/logo.png" 
                 alt="Path to Inner Peace Logo" 
-                className="w-full h-full object-cover scale-[1.18] rounded-full group-hover:scale-125 transition-transform duration-300"
-                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-300"
               />
             </div>
             <div className="flex flex-col min-w-0">
@@ -203,10 +202,9 @@ export const Header: React.FC = () => {
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full overflow-hidden border border-[#D4AF37] bg-black shrink-0">
                   <img 
-                    src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
+                    src="/images/logo.png" 
                     alt="Logo" 
-                    className="w-full h-full object-cover scale-110"
-                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="flex flex-col min-w-0">

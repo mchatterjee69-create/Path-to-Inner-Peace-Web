@@ -42,10 +42,9 @@ export const HeroSection: React.FC = () => {
             <div className="flex justify-center">
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-xl shadow-black/80 bg-black flex items-center justify-center">
                 <img 
-                  src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
+                  src="/images/logo.png" 
                   alt="Path to Inner Peace Logo" 
-                  className="w-full h-full object-cover scale-[1.18] rounded-full"
-                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover rounded-full"
                 />
               </div>
             </div>

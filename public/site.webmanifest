@@ -8,10 +8,16 @@
   "theme_color": "#0B6B53",
   "icons": [
     {
-      "src": "/images/mainak-chatterjee.jpg",
-      "sizes": "512x512",
-      "type": "image/jpeg",
+      "src": "/images/logo.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "categories": ["lifestyle", "health", "education", "productivity"]

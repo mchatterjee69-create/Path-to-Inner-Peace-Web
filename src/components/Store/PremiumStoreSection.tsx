@@ -1195,10 +1195,9 @@ export const PremiumStoreSection: React.FC = () => {
                   title="Official Hero Section Golden Emblem Logo printed on center chest"
                 >
                   <img 
-                    src="https://cdn.corenexis.com/f/J29m8uBQ4qF.jpeg" 
-                    alt="Official Hero Section Sacred Logo" 
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover scale-110 rounded-lg group-hover:scale-125 transition-transform"
+                    src="/images/logo.png" 
+                    alt="Official Sacred Logo" 
+                    className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform"
                   />
                   <span className="absolute bottom-0 inset-x-0 bg-[#021811]/90 text-[7px] text-[#D4AF37] font-bold text-center leading-tight py-0.5">
                     Hero Logo
