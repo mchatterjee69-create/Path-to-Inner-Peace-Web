@@ -56,6 +56,27 @@ app.get("/sitemap.xml", (_req, res) => {
   res.status(404).send("Sitemap not found");
 });
 
+app.get(["/favicon.ico", "/favicon.png"], (req, res) => {
+  const isIco = req.path.endsWith(".ico");
+  const filePath = path.join(process.cwd(), "public", isIco ? "favicon.ico" : "favicon.png");
+  if (fs.existsSync(filePath)) {
+    res.setHeader("Content-Type", isIco ? "image/x-icon" : "image/png");
+    res.setHeader("Cache-Control", "no-cache, must-revalidate");
+    return res.sendFile(filePath);
+  }
+  res.status(404).send("Favicon not found");
+});
+
+app.get("/images/logo.png", (_req, res) => {
+  const filePath = path.join(process.cwd(), "public", "images", "logo.png");
+  if (fs.existsSync(filePath)) {
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "no-cache, must-revalidate");
+    return res.sendFile(filePath);
+  }
+  res.status(404).send("Logo not found");
+});
+
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 
