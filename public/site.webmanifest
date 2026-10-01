@@ -1,0 +1,18 @@
+{
+  "name": "Path to Inner Peace",
+  "short_name": "Inner Peace",
+  "description": "Holistic Mental Reset, Career Axis & Corporate Wellness Platform by Mainak Chatterjee",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#041F18",
+  "theme_color": "#0B6B53",
+  "icons": [
+    {
+      "src": "/images/mainak-chatterjee.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "health", "education", "productivity"]
+}

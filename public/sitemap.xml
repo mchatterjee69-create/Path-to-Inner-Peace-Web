@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Homepage & Core Platform Overview -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/images/hero_banner_current.png</image:loc>
+      <image:title>Path to Inner Peace - Holistic Mental Reset Platform</image:title>
+      <image:caption>Mindfulness, CBT, and stress recalibration by Coach Mainak Chatterjee</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/images/mainak-chatterjee.jpg</image:loc>
+      <image:title>Coach Mainak Chatterjee - Mindset &amp; Life Coach</image:title>
+    </image:image>
+  </url>
+
+  <!-- 5-Day Mind Reset Challenge -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=challenge</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Career Axis: 1:1 Career & Life Consulting -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=career-axis</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Corporate Wellness & Institutional Programs -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=corporate-wellness</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Inner Shift: Guided Meditation & Camps -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=inner-shift</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Sound Frequency Therapy (432Hz & 528Hz Binaural Audio) -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=sound-therapy</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Inner Peace Store & "The Inner Algorithm" Book -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=store</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Inner Horizon Wellness Magazine & CBT Research Articles -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=magazine</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Profile & Coach Biography -->
+  <url>
+    <loc>https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/?tab=profile</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+</urlset>

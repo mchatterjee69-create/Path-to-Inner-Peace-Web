@@ -1,0 +1,25 @@
+# Robots.txt for Path to Inner Peace (Coach Mainak Chatterjee)
+# Global Crawler Directives
+User-agent: *
+Allow: /
+Disallow: /api/admin/
+
+# Googlebot specific optimizations
+User-agent: Googlebot
+Allow: /
+Allow: /images/
+Allow: /videos/
+Allow: /*.js
+Allow: /*.css
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Applebot
+User-agent: Applebot
+Allow: /
+
+# Host & Sitemap specification
+Host: https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app
+Sitemap: https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/sitemap.xml

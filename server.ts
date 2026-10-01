@@ -35,6 +35,27 @@ process.on("uncaughtException", (err) => {
 app.get(["/_health", "/healthz", "/health", "/ping"], (_req, res) => res.status(200).send("OK"));
 app.get("/api/health", (_req, res) => res.status(200).json({ status: "ok" }));
 
+// Search Engine Optimization (SEO) & Web Crawler Directives
+app.get("/robots.txt", (_req, res) => {
+  const robotsPath = path.join(process.cwd(), "public", "robots.txt");
+  if (fs.existsSync(robotsPath)) {
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    return res.sendFile(robotsPath);
+  }
+  res.type("text/plain").send("User-agent: *\nAllow: /\nSitemap: https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/sitemap.xml");
+});
+
+app.get("/sitemap.xml", (_req, res) => {
+  const sitemapPath = path.join(process.cwd(), "public", "sitemap.xml");
+  if (fs.existsSync(sitemapPath)) {
+    res.setHeader("Content-Type", "application/xml; charset=utf-8");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    return res.sendFile(sitemapPath);
+  }
+  res.status(404).send("Sitemap not found");
+});
+
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 
