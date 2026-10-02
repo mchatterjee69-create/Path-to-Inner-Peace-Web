@@ -21,5 +21,5 @@ User-agent: Applebot
 Allow: /
 
 # Host & Sitemap specification
-Host: https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app
-Sitemap: https://ais-pre-shboembemwee4psokiddmd-22738377368.asia-southeast1.run.app/sitemap.xml
+Host: https://www.pathtoinnerpeace.in
+Sitemap: https://www.pathtoinnerpeace.in/sitemap.xml

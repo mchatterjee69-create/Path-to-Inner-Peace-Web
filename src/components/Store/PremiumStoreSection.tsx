@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Star, 
   ShieldCheck, 
@@ -29,6 +29,7 @@ import {
   Minus,
   Trash2,
   ArrowRight,
+  ArrowLeft,
   Banknote,
   Loader2,
   AlertCircle
@@ -626,6 +627,24 @@ export const PremiumStoreSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [categoryFilter, setCategoryFilter] = useState<string>('All');
   
+  // Mobile & Tablet Instant Product Details Sheet (zero scrolling needed)
+  const [isMobileDetailOpen, setIsMobileDetailOpen] = useState<boolean>(false);
+  const mobileDetailScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMobileDetailOpen) {
+      document.body.style.overflow = 'hidden';
+      if (mobileDetailScrollRef.current) {
+        mobileDetailScrollRef.current.scrollTop = 0;
+      }
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileDetailOpen, selectedProductId]);
+  
   // Interactive Reviews state
   const [newReviewAuthor, setNewReviewAuthor] = useState<string>(user?.name || '');
   const [newReviewRating, setNewReviewRating] = useState<number>(5);
@@ -684,7 +703,11 @@ export const PremiumStoreSection: React.FC = () => {
     setSelectedProductId(product.id);
     setSelectedFormatId(product.formats[0].id);
     setQuantity(1);
-    window.scrollTo({ top: 380, behavior: 'smooth' });
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    } else {
+      setIsMobileDetailOpen(true);
+    }
   };
 
   const handleSelectFormat = (formatId: string) => {
@@ -1130,6 +1153,15 @@ export const PremiumStoreSection: React.FC = () => {
                     ₹{maxMrp}
                   </span>
                 </div>
+
+                {/* Instant View Action for Mobile & Tablet */}
+                <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between lg:hidden text-xs">
+                  <span className="text-[10px] text-slate-500 font-medium">Instant View</span>
+                  <span className="text-emerald-800 font-extrabold text-[11px] flex items-center gap-0.5 group-hover:text-amber-600 transition-colors">
+                    <span>View &amp; Buy</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-amber-500" />
+                  </span>
+                </div>
               </div>
 
               {isSelected && (
@@ -1143,9 +1175,9 @@ export const PremiumStoreSection: React.FC = () => {
       </div>
 
       {/* ====================================================================
-         EXPANDED PRODUCT DETAIL SHOWCASE
+         EXPANDED PRODUCT DETAIL SHOWCASE (DESKTOP ONLY: LG AND UP)
          ==================================================================== */}
-      <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-slate-200">
+      <div className="hidden lg:block bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-slate-200">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
@@ -1739,6 +1771,506 @@ export const PremiumStoreSection: React.FC = () => {
         </div>
 
       </div>
+
+      {/* ====================================================================
+         MOBILE & TABLET INSTANT PRODUCT DETAILS MODAL (ZERO SCROLLING)
+         Applicable across Mobile & Tablet only (< lg). Desktop remains untouched.
+         ==================================================================== */}
+      {isMobileDetailOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm flex flex-col justify-end sm:justify-center animate-fadeIn"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Main Sheet Container */}
+          <div 
+            ref={mobileDetailScrollRef}
+            className="w-full h-[95vh] sm:h-[90vh] sm:max-w-2xl sm:mx-auto bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-slate-200"
+          >
+            {/* 1. Sticky Top Navigation Bar */}
+            <div className="sticky top-0 z-20 bg-gradient-to-r from-[#021811] via-[#053225] to-[#0B6B53] text-white px-4 py-3 flex items-center justify-between shadow-md border-b border-emerald-600/30">
+              <button
+                type="button"
+                onClick={() => setIsMobileDetailOpen(false)}
+                className="flex items-center gap-1.5 text-xs font-bold text-emerald-100 hover:text-white bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-xl transition-all cursor-pointer"
+              >
+                <ArrowLeft className="w-4 h-4 text-amber-300" />
+                <span>Back to Store</span>
+              </button>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsCartOpen(true)}
+                  className="relative p-2 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-bold"
+                  title="View Cart"
+                >
+                  <ShoppingCart className="w-4 h-4 text-amber-300" />
+                  {totalCartCount > 0 && (
+                    <span className="bg-amber-400 text-slate-950 text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+                      {totalCartCount}
+                    </span>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsMobileDetailOpen(false)}
+                  className="p-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white transition-all cursor-pointer"
+                  aria-label="Close details"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Product Switcher Horizontal Strip */}
+            <div className="bg-slate-50 border-b border-slate-200 px-3 py-2 flex items-center gap-2 overflow-x-auto shrink-0 scrollbar-none">
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0 pl-1">
+                Products:
+              </span>
+              {filteredProducts.map((p) => {
+                const isCurrent = p.id === currentProduct.id;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => {
+                      setSelectedProductId(p.id);
+                      setSelectedFormatId(p.formats[0].id);
+                      setQuantity(1);
+                      if (mobileDetailScrollRef.current) {
+                        mobileDetailScrollRef.current.scrollTop = 0;
+                      }
+                    }}
+                    className={`shrink-0 flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                      isCurrent
+                        ? 'bg-amber-400 text-slate-950 border-amber-500 shadow-xs'
+                        : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <img 
+                      src={p.imageUrl} 
+                      alt="" 
+                      className="w-4 h-4 object-contain rounded" 
+                    />
+                    <span className="truncate max-w-[120px] text-[11px]">
+                      {p.id === 'prod-tshirt' ? 'T-Shirt' : p.id === 'prod-journal' ? 'Journal' : p.id === 'prod-algorithm' ? 'Inner Algorithm' : p.id === 'prod-bowl' ? 'Singing Bowl' : p.id === 'prod-mala' ? 'Japa Mala' : p.id === 'prod-incense' ? 'Brass Lotus' : 'Zafu Cushion'}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Scrollable Content Inside the Sheet */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 pb-28">
+              {/* Product Headline & Category */}
+              <div>
+                <div className="flex items-center gap-2 flex-wrap mb-1.5">
+                  <span className="bg-[#E67A00] text-white font-extrabold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded shadow-xs">
+                    {currentProduct.badge}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[11px] text-emerald-800 font-bold bg-emerald-100/90 px-2 py-0.5 rounded-md border border-emerald-300/80">
+                    <ShieldCheck className="w-3 h-3 text-emerald-700" />
+                    <span>Official Direct Edition</span>
+                  </span>
+                </div>
+                <h2 className="font-heading font-extrabold text-lg sm:text-xl text-slate-900 leading-snug">
+                  {currentProduct.title}
+                </h2>
+                <p className="text-xs text-slate-600 mt-1">
+                  by <strong className="text-slate-800">{currentProduct.authorOrMaker}</strong>
+                </p>
+              </div>
+
+              {/* Product Image Stage */}
+              <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 p-4 aspect-[4/3] flex items-center justify-center shadow-inner">
+                <img 
+                  src={currentProduct.imageUrl} 
+                  alt={currentProduct.title}
+                  className="max-h-[260px] w-auto object-contain"
+                />
+
+                <div className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur-md text-slate-700 text-[10px] font-bold px-2 py-1 rounded-full border border-slate-200 shadow-xs flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-amber-500" />
+                  <span>High Res Photo</span>
+                </div>
+              </div>
+
+              {/* T-Shirt Sacred Emblem Badge if T-Shirt */}
+              {currentProduct.id === 'prod-tshirt' && (
+                <div className="flex items-center gap-3 p-3 bg-[#021811] text-white rounded-2xl border border-amber-400/60 shadow-md">
+                  <div className="w-12 h-12 rounded-xl border border-amber-400/80 p-0.5 bg-black shrink-0 overflow-hidden">
+                    <img 
+                      src="/images/logo.png" 
+                      alt="Hero Logo" 
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-amber-300 block">
+                      Official Sacred Lotus Emblem
+                    </span>
+                    <span className="text-[11px] text-emerald-100">
+                      Printed on center chest in radiant golden shimmer
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Ratings & Social Proof */}
+              <div className="flex items-center gap-2 text-xs border-b border-slate-200 pb-3">
+                <div className="flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 text-amber-900 font-bold">
+                  <span>{currentProduct.rating}</span>
+                  <div className="flex text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                </div>
+                <span className="text-blue-700 font-semibold text-[11px]">
+                  {currentProduct.ratingCount.toLocaleString()} ratings
+                </span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-500 text-[11px]">
+                  {currentProduct.boughtCount}
+                </span>
+              </div>
+
+              {/* Pricing & Prime Delivery Box */}
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-50/80 via-white to-emerald-50/50 border-2 border-amber-300/80 shadow-sm space-y-3">
+                <div className="flex items-baseline justify-between">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-rose-600 font-extrabold text-2xl">
+                      -{Math.round(((currentFormat.mrp - currentFormat.price) / currentFormat.mrp) * 100)}%
+                    </span>
+                    <div className="flex items-start">
+                      <span className="text-xs font-semibold mt-1">₹</span>
+                      <span className="text-3xl font-black text-slate-950">
+                        {currentFormat.price}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs text-slate-400 line-through block">M.R.P. ₹{currentFormat.mrp}</span>
+                    <span className="text-[10px] text-emerald-700 font-bold">Inclusive of all taxes</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 text-xs text-slate-800 bg-amber-100/60 p-2 rounded-xl border border-amber-200/80">
+                  <span className="bg-[#FF9900] text-slate-950 text-[9.5px] px-1.5 py-0.2 rounded font-black">prime</span>
+                  <span className="font-bold">FREE Delivery:</span>
+                  <span className="text-[11px] text-slate-600">{currentFormat.deliveryText}</span>
+                </div>
+
+                <div className="flex items-center justify-between text-xs pt-1">
+                  <div className="flex items-center gap-1.5 text-emerald-700 font-bold">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span>In Stock. Dispatches Today.</span>
+                  </div>
+                  
+                  {/* Quantity */}
+                  <div className="flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-2.5 py-1">
+                    <span className="font-semibold text-slate-600 text-[11px]">Qty:</span>
+                    <select
+                      value={quantity}
+                      onChange={(e) => setQuantity(Number(e.target.value))}
+                      className="font-bold text-slate-900 bg-transparent focus:outline-none cursor-pointer text-xs"
+                    >
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                      <option value={5}>5</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Format / Size Selection Buttons */}
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-slate-800 block">
+                  {currentProduct.id === 'prod-tshirt' ? 'Choose Size:' : 'Choose Edition / Format:'}
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  {currentProduct.formats.map((fmt) => {
+                    const isSelected = fmt.id === selectedFormatId;
+                    const discountPercent = Math.round(((fmt.mrp - fmt.price) / fmt.mrp) * 100);
+                    return (
+                      <button
+                        key={fmt.id}
+                        type="button"
+                        onClick={() => handleSelectFormat(fmt.id)}
+                        className={`p-2.5 rounded-2xl text-left border-2 transition-all cursor-pointer relative ${
+                          isSelected
+                            ? 'border-amber-500 bg-amber-50/70 shadow-xs ring-2 ring-amber-400/50'
+                            : 'border-slate-200 hover:border-slate-300 bg-white'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-slate-900 leading-tight">
+                            {fmt.name}
+                          </span>
+                          {isSelected && <span className="w-2 h-2 rounded-full bg-amber-500"></span>}
+                        </div>
+                        <span className="text-[10px] text-slate-500 block mt-0.5 line-clamp-1">
+                          {fmt.badge}
+                        </span>
+                        <div className="mt-1.5 flex items-baseline gap-1.5">
+                          <span className="text-slate-950 font-black text-sm">₹{fmt.price}</span>
+                          <span className="text-slate-400 text-[10px] line-through">₹{fmt.mrp}</span>
+                        </div>
+                        <span className="text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-1 py-0.2 rounded mt-1 inline-block">
+                          Save {discountPercent}%
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-200 leading-relaxed">
+                  <strong className="text-slate-800">{currentFormat.name}:</strong> {currentFormat.description}
+                </p>
+              </div>
+
+              {/* Action Buttons inside body */}
+              <div className="space-y-2.5 pt-1">
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  className="w-full py-3 px-4 bg-gradient-to-r from-[#FFA41C] to-[#FF8F00] text-slate-950 font-poppins font-black text-sm rounded-2xl shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-amber-500/40"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Buy Now — ₹{currentFormat.price * quantity} (COD / Online)</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="w-full py-2.5 px-4 bg-[#FFD814] text-slate-950 font-poppins font-bold text-xs rounded-2xl shadow-xs active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer border border-amber-300"
+                >
+                  <ShoppingCart className="w-3.5 h-3.5" />
+                  <span>Add to Cart</span>
+                </button>
+
+                <div className="flex items-center justify-center gap-3 text-[11px] text-slate-500 font-medium pt-1">
+                  <span className="flex items-center gap-1 text-emerald-700 font-semibold">
+                    <Check className="w-3 h-3 text-emerald-600" />
+                    <span>Cash on Delivery Available</span>
+                  </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1 text-blue-700 font-semibold">
+                    <Lock className="w-3 h-3 text-emerald-600" />
+                    <span>100% Secure</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Trust Assurance Grid */}
+              <div className="grid grid-cols-3 gap-2 text-center pt-2">
+                <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center">
+                  <Truck className="w-4 h-4 text-emerald-600 mb-1" />
+                  <span className="text-[10px] font-bold text-slate-800">FREE Delivery</span>
+                  <span className="text-[9px] text-slate-500">Across India</span>
+                </div>
+                <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center">
+                  <ShieldCheck className="w-4 h-4 text-blue-600 mb-1" />
+                  <span className="text-[10px] font-bold text-slate-800">100% Genuine</span>
+                  <span className="text-[9px] text-slate-500">Founder Certified</span>
+                </div>
+                <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center">
+                  <RotateCcw className="w-4 h-4 text-amber-600 mb-1" />
+                  <span className="text-[10px] font-bold text-slate-800">Easy Returns</span>
+                  <span className="text-[9px] text-slate-500">7-Day Guarantee</span>
+                </div>
+              </div>
+
+              {/* "About this item" Bullet Points */}
+              <div className="space-y-2 border-t border-slate-200 pt-4">
+                <h4 className="font-heading font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                  <Info className="w-4 h-4 text-amber-500" />
+                  <span>About this item</span>
+                </h4>
+                <ul className="space-y-2 text-xs text-slate-700">
+                  {currentProduct.bulletPoints.map((bp, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0"></span>
+                      <span className="leading-relaxed">{bp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Specifications Table */}
+              <div className="space-y-2 border-t border-slate-200 pt-4">
+                <h4 className="font-heading font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                  <Package className="w-4 h-4 text-amber-500" />
+                  <span>Product Specifications</span>
+                </h4>
+                <div className="rounded-2xl border border-slate-200 overflow-hidden">
+                  <table className="w-full text-left text-xs divide-y divide-slate-200">
+                    <tbody className="divide-y divide-slate-200 bg-white">
+                      {currentProduct.specs.map((item, idx) => (
+                        <tr key={idx} className={idx % 2 === 0 ? 'bg-slate-50/70' : 'bg-white'}>
+                          <td className="py-2 px-3 font-bold text-slate-700 w-2/5">
+                            {item.label}
+                          </td>
+                          <td className="py-2 px-3 text-slate-900 font-medium">
+                            {item.value}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Customer Reviews Section */}
+              <div className="space-y-4 border-t border-slate-200 pt-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-heading font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                    <MessageSquare className="w-4 h-4 text-amber-500" />
+                    <span>Customer Reviews ({allCurrentReviews.length})</span>
+                  </h4>
+                  <button
+                    type="button"
+                    onClick={() => setIsReviewFormOpen(!isReviewFormOpen)}
+                    className="text-xs font-bold text-emerald-800 hover:text-amber-600 cursor-pointer"
+                  >
+                    {isReviewFormOpen ? 'Cancel' : '+ Write Review'}
+                  </button>
+                </div>
+
+                {/* Review Form if open */}
+                {isReviewFormOpen && (
+                  <form 
+                    onSubmit={handleAddReview}
+                    className="p-4 rounded-2xl bg-amber-50/50 border border-amber-200 space-y-3 text-xs"
+                  >
+                    <div>
+                      <label className="font-semibold text-slate-700 block mb-1">Your Name</label>
+                      <input 
+                        type="text"
+                        value={newReviewAuthor}
+                        onChange={(e) => setNewReviewAuthor(e.target.value)}
+                        placeholder="e.g. Priya Sharma"
+                        required
+                        className="w-full bg-white border border-slate-300 rounded-xl p-2 focus:outline-none focus:border-amber-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-semibold text-slate-700 block mb-1">Overall Rating</label>
+                      <div className="flex items-center gap-1">
+                        {[1, 2, 3, 4, 5].map((starVal) => (
+                          <button
+                            type="button"
+                            key={starVal}
+                            onClick={() => setNewReviewRating(starVal)}
+                            className="cursor-pointer"
+                          >
+                            <Star 
+                              className={`w-5 h-5 ${
+                                starVal <= newReviewRating 
+                                  ? 'fill-amber-400 text-amber-400' 
+                                  : 'text-slate-300'
+                              }`} 
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="font-semibold text-slate-700 block mb-1">Headline</label>
+                      <input 
+                        type="text"
+                        value={newReviewTitle}
+                        onChange={(e) => setNewReviewTitle(e.target.value)}
+                        placeholder="Headline"
+                        required
+                        className="w-full bg-white border border-slate-300 rounded-xl p-2 focus:outline-none focus:border-amber-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-semibold text-slate-700 block mb-1">Comment</label>
+                      <textarea 
+                        rows={2}
+                        value={newReviewComment}
+                        onChange={(e) => setNewReviewComment(e.target.value)}
+                        placeholder="How did this product help your wellness?"
+                        required
+                        className="w-full bg-white border border-slate-300 rounded-xl p-2 focus:outline-none focus:border-amber-500"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full py-2 bg-gradient-to-r from-[#021811] to-[#0B6B53] text-white font-bold rounded-xl shadow-xs cursor-pointer"
+                    >
+                      Submit Review
+                    </button>
+                  </form>
+                )}
+
+                {/* Reviews List */}
+                <div className="space-y-3">
+                  {allCurrentReviews.map((rev) => (
+                    <div key={rev.id} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-slate-900">{rev.name}</span>
+                        <span className="text-[10px] text-slate-400">{rev.date}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex text-amber-400">
+                          {[...Array(5)].map((_, i) => (
+                            <Star 
+                              key={i} 
+                              className={`w-3 h-3 ${
+                                i < rev.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'
+                              }`} 
+                            />
+                          ))}
+                        </div>
+                        <span className="font-bold text-slate-800 text-[11px]">{rev.title}</span>
+                      </div>
+                      {rev.verified && (
+                        <span className="text-[#C45500] font-bold text-[9.5px]">Verified Purchase</span>
+                      )}
+                      <p className="text-slate-600 text-xs leading-relaxed">{rev.comment}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* 3. Sticky Bottom Quick Action Bar on Mobile/Tablet */}
+            <div className="sticky bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-3 flex items-center justify-between gap-3 shadow-lg">
+              <div>
+                <span className="text-[10px] text-slate-400 block leading-tight">Total Price:</span>
+                <span className="font-heading font-black text-slate-950 text-base">
+                  ₹{currentFormat.price * quantity}
+                </span>
+              </div>
+              <div className="flex items-center gap-2 flex-1 justify-end max-w-xs">
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="py-2.5 px-3 bg-[#FFD814] hover:bg-[#F7CA00] text-slate-950 font-bold text-xs rounded-xl shadow-xs flex items-center gap-1 shrink-0 cursor-pointer active:scale-95"
+                >
+                  <ShoppingCart className="w-3.5 h-3.5" />
+                  <span>Cart</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  className="flex-1 py-2.5 px-3 bg-gradient-to-r from-[#FFA41C] to-[#FF8F00] text-slate-950 font-black text-xs rounded-xl shadow-md flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                >
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                  <span>Buy Now</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
 
       {/* ====================================================================
          1-CLICK CHECKOUT MODAL
