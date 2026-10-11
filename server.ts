@@ -77,6 +77,17 @@ app.get("/images/logo.png", (_req, res) => {
   res.status(404).send("Logo not found");
 });
 
+app.get(["/images/mainak-chatterjee.jpg", "/images/mainak_chatterjee_mentor.webp"], (req, res) => {
+  const filename = req.path.endsWith(".webp") ? "mainak_chatterjee_mentor.webp" : "mainak-chatterjee.jpg";
+  const filePath = path.join(process.cwd(), "public", "images", filename);
+  if (fs.existsSync(filePath)) {
+    res.setHeader("Content-Type", filename.endsWith(".webp") ? "image/webp" : "image/jpeg");
+    res.setHeader("Cache-Control", "no-cache, must-revalidate");
+    return res.sendFile(filePath);
+  }
+  res.status(404).send("Mentor image not found");
+});
+
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 

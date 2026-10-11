@@ -237,7 +237,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [founderPhoto, setFounderPhoto] = useState<string>(() => {
     try {
       const saved = localStorage.getItem('pip_founder_photo');
-      return saved || FOUNDER_INFO.image;
+      if (!saved || saved.includes('corenexis.com')) {
+        return FOUNDER_INFO.image;
+      }
+      return saved;
     } catch {
       return FOUNDER_INFO.image;
     }

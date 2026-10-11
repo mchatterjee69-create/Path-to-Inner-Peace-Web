@@ -14,7 +14,7 @@ export const FOUNDER_INFO = {
   achievement: 'Quantum Alchemist & Mindfulness Coach',
   bio: 'Helping people overcome stress, anxiety, emotional pain, relationship struggles, and negative thinking through modern psychology, CBT techniques, mindfulness, meditation, and inner transformation practices.',
   quote: 'Transformation is not about becoming someone new; it is about stripping away the false layers to rediscover your innate inner peace.',
-  image: 'https://cdn.corenexis.com/f/H5nVGDp0Fk3.jpg',
+  image: founderMainak,
   website: 'www.pathtoinnerpeace.in',
   email: 'connect@pathtoinnerpeace.in',
   founderEmail: 'mainak.chatterjee@pathtoinnerpeace.in',
