@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { FOUNDER_INFO } from '../../data/mockData';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, Award, X, CheckCircle2, UserCheck, ArrowRight, Quote } from 'lucide-react';
+import { ShieldCheck, Award, X, CheckCircle2, UserCheck, ArrowRight, Quote, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import founderMentorPhoto from '../../assets/images/mainak-chatterjee.jpg';
 import verifyScannerImg from '../../assets/images/verify-scanner.png';
 
 export const FounderSection: React.FC = () => {
   const [showBioModal, setShowBioModal] = useState(false);
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
   const { founderPhoto } = useApp();
 
   return (
@@ -53,9 +54,9 @@ export const FounderSection: React.FC = () => {
 
                   {/* Center: Scan to Verify */}
                   <button 
-                    onClick={() => setShowBioModal(true)}
+                    onClick={() => setShowVerifyModal(true)}
                     className="inline-flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-emerald-900/85 border border-[#D4AF37]/40 text-[8px] sm:text-[9.5px] lg:text-[10px] font-medium text-emerald-100 whitespace-nowrap tracking-tight shrink-0 shadow-2xs hover:border-[#D4AF37] hover:bg-emerald-800 transition-colors cursor-pointer"
-                    title="Click to view verified accreditation & credentials"
+                    title="Click to scan or view verified accreditation & credentials"
                   >
                     <span>Scan to Verify</span>
                     <img 
@@ -147,10 +148,14 @@ export const FounderSection: React.FC = () => {
                 <h3 className="font-heading font-bold text-2xl text-slate-900">{FOUNDER_INFO.name}</h3>
                 <p className="text-xs text-[#0B6B53] font-bold mt-0.5">{FOUNDER_INFO.title}</p>
               </div>
-              <div className="hidden sm:flex flex-col items-center gap-1 bg-emerald-50 border border-emerald-200/80 p-2 rounded-xl shrink-0">
-                <img src={verifyScannerImg} alt="Accredited Scanner" className="w-10 h-10 object-contain rounded bg-white p-0.5 border border-[#D4AF37]/40 shadow-xs" />
+              <button 
+                onClick={() => { setShowBioModal(false); setShowVerifyModal(true); }}
+                className="hidden sm:flex flex-col items-center gap-1 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/80 p-2 rounded-xl shrink-0 transition-colors cursor-pointer group"
+                title="Click to view full scannable verification record"
+              >
+                <img src={verifyScannerImg} alt="Accredited Scanner" className="w-10 h-10 object-contain rounded bg-white p-0.5 border border-[#D4AF37]/40 shadow-xs group-hover:scale-105 transition-transform" />
                 <span className="text-[9px] font-bold text-[#0B6B53] uppercase tracking-tight">Verified Mentor</span>
-              </div>
+              </button>
             </div>
 
             <div className="space-y-4 text-sm text-slate-700 leading-relaxed font-inter">
@@ -190,6 +195,84 @@ export const FounderSection: React.FC = () => {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+      {/* Official GSDC Accreditation & Scanner Verification Modal */}
+      {showVerifyModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-7 border border-slate-200 text-center">
+            <button
+              onClick={() => setShowVerifyModal(false)}
+              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Header */}
+            <div className="flex items-center justify-center gap-2 mb-1.5">
+              <ShieldCheck className="w-6 h-6 text-[#0B6B53]" />
+              <span className="font-heading font-extrabold text-lg text-slate-900">
+                Official Credential Verification
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 mb-4">
+              Global Skill Development Council (GSDC) Certification
+            </p>
+
+            {/* Scannable High-Res QR Code Card */}
+            <div className="bg-slate-50 border-2 border-[#D4AF37] rounded-2xl p-4 sm:p-5 inline-block shadow-inner mx-auto mb-4">
+              <img 
+                src={verifyScannerImg} 
+                alt="Scan to Verify GSDC Certification" 
+                className="w-48 h-48 sm:w-56 sm:h-56 object-contain rounded-lg bg-white mx-auto shadow-xs" 
+              />
+              <p className="text-[11px] font-semibold text-slate-700 mt-2.5">
+                Scan with any phone camera to verify credentials
+              </p>
+            </div>
+
+            {/* Verification Metadata */}
+            <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3 text-left space-y-1.5 mb-5 text-xs">
+              <div className="flex justify-between items-center">
+                <span className="text-slate-500">Coach / Mentor:</span>
+                <span className="font-bold text-slate-900">Mainak Chatterjee</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-500">Certification:</span>
+                <span className="font-bold text-[#0B6B53] text-[11px] text-right">Mindfulness & Stress Management Coach</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-500">Accreditation:</span>
+                <span className="font-bold text-slate-800">GSDC Global Registry</span>
+              </div>
+              <div className="flex justify-between items-center pt-1 border-t border-emerald-200/50">
+                <span className="text-slate-500">Verification Status:</span>
+                <span className="inline-flex items-center gap-1 font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full text-[10px]">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                  AUTHENTICATED & ACTIVE
+                </span>
+              </div>
+            </div>
+
+            {/* Direct Verification Link for Mobile / Instant View */}
+            <a
+              href="https://gsdci.com/result/mainak-chatterjee-certified-mindfulness-stress-management-coach/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#0B6B53] hover:bg-[#08523F] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all mb-2 cursor-pointer"
+            >
+              <span>Open Official Verification Record</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+
+            <button
+              onClick={() => setShowVerifyModal(false)}
+              className="w-full py-2 text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors cursor-pointer"
+            >
+              Done & Return
+            </button>
           </div>
         </div>
       )}
