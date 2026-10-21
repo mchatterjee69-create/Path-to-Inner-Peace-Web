@@ -54,14 +54,14 @@ export const FounderSection: React.FC = () => {
                   {/* Center: Scan to Verify */}
                   <button 
                     onClick={() => setShowBioModal(true)}
-                    className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-900/80 border border-[#D4AF37]/35 text-[8px] sm:text-[9px] lg:text-[9.5px] font-medium text-emerald-100 whitespace-nowrap tracking-tight shrink-0 shadow-2xs hover:border-[#D4AF37] hover:bg-emerald-800 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-emerald-900/85 border border-[#D4AF37]/40 text-[8px] sm:text-[9.5px] lg:text-[10px] font-medium text-emerald-100 whitespace-nowrap tracking-tight shrink-0 shadow-2xs hover:border-[#D4AF37] hover:bg-emerald-800 transition-colors cursor-pointer"
                     title="Click to view verified accreditation & credentials"
                   >
                     <span>Scan to Verify</span>
                     <img 
                       src={verifyScannerImg} 
                       alt="Verification Scanner" 
-                      className="w-2.5 h-2.5 lg:w-3 lg:h-3 rounded-[2px] object-contain bg-white shrink-0 p-[0.5px]" 
+                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-[3px] object-contain bg-white shrink-0 p-[0.5px] shadow-xs" 
                     />
                   </button>
 
@@ -143,9 +143,13 @@ export const FounderSection: React.FC = () => {
 
             <div className="flex items-center gap-4 mb-6 pb-5 border-b border-slate-200">
               <img src={founderMentorPhoto} alt={FOUNDER_INFO.name} className="w-16 h-16 rounded-2xl object-cover border-2 border-[#D4AF37] shrink-0 shadow-md" />
-              <div>
+              <div className="flex-1">
                 <h3 className="font-heading font-bold text-2xl text-slate-900">{FOUNDER_INFO.name}</h3>
                 <p className="text-xs text-[#0B6B53] font-bold mt-0.5">{FOUNDER_INFO.title}</p>
+              </div>
+              <div className="hidden sm:flex flex-col items-center gap-1 bg-emerald-50 border border-emerald-200/80 p-2 rounded-xl shrink-0">
+                <img src={verifyScannerImg} alt="Accredited Scanner" className="w-10 h-10 object-contain rounded bg-white p-0.5 border border-[#D4AF37]/40 shadow-xs" />
+                <span className="text-[9px] font-bold text-[#0B6B53] uppercase tracking-tight">Verified Mentor</span>
               </div>
             </div>
 
@@ -166,6 +170,10 @@ export const FounderSection: React.FC = () => {
                 <li className="flex items-start gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200/80">
                   <CheckCircle2 className="w-4 h-4 text-[#0B6B53] shrink-0 mt-0.5" />
                   <span><strong>Somatic Breathwork:</strong> Vagus nerve activation to quiet fight-or-flight anxiety within 3 minutes.</span>
+                </li>
+                <li className="flex items-start gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200/80">
+                  <CheckCircle2 className="w-4 h-4 text-[#0B6B53] shrink-0 mt-0.5" />
+                  <span><strong>Mindfulness & Meditation:</strong> Cultivating present-moment awareness, emotional detachment, and mental clarity through guided stillness.</span>
                 </li>
                 <li className="flex items-start gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-200/80">
                   <CheckCircle2 className="w-4 h-4 text-[#0B6B53] shrink-0 mt-0.5" />
