@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FOUNDER_INFO } from '../../data/mockData';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, Award, X, CheckCircle2, UserCheck, GraduationCap, ArrowRight, Quote } from 'lucide-react';
+import { ShieldCheck, Award, X, CheckCircle2, UserCheck, ArrowRight, Quote } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import founderMentorPhoto from '../../assets/images/mainak-chatterjee.jpg';
 import verifyScannerImg from '../../assets/images/verify-scanner.png';
@@ -87,13 +87,9 @@ export const FounderSection: React.FC = () => {
 
               {/* Achievement Badges */}
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-700">
-                <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-[#0B6B53] px-3 py-1.5 rounded-full font-bold border border-emerald-200 shadow-2xs">
-                  <GraduationCap className="w-3.5 h-3.5 text-[#0B6B53] shrink-0" />
-                  {FOUNDER_INFO.achievement}
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 px-3 py-1.5 rounded-full font-bold border border-amber-200 shadow-2xs">
+                <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 px-3.5 py-1.5 rounded-full font-bold border border-amber-200 shadow-2xs">
                   <Award className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
-                  1,000+ Mentored
+                  1000+ Mentored
                 </span>
               </div>
 

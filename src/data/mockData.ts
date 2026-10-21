@@ -10,8 +10,8 @@ import avatarAmrita from '../assets/images/seeker_amrita_ghosh_circle.png';
 
 export const FOUNDER_INFO = {
   name: 'Mainak Chatterjee',
-  title: 'Author, Mind Mastery Coach & Founder',
-  achievement: 'Quantum Alchemist & Mindfulness Coach',
+  title: 'Certified Mindfulness & Stress Management Coach, Quantum Alchemist, Author of Inner Algorithm',
+  achievement: '1000+ Mentored',
   bio: 'Helping people overcome stress, anxiety, emotional pain, relationship struggles, and negative thinking through modern psychology, CBT techniques, mindfulness, meditation, and inner transformation practices.',
   quote: 'Transformation is not about becoming someone new; it is about stripping away the false layers to rediscover your innate inner peace.',
   image: founderMainak,
