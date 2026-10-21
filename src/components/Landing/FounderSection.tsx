@@ -4,6 +4,7 @@ import { useApp } from '../../context/AppContext';
 import { ShieldCheck, Award, X, CheckCircle2, UserCheck, GraduationCap, ArrowRight, Quote } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import founderMentorPhoto from '../../assets/images/mainak-chatterjee.jpg';
+import verifyScannerImg from '../../assets/images/verify-scanner.png';
 
 export const FounderSection: React.FC = () => {
   const [showBioModal, setShowBioModal] = useState(false);
@@ -43,12 +44,31 @@ export const FounderSection: React.FC = () => {
                 />
                 
                 {/* Verified Mentor Badge */}
-                <div className="absolute bottom-3 left-3 right-3 bg-emerald-950/85 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-[#D4AF37]/40 flex items-center justify-between text-xs text-white shadow-md">
-                  <div className="flex items-center gap-1.5 font-bold text-amber-200">
-                    <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
-                    <span>Verified Mentor</span>
+                <div className="absolute bottom-2.5 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 bg-emerald-950/90 backdrop-blur-md px-2 sm:px-2.5 lg:px-3 py-1.5 rounded-xl sm:rounded-2xl border border-[#D4AF37]/50 flex items-center justify-between gap-1 sm:gap-1.5 text-white shadow-md overflow-hidden">
+                  {/* Left: Verified Mentor */}
+                  <div className="flex items-center gap-1 font-bold text-amber-200 shrink-0 whitespace-nowrap">
+                    <ShieldCheck className="w-3 h-3 lg:w-3.5 lg:h-3.5 text-[#D4AF37] shrink-0" />
+                    <span className="text-[9px] sm:text-[10px] lg:text-[10.5px] tracking-tight">Verified Mentor</span>
                   </div>
-                  <span className="text-[10px] text-emerald-200 font-medium">10+ Yrs Exp</span>
+
+                  {/* Center: Scan to Verify */}
+                  <button 
+                    onClick={() => setShowBioModal(true)}
+                    className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-900/80 border border-[#D4AF37]/35 text-[8px] sm:text-[9px] lg:text-[9.5px] font-medium text-emerald-100 whitespace-nowrap tracking-tight shrink-0 shadow-2xs hover:border-[#D4AF37] hover:bg-emerald-800 transition-colors cursor-pointer"
+                    title="Click to view verified accreditation & credentials"
+                  >
+                    <span>Scan to Verify</span>
+                    <img 
+                      src={verifyScannerImg} 
+                      alt="Verification Scanner" 
+                      className="w-2.5 h-2.5 lg:w-3 lg:h-3 rounded-[2px] object-contain bg-white shrink-0 p-[0.5px]" 
+                    />
+                  </button>
+
+                  {/* Right: 10+ Yrs Exp */}
+                  <div className="text-[8.5px] sm:text-[9.5px] lg:text-[10px] text-emerald-200 font-semibold shrink-0 whitespace-nowrap tracking-tight">
+                    10+ Yrs Exp
+                  </div>
                 </div>
               </div>
             </div>
@@ -135,7 +155,7 @@ export const FounderSection: React.FC = () => {
 
             <div className="space-y-4 text-sm text-slate-700 leading-relaxed font-inter">
               <p>
-                Mainak Chatterjee is an <strong>Author, Mind Mastery Coach & Founder</strong> of <strong>Path to Inner Peace</strong> and the <strong>MindForge 360°™</strong> ecosystem.
+                Mainak Chatterjee is a <strong>Certified Mindfulness & Stress Management Coach</strong>, <strong>Quantum Alchemist</strong>, <strong>Author</strong> & <strong>Post Graduate in Business Management</strong>.
               </p>
               <p>
                 Having spent over a decade researching cognitive behavioral techniques, mindfulness protocols, eastern spiritual wisdom, and nervous system regulation, Mainak created the <strong>5-Day 30-Minute Mind Reset Challenge</strong> to make emotional healing accessible to busy individuals.
