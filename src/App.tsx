@@ -23,10 +23,7 @@ import { MeditationPlayer } from './components/Meditation/MeditationPlayer';
 import { SoundTherapyView } from './components/SoundTherapy/SoundTherapyView';
 import { InnerShiftView } from './components/InnerShift/InnerShiftView';
 import { InnerRevolutionView } from './components/InnerShift/InnerRevolutionView';
-import { CareerAxisView } from './components/CareerAxis/CareerAxisView';
 import { ExplorePathSerialView } from './components/Landing/ExplorePathSerialView';
-import { CareerAxisBookingView } from './components/CareerAxis/CareerAxisBookingView';
-import { CorporateWellnessView } from './components/CorporateWellness/CorporateWellnessView';
 import { PartnerWithUsView } from './components/PartnerWithUs/PartnerWithUsView';
 import { JournalView } from './components/Journal/JournalView';
 import { MindForgeUpgrade } from './components/Pricing/MindForgeUpgrade';
@@ -148,8 +145,6 @@ const MainContent: React.FC = () => {
         {activeView === 'explore-path' && <ExplorePathSerialView />}
         {activeView === 'inner-shift' && <InnerShiftView />}
         {activeView === 'inner-revolution' && <InnerRevolutionView />}
-        {activeView === 'career-axis' && <CareerAxisView />}
-        {activeView === 'career-axis-booking' && <CareerAxisBookingView />}
         {(activeView === 'partner-with-us' || activeView === 'corporate-wellness') && <PartnerWithUsView />}
         {activeView === 'challenge' && <DailyChallengeView />}
         {activeView === 'breathing' && <BreathingExercise />}

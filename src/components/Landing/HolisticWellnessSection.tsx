@@ -6,8 +6,7 @@ import {
   HeartHandshake, 
   Sparkles, 
   ArrowRight,
-  ShieldCheck,
-  Compass
+  ShieldCheck
 } from 'lucide-react';
 
 interface HolisticWellnessSectionProps {
@@ -62,17 +61,6 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
       accentColor: 'text-[#D4AF37]',
       cardGlow: 'hover:border-[#D4AF37]/60 hover:shadow-[0_12px_32px_rgba(6,44,34,0.35)]',
     },
-    {
-      id: 'career-axis',
-      number: '05',
-      title: 'Career Axis',
-      highlightBadge: '1:1 Career Mapping',
-      icon: Compass,
-      description: 'Personalized career mapping, decision frameworks and 1:1 guidance to navigate transitions, remove confusion and align with your true purpose.',
-      foundation: 'Decision Framework & Clarity',
-      accentColor: 'text-[#D4AF37]',
-      cardGlow: 'hover:border-[#D4AF37]/60 hover:shadow-[0_12px_32px_rgba(6,44,34,0.35)]',
-    },
   ];
 
   const handleCtaClick = () => {
@@ -90,7 +78,7 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full bg-emerald-50 border border-emerald-200/80 text-[#0B6B53] text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider shadow-xs">
-            <Compass className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#0B6B53]" />
+            <Sparkles className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#0B6B53]" />
             <span>Holistic Wellness & Inner Transformation</span>
           </div>
 
@@ -102,12 +90,12 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
-            One integrated approach to emotional wellbeing, relationships, mindfulness, higher consciousness and career clarity.
+            One integrated approach to emotional wellbeing, relationships, mindfulness, and higher consciousness.
           </p>
         </div>
 
-        {/* 5 Core Solutions Grid (Matched Emerald Green Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6 items-stretch">
+        {/* 4 Core Solutions Grid (Matched Emerald Green Cards) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
           {coreSolutions.map((solution) => {
             const Icon = solution.icon;
             return (

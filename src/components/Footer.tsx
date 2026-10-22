@@ -51,23 +51,18 @@ export const Footer: React.FC = () => {
           </h4>
           <ul className="space-y-2 text-xs text-slate-300">
             <li>
-              <button onClick={() => setActiveView('inner-shift')} className="hover:text-white transition-colors text-amber-300 font-semibold">
+              <button onClick={() => setActiveView('inner-shift')} className="hover:text-white transition-colors text-amber-300 font-semibold cursor-pointer">
                 Inner Shift Program
               </button>
             </li>
             <li>
-              <button onClick={() => setActiveView('inner-revolution')} className="hover:text-white transition-colors text-emerald-300 font-semibold">
+              <button onClick={() => setActiveView('inner-revolution')} className="hover:text-white transition-colors text-emerald-300 font-semibold cursor-pointer">
                 Inner Revolution
               </button>
             </li>
             <li>
-              <button onClick={() => setActiveView('career-axis')} className="hover:text-white transition-colors text-amber-200 font-semibold">
-                Career Axis (1:1 Mapping)
-              </button>
-            </li>
-            <li>
-              <button onClick={() => setActiveView('partner-with-us')} className="hover:text-white transition-colors text-emerald-300 font-semibold">
-                Partner With Us (Refer & Earn • 10 Verticals)
+              <button onClick={() => setActiveView('partner-with-us')} className="hover:text-white transition-colors text-emerald-300 font-semibold cursor-pointer">
+                Partner With Us
               </button>
             </li>
             <li>

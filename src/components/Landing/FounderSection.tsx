@@ -51,15 +51,15 @@ export const FounderSection: React.FC = () => {
                     <span className="text-[9px] sm:text-[10px] lg:text-[10.5px] tracking-tight">Verified Mentor</span>
                   </div>
 
-                  {/* Center: Scan to Verify */}
+                  {/* Center: Verify */}
                   <a 
                     href="https://gsdci.com/result/mainak-chatterjee-certified-mindfulness-stress-management-coach/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-emerald-900/85 border border-[#D4AF37]/40 text-[8px] sm:text-[9.5px] lg:text-[10px] font-medium text-emerald-100 whitespace-nowrap tracking-tight shrink-0 shadow-2xs hover:border-[#D4AF37] hover:bg-emerald-800 transition-colors cursor-pointer"
-                    title="Click to verify credentials at GSDC"
+                    title="Open official GSDC accreditation registry"
                   >
-                    <span>Scan to Verify</span>
+                    <span>Verify</span>
                     <img 
                       src={verifyScannerImg} 
                       alt="Verification Scanner" 
