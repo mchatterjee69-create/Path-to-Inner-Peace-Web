@@ -1,6 +1,18 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Calendar, Clock, CheckCircle2, ArrowRight, X, Target, Play } from 'lucide-react';
+import { Calendar, Clock, CheckCircle2, ArrowRight, X, Target } from 'lucide-react';
+
+const GoogleMeetIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+  <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M14.5 12l4.5 3.5V8.5L14.5 12z" fill="#00832d"/>
+    <path d="M2.5 16.5V19c0 .83.67 1.5 1.5 1.5H6.5l.5-4H2.5z" fill="#0066da"/>
+    <path d="M6.5 3.5H4c-.83 0-1.5.67-1.5 1.5v2.5H7l-.5-4z" fill="#e53935"/>
+    <path d="M2.5 7.5h4.5v9H2.5v-9z" fill="#2684fc"/>
+    <path d="M19 5.5l-4.5 3.5v6L19 18.5c.83.62 2 .03 2-1V6.5c0-1.03-1.17-1.62-2-1z" fill="#00ac47"/>
+    <path d="M14.5 16.5H7V20.5h6c.83 0 1.5-.67 1.5-1.5v-2.5z" fill="#00aa47"/>
+    <path d="M14.5 3.5H7v4h7.5V5c0-.83-.67-1.5-1.5-1.5z" fill="#ffba00"/>
+  </svg>
+);
 
 export const MindResetChallengeModal: React.FC = () => {
   const { isChallengeDetailsModalOpen, setIsChallengeDetailsModalOpen } = useApp();
@@ -12,7 +24,7 @@ export const MindResetChallengeModal: React.FC = () => {
   };
 
   const handleJoinLive = () => {
-    const liveUrl = 'https://www.youtube.com/live/u42RK5eV_c8?si=wg7ziJNLQNRu7hID';
+    const liveUrl = 'https://meet.google.com/';
     const newWin = window.open(liveUrl, '_blank');
     if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
       window.location.href = liveUrl;
@@ -95,13 +107,11 @@ export const MindResetChallengeModal: React.FC = () => {
                   <span className="font-bold text-white text-base sm:text-lg">6:30 AM</span>
                 </div>
                 
-                {/* YouTube LIVE badge */}
+                {/* Google Meet badge */}
                 <div className="mt-3">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#CC0000] text-white text-xs font-bold rounded-full shadow-md shadow-red-950/40">
-                    <span className="w-4 h-3 bg-white rounded-xs flex items-center justify-center shrink-0">
-                      <Play className="w-2 h-2 text-[#CC0000] fill-current translate-x-[0.5px]" />
-                    </span>
-                    <span>YouTube LIVE</span>
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white text-slate-900 text-xs font-bold rounded-full shadow-md border border-emerald-200/80">
+                    <GoogleMeetIcon className="w-4 h-4 shrink-0" />
+                    <span>Google Meet</span>
                   </div>
                 </div>
               </div>

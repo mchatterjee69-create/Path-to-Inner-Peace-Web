@@ -13,7 +13,7 @@ import {
   Check, 
   ShieldCheck,
   FolderOpen,
-  Sparkles,
+  Sun,
   Headphones,
   Lightbulb,
   ShieldAlert,
@@ -355,7 +355,7 @@ export const DeeperAwakeningModal: React.FC<DeeperAwakeningModalProps> = ({
               <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <h3 className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 stroke-[2.2]" />
+                    <Sun className="w-4 h-4 stroke-[2.2]" />
                   </span>
                   <span>✦ What This Masterclass Facilitates</span>
                 </h3>

@@ -4,7 +4,8 @@ import {
   Activity, 
   Eye, 
   HeartHandshake, 
-  Sparkles, 
+  Sun, 
+  Leaf,
   ArrowRight,
   ShieldCheck
 } from 'lucide-react';
@@ -55,7 +56,7 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
       number: '04',
       title: 'Higher Consciousness Activation',
       highlightBadge: 'Heartfulness & Ashtanga',
-      icon: Sparkles,
+      icon: Sun,
       description: 'Practices integrating Heartfulness and Ashtanga Yoga to cultivate deeper awareness, discipline and inner growth.',
       foundation: 'Heart Centered • Yogic Discipline',
       accentColor: 'text-[#D4AF37]',
@@ -78,7 +79,7 @@ export const HolisticWellnessSection: React.FC<HolisticWellnessSectionProps> = (
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full bg-emerald-50 border border-emerald-200/80 text-[#0B6B53] text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider shadow-xs">
-            <Sparkles className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#0B6B53]" />
+            <Leaf strokeWidth={1.8} className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#0B6B53]" />
             <span>Holistic Wellness & Inner Transformation</span>
           </div>
 

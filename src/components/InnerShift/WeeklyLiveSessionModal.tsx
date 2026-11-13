@@ -12,7 +12,6 @@ import {
   MessageCircle, 
   ArrowRight,
   HelpCircle,
-  Sparkles,
   Lock
 } from 'lucide-react';
 
@@ -186,7 +185,7 @@ export const WeeklyLiveSessionModal: React.FC<{ isOpen: boolean; onClose: () => 
                   onClick={handleResetAndClose}
                   className="flex-1 py-3.5 px-4 bg-[#0F4C45] hover:bg-[#0B3B36] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+                  <CheckCircle2 strokeWidth={1.8} className="w-4 h-4 text-[#D4AF37]" />
                   <span>Done & Back to Inner Shift</span>
                 </button>
               </div>

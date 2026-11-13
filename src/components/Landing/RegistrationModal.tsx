@@ -84,12 +84,12 @@ export const RegistrationModal: React.FC = () => {
             {isSerialLocked ? (
               <Lock className="w-5 h-5 text-[#D4AF37]" />
             ) : (
-              <Sun className="w-5 h-5 animate-spin-slow text-[#D4AF37]" />
+              <Sun strokeWidth={1.8} className="w-5 h-5 text-[#D4AF37]" />
             )}
           </div>
 
           <span className="inline-block px-3 py-0.5 mb-1 bg-[#D4AF37] text-slate-950 font-bold text-[10px] uppercase tracking-widest rounded-full">
-            {isSerialLocked ? `🔒 COMPLETE DAY 1 FIRST TO UNLOCK DAY ${registrationTargetDay}` : '100% FREE REGISTRATION'}
+            {isSerialLocked ? `COMPLETE DAY 1 FIRST TO UNLOCK DAY ${registrationTargetDay}` : '100% FREE REGISTRATION'}
           </span>
 
           <h3 className="font-heading font-bold text-xl sm:text-2xl text-white tracking-tight">
@@ -188,7 +188,7 @@ export const RegistrationModal: React.FC = () => {
                   className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B6B53] focus:bg-white transition-all"
                 />
               </div>
-              <p className="text-[11px] text-slate-500 mt-1">Used exclusively to send daily exercise reminders & zoom session links.</p>
+              <p className="text-[11px] text-slate-500 mt-1">Used exclusively to send daily exercise reminders &amp; Google Meet session links.</p>
             </div>
 
             <div>

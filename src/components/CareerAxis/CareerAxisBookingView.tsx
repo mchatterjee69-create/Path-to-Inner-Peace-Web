@@ -13,7 +13,7 @@ import {
   CheckCircle2, 
   AlertCircle, 
   ArrowLeft, 
-  Sparkles,
+  Award,
   CalendarPlus,
   Globe,
   Loader2,
@@ -464,7 +464,7 @@ export const CareerAxisBookingView: React.FC = () => {
             {/* Page Title & Intro Header */}
             <div className="text-center space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/10 text-[#1b4d2e] text-xs font-bold border border-emerald-900/20">
-                <Sparkles className="w-3.5 h-3.5 text-[#C89620]" />
+                <Award strokeWidth={1.8} className="w-3.5 h-3.5 text-[#C89620]" />
                 <span>Official 1:1 Consulting Registration</span>
               </div>
               

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { BookOpen, ExternalLink, Sparkles, CheckCircle, Download, FileText, ArrowRight } from 'lucide-react';
+import { BookOpen, ExternalLink, Award, CheckCircle, Download, FileText, ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import innerHorizonCover from '../../assets/images/inner_horizon_cover_1785774252941.jpg';
 
@@ -40,7 +40,7 @@ export const MagazineBannerSection: React.FC = () => {
                     
                     {/* Badge Overlay */}
                     <div className="absolute top-3 left-3 bg-[#D4AF37] text-slate-950 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-lg flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 fill-slate-950" />
+                      <Award strokeWidth={2} className="w-3 h-3 text-slate-950" />
                       <span>Issue 01 Launch</span>
                     </div>
 

@@ -118,7 +118,7 @@ export const RazorpayModal: React.FC = () => {
           <div className="text-center space-y-1 text-xs text-slate-600 font-medium">
             <div className="flex items-center justify-center gap-1.5 text-slate-800 font-semibold">
               <ShieldCheck className="w-4 h-4 text-[#0F4C45] shrink-0" />
-              <span>🔒 Secure payment powered by Razorpay.</span>
+              <span>Secure payment powered by Razorpay.</span>
             </div>
             <p className="text-[11px] text-slate-500 max-w-xs mx-auto leading-relaxed">
               Supports UPI, Google Pay, PhonePe, Paytm, Cards and Net Banking.
@@ -129,15 +129,15 @@ export const RazorpayModal: React.FC = () => {
           <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5 text-xs font-bold text-slate-700">
             <div className="flex items-center gap-2 text-slate-800">
               <CheckCircle2 className="w-4 h-4 text-[#0F4C45] shrink-0" />
-              <span>{isOneTimePayment ? '✔ One-Time Payment (No Recurring Fees)' : '✔ Monthly Membership'}</span>
+              <span>{isOneTimePayment ? 'One-Time Payment (No Recurring Fees)' : 'Monthly Membership'}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-800">
               <CheckCircle2 className="w-4 h-4 text-[#0F4C45] shrink-0" />
-              <span>{isOneTimePayment ? '✔ Lifetime Access to Course & Materials' : '✔ Cancel Anytime'}</span>
+              <span>{isOneTimePayment ? 'Lifetime Access to Course & Materials' : 'Cancel Anytime'}</span>
             </div>
             <div className="flex items-center gap-2 text-slate-800">
-              <CheckCircle2 className="w-4 h-4 text-slate-800 shrink-0" />
-              <span>✔ Instant Access After Payment</span>
+              <CheckCircle2 className="w-4 h-4 text-[#0F4C45] shrink-0" />
+              <span>Instant Access After Payment</span>
             </div>
           </div>
 

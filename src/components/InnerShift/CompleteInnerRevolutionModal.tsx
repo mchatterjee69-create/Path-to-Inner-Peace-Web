@@ -17,7 +17,6 @@ import {
   Brain,
   HeartCrack,
   Zap,
-  Sparkles,
   Heart,
   Compass,
   Headphones,
@@ -397,7 +396,7 @@ export const CompleteInnerRevolutionModal: React.FC<CompleteInnerRevolutionModal
               <div className="space-y-1">
                 <p className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-teal-500/15 border border-teal-500/30 text-teal-400 flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 stroke-[2.2]" />
+                    <Compass className="w-4 h-4 stroke-[2.2]" />
                   </span>
                   <span>Master Mindfulness & Meditation</span>
                 </p>

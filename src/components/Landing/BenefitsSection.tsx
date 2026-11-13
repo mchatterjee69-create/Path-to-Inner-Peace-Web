@@ -10,7 +10,7 @@ import {
   Wind, 
   Sun, 
   Sprout, 
-  Sparkles,
+  Compass,
   HeartPulse 
 } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
@@ -115,7 +115,7 @@ export const BenefitsSection: React.FC = () => {
       point1: 'Step back from mental autopilot and reconnect with greater clarity, balance and self-awareness.',
       point2: 'Use the five-day experience as a starting point for a deeper Path to Inner Peace.',
       description: 'Step back from mental autopilot and reconnect with greater clarity, balance and self-awareness. Use the five-day experience as a starting point for a deeper Path to Inner Peace.',
-      icon: Sparkles,
+      icon: Compass,
       image: '/images/benefits/personal_reset_transformation.webp',
       fallbackUrl: 'https://yourimageshare.com/ib/DRr0S4yTST.webp'
     }

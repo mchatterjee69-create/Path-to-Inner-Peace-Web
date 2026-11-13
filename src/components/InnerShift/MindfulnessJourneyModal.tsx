@@ -13,7 +13,6 @@ import {
   Check, 
   ShieldCheck,
   FolderOpen,
-  Sparkles,
   Headphones,
   Lightbulb,
   ShieldAlert,
@@ -330,7 +329,7 @@ export const MindfulnessJourneyModal: React.FC<MindfulnessJourneyModalProps> = (
               <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <h3 className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 stroke-[2.2]" />
+                    <Compass className="w-4 h-4 stroke-[2.2]" />
                   </span>
                   <span>✦ What This Journey Offers</span>
                 </h3>

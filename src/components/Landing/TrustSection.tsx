@@ -1,12 +1,13 @@
 import React from 'react';
-import { Star, Users, Headphones, Sun, Sparkles, CheckCircle, Crown } from 'lucide-react';
+import { Star, Users, Headphones, Sun, CheckCircle, Crown } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 
 export const TrustSection: React.FC = () => {
   const stats = [
     {
       icon: Star,
-      value: '4.9 ★★★★★',
+      value: '4.9 / 5.0',
+      showStars: true,
       label: 'Average User Rating',
       detail: 'Based on 850+ verified reviews',
       accent: 'text-amber-500 bg-amber-50 border-amber-200'
@@ -68,8 +69,15 @@ export const TrustSection: React.FC = () => {
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
 
-                  <div className="font-heading font-extrabold text-base sm:text-lg text-slate-900 tracking-tight">
-                    {stat.value}
+                  <div className="font-heading font-extrabold text-base sm:text-lg text-slate-900 tracking-tight flex flex-col items-center">
+                    <span>{stat.value}</span>
+                    {stat.showStars && (
+                      <div className="flex items-center gap-0.5 mt-1 text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="text-xs font-bold text-[#0B6B53] mt-1">

@@ -1,6 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Compass, Send, User, Lightbulb, HeartHandshake, RotateCcw } from 'lucide-react';
+import { 
+  Compass, 
+  Send, 
+  User, 
+  Lightbulb, 
+  HeartHandshake, 
+  RotateCcw,
+  LayoutGrid,
+  Activity,
+  Brain,
+  Eye,
+  Sun,
+  Briefcase,
+  Award
+} from 'lucide-react';
 
 interface ChatMessage {
   id: string;
@@ -288,14 +302,14 @@ export const AiReflectionAssistant: React.FC = () => {
 
   // Domain categories with curated quick prompts
   const topicCategories = [
-    { id: 'all', label: '🌟 All Topics' },
-    { id: 'wellness', label: '🌿 Stress & Somatics' },
-    { id: 'meditation', label: '🧘 Meditation' },
-    { id: 'mindfulness', label: '✨ Mindfulness' },
-    { id: 'relationships', label: '❤️ Relationships & Recovery' },
-    { id: 'consciousness', label: '🌌 Higher Consciousness' },
-    { id: 'career', label: '💼 Career & Counselling' },
-    { id: 'hub', label: '🏆 Hub Programs' }
+    { id: 'all', label: 'All Topics', icon: LayoutGrid },
+    { id: 'wellness', label: 'Stress & Somatics', icon: Activity },
+    { id: 'meditation', label: 'Meditation', icon: Brain },
+    { id: 'mindfulness', label: 'Mindfulness', icon: Eye },
+    { id: 'relationships', label: 'Relationships & Recovery', icon: HeartHandshake },
+    { id: 'consciousness', label: 'Higher Consciousness', icon: Sun },
+    { id: 'career', label: 'Career & Counselling', icon: Briefcase },
+    { id: 'hub', label: 'Hub Programs', icon: Award }
   ];
 
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -426,7 +440,7 @@ export const AiReflectionAssistant: React.FC = () => {
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-[#0B6B53] font-bold text-xs rounded-full border border-emerald-100 shadow-sm">
-          <Compass className="w-4 h-4 text-[#0B6B53]" />
+          <Compass strokeWidth={1.8} className="w-4 h-4 text-[#0B6B53]" />
           <span>24/7 WELLNESS & COACH AI COMPANION</span>
         </div>
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
@@ -439,20 +453,25 @@ export const AiReflectionAssistant: React.FC = () => {
 
       {/* Domain Category Filter Tabs */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none px-1">
-        {topicCategories.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            onClick={() => setSelectedCategory(cat.id)}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1 shrink-0 ${
-              selectedCategory === cat.id
-                ? 'bg-[#0B6B53] text-white shadow-sm ring-2 ring-[#0B6B53]/20'
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-            }`}
-          >
-            {cat.label}
-          </button>
-        ))}
+        {topicCategories.map((cat) => {
+          const Icon = cat.icon;
+          const isSelected = selectedCategory === cat.id;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${
+                isSelected
+                  ? 'bg-[#0B6B53] text-white shadow-sm ring-2 ring-[#0B6B53]/20'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-amber-300' : 'text-slate-500'}`} />
+              <span>{cat.label}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Main Chat Box */}
@@ -504,7 +523,7 @@ export const AiReflectionAssistant: React.FC = () => {
                     : 'bg-[#0B6B53] text-[#D4AF37]'
                 }`}
               >
-                {msg.sender === 'user' ? <User className="w-4 h-4" /> : <Compass className="w-4 h-4" />}
+                {msg.sender === 'user' ? <User strokeWidth={1.8} className="w-4 h-4" /> : <Compass strokeWidth={1.8} className="w-4 h-4" />}
               </div>
 
               <div
@@ -522,7 +541,10 @@ export const AiReflectionAssistant: React.FC = () => {
 
                 {msg.affirmation && (
                   <div className="p-3 bg-amber-50/90 border-l-2 border-[#D4AF37] text-slate-900 text-xs rounded-r-xl font-medium shadow-xs">
-                    <span className="text-[#0B6B53] font-bold block mb-0.5">✨ Daily Affirmation:</span>
+                    <span className="text-[#0B6B53] font-bold flex items-center gap-1 mb-0.5">
+                      <Sun strokeWidth={1.8} className="w-3.5 h-3.5 text-[#D4AF37]" />
+                      <span>Daily Affirmation:</span>
+                    </span>
                     "{msg.affirmation}"
                   </div>
                 )}
@@ -537,7 +559,7 @@ export const AiReflectionAssistant: React.FC = () => {
           {loading && (
             <div className="flex gap-3 mr-auto max-w-[80%]">
               <div className="w-8 h-8 rounded-full bg-[#0B6B53] text-[#D4AF37] flex items-center justify-center">
-                <Compass className="w-4 h-4 animate-spin" />
+                <Compass strokeWidth={1.8} className="w-4 h-4" />
               </div>
               <div className="bg-white p-4 rounded-2xl border border-slate-200 text-xs text-slate-500 italic flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />

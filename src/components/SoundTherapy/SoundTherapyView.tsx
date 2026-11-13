@@ -5,7 +5,7 @@ import {
   Volume2, 
   VolumeX, 
   Clock, 
-  Sparkles, 
+  Bell, 
   Info, 
   Headphones, 
   Radio, 
@@ -661,7 +661,7 @@ export const SoundTherapyView: React.FC = () => {
         {/* Header Title Banner */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/60 border border-[#D4AF37]/30 text-[#D4AF37] text-xs font-semibold tracking-wide uppercase shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <Waves strokeWidth={1.8} className="w-3.5 h-3.5 text-[#D4AF37]" />
             <span>Realistic Acoustic Sound Therapy & Frequency Healing</span>
           </div>
 
@@ -678,7 +678,7 @@ export const SoundTherapyView: React.FC = () => {
           {[
             { id: 'all', label: 'All Soundscapes', icon: Radio },
             { id: 'binaural', label: 'Binaural Beats', icon: Activity },
-            { id: 'crystal_bowls', label: 'Crystal Bowls', icon: Sparkles },
+            { id: 'crystal_bowls', label: 'Crystal Bowls', icon: Bell },
             { id: 'gong_bath', label: 'Gong Bath', icon: Disc },
             { id: 'solfeggio', label: 'Solfeggio Frequencies', icon: Headphones },
             { id: 'nature', label: 'Nature Soundscapes', icon: Waves },

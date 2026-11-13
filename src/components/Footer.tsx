@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
               </button>
             </li>
             <li>
-              <button onClick={() => setActiveView('reflection')} className="hover:text-white transition-colors flex items-center gap-1">
+              <button onClick={() => setActiveView('ai-coach')} className="hover:text-white transition-colors flex items-center gap-1">
                 <span>Reflection Guide</span>
               </button>
             </li>

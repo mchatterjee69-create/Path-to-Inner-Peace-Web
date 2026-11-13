@@ -1,6 +1,6 @@
 import React from 'react';
 import { WellnessVideoPlayer } from './WellnessVideoPlayer';
-import { Sparkles, Heart } from 'lucide-react';
+import { Wind, Heart } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 
 export const BreathingExercise: React.FC = () => {
@@ -12,7 +12,7 @@ export const BreathingExercise: React.FC = () => {
         <div className="bg-gradient-to-r from-[#0F4C45] via-[#134E4A] to-slate-900 text-white p-6 rounded-3xl shadow-xl border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-1.5 bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <Wind strokeWidth={1.8} className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>5-MINUTE SOMATIC REGULATION VIDEO</span>
             </div>
             <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-white mt-2">

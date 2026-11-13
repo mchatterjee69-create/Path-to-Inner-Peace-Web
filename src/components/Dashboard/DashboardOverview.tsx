@@ -18,8 +18,9 @@ import {
   Compass, 
   User,
   ExternalLink,
-  Sparkles,
-  FileText
+  FileText,
+  Lightbulb,
+  Video
 } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../ScrollReveal';
 import { FreeStarBadge } from '../Common/FreeStarBadge';
@@ -83,7 +84,7 @@ export const DashboardOverview: React.FC = () => {
                   </span>
                 </div>
                 <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-white">
-                  Namaste, {user.name}! 🙏
+                  Namaste, {user.name}!
                 </h1>
                 <p className="text-xs text-emerald-100 mt-1">
                   Your inner peace journey continues today with Day {user.currentDay}: {currentDayData.title}
@@ -220,7 +221,7 @@ export const DashboardOverview: React.FC = () => {
             <div className="space-y-2 max-w-xl">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <span className="text-[10px] font-extrabold uppercase bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 fill-slate-950" />
+                  <BookOpen strokeWidth={2} className="w-3 h-3 text-slate-950" />
                   <span>Free Member Publication</span>
                 </span>
                 <span className="text-[10px] font-bold text-amber-300">
@@ -348,7 +349,7 @@ export const DashboardOverview: React.FC = () => {
                   className="p-3.5 rounded-xl bg-teal-50/90 border border-teal-200 hover:bg-teal-100 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow"
                 >
                   <div className="flex items-center justify-between w-full">
-                    <Compass className="w-5 h-5 text-[#0B6B53]" />
+                    <Compass strokeWidth={1.8} className="w-5 h-5 text-[#0B6B53]" />
                     <span className="text-[10px] font-bold uppercase bg-teal-200/60 text-teal-950 px-1.5 py-0.5 rounded">24/7 Guide</span>
                   </div>
                   <div>
@@ -362,7 +363,7 @@ export const DashboardOverview: React.FC = () => {
                   className="p-3.5 rounded-xl bg-gradient-to-br from-amber-50 to-emerald-50 border border-amber-300 hover:border-amber-400 text-left transition-all flex flex-col justify-between gap-2 group shadow-sm hover:shadow col-span-2 sm:col-span-1"
                 >
                   <div className="flex items-center justify-between w-full">
-                    <span className="text-lg">🎬</span>
+                    <Video className="w-5 h-5 text-amber-700" />
                     <span className="text-[10px] font-extrabold uppercase bg-[#D4AF37] text-slate-950 px-1.5 py-0.5 rounded">10 Mins Video</span>
                   </div>
                   <div>
@@ -432,9 +433,10 @@ export const DashboardOverview: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-emerald-100 leading-relaxed bg-[#0B6B53]/50 p-3 rounded-xl border border-emerald-700/40">
-                💡 Tip: The best time to practice your 30-minute reset is early morning or right before bedtime for deep sleep recovery.
-              </p>
+              <div className="text-xs text-emerald-100 leading-relaxed bg-[#0B6B53]/50 p-3 rounded-xl border border-emerald-700/40 flex items-start gap-2">
+                <Lightbulb className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+                <span><strong className="text-white">Tip:</strong> The best time to practice your 30-minute reset is early morning or right before bedtime for deep sleep recovery.</span>
+              </div>
             </div>
           </ScrollReveal>
 

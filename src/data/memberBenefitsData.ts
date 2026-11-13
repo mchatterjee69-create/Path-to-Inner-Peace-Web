@@ -222,7 +222,7 @@ export const FUTURE_PROGRAMS: FutureProgram[] = [
     subtitle: 'A Live Online Transformation Experience with Mainak Chatterjee',
     date: 'August 20 - August 26, 2026',
     time: '7:30 PM - 8:30 PM IST (Daily Live)',
-    location: 'Path to Inner Peace Live Zoom Portal',
+    location: 'Path to Inner Peace Live Google Meet Portal',
     instructor: 'Mainak Chatterjee',
     category: 'Intensive',
     description: 'An immersive 7-day live experience designed to dissolve deep-seated emotional blockages, balance your 7 energy centers (chakras), and align your nervous system with custom sound healing frequencies.',

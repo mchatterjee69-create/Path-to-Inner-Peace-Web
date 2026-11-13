@@ -53,7 +53,6 @@ import {
   Headphones,
   Moon,
   Compass,
-  Sparkles,
   ShoppingBag
 } from 'lucide-react';
 import { PremiumStoreSection } from '../Store/PremiumStoreSection';
@@ -884,7 +883,7 @@ export const ProfileView: React.FC = () => {
                   <div>
                     <h4 className="font-bold text-white text-sm">Future Program Invitations</h4>
                     <p className="text-emerald-100/80 text-xs mt-0.5 leading-snug">
-                      Get VIP invitations to live Zoom masterclasses, retreats, and group coaching sessions.
+                      Get VIP invitations to live Google Meet masterclasses, retreats, and group coaching sessions.
                     </p>
                   </div>
                 </div>
@@ -1553,7 +1552,7 @@ export const ProfileView: React.FC = () => {
               Upcoming Live Masterclasses, Retreats & Intensives
             </h2>
             <p className="text-xs text-emerald-100/90 leading-relaxed max-w-2xl">
-              As a member of Path to Inner Peace, you get priority seat reservation and direct invitations to live Zoom sessions, group mentorships, and retreats led by Mainak Chatterjee.
+              As a member of Path to Inner Peace, you get priority seat reservation and direct invitations to live Google Meet sessions, group mentorships, and retreats led by Mainak Chatterjee.
             </p>
           </div>
 
@@ -1654,7 +1653,7 @@ export const ProfileView: React.FC = () => {
                           VIP Seat Reserved
                         </span>
                         <p className="text-[11px] text-slate-500">
-                          Zoom link & calendar invitation added.
+                          Google Meet link &amp; calendar invitation added.
                         </p>
                         <button
                           onClick={() => toggleRsvp(prog.id, prog.title)}

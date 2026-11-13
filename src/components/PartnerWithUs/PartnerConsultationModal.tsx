@@ -15,7 +15,6 @@ import {
   AlertCircle, 
   Loader2, 
   Laptop, 
-  Sparkles,
   ArrowRight,
   ShieldCheck,
   MapPin,

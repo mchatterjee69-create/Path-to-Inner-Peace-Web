@@ -25,11 +25,10 @@ import {
   Brain,
   ShieldCheck,
   HeartHandshake,
-  Sparkles,
+  Award,
   Presentation,
   Users2,
   MapPin,
-  Sparkle,
   Check,
   ArrowDown
 } from 'lucide-react';
@@ -475,7 +474,7 @@ export const ExplorePathSerialView: React.FC = () => {
                 {
                   title: 'Higher Consciousness & Inner Growth',
                   desc: 'Guided practices for deeper self-awareness, purpose and conscious living.',
-                  icon: Sparkles,
+                  icon: Sun,
                   tag: 'Conscious Living'
                 }
               ].map((prog, i) => {
@@ -539,7 +538,7 @@ export const ExplorePathSerialView: React.FC = () => {
                 { title: 'Mindfulness & Meditation Programs', icon: Brain, desc: 'Structured multi-week mental mastery tracks.' },
                 { title: 'Stress Management Programs', icon: Flame, desc: 'Comprehensive burnout prevention toolkits.' },
                 { title: 'Leadership & Emotional Resilience Sessions', icon: ShieldCheck, desc: 'Executive coaching & high-pressure leadership.' },
-                { title: 'Customized Wellness Programs', icon: Sparkle, desc: 'Bespoke programs built around your company calendar.' }
+                { title: 'Customized Wellness Programs', icon: Award, desc: 'Bespoke programs built around your company calendar.' }
               ].map((fmt, idx) => {
                 const Icon = fmt.icon;
                 return (

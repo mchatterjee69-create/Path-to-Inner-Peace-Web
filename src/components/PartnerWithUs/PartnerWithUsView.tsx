@@ -9,7 +9,7 @@ import {
   Brain, 
   HeartHandshake, 
   Compass, 
-  Sparkles, 
+  Sun,
   CheckCircle2, 
   Globe2, 
   Users2, 
@@ -38,7 +38,6 @@ import {
   UserCheck,
   Home,
   Megaphone,
-  Sparkle,
   Gift,
   Key,
   BadgePercent,
@@ -81,7 +80,7 @@ export const REFER_EARN_VERTICALS: ReferEarnVertical[] = [
     id: 'yoga-instructor',
     title: 'Yoga Instructor',
     tagline: 'Deepen student transformation with nervous system resets & breathwork mastery',
-    icon: Sparkles,
+    icon: Sun,
     badge: 'Mind-Body Wellness',
     earningPotential: '₹40,000 - ₹1,20,000/mo',
     commissionRate: 'Flat 50% Commission + Free Activation Reward',
@@ -411,7 +410,7 @@ export const PartnerWithUsView: React.FC = () => {
     {
       id: 'gym-member-pass',
       title: 'Digital Wellness Pass for Members',
-      icon: Sparkles,
+      icon: Award,
       summary: 'Provide every gym member with premium app access to the 5-Day Mind Reset challenge, binaural soundscapes, and guided journals.',
       details: [
         'Co-branded gym onboarding mental fitness package',
@@ -552,7 +551,7 @@ export const PartnerWithUsView: React.FC = () => {
               transition={{ duration: 0.4 }}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/90 border border-[#D4AF37]/60 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide backdrop-blur-md shadow-xs"
             >
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+              <Handshake strokeWidth={1.8} className="w-4 h-4 text-[#D4AF37]" />
               <span>Partner Sphere • Refer & Earn Ecosystem</span>
             </motion.div>
 

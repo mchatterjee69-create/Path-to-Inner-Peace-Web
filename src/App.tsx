@@ -44,6 +44,7 @@ import { MeditationCampModal } from './components/InnerShift/MeditationCampModal
 import { WeeklyLiveSessionModal } from './components/InnerShift/WeeklyLiveSessionModal';
 import { ScrollToTop } from './components/Navigation/ScrollToTop';
 import { FreeStarBadge } from './components/Common/FreeStarBadge';
+import { Sun } from 'lucide-react';
 
 const MainContent: React.FC = () => {
   const { 
@@ -107,8 +108,9 @@ const MainContent: React.FC = () => {
               <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-300/30 via-transparent to-transparent blur-2xl" />
               
               <div className="relative max-w-3xl mx-auto space-y-4">
-                <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#D4AF37] text-[11px] font-bold uppercase tracking-widest">
-                  ★ Start Your Journey Today
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#D4AF37] text-[11px] font-bold uppercase tracking-widest">
+                  <Sun strokeWidth={1.8} className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <span>Start Your Journey Today</span>
                 </span>
                 <h3 className="font-heading font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
                   Ready to Rewire Your Mind in 5 Days?

@@ -3,7 +3,6 @@ import { useApp } from '../../context/AppContext';
 import { dispatchFormToAdmin } from '../../utils/formSubmit';
 import { 
   X, 
-  Sparkles, 
   Calendar, 
   Clock, 
   Users, 
@@ -104,7 +103,7 @@ export const MeditationCampModal: React.FC<{ isOpen: boolean; onClose: () => voi
 
           <div className="flex items-center gap-2 mb-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#D4AF37]/20 border border-[#D4AF37]/50 rounded-full text-[#FDE047] font-bold text-[11px] uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <Compass strokeWidth={1.8} className="w-3.5 h-3.5 text-[#D4AF37]" />
               Guided Meditation Camps & Retreats
             </span>
           </div>
@@ -367,7 +366,7 @@ export const MeditationCampModal: React.FC<{ isOpen: boolean; onClose: () => voi
                   className="w-4 h-4 rounded text-[#0F4C45] focus:ring-[#0F4C45] mt-0.5 cursor-pointer"
                 />
                 <span className="text-xs text-slate-600 leading-snug">
-                  I agree to receive the Meditation Camp schedule, Zoom links, and preparation audio guide via WhatsApp and Email.
+                  I agree to receive the Meditation Camp schedule, Google Meet links, and preparation audio guide via WhatsApp and Email.
                 </span>
               </label>
 

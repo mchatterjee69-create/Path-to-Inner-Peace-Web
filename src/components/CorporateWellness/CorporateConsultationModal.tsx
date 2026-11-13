@@ -13,7 +13,6 @@ import {
   AlertCircle, 
   Loader2, 
   Laptop, 
-  Sparkles,
   ArrowRight,
   ShieldCheck
 } from 'lucide-react';

@@ -15,7 +15,7 @@ import {
   ShieldCheck,
   FolderOpen,
   Heart,
-  Sparkles,
+  HeartHandshake,
   Headphones,
   Lightbulb,
   ShieldAlert,
@@ -333,7 +333,7 @@ export const RelationshipHealingModal: React.FC<RelationshipHealingModalProps> =
               <div className="space-y-2.5 pt-3 border-t border-emerald-800/70">
                 <h3 className="font-bold text-white text-base flex items-center gap-2">
                   <span className="p-1 rounded-md bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 stroke-[2.2]" />
+                    <HeartHandshake className="w-4 h-4 stroke-[2.2]" />
                   </span>
                   <span>✦ What This Therapy Offers</span>
                 </h3>
@@ -495,17 +495,17 @@ export const RelationshipHealingModal: React.FC<RelationshipHealingModalProps> =
                 <p className="text-xs sm:text-sm text-slate-300 pl-7 font-medium">
                   Imagine experiencing relationships from a place of understanding and connection…
                 </p>
-                <div className="space-y-1.5 text-xs sm:text-sm text-slate-200 pl-7">
+                <div className="space-y-2 text-xs sm:text-sm text-slate-200 pl-7">
                   <div className="flex items-center gap-2">
-                    <span>✨</span>
+                    <CheckCircle2 strokeWidth={1.8} className="w-3.5 h-3.5 text-amber-300 shrink-0" />
                     <span>You communicate with clarity instead of frustration</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span>✨</span>
+                    <CheckCircle2 strokeWidth={1.8} className="w-3.5 h-3.5 text-amber-300 shrink-0" />
                     <span>You feel emotionally safe, heard, and valued</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span>✨</span>
+                    <CheckCircle2 strokeWidth={1.8} className="w-3.5 h-3.5 text-amber-300 shrink-0" />
                     <span>You build deeper, more meaningful bonds</span>
                   </div>
                 </div>

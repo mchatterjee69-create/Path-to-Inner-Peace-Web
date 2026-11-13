@@ -8,7 +8,7 @@ import {
   Volume2, 
   VolumeX, 
   MessageSquare, 
-  Sparkles, 
+  Activity, 
   Sun
 } from 'lucide-react';
 import guideAvatar from '../../assets/images/wellness_female_guide_1786113672089.jpg';
@@ -474,7 +474,7 @@ export const WellnessVideoPlayer: React.FC<{ onNextSlide?: () => void }> = ({ on
                 className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full object-cover border-4 border-[#D4AF37] shadow-2xl scale-105 transition-transform duration-700"
               />
               <div className="absolute bottom-2 right-2 bg-emerald-950/90 text-[#D4AF37] border border-[#D4AF37] text-[10px] font-bold uppercase px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
-                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                <Sun strokeWidth={1.8} className="w-3 h-3 text-[#D4AF37]" />
                 <span>Wellness Guide</span>
               </div>
             </div>
@@ -797,7 +797,7 @@ export const WellnessVideoPlayer: React.FC<{ onNextSlide?: () => void }> = ({ on
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-widest text-[#0B6B53] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/80 inline-flex items-center gap-1.5 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-[#0B6B53]" />
+              <Activity strokeWidth={1.8} className="w-3.5 h-3.5 text-[#0B6B53]" />
               SOMATIC NERVOUS SYSTEM REGULATION
             </span>
           </div>
@@ -1012,7 +1012,7 @@ export const WellnessVideoPlayer: React.FC<{ onNextSlide?: () => void }> = ({ on
                 <span className={`text-[10px] font-bold uppercase ${isActive ? 'text-[#D4AF37]' : 'text-slate-500'}`}>
                   {formatTime(scene.startTime)} - {formatTime(scene.endTime)}
                 </span>
-                {isActive && <Sparkles className="w-3 h-3 text-[#D4AF37]" />}
+                {isActive && <Sun strokeWidth={1.8} className="w-3 h-3 text-[#D4AF37]" />}
               </div>
               <h4 className={`text-xs font-bold mt-1 ${isActive ? 'text-white' : 'text-slate-900'}`}>
                 {scene.title}

@@ -12,11 +12,9 @@ import {
   Menu,
   MoreVertical,
   X,
-  Sparkles,
-  PhoneCall,
+  Compass,
   MessageCircle,
   ChevronRight,
-  Building2,
   Handshake
 } from 'lucide-react';
 
@@ -58,7 +56,7 @@ export const Header: React.FC = () => {
     { id: 'inner-revolution', label: 'Inner Revolution', icon: Zap },
     { id: 'partner-with-us', label: 'Partner With Us', icon: Handshake },
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, streak: user.streakDays },
-    { id: 'ai-coach', label: 'Inner Peace Guide', icon: Sparkles },
+    { id: 'ai-coach', label: 'Inner Peace Guide', icon: Compass },
     { id: 'profile', label: 'Member Access', icon: User },
   ] as const;
 
@@ -108,7 +106,7 @@ export const Header: React.FC = () => {
                       : 'hover:text-emerald-950 hover:bg-slate-50 text-slate-700'
                   }`}
                 >
-                  <Icon className={`w-2.5 h-2.5 lg:w-3 lg:h-3 xl:w-3.5 xl:h-3.5 shrink-0 ${isActive ? 'text-[#0B6B53]' : 'text-slate-500'}`} />
+                  <Icon strokeWidth={1.8} className={`w-2.5 h-2.5 lg:w-3 lg:h-3 xl:w-3.5 xl:h-3.5 shrink-0 ${isActive ? 'text-[#0B6B53]' : 'text-slate-500'}`} />
                   <span className="whitespace-nowrap">{item.label}</span>
                   {'streak' in item && typeof item.streak === 'number' && item.streak > 0 && (
                     <span className="bg-amber-100 text-amber-900 text-[8.5px] px-1 py-0.2 rounded-full flex items-center gap-0.5 font-bold shrink-0">
@@ -144,13 +142,13 @@ export const Header: React.FC = () => {
               <span className="sm:hidden text-[9.5px]">Upgrade</span>
             </button>
 
-            {/* Join Free CTA - sized compactly to fit comfortably */}
+            {/* Join Free CTA - sized compactly to fit comfortably with genuine Lucide Sun */}
             {!user.registered ? (
               <button
                 onClick={() => setIsRegistrationModalOpen(true)}
-                className="relative btn-join-free-animated flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 bg-gradient-to-r from-[#0B6B53] via-emerald-600 to-[#0B6B53] hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-full text-[9.5px] lg:text-[10px] xl:text-[10.5px] active:scale-95 transition-all shadow-md shadow-emerald-950/20 border border-emerald-400/50 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider group"
+                className="relative btn-join-free-animated flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-[#0B6B53] via-emerald-600 to-[#0B6B53] hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-full text-[9.5px] lg:text-[10px] xl:text-[10.5px] active:scale-95 transition-all shadow-md shadow-emerald-950/20 border border-emerald-400/50 shrink-0 whitespace-nowrap cursor-pointer uppercase tracking-wider group"
               >
-                <Sun className="w-3 h-3 text-amber-300 shrink-0 animate-[spin_8s_linear_infinite]" />
+                <Sun size={15} strokeWidth={2} className="text-amber-300 shrink-0 group-hover:scale-105 transition-transform" />
                 <span className="relative z-10 font-bold text-amber-100 group-hover:text-white transition-colors text-[9px] lg:text-[9.5px] xl:text-[10.5px]">Join Free</span>
               </button>
             ) : (
@@ -177,7 +175,7 @@ export const Header: React.FC = () => {
               title="Navigation Menu"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-4 h-4 text-[#0B6B53]" /> : <MoreVertical className="w-4 h-4 text-slate-800" />}
+              {mobileMenuOpen ? <X size={16} strokeWidth={2} className="text-[#0B6B53]" /> : <MoreVertical size={16} strokeWidth={2} className="text-slate-800" />}
             </button>
           </div>
         </div>
@@ -242,7 +240,7 @@ export const Header: React.FC = () => {
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isActive ? 'bg-[#0B6B53] text-white' : 'bg-slate-100 text-slate-600'}`}>
-                        <Icon className="w-4 h-4" />
+                        <Icon strokeWidth={1.8} className="w-4 h-4" />
                       </div>
                       <span className="text-sm font-medium">{item.label}</span>
                     </div>
@@ -261,6 +259,7 @@ export const Header: React.FC = () => {
 
             {/* Drawer Footer Actions */}
             <div className="p-4 bg-slate-50 border-t border-slate-200 space-y-2">
+
               {!user.registered && (
                 <button
                   onClick={() => {
@@ -269,7 +268,7 @@ export const Header: React.FC = () => {
                   }}
                   className="relative btn-join-free-animated w-full py-3 bg-gradient-to-r from-[#0B6B53] via-emerald-600 to-[#0B6B53] text-white font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 uppercase tracking-wider group cursor-pointer border border-emerald-400/40"
                 >
-                  <Sun className="w-4 h-4 text-amber-300 shrink-0 animate-[spin_8s_linear_infinite]" />
+                  <Sun size={16} strokeWidth={2} className="text-amber-300 shrink-0 group-hover:scale-105 transition-transform" />
                   <span className="relative z-10 font-bold text-amber-100 group-hover:text-white">Join Free - 5 Day Reset</span>
                 </button>
               )}
@@ -280,7 +279,7 @@ export const Header: React.FC = () => {
                 }}
                 className="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-amber-500 text-slate-950 font-bold text-xs rounded-xl shadow-md flex items-center justify-center gap-2 cursor-pointer hover:brightness-105 transition-all"
               >
-                <Crown className="w-4 h-4 fill-slate-950" />
+                <Crown size={16} strokeWidth={2} className="fill-slate-950" />
                 <span>Upgrade to MindForge 360°™</span>
               </button>
 

@@ -54,7 +54,7 @@ export const HowItWorks: React.FC = () => {
       color: 'bg-[#D4AF37]/15 text-[#D4AF37] border-[#D4AF37]/40'
     },
     {
-      num: '★',
+      num: '06',
       step: 'Bonus',
       title: 'Unlock MindForge 360°™',
       description: 'Gain access to advanced masterclasses, live coaching, and 50+ guided meditations.',

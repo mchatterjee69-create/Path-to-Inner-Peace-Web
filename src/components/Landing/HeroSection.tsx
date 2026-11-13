@@ -332,12 +332,12 @@ export const HeroSection: React.FC = () => {
 
                   <div className="flex items-center justify-between text-xs border-b border-white/10 pb-2">
                     <span className="text-emerald-200/90 font-medium flex items-center gap-1.5">
-                      <Video className="w-3.5 h-3.5 text-red-400" />
+                      <Video className="w-3.5 h-3.5 text-emerald-400" />
                       Platform:
                     </span>
                     <span className="font-semibold text-white flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                      Youtube Live
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      Google Meet
                     </span>
                   </div>
 
